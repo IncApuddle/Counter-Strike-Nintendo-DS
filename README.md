@@ -1,4 +1,4 @@
-#New version! 1.1.0
+# New version! 1.1.0
 New maps, 
 New texture for Terrorists, 
 New player models (Animated and Static), 
