@@ -1,7 +1,7 @@
 # New version! 1.1.0
-New maps, 
-New texture for Terrorists, 
-New player models (Animated and Static), 
+New maps,
+New texture for Terrorists,
+New player models (Animated and Static),
 Now you can choose to which server to connect via IP.
 
 # Counter Strike Nintendo DS
