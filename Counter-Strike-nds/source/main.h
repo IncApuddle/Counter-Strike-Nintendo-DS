@@ -29,30 +29,57 @@
 #include "soundbank.h"
 
 // 3D models
-#include "playerAnimNea_bin.h"
-#include "GIGNAnimNea_bin.h"
-#include "GIGNNew_bin.h"
-#include "DustPart0_bin.h"
-#include "DustPart1_bin.h"
-#include "DustPart2_bin.h"
-#include "DustPart3_bin.h"
+#include "m_DustPart0Solid_bin.h"
+#include "m_DustPart0Shadows_bin.h"
+#include "m_DustPart1Solid_bin.h"
+#include "m_DustPart1Shadows_bin.h"
+#include "m_DustPart2Solid_bin.h"
+#include "m_DustPart2Shadows_bin.h"
+#include "m_DustPart3Solid_bin.h"
+#include "m_DustPart3Shadows_bin.h"
 
-#include "DustPart4_bin.h"
-#include "DustPart5_bin.h"
-#include "DustPart6_bin.h"
+#include "m_DustPart4Solid_bin.h"
+#include "m_DustPart4Shadows_bin.h"
+#include "m_DustPart5Solid_bin.h"
+#include "m_DustPart5Shadows_bin.h"
+#include "m_DustPart6Solid_bin.h"
+#include "m_DustPart6Shadows_bin.h"
+
+#include "m_Dust2_2x2Part3Solid_bin.h"
+#include "m_Dust2_2x2Part3Shadows_bin.h"
+#include "m_Dust2_2x2Part4Solid_bin.h"
+#include "m_Dust2_2x2Part4Shadows_bin.h"
+
+#include "m_Aim_MapPart0Shadows_bin.h"
+#include "m_Aim_MapPart0Solid_bin.h"
+#include "m_Aim_MapPart1Shadows_bin.h"
+#include "m_Aim_MapPart1Solid_bin.h"
+#include "m_Aim_MapPart2Shadows_bin.h"
+#include "m_Aim_MapPart2Solid_bin.h"
+
+#include "m_2000Part0Solid_bin.h"
+#include "m_2000Part0Shadows_bin.h"
+#include "m_2000Part1Solid_bin.h"
+#include "m_2000Part1Shadows_bin.h"
+
 #include "bomb_bin.h"
 #include "plane_bin.h"
 #include "repeat_bin.h"
 #include "explosion_bin.h"
 #include "smokeSphere_bin.h"
 
-#include "tutorialMapUnShadowed_3ds_bin.h"
-#include "tutorialMapShadowed_3ds_bin.h"
+#include "m_tutorialMapUnShadowed_3ds_bin.h"
+#include "m_tutorialMapShadowed_3ds_bin.h"
 
 #include "grenade_3ds_bin.h"
+#include "obj_PlayerAnim_bin.h"
+#include "obj_PlayerStatic_bin.h"
 
 // Textures
-#include "MapUI_bin.h"
+#include "MapUI_Dust2_bin.h"
+#include "MapUI_Dust2_2x2_bin.h"
+#include "MapUI_General_bin.h"
+
 #include "bomb_logo_bin.h"
 #include "MapPointUI_bin.h"
 #include "CheckMark_bin.h"
@@ -65,24 +92,17 @@
 #include "JumpArrow_bin.h"
 
 // Player skins
-#include "skin_soldier_bin.h"
-#include "skin_adventurer_bin.h"
-#include "skin_man_bin.h"
-#include "gign_skin1_bin.h"
-#include "terrorist_skin1_bin.h"
+#include "tex_CtSkin_bin.h"
+#include "tex_TSkin_bin.h"
 
 // crosshairs
 #include "crosshair2_bin.h"
 
-// Terrain texture
-#include "Atlas_bin.h"
+// Terrain textures
+#include "tex_Dust2_bin.h"
+#include "tex_General_Map_bin.h"
 
 // Gun sprites and 3D models
-#include "gun_bin.h"
-#include "gun1_bin.h"
-#include "gun2_bin.h"
-#include "gunFixed_bin.h"
-
 #include "knifect_bin.h"
 #include "deagle_bin.h"
 #include "elite_bin.h"
@@ -153,8 +173,8 @@
 #define defaultWalkSpeed 220
 #define flashAnimationSpeed 0.0035
 
-#define DEFAULTTERRORISTGUN 4
-#define DEFAULTCOUNTERTERRORISTGUN 6
+#define DEFAULTTERRORISTGUN 1
+#define DEFAULTCOUNTERTERRORISTGUN 2
 #define wallCount 210
 
 #define WaypointA 14
@@ -176,7 +196,7 @@
 #define INPUT_NAMES_COUNT 15
 #define SHOP_DISABLE_TIMER 900
 
-#define GAME_VERSION "1.0.0"
+#define GAME_VERSION "1.1.0"
 
 enum connectionType
 {
@@ -429,7 +449,7 @@ typedef struct //
 {
 	int id;
 	int ZoneCount;
-	int visibleMapPart[5];
+	int visibleMapPart[10];
 	CollisionBox2D collisionBox;
 } Zone;
 
@@ -506,6 +526,7 @@ extern int currentMenu;
 extern NE_Sprite *BottomScreenSprites[1];
 extern NE_Material *GroundMaterial;
 extern NE_Material *GroundMaterialShadowed;
+// extern NE_Material *GroundMaterial1;
 extern float xWithoutYForMap;
 extern float zWithoutYForMap;
 extern float xWithoutYForOcclusionSide1;

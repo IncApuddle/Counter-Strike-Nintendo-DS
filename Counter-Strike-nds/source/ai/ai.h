@@ -31,6 +31,10 @@ extern int MatriceCount;
 extern int waypointsSize;
 extern int MatricesSize;
 
+extern int SiteAPoint;
+extern int SiteBPoint;
+extern bool TwoSites;
+
 void StartChecking(int playerIndex, int FinalWaypoint);
 void GetRandomPoint(int currentAiToCheck);
 void CreateWaypoint(int id, float x, float y, float z, int edgeCount, int *edge);

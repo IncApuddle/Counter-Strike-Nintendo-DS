@@ -104,7 +104,7 @@ PhysicalGrenade *CreateGrenade(int id, int ownerId)
                 grenade->EffectModel->ry = 256;
 
                 // Set grenade values
-                grenade->Timer = 240;      // 4s * 60 frames
+                grenade->Timer = 85;      // 4s * 60 frames
                 grenade->EffectTimer = 30; // 0,5s * 60 frames
             }
             else if (grenade->GrenadeType == SMOKE) // If the grenade is a smoke grenade

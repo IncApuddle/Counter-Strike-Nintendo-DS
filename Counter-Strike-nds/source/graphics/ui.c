@@ -398,6 +398,10 @@ void ChangeMenu(int menuId)
     {
         initEnterCodeMenu();
     }
+    else if (menuId == ENTER_IP)
+    {
+        initEnterIPMenu();
+    }
 }
 
 /**
@@ -552,6 +556,8 @@ void ChangeMap(int Left)
         if (currentSelectionMap == -1)
             currentSelectionMap = MAP_COUNT - 1;
     }
+
+    MapImgToLoad = currentSelectionMap;
 
     // Update texture
     NE_PaletteDelete(Palettes[10]);
@@ -795,6 +801,29 @@ void drawKeyboardInput()
                      NE_White, // Color
                      code);
     }
+    else if (currentMenu == ENTER_IP)
+    {
+        NE_TextPrint(0,        // Font slot
+                     12, 2,    // Coordinates x(column), y(row)
+                     NE_White, // Color
+                     "Enter IP");
+
+        char ChengedIP[21];
+
+        sprintf(ChengedIP, "%s", tempText);
+
+        int IPLength = strlen(ChengedIP);
+        for (int i = IPLength; i < maxInputLength; i++)
+        {
+            sprintf(ChengedIP + IPLength, "_");
+            IPLength++;
+        }
+
+        NE_TextPrint(0,        // Font slot
+                     9, 12,   // Coordinates x(column), y(row)
+                     NE_White, // Color
+                     ChengedIP);
+    }
 }
 
 /**
@@ -830,7 +859,7 @@ void drawTopScreenUI()
         float mapYPos = map(selectPlayer->position.z, -41, 67, -177, 177);
 
         // Set map position and draw sprite
-        NE_SpriteSetPos(TopScreenSprites[1], ScreenCenterWidth - 170 / 2 + (mapXPos * zWithoutYForMap - mapYPos * xWithoutYForMap) / 2, ScreenCenterHeight - 177 / 2 + 2 + (mapYPos * zWithoutYForMap + mapXPos * xWithoutYForMap) / 2);
+        NE_SpriteSetPos(TopScreenSprites[1], ScreenCenterWidth - 170 / 2 + ((mapXPos * zWithoutYForMap - 3.5) - (mapYPos * xWithoutYForMap - 2)) / 2, ScreenCenterHeight - 177 / 2 + (mapYPos * zWithoutYForMap + mapXPos * xWithoutYForMap) / 2);
         NE_SpriteSetRot(TopScreenSprites[1], (int)selectPlayer->Angle);
         NE_SpriteDraw(TopScreenSprites[1]);
 
@@ -1477,7 +1506,7 @@ void initGameMenu()
     AllButtons[0].xSize = 100;
     AllButtons[0].ySize = 24;
     AllButtons[0].OnClick = &initScoreMenu;
-    AllButtons[0].xTextPos = 12;
+    AllButtons[0].xTextPos = 11;
     AllButtons[0].yTextPos = 14;
     if (localPlayer->Team == SPECTATOR)
         AllButtons[0].text = "Choose team";
@@ -1668,18 +1697,25 @@ void initSettingsMenu()
     setQuitButton(true);
 
     // Set rumble checkbox
-    AllCheckBoxs[0].xPos = 58;
+    AllCheckBoxs[0].xPos = 50;
     AllCheckBoxs[0].yPos = 56;
     AllCheckBoxs[0].xSize = 20;
     AllCheckBoxs[0].ySize = 20;
     AllCheckBoxs[0].value = &useRumble;
 
     // Set show ping checkbox
-    AllCheckBoxs[1].xPos = 180;
+    AllCheckBoxs[1].xPos = 149;
     AllCheckBoxs[1].yPos = 56;
     AllCheckBoxs[1].xSize = 20;
     AllCheckBoxs[1].ySize = 20;
     AllCheckBoxs[1].value = &showPing;
+
+    // Set show Anim checkbox
+    AllCheckBoxs[2].xPos = 200;
+    AllCheckBoxs[2].yPos = 56;
+    AllCheckBoxs[2].xSize = 20;
+    AllCheckBoxs[2].ySize = 20;
+    AllCheckBoxs[2].value = &PlayerAnim;
 
     // Set change name button
     AllButtons[0].xPos = 15;
@@ -1720,7 +1756,7 @@ void initSettingsMenu()
 
     SetSliderToShow(1);
     SetButtonToShow(3);
-    SetCheckBoxToShow(2);
+    SetCheckBoxToShow(3);
 }
 
 /**
@@ -2431,7 +2467,16 @@ void initJoinCreatePartyMenu()
     AllButtons[2].yTextPos = 19;
     AllButtons[2].text = "Create a private party";
 
-    SetButtonToShow(3);
+    AllButtons[3].xPos = 1;
+    AllButtons[3].yPos = 2;
+    AllButtons[3].xSize = 28;
+    AllButtons[3].ySize = 22;
+    AllButtons[3].OnClick = &initEnterIPMenu;
+    AllButtons[3].xTextPos = 1;
+    AllButtons[3].yTextPos = 1;
+    AllButtons[3].text = "IP";
+
+    SetButtonToShow(4);
 }
 
 /**
@@ -2460,6 +2505,33 @@ void initEnterCodeMenu()
     isUpperCase = true;
     strncpy(tempText, "", 21);
 }
+
+/**
+ * @brief Init enter Ip menu
+ *
+ */
+ void initEnterIPMenu()
+ {
+     SetTwoScreenMode(false);
+ 
+     startChangeMenu(ENTER_IP);
+ 
+     renderFunction = &drawEnterCodeMenu;
+ 
+     isShowingKeyBoard = true;
+     returnToMenuOnCancel = JOIN_CREATE_PARTY;
+     returnToMenuOnSucces = JOIN_CREATE_PARTY;
+     keyboardAction = KEYBOARD_ACTION_ENTER_IP;
+ 
+     onKeyboardCloseCancel = &ChangeMenu;
+     onKeyboardCloseSucces = &ChangeMenu;
+ 
+     maxInputLength = 15;
+     minInputLength = 5;
+     SetCanChangeCase(true);
+     isUpperCase = false;
+     strncpy(tempText, IpToGo, 21);
+ }
 
 /**
  * @brief Init online error menu
@@ -2702,8 +2774,9 @@ void drawSettingsMenu()
                  NE_White, // Color
                  "Keyboard mode");
 
-    printLongText(1, 16, 3, "Use Rumble Pak (causes crash on DSi/3DS)");
-    printLongText(17, 32, 4, "Show ping");
+    printLongText(1, 16, 3, "Use Rumble Pack (cause crash on 3DS)");
+    printLongText(16, 24, 4, "Show Ping");
+    printLongText(23, 31, 4, "Anim. Model");
 
     char gamePadSensitivityText[29];
     sprintf(gamePadSensitivityText, "Crosshair transparency: %d%%", (int)(*AllSliders[0].value * 100));

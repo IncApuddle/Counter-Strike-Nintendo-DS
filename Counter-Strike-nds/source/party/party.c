@@ -12,6 +12,7 @@
 #include "stats.h"
 #include "camera.h"
 #include "sounds.h"
+#include "draw3d.h"
 
 // Party modes data
 PartyMode allPartyModes[3];
@@ -276,6 +277,9 @@ void partyTimerTick()
                             PartyMinutes = allPartyModes[currentPartyMode].roundMinutesDuration;
                             PartySeconds = allPartyModes[currentPartyMode].roundSecondsDuration;
                             roundState = PLAYING;
+
+                            // Play the start round clip
+                            PlayBasicSound(SFX_ZOOM);
                         }
                         else if (roundState == PLAYING)
                         {
@@ -664,8 +668,11 @@ void OnPartyQuit()
  */
 void StartSinglePlayer(int partyMode)
 {
+    // CheckCurTextur();
+    MapImgToLoadFunc();
     Connection = OFFLINE;
     currentPartyMode = partyMode;
+    
 }
 
 /**

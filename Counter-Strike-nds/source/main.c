@@ -37,6 +37,7 @@ NE_Model *flashModels[FLASH_MODELS_COUNT];
 
 // Materials
 NE_Material *GroundMaterial = NULL;
+// NE_Material *GroundMaterial1 = NULL;
 NE_Material *GroundMaterialShadowed = NULL;
 
 //
@@ -350,7 +351,7 @@ int main(void)
 		// DEBUG show connection mode
 		printf("A : Offline mode\n");				 // 0
 		printf("B : %s\n", DEBUG_IP_1_STRING);		 // 1
-		printf("Y : %s\n", ONLINE_SERVER_IP_STRING); // 2
+		printf("Y : %s\n", IpToGo); // 2
 		printf("X : %s\n", DEBUG_IP_2_STRING);		 // 3
 	}
 
@@ -362,6 +363,7 @@ int main(void)
 		isInTutorial = true;
 		currentSelectionMap = TUTORIAL;
 		StartSinglePlayer(2);
+		MapImgToLoadFunc();
 	}
 	else
 	{

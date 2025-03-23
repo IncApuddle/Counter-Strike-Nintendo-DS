@@ -9,6 +9,9 @@
 #include "input.h"
 #include "tutorial.h"
 #include "stats.h"
+#include "player.h"
+#include "stats.h"
+#include "network.h"
 
 // File system
 #include <fat.h>
@@ -41,12 +44,14 @@ void Save()
     char saveText[512];
     sprintf(saveText, "game_version %s\n", GAME_VERSION);
     sprintf(saveText + strlen(saveText), "player_name %s\n", localPlayer->name);
+    sprintf(saveText + strlen(saveText), "player_ip %s\n", IpToGo);
     sprintf(saveText + strlen(saveText), "use_rumble %d\n", useRumble);
     sprintf(saveText + strlen(saveText), "is_azerty %d\n", isAzerty);
     sprintf(saveText + strlen(saveText), "is_left_controls %d\n", isLeftControls);
     sprintf(saveText + strlen(saveText), "sensitivity %f\n", sensitivity);
     sprintf(saveText + strlen(saveText), "tutorial_done %d\n", tutorialDone);
     sprintf(saveText + strlen(saveText), "show_ping %d\n", showPing);
+    sprintf(saveText + strlen(saveText), "anim_model %d\n", PlayerAnim);
     sprintf(saveText + strlen(saveText), "inputs %d\n", INPUT_COUNT);
     for (int i = 0; i < INPUT_COUNT; i++)
     {
@@ -112,6 +117,10 @@ void Load()
             {
                 fscanf(savefile, "%s", localPlayer->name);
             }
+            else if (strcmp(word, "player_ip") == 0) // Read player IP
+            {
+                fscanf(savefile, "%s", IpToGo);
+            }
             else if (strcmp(word, "use_rumble") == 0) // Read use rumble
             {
                 int tmpUseRumble;
@@ -147,6 +156,12 @@ void Load()
                 int tmpShowPing;
                 fscanf(savefile, "%d", &tmpShowPing);
                 showPing = tmpShowPing;
+            }
+            else if (strcmp(word, "anim_model") == 0) //
+            {
+                int tmpAnimModel;
+                fscanf(savefile, "%d", &tmpAnimModel);
+                PlayerAnim = tmpAnimModel;
             }
             else if (strcmp(word, "inputs") == 0) //
             {

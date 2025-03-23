@@ -15,6 +15,8 @@
 #include "stats.h"
 #include "network.h"
 
+bool PlayerAnim = false;
+
 /**
  * @brief Kill a player
  *
@@ -165,6 +167,7 @@ void buyGun()
             if (!allPartyModes[currentPartyMode].infiniteMoney)
             {
                 reducePlayerMoney(0, AllGuns[GetSelectedGunShop()].Price);
+                PlayBasicSound(SFX_MOLOTOV_DETONATE);
             }
 
             // Set inventory slot
@@ -194,6 +197,7 @@ void buyGun()
                 if (!allPartyModes[currentPartyMode].infiniteMoney)
                 {
                     reducePlayerMoney(0, AllGrenades[grenadeIndex].Price);
+                    PlayBasicSound(SFX_MOLOTOV_DETONATE);
                 }
                 setSelectedGunInInventory(0, grenadeCheckIndex);
                 break;
@@ -248,6 +252,7 @@ void buyGun()
         if (!allPartyModes[currentPartyMode].infiniteMoney && canBuy)
         {
             reducePlayerMoney(0, allEquipments[equipmentIndex].Price);
+            PlayBasicSound(SFX_MOLOTOV_DETONATE);
         }
     }
 }
@@ -670,22 +675,27 @@ int AddNewPlayer(int NewId, bool IsLocalPlayer, bool isAI)
             }
             else
             {
-                // player->PlayerModel = NE_ModelCreate(NE_Animated); // ANIMATED VERSION
-                player->PlayerModel = NE_ModelCreate(NE_Static);
-                // NE_ModelLoadNEA(player->PlayerModel, (u32 *)playerAnimNea_bin); // ANIMATED VERSION
+                if(PlayerAnim)
+                {
+                    player->PlayerModel = NE_ModelCreate(NE_Animated); // ANIMATED VERSION
+                    NE_ModelAnimInterpolate(player->PlayerModel, false);
+                    NE_ModelAnimStart(player->PlayerModel, 0, 0, 2, NE_ANIM_UPDOWN, 5);
+                }
+                else
+                player->PlayerModel = NE_ModelCreate(NE_Static); // STATIC VERSION
 
                 if (i == 1)
-                    NE_ModelLoadStaticMesh(player->PlayerModel, (u32 *)GIGNNew_bin);
+                    if(PlayerAnim)
+                    NE_ModelLoadNEA(player->PlayerModel, (u32 *)obj_PlayerAnim_bin);
+                    else
+                    NE_ModelLoadStaticMesh(player->PlayerModel, (u32 *)obj_PlayerStatic_bin);
                 else
                     NE_ModelClone(player->PlayerModel,        // Destination
                                   AllPlayers[1].PlayerModel); // Source model
 
-                // NE_ModelLoadNEA(player->PlayerModel, (u32 *)GIGNAnimNea_bin);
                 NE_ModelSetMaterial(player->PlayerModel, PlayerMaterial);
                 NE_ModelScaleI(player->PlayerModel, 2048, 2090, 2048); // 2048 <- 4096 * 0.5 ANIMATED VERSION
                 // NE_ModelScaleI(player->PlayerModel, 700, 700, 700); // 2048 <- 4096 * 0.5 STATIC VERSION
-                //  NE_ModelAnimInterpolate(player->PlayerModel, false);
-                //  NE_ModelAnimStart(player->PlayerModel, 0, 0, 5, NE_ANIM_LOOP, 3);
 
                 // Select a random name
                 if (isAI)

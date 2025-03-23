@@ -11,15 +11,23 @@
 #include "map.h"
 #include "draw3d.h"
 #include "party.h"
+#include "player.h"
 
 int t1x = 0;
 int t1z = 0;
 int t2x = 0;
 int t2z = 0;
+
+//map UI
+int MapImgToLoad;
+
+//Currently loaded texture
+int CurrentTexture = 1;
+
 // Text material
 NE_Material *TextMaterial = NULL;
 // All palettes
-NE_Palette *Palettes[17]; // 0 MapUI, 1 Map atlas, 2 text, 3 player, 4 gun sprite, 5 map point
+NE_Palette *Palettes[18]; // 0 MapUI, 1 Map atlas, 2 text, 3 player, 4 gun sprite, 5 map point
 
 // All materials used for the top screen
 NE_Material *TopScreenSpritesMaterials[6];
@@ -31,6 +39,7 @@ void initGraphics()
 {
     // create Materials
     GroundMaterial = NE_MaterialCreate();
+    // GroundMaterial1 = NE_MaterialCreate();
     GroundMaterialShadowed = NE_MaterialCreate();
     PlayerMaterial = NE_MaterialCreate();
     PlayerMaterialTerrorist = NE_MaterialCreate();
@@ -63,6 +72,8 @@ void initGraphics()
     Palettes[14] = NE_PaletteCreate();
     Palettes[15] = NE_PaletteCreate();
     Palettes[16] = NE_PaletteCreate();
+    Palettes[17] = NE_PaletteCreate();
+    // Palettes[18] = NE_PaletteCreate();
 
     // Load .bin textures
 
@@ -75,11 +86,13 @@ void initGraphics()
                 TextMaterial, // Image
                 8, 8);        // Size of one character (x, y)
 
-    NE_MaterialTexLoadBMPtoRGB256(PlayerMaterial, Palettes[3], (void *)gign_skin1_bin, 0);
-    NE_MaterialTexLoadBMPtoRGB256(PlayerMaterialTerrorist, Palettes[13], (void *)terrorist_skin1_bin, 0);
+    NE_MaterialTexLoadBMPtoRGB256(PlayerMaterial, Palettes[3], (void *)tex_CtSkin_bin, 0);
+    NE_MaterialTexLoadBMPtoRGB256(PlayerMaterialTerrorist, Palettes[13], (void *)tex_TSkin_bin, 0);
 
-    NE_MaterialTexLoadBMPtoRGB256(GroundMaterial, Palettes[1], (void *)Atlas_bin, 1);
-    NE_MaterialTexClone(GroundMaterial, GroundMaterialShadowed);
+    // NE_MaterialTexLoadBMPtoRGB256(GroundMaterial, Palettes[1], (void *)tex_Dust2_bin, 1);
+    // NE_MaterialTexLoadBMPtoRGB256(GroundMaterial1, Palettes[18], (void *)tex_General_Map_bin, 0);
+    // NE_MaterialTexClone(GroundMaterial, GroundMaterialShadowed);
+    TextureLoadOfMap();
 
     NE_MaterialTexLoadBMPtoRGB256(BottomScreenSpritesMaterials[0], Palettes[9], (void *)QuitButton_bin, 1);
     NE_MaterialTexLoadBMPtoRGB256(BottomScreenSpritesMaterials[2], Palettes[5], (void *)MapPointUI_bin, 1);
@@ -92,7 +105,6 @@ void initGraphics()
 
     NE_MaterialTexLoadBMPtoRGB256(TopScreenSpritesMaterials[2], Palettes[11], (void *)muzzle_bin, 1);
     NE_MaterialTexLoadBMPtoRGB256(TopScreenSpritesMaterials[3], Palettes[12], (void *)scopeImage_bin, 1);
-    NE_MaterialTexLoadBMPtoRGB256(TopScreenSpritesMaterials[4], Palettes[14], (void *)MapUI_bin, 0);
     NE_MaterialTexLoadBMPtoRGB256(PlayerShadowMaterial, Palettes[15], (void *)player_shadow_bin, 1);
 
     // Create crosshair sprite
@@ -155,6 +167,71 @@ void initGraphics()
     Model[10]->rx = 0;
     Model[10]->ry = 256;
     NE_ModelScaleI(Model[10], 0, 0, 0);
+    
+}
+
+// Create texture map sprite
+void MapImgToLoadFunc()
+{
+	NE_PaletteDelete(Palettes[17]);
+    NE_MaterialDelete(TopScreenSpritesMaterials[4]);
+    TopScreenSpritesMaterials[4] = NE_MaterialCreate();
+    Palettes[17] = NE_PaletteCreate();
+
+    if(MapImgToLoad == 0)
+	{
+		NE_MaterialTexLoadBMPtoRGB256(TopScreenSpritesMaterials[4], Palettes[17], (void *)MapUI_Dust2_bin, 0);
+	}
+	else if(MapImgToLoad == 2)
+	{
+		NE_MaterialTexLoadBMPtoRGB256(TopScreenSpritesMaterials[4], Palettes[17], (void *)MapUI_Dust2_2x2_bin, 0);
+	}
+	else
+	{
+		NE_MaterialTexLoadBMPtoRGB256(TopScreenSpritesMaterials[4], Palettes[17], (void *)MapUI_General_bin, 0);
+	}
+
+    TopScreenSprites[1] = NE_SpriteCreate();
+	NE_SpriteSetSize(TopScreenSprites[1], 170, 177);
+	NE_SpriteSetPriority(TopScreenSprites[1], 2);
+	NE_SpriteSetMaterial(TopScreenSprites[1], TopScreenSpritesMaterials[4]);
+}
+
+void TextureLoadOfMap()
+{
+	NE_MaterialDelete(GroundMaterial);
+	GroundMaterial = NE_MaterialCreate();
+	NE_MaterialDelete(GroundMaterialShadowed);
+	GroundMaterialShadowed = NE_MaterialCreate();
+	NE_PaletteDelete(Palettes[1]);
+	Palettes[1] = NE_PaletteCreate();
+
+	if(MapImgToLoad == 3)
+	{
+        NE_MaterialTexLoadBMPtoRGB256(GroundMaterial, Palettes[1], (void *)allMaps[AIM_MAP].MapImage, 1);
+        // NE_MaterialTexClone(GroundMaterial1, GroundMaterialShadowed);
+		CurrentTexture = 2;
+	}
+	else
+	{
+        NE_MaterialTexLoadBMPtoRGB256(GroundMaterial, Palettes[1], (void *)allMaps[DUST2].MapImage, 1);
+        // NE_MaterialTexClone(GroundMaterial, GroundMaterialShadowed);
+		CurrentTexture = 1;
+	}
+
+    NE_MaterialTexClone(GroundMaterial, GroundMaterialShadowed);
+}
+
+void CheckCurTextur()
+{
+	if(MapImgToLoad == 3 && CurrentTexture == 1)
+	{
+		TextureLoadOfMap();
+	}
+	else if(MapImgToLoad != 3 && CurrentTexture == 2)
+	{
+		TextureLoadOfMap();
+	}
 }
 
 /**
@@ -200,6 +277,10 @@ void Draw3DScene(void)
     // Set camera for drawing
     NE_CameraUse(Camera);
 
+    // Animate all Obj
+    if(PlayerAnim)
+        NE_ModelAnimateAll();
+
     // Reset polygons Alpha/Light/Effect
     NE_PolyFormat(31, 0, NE_LIGHT_0, NE_CULL_BACK, NE_MODULATION);
 
@@ -243,12 +324,18 @@ void Draw3DScene(void)
                     GroundMaterial->diffuse = RGB15(0, 0, 0);
                     GroundMaterial->emission = RGB15(11, 11, 11);
                     GroundMaterial->specular = RGB15(7, 7, 7);
+                    // GroundMaterial1->diffuse = RGB15(0, 0, 0);
+                    // GroundMaterial1->emission = RGB15(11, 11, 11);
+                    // GroundMaterial1->specular = RGB15(7, 7, 7);
                 }
                 else // Set the model light like shadowed
                 {
                     GroundMaterial->diffuse = RGB15(1, 1, 1);
                     GroundMaterial->emission = RGB15(3, 3, 3);
                     GroundMaterial->specular = RGB15(3, 3, 3);
+                    // GroundMaterial1->diffuse = RGB15(1, 1, 1);
+                    // GroundMaterial1->emission = RGB15(3, 3, 3);
+                    // GroundMaterial1->specular = RGB15(3, 3, 3);
                 }
                 NE_ModelDraw(map->models[map->AllZones[AllPlayers[CurrentCameraPlayer].CurrentOcclusionZone].visibleMapPart[i]].Model);
             }
@@ -396,8 +483,37 @@ void Draw3DSceneNotInGame(void)
     // Draw map
     if (currentMap == DUST2)
     {
-        NE_ModelDraw(map->models[2].Model);
-        NE_ModelDraw(map->models[3].Model);
+        if (!map->models[2].shadowed)
+        {
+                GroundMaterial->diffuse = RGB15(0, 0, 0);
+                GroundMaterial->emission = RGB15(14, 14, 14);
+                GroundMaterial->specular = RGB15(10, 10, 10);
+                NE_ModelDraw(map->models[2].Model);
+        }
+
+        if (!map->models[3].shadowed)
+        {
+                GroundMaterial->diffuse = RGB15(0, 0, 0);
+                GroundMaterial->emission = RGB15(14, 14, 14);
+                GroundMaterial->specular = RGB15(10, 10, 10);
+                NE_ModelDraw(map->models[3].Model);
+        }
+
+        if (map->models[9].shadowed)
+        {
+                GroundMaterial->diffuse = RGB15(4, 4, 4);
+                GroundMaterial->emission = RGB15(0, 0, 0);
+                GroundMaterial->specular = RGB15(1, 1, 1);
+                NE_ModelDraw(map->models[9].Model);
+        }
+
+        if (map->models[10].shadowed)
+        {
+                GroundMaterial->diffuse = RGB15(4, 4, 4);
+                GroundMaterial->emission = RGB15(0, 0, 0);
+                GroundMaterial->specular = RGB15(1, 1, 1);
+                NE_ModelDraw(map->models[10].Model);
+        }
     }
     else if (currentMap == TUTORIAL)
     {
@@ -407,14 +523,88 @@ void Draw3DSceneNotInGame(void)
             if (!map->models[i].shadowed)
             {
                 GroundMaterial->diffuse = RGB15(0, 0, 0);
-                GroundMaterial->emission = RGB15(11, 11, 11);
-                GroundMaterial->specular = RGB15(7, 7, 7);
+                GroundMaterial->emission = RGB15(14, 14, 14);
+                GroundMaterial->specular = RGB15(10, 10, 10);
             }
             else // Set the model light like shadowed
             {
-                GroundMaterial->diffuse = RGB15(1, 1, 1);
-                GroundMaterial->emission = RGB15(3, 3, 3);
-                GroundMaterial->specular = RGB15(3, 3, 3);
+                GroundMaterial->diffuse = RGB15(4, 4, 4);
+                GroundMaterial->emission = RGB15(0, 0, 0);
+                GroundMaterial->specular = RGB15(1, 1, 1);
+            }
+            NE_ModelDraw(map->models[i].Model);
+        }
+    }
+    else if (currentMap == DUST2_2x2)
+    {
+        if (!map->models[0].shadowed)
+        {
+                GroundMaterial->diffuse = RGB15(0, 0, 0);
+                GroundMaterial->emission = RGB15(14, 14, 14);
+                GroundMaterial->specular = RGB15(10, 10, 10);
+                NE_ModelDraw(map->models[0].Model);
+        }
+
+        if (!map->models[4].shadowed)
+        {
+                GroundMaterial->diffuse = RGB15(0, 0, 0);
+                GroundMaterial->emission = RGB15(14, 14, 14);
+                GroundMaterial->specular = RGB15(10, 10, 10);
+                NE_ModelDraw(map->models[4].Model);
+        }
+
+        if (map->models[1].shadowed)
+        {
+                GroundMaterial->diffuse = RGB15(4, 4, 4);
+                GroundMaterial->emission = RGB15(0, 0, 0);
+                GroundMaterial->specular = RGB15(1, 1, 1);
+                NE_ModelDraw(map->models[1].Model);
+        }
+
+        if (map->models[5].shadowed)
+        {
+                GroundMaterial->diffuse = RGB15(4, 4, 4);
+                GroundMaterial->emission = RGB15(0, 0, 0);
+                GroundMaterial->specular = RGB15(1, 1, 1);
+                NE_ModelDraw(map->models[5].Model);
+        }
+    }
+    else if (currentMap == AIM_MAP)
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            // Set the model light like normal
+            if (!map->models[i].shadowed)
+            {
+                GroundMaterial->diffuse = RGB15(0, 0, 0);
+                GroundMaterial->emission = RGB15(14, 14, 14);
+                GroundMaterial->specular = RGB15(10, 10, 10);
+            }
+            else // Set the model light like shadowed
+            {
+                GroundMaterial->diffuse = RGB15(4, 4, 4);
+                GroundMaterial->emission = RGB15(0, 0, 0);
+                GroundMaterial->specular = RGB15(1, 1, 1);
+            }
+            NE_ModelDraw(map->models[i].Model);
+        }
+    }
+    else if (currentMap == B2000)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            // Set the model light like normal
+            if (!map->models[i].shadowed)
+            {
+                GroundMaterial->diffuse = RGB15(0, 0, 0);
+                GroundMaterial->emission = RGB15(14, 14, 14);
+                GroundMaterial->specular = RGB15(10, 10, 10);
+            }
+            else // Set the model light like shadowed
+            {
+                GroundMaterial->diffuse = RGB15(4, 4, 4);
+                GroundMaterial->emission = RGB15(0, 0, 0);
+                GroundMaterial->specular = RGB15(1, 1, 1);
             }
             NE_ModelDraw(map->models[i].Model);
         }

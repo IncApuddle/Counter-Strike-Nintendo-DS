@@ -33,6 +33,11 @@ int waypointsSize = 0;
 // Matrices count for the current map
 int MatriceCount = 0;
 
+//NomberPoint for Sites | Is there two sites or one
+int SiteAPoint = 0;
+int SiteBPoint = 0;
+bool TwoSites;
+
 // Timer to check the player's distance between the bot and the player
 int checkPlayerDistanceFromAiTimer = 1;
 Waypoint Waypoints[maxPoint]; // TODO replace this by a malloc
@@ -431,17 +436,24 @@ void AiCheckForAction()
 
                 if (playerToCheck->haveBomb)
                 {
-                    float distanceA = GetDistanceBewteenPlayerAndWaypoint(currentAiToCheck, 14);
-                    float distanceB = GetDistanceBewteenPlayerAndWaypoint(currentAiToCheck, 29);
-
-                    // if (random() % 2 == 0)
-                    if (distanceA < distanceB)
+                    if(TwoSites == true)
                     {
-                        StartChecking(currentAiToCheck, 14); // Bomb site A
+                        float distanceA = GetDistanceBewteenPlayerAndWaypoint(currentAiToCheck, SiteAPoint);
+                        float distanceB = GetDistanceBewteenPlayerAndWaypoint(currentAiToCheck, SiteBPoint);
+
+                        // if (random() % 2 == 0)
+                        if (distanceA < distanceB)
+                        {
+                            StartChecking(currentAiToCheck, SiteAPoint); // Bomb site A
+                        }
+                        else
+                        {
+                            StartChecking(currentAiToCheck, SiteBPoint); // Bomb site B
+                        }
                     }
                     else
                     {
-                        StartChecking(currentAiToCheck, 29); // Bomb site B
+                        StartChecking(currentAiToCheck, SiteAPoint);
                     }
                 }
                 else if (bombDropped && playerToCheck->Team == TERRORISTS)
@@ -475,22 +487,40 @@ void AiCheckForAction()
 
 void GetRandomPoint(int currentAiToCheck)
 {
-    if (IsExplode || (BombPlanted && ((BombSeconds <= 5 && AllPlayers[currentAiToCheck].Team == TERRORISTS) || (BombSeconds <= 3 && AllPlayers[currentAiToCheck].Team == COUNTERTERRORISTS)))) // Run away from the bomb
+    if(TwoSites == true)
     {
-        StartChecking(currentAiToCheck, random() % waypointsSize);
+        if (IsExplode || (BombPlanted && ((BombSeconds <= 5 && AllPlayers[currentAiToCheck].Team == TERRORISTS) || (BombSeconds <= 3 && AllPlayers[currentAiToCheck].Team == COUNTERTERRORISTS)))) // Run away from the bomb
+        {
+            StartChecking(currentAiToCheck, random() % waypointsSize);
+        }
+        else
+        {
+            int site = random() % 2;
+
+            if (bombPlantedAt == SiteAPoint)
+                site = 0;
+            else if (bombPlantedAt == SiteBPoint)
+                site = 1;
+
+            Site siteRef = allMaps[currentMap].AllBombsTriggersCollisions[site];
+
+            StartChecking(currentAiToCheck, siteRef.nearWaypoints[random() % siteRef.nearWaypointCount]);
+        }   
     }
     else
     {
-        int site = random() % 2;
+        if (IsExplode || (BombPlanted && ((BombSeconds <= 5 && AllPlayers[currentAiToCheck].Team == TERRORISTS) || (BombSeconds <= 3 && AllPlayers[currentAiToCheck].Team == COUNTERTERRORISTS)))) // Run away from the bomb
+        {
+            StartChecking(currentAiToCheck, random() % waypointsSize);
+        }
+        else
+        {
+            int site = 0;
 
-        if (bombPlantedAt == 14)
-            site = 0;
-        else if (bombPlantedAt == 29)
-            site = 1;
+            Site siteRef = allMaps[currentMap].AllBombsTriggersCollisions[site];
 
-        Site siteRef = allMaps[currentMap].AllBombsTriggersCollisions[site];
-
-        StartChecking(currentAiToCheck, siteRef.nearWaypoints[random() % siteRef.nearWaypointCount]);
+            StartChecking(currentAiToCheck, siteRef.nearWaypoints[random() % siteRef.nearWaypointCount]);
+        }
     }
 }
 
