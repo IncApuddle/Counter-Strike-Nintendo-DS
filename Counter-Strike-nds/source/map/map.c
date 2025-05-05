@@ -97,6 +97,7 @@ void LoadMapTextures()
     allMaps[DUST2_2x2].image = (void *)tex_map_image_dust2_2x2_bin;
     allMaps[AIM_MAP].image = (void *)tex_map_image_aim_bin;
     allMaps[B2000].image = (void *)tex_map_image_2000_bin;
+    allMaps[MIRAGEA].image = (void *)tex_map_image_mirage_bin;
     allMaps[DUST2].MapImage = (void *)tex_Dust2_bin;
     allMaps[AIM_MAP].MapImage = (void *)tex_General_Map_bin;
 }
@@ -112,6 +113,7 @@ void SetMapNames()
     allMaps[DUST2_2x2].name = "Dust II_2x2";
     allMaps[AIM_MAP].name = "Aim_Map";
     allMaps[B2000].name = "$2000$";
+    allMaps[MIRAGEA].name = "Mirage(A site)";
 }
 
 /**
@@ -125,6 +127,7 @@ void SetMapPartyMode()
     allMaps[DUST2_2x2].forcePartyMode = -1;
     allMaps[AIM_MAP].forcePartyMode = -1;
     allMaps[B2000].forcePartyMode = -1;
+    allMaps[MIRAGEA].forcePartyMode = -1;
 }
 
 /**
@@ -177,6 +180,14 @@ void SetMapCameraPosition()
     allMaps[B2000].cameraLookPosition.x = -3;
     allMaps[B2000].cameraLookPosition.y = 3.2;
     allMaps[B2000].cameraLookPosition.z = -0;
+
+    allMaps[MIRAGEA].cameraPosition.x = -7;
+    allMaps[MIRAGEA].cameraPosition.y = 8.5;
+    allMaps[MIRAGEA].cameraPosition.z = 27;
+
+    allMaps[MIRAGEA].cameraLookPosition.x = -16;
+    allMaps[MIRAGEA].cameraLookPosition.y = 0;
+    allMaps[MIRAGEA].cameraLookPosition.z = 33;
 }
 
 /**
@@ -259,6 +270,22 @@ void AddAllSpawnPoints()
     AddSpawnPoint(B2000, COUNTERTERRORISTS, 5, 7, 0, 17.3);
 
     SetAngles(B2000, -256, 0);
+
+    AddSpawnPoint(MIRAGEA, TERRORISTS, 0, 13, 2.6, 41);
+    AddSpawnPoint(MIRAGEA, TERRORISTS, 1, 16, 2.6, 41);
+    AddSpawnPoint(MIRAGEA, TERRORISTS, 2, 10, 2.6, 41);
+    AddSpawnPoint(MIRAGEA, TERRORISTS, 3, 13, 2.6, 44);
+    AddSpawnPoint(MIRAGEA, TERRORISTS, 4, 16, 2.6, 44);
+    AddSpawnPoint(MIRAGEA, TERRORISTS, 5, 10, 2.6, 44);
+
+    AddSpawnPoint(MIRAGEA, COUNTERTERRORISTS, 0, -28, 0.15, -29);
+    AddSpawnPoint(MIRAGEA, COUNTERTERRORISTS, 1, -25.5, 0.15, -29);
+    AddSpawnPoint(MIRAGEA, COUNTERTERRORISTS, 2, -30.5, 0.15, -29);
+    AddSpawnPoint(MIRAGEA, COUNTERTERRORISTS, 3, -28, 0.15, -33);
+    AddSpawnPoint(MIRAGEA, COUNTERTERRORISTS, 4, -25.5, 0.15, -33);
+    AddSpawnPoint(MIRAGEA, COUNTERTERRORISTS, 5, -30.5, 0.15, -33);
+
+    SetAngles(MIRAGEA, 0, -256);
 }
 
 /**
@@ -314,6 +341,14 @@ void loadMapModels(int mapToLoad)
         mapPos.y = -1.5 + 0.5;
         mapPos.z = 0;
         Scale.x = Scale.y = Scale.z = 2048;
+    }
+    else if (mapToLoad == MIRAGEA)
+    {
+        mapPartCount = 6;
+        mapPos.x = 0;
+        mapPos.y = -1.5 + 0.5;
+        mapPos.z = 0;
+        Scale.x = Scale.y = Scale.z = 4096;
     }
 
     // Set for each map parts, position, rotation and scale
@@ -434,6 +469,21 @@ void loadMapModels(int mapToLoad)
         map->models[2].shadowed = false;
         NE_ModelLoadStaticMesh(map->models[3].Model, (u32 *)m_2000Part1Shadows_bin);
         map->models[3].shadowed = true;
+    }
+    else if (mapToLoad == MIRAGEA)
+    {
+        NE_ModelLoadStaticMesh(map->models[0].Model, (u32 *)m_MiragePart1Solid_bin);
+        map->models[0].shadowed = false;
+        NE_ModelLoadStaticMesh(map->models[1].Model, (u32 *)m_MiragePart1Shadows_bin);
+        map->models[1].shadowed = true;
+        NE_ModelLoadStaticMesh(map->models[2].Model, (u32 *)m_MiragePart2Solid_bin);
+        map->models[2].shadowed = false;
+        NE_ModelLoadStaticMesh(map->models[3].Model, (u32 *)m_MiragePart2Shadows_bin);
+        map->models[3].shadowed = true;
+        NE_ModelLoadStaticMesh(map->models[4].Model, (u32 *)m_MiragePart3Solid_bin);
+        map->models[4].shadowed = false;
+        NE_ModelLoadStaticMesh(map->models[5].Model, (u32 *)m_MiragePart3Shadows_bin);
+        map->models[5].shadowed = true;
     }
 }
 

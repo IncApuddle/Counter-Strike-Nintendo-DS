@@ -571,6 +571,7 @@ void treatData()
                 }
                 else if (ConfirmResultInt == 2) // Not an error
                 {
+                    PlayBasicSound(SFX_MOLOTOV_DETONATE);
                 }
             }
         }

@@ -62,6 +62,14 @@
 #include "m_2000Part1Solid_bin.h"
 #include "m_2000Part1Shadows_bin.h"
 
+#include "m_MiragePart1Solid_bin.h"
+#include "m_MiragePart1Shadows_bin.h"
+#include "m_MiragePart2Solid_bin.h"
+#include "m_MiragePart2Shadows_bin.h"
+#include "m_MiragePart3Solid_bin.h"
+#include "m_MiragePart3Shadows_bin.h"
+
+
 #include "bomb_bin.h"
 #include "plane_bin.h"
 #include "repeat_bin.h"

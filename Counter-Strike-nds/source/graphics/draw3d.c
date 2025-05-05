@@ -609,6 +609,26 @@ void Draw3DSceneNotInGame(void)
             NE_ModelDraw(map->models[i].Model);
         }
     }
+    else if (currentMap == MIRAGEA)
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            // Set the model light like normal
+            if (!map->models[i].shadowed)
+            {
+                GroundMaterial->diffuse = RGB15(0, 0, 0);
+                GroundMaterial->emission = RGB15(14, 14, 14);
+                GroundMaterial->specular = RGB15(10, 10, 10);
+            }
+            else // Set the model light like shadowed
+            {
+                GroundMaterial->diffuse = RGB15(4, 4, 4);
+                GroundMaterial->emission = RGB15(0, 0, 0);
+                GroundMaterial->specular = RGB15(1, 1, 1);
+            }
+            NE_ModelDraw(map->models[i].Model);
+        }
+    }
 
     NE_2DViewInit();
     // Draw keyboard input screen if needed
