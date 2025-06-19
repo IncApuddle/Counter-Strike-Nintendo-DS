@@ -157,6 +157,8 @@ void showDisconnectedText(int disconnectedPlayerIndex);
 int centerPositionOfAText(int xMin, int xMax, int textLength);
 void stopScanForInput();
 
+void showTopKillPlayer();
+
 void changeMapState();
 void closeMap();
 void setQuitButton(bool value);

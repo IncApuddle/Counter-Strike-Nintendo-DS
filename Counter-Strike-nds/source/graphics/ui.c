@@ -656,6 +656,25 @@ void showPartyEventText(int event)
 }
 
 /**
+ * @brief Show party event notification
+ *
+ * @param event Event type see TextEnum in ui.h
+ */
+void showTopKillPlayer()
+{
+    for (int i = 0; i < MaxPlayer; i++)
+    {
+        if (AllPlayers[i].KillCount == TopKill)
+        {
+            sprintf(killText, "TThe player {%d%s {hhas won", (int)AllPlayers[i].Team, AllPlayers[i].name);
+
+            KillTextShowTimer = 560;
+            notificationType = 0;
+        }
+    }   
+}
+
+/**
  * @brief Show kill text between two players
  *
  * @param killerIndex Killer index
@@ -2407,17 +2426,41 @@ void initPartyModeSelectionMenu()
 
     // Multiplayer button
     AllButtons[1].xPos = 40;
-    AllButtons[1].yPos = 119;
+    AllButtons[1].yPos = 88;
     AllButtons[1].xSize = ScreenWidth - 80;
     AllButtons[1].ySize = 24;
     AllButtons[1].OnClick = &StartSinglePlayer;
     AllButtons[1].parameter = 0;
     AllButtons[1].isHidden = false;
     AllButtons[1].xTextPos = 11;
-    AllButtons[1].yTextPos = 16;
+    AllButtons[1].yTextPos = 12;
     AllButtons[1].text = "Competitive";
 
-    SetButtonToShow(2);
+    // Deathmatch
+    AllButtons[2].xPos = 40;
+    AllButtons[2].yPos = 120;
+    AllButtons[2].xSize = ScreenWidth - 80;
+    AllButtons[2].ySize = 24;
+    AllButtons[2].OnClick = &StartSinglePlayer;
+    AllButtons[2].parameter = 3;
+    AllButtons[2].isHidden = false;
+    AllButtons[2].xTextPos = 11;
+    AllButtons[2].yTextPos = 16;
+    AllButtons[2].text = "Deathmatch";
+
+    // Deathmatch
+    AllButtons[3].xPos = 40;
+    AllButtons[3].yPos = 152;
+    AllButtons[3].xSize = ScreenWidth - 80;
+    AllButtons[3].ySize = 24;
+    AllButtons[3].OnClick = &StartSinglePlayer;
+    AllButtons[3].parameter = 4;
+    AllButtons[3].isHidden = false;
+    AllButtons[3].xTextPos = 12;
+    AllButtons[3].yTextPos = 20;
+    AllButtons[3].text = "GunGame";
+
+    SetButtonToShow(4);
     setQuitButton(true);
 }
 

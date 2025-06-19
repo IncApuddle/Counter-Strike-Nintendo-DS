@@ -429,6 +429,7 @@ void setPlayerHealth(int playerIndex, int health)
             PlayBasicSound(SFX_DEATH);
             // Hide crosshair
             NE_SpriteVisible(TopScreenSprites[0], false);
+            // setNeedRespawn(HittedClient);
         }
         else
         {
@@ -936,20 +937,23 @@ void resetPlayer(int index)
         player->grenadeBought[i] = 0;
     }
 
-    if (player->IsDead || (allPartyModes[currentPartyMode].middlePartyTeamSwap && TerroristsScore + CounterScore == floor(allPartyModes[currentPartyMode].maxRound / 2.0)) || TerroristsScore + CounterScore == 0)
+    if(roundState != TRAINING)
     {
-        player->haveDefuseKit = false;
-        player->armor = 0;
-        player->haveHeadset = false;
-
-        if (player->Team == TERRORISTS)
-            player->AllGunsInInventory[1] = DEFAULTTERRORISTGUN;
-        else if (player->Team == COUNTERTERRORISTS)
-            player->AllGunsInInventory[1] = DEFAULTCOUNTERTERRORISTGUN;
-
-        for (int i = 2; i < inventoryCapacity - 1; i++)
+        if (player->IsDead || (allPartyModes[currentPartyMode].middlePartyTeamSwap && TerroristsScore + CounterScore == floor(allPartyModes[currentPartyMode].maxRound / 2.0)) || TerroristsScore + CounterScore == 0)
         {
-            player->AllGunsInInventory[i] = EMPTY;
+            player->haveDefuseKit = false;
+            player->armor = 0;
+            player->haveHeadset = false;
+
+            if (player->Team == TERRORISTS)
+                player->AllGunsInInventory[1] = DEFAULTTERRORISTGUN;
+            else if (player->Team == COUNTERTERRORISTS)
+                player->AllGunsInInventory[1] = DEFAULTCOUNTERTERRORISTGUN;
+
+            for (int i = 2; i < inventoryCapacity - 1; i++)
+            {
+                player->AllGunsInInventory[i] = EMPTY;
+            }
         }
     }
 
@@ -963,7 +967,7 @@ void resetPlayer(int index)
     if (roundState == TRAINING)
     {
         player->invincibilityTimer = 60 * 5; // 5 seconds
-        player->currentGunInInventory = 1;
+        // player->currentGunInInventory = 1;
     }
     player->isPlantingBomb = false; //
     player->bombTimer = 0;
