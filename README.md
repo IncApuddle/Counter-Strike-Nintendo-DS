@@ -14,6 +14,8 @@ There is no emulator with **online** support on **Android** at this time.<br/>
 
 ![image](https://user-images.githubusercontent.com/39272935/176778790-14707835-d15d-473b-baeb-3cb51864b004.png)
 ![image](https://user-images.githubusercontent.com/39272935/176778935-59555499-c40e-4325-83f8-8d89778a75af.png)
+![image](![123](https://github.com/user-attachments/assets/949ff2b9-58a8-4011-842a-a0faefaa66e4)
+)
 
 ## How to install the game
 
