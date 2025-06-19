@@ -1,5 +1,6 @@
 # New version! 1.1.0
 New maps,<br/>
+New modes,<br/>
 New texture for Terrorists,<br/>
 New player models (Animated and Static),<br/>
 Now you can choose to which server to connect via IP.
