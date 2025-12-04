@@ -31,9 +31,12 @@ extern int MatriceCount;
 extern int waypointsSize;
 extern int MatricesSize;
 
+extern bool equalTeam;
+
 extern int SiteAPoint;
 extern int SiteBPoint;
 extern bool TwoSites;
+extern int amountOfBots;
 
 void StartChecking(int playerIndex, int FinalWaypoint);
 void GetRandomPoint(int currentAiToCheck);
@@ -52,6 +55,10 @@ void SetDefuser(int defuserIndex);
 void SetRandomDefuser();
 void freeAllMatricesLength(int size);
 void freeWaypoint();
+
+void setBotAmount4();
+void setBotAmount6();
+void setBotAmount10();
 
 Waypoint *GetWaypoints();
 

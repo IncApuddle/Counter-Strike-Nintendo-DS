@@ -278,7 +278,7 @@ void Draw3DScene(void)
     NE_CameraUse(Camera);
 
     // Animate all Obj
-    if(PlayerAnim)
+    if(PlayerAnim && roundState != WAIT_START)
         NE_ModelAnimateAll();
 
     // Reset polygons Alpha/Light/Effect
@@ -498,22 +498,6 @@ void Draw3DSceneNotInGame(void)
                 GroundMaterial->specular = RGB15(10, 10, 10);
                 NE_ModelDraw(map->models[3].Model);
         }
-
-        if (map->models[9].shadowed)
-        {
-                GroundMaterial->diffuse = RGB15(4, 4, 4);
-                GroundMaterial->emission = RGB15(0, 0, 0);
-                GroundMaterial->specular = RGB15(1, 1, 1);
-                NE_ModelDraw(map->models[9].Model);
-        }
-
-        if (map->models[10].shadowed)
-        {
-                GroundMaterial->diffuse = RGB15(4, 4, 4);
-                GroundMaterial->emission = RGB15(0, 0, 0);
-                GroundMaterial->specular = RGB15(1, 1, 1);
-                NE_ModelDraw(map->models[10].Model);
-        }
     }
     else if (currentMap == TUTORIAL)
     {
@@ -545,33 +529,17 @@ void Draw3DSceneNotInGame(void)
                 NE_ModelDraw(map->models[0].Model);
         }
 
-        if (!map->models[4].shadowed)
+        if (!map->models[2].shadowed)
         {
                 GroundMaterial->diffuse = RGB15(0, 0, 0);
                 GroundMaterial->emission = RGB15(14, 14, 14);
                 GroundMaterial->specular = RGB15(10, 10, 10);
-                NE_ModelDraw(map->models[4].Model);
-        }
-
-        if (map->models[1].shadowed)
-        {
-                GroundMaterial->diffuse = RGB15(4, 4, 4);
-                GroundMaterial->emission = RGB15(0, 0, 0);
-                GroundMaterial->specular = RGB15(1, 1, 1);
-                NE_ModelDraw(map->models[1].Model);
-        }
-
-        if (map->models[5].shadowed)
-        {
-                GroundMaterial->diffuse = RGB15(4, 4, 4);
-                GroundMaterial->emission = RGB15(0, 0, 0);
-                GroundMaterial->specular = RGB15(1, 1, 1);
-                NE_ModelDraw(map->models[5].Model);
+                NE_ModelDraw(map->models[2].Model);
         }
     }
     else if (currentMap == AIM_MAP)
     {
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 3; i++)
         {
             // Set the model light like normal
             if (!map->models[i].shadowed)
@@ -591,26 +559,6 @@ void Draw3DSceneNotInGame(void)
     }
     else if (currentMap == B2000)
     {
-        for (int i = 0; i < 4; i++)
-        {
-            // Set the model light like normal
-            if (!map->models[i].shadowed)
-            {
-                GroundMaterial->diffuse = RGB15(0, 0, 0);
-                GroundMaterial->emission = RGB15(14, 14, 14);
-                GroundMaterial->specular = RGB15(10, 10, 10);
-            }
-            else // Set the model light like shadowed
-            {
-                GroundMaterial->diffuse = RGB15(4, 4, 4);
-                GroundMaterial->emission = RGB15(0, 0, 0);
-                GroundMaterial->specular = RGB15(1, 1, 1);
-            }
-            NE_ModelDraw(map->models[i].Model);
-        }
-    }
-    else if (currentMap == MIRAGEA)
-    {
         for (int i = 0; i < 2; i++)
         {
             // Set the model light like normal
@@ -629,6 +577,26 @@ void Draw3DSceneNotInGame(void)
             NE_ModelDraw(map->models[i].Model);
         }
     }
+    // else if (currentMap == MIRAGEA)
+    // {
+    //     for (int i = 0; i < 2; i++)
+    //     {
+    //         // Set the model light like normal
+    //         if (!map->models[i].shadowed)
+    //         {
+    //             GroundMaterial->diffuse = RGB15(0, 0, 0);
+    //             GroundMaterial->emission = RGB15(14, 14, 14);
+    //             GroundMaterial->specular = RGB15(10, 10, 10);
+    //         }
+    //         else // Set the model light like shadowed
+    //         {
+    //             GroundMaterial->diffuse = RGB15(4, 4, 4);
+    //             GroundMaterial->emission = RGB15(0, 0, 0);
+    //             GroundMaterial->specular = RGB15(1, 1, 1);
+    //         }
+    //         NE_ModelDraw(map->models[i].Model);
+    //     }
+    // }
 
     NE_2DViewInit();
     // Draw keyboard input screen if needed

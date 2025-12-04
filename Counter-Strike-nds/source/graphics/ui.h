@@ -22,8 +22,8 @@
 #define ScreenCenterWidth 128 // 256/2
 #define ScreenCenterHeight 96 // 192/2
 
-#define ButtonCount 9
-#define CheckBoxCount 4
+#define ButtonCount 8
+#define CheckBoxCount 3
 #define SliderCount 2
 
 #define ColorTerroristsTeam RGB15(26, 26, 13)
@@ -80,6 +80,7 @@ enum UiMenu
     ONLINE_ERROR = 19,
     STATS = 20,
     ENTER_IP = 21,
+    AI_Set = 22,
 };
 
 enum shopCategory
@@ -208,6 +209,7 @@ void drawServersMenu();
 void drawChangeNameMenu();
 void drawChatMenu();
 void drawControlsSettingsMenu();
+void drawAISettingsMenu();
 void drawControlsChangeMenu();
 void drawSelectionMapImageMenu();
 void drawSelectionMapListMenu();

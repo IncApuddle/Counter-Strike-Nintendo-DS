@@ -14,7 +14,7 @@
 #include "tex_map_image_dust2_2x2_bin.h"
 #include "tex_map_image_aim_bin.h"
 #include "tex_map_image_2000_bin.h"
-#include "tex_map_image_mirage_bin.h"
+// #include "tex_map_image_mirage_bin.h"
 
 enum mapEnum
 {
@@ -23,7 +23,7 @@ enum mapEnum
     DUST2_2x2 = 2,
     AIM_MAP = 3,
     B2000 = 4,
-    MIRAGEA = 5
+    // MIRAGEA = 5
 };
 
 typedef struct //
@@ -63,7 +63,7 @@ typedef struct //
     Vector3 cameraLookPosition;
 } Map;
 
-#define MAP_COUNT 6
+#define MAP_COUNT 5
 extern Map allMaps[MAP_COUNT];
 
 void AddAllSpawnPoints();

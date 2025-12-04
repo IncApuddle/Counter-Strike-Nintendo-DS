@@ -680,7 +680,7 @@ int AddNewPlayer(int NewId, bool IsLocalPlayer, bool isAI)
                 {
                     player->PlayerModel = NE_ModelCreate(NE_Animated); // ANIMATED VERSION
                     NE_ModelAnimInterpolate(player->PlayerModel, false);
-                    NE_ModelAnimStart(player->PlayerModel, 0, 0, 2, NE_ANIM_UPDOWN, 5);
+                    NE_ModelAnimStart(player->PlayerModel, 0, 0, 3, NE_ANIM_LOOP, 5);
                 }
                 else
                 player->PlayerModel = NE_ModelCreate(NE_Static); // STATIC VERSION

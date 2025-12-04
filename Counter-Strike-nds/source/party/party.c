@@ -144,7 +144,7 @@ void AddAllPartyModes()
     allPartyModes[2].infiniteGunAmmo = true;
 
     // Deathmatch
-    AddPartyMode(3, true, 0, 10000, 10000, 0, 0, 0, 0, 0, 0, 0, 0, false, false, false);
+    AddPartyMode(3, true, 0, 10000, 10000, 0, 0, 0, 0, 0, 0, 0, 0, false, false, true);
 
     allPartyModes[3].trainingMinutesDuration = 5;
     allPartyModes[3].trainingSecondsDuration = 0;
@@ -173,7 +173,7 @@ void AddAllPartyModes()
     allPartyModes[3].infiniteGunAmmo = true;
 
     // GunGame
-    AddPartyMode(4, true, 0, 0, 10000, 0, 0, 0, 0, 0, 0, 0, 0, false, false, false);
+    AddPartyMode(4, true, 0, 0, 10000, 0, 0, 0, 0, 0, 0, 0, 0, false, false, true);
 
     allPartyModes[4].trainingMinutesDuration = 0;
     allPartyModes[4].trainingSecondsDuration = 0;
@@ -687,9 +687,14 @@ void checkAfterDamage(int shooterPlayerIndex, int hittedPlayerIndex, bool CheckS
                 {
                     TopKill++;
                 }
+
                 if(currentPartyMode == 4)
                 {
-                   if(killerClient->KillCount % 2 == 0)
+                    if (killerClient != localPlayer)
+                    {
+                        killerClient->KillCount++;
+                    }
+                    if(killerClient->KillCount % 2 == 0) // swithcing guns when your score is divided by 2
                     {
                         GunSwitch(shooterPlayerIndex);
                     }

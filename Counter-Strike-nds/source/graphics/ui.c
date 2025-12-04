@@ -402,6 +402,10 @@ void ChangeMenu(int menuId)
     {
         initEnterIPMenu();
     }
+    else if (menuId == AI_Set)
+    {
+        initEnterIPMenu();
+    }
 }
 
 /**
@@ -1723,18 +1727,11 @@ void initSettingsMenu()
     AllCheckBoxs[0].value = &useRumble;
 
     // Set show ping checkbox
-    AllCheckBoxs[1].xPos = 149;
+    AllCheckBoxs[1].xPos = 175;
     AllCheckBoxs[1].yPos = 56;
     AllCheckBoxs[1].xSize = 20;
     AllCheckBoxs[1].ySize = 20;
     AllCheckBoxs[1].value = &showPing;
-
-    // Set show Anim checkbox
-    AllCheckBoxs[2].xPos = 200;
-    AllCheckBoxs[2].yPos = 56;
-    AllCheckBoxs[2].xSize = 20;
-    AllCheckBoxs[2].ySize = 20;
-    AllCheckBoxs[2].value = &PlayerAnim;
 
     // Set change name button
     AllButtons[0].xPos = 15;
@@ -1775,7 +1772,7 @@ void initSettingsMenu()
 
     SetSliderToShow(1);
     SetButtonToShow(3);
-    SetCheckBoxToShow(3);
+    SetCheckBoxToShow(2);
 }
 
 /**
@@ -2145,6 +2142,81 @@ void initControlsSettingsMenu()
 }
 
 /**
+ * @brief Init AI settings menu
+ *
+ */
+void initAISettingsMenu()
+{
+
+    SetTwoScreenMode(true);
+
+    startChangeMenu(AI_Set);
+
+    renderFunction = &drawAISettingsMenu;
+
+    lastOpenedMenu = &initSelectionMapImageMenu;
+
+    setQuitButton(true);
+
+    // Set AI Settings
+    AllButtons[0].xPos = 18;
+    AllButtons[0].yPos = 130;
+    AllButtons[0].xSize = 55;
+    AllButtons[0].ySize = 24;
+    AllButtons[0].OnClick = &setBotAmount4;
+    AllButtons[0].xTextPos = 3;
+    AllButtons[0].yTextPos = 17;
+    AllButtons[0].text = "2 vs 2";
+
+    AllButtons[1].xPos = 100;
+    AllButtons[1].yPos = 130;
+    AllButtons[1].xSize = 55;
+    AllButtons[1].ySize = 24;
+    AllButtons[1].OnClick = &setBotAmount6;
+    AllButtons[1].xTextPos = 13;
+    AllButtons[1].yTextPos = 17;
+    AllButtons[1].text = "3 vs 3";
+
+    AllButtons[2].xPos = 180;
+    AllButtons[2].yPos = 130;
+    AllButtons[2].xSize = 55;
+    AllButtons[2].ySize = 24;
+    AllButtons[2].OnClick = &setBotAmount10;
+    AllButtons[2].xTextPos = 23;
+    AllButtons[2].yTextPos = 17;
+    AllButtons[2].text = "5 vs 5";
+
+    AllCheckBoxs[0].xPos = 50;
+    AllCheckBoxs[0].yPos = 58;
+    AllCheckBoxs[0].xSize = 20;
+    AllCheckBoxs[0].ySize = 20;
+    AllCheckBoxs[0].value = &equalTeam;
+
+    // Set show Anim checkbox
+    AllCheckBoxs[1].xPos = 165;
+    AllCheckBoxs[1].yPos = 58;
+    AllCheckBoxs[1].xSize = 20;
+    AllCheckBoxs[1].ySize = 20;
+    AllCheckBoxs[1].value = &PlayerAnim;
+
+    SetButtonToShow(3);
+    SetCheckBoxToShow(2);
+}
+
+void setBotAmount4()
+{
+    amountOfBots = 4;
+}
+void setBotAmount6()
+{
+    amountOfBots = 6;
+}
+void setBotAmount10()
+{
+    amountOfBots = 10;
+}
+
+/**
  * @brief Init controls change menu
  *
  */
@@ -2359,7 +2431,16 @@ void initSelectionMapImageMenu()
     AllButtons[2].yTextPos = 22;
     AllButtons[2].text = "Start";
 
-    SetButtonToShow(3);
+    AllButtons[3].xPos = 5;
+    AllButtons[3].yPos = 26;
+    AllButtons[3].xSize = 25;
+    AllButtons[3].ySize = 20;
+    AllButtons[3].OnClick = &initAISettingsMenu;
+    AllButtons[3].xTextPos = 1;
+    AllButtons[3].yTextPos = 4;
+    AllButtons[3].text = "Mod";
+
+    SetButtonToShow(4);
 }
 
 /**
@@ -2818,8 +2899,8 @@ void drawSettingsMenu()
                  "Keyboard mode");
 
     printLongText(1, 16, 3, "Use Rumble Pack (cause crash on 3DS)");
-    printLongText(16, 24, 4, "Show Ping");
-    printLongText(23, 31, 4, "Anim. Model");
+    printLongText(17, 31, 4, "Show Ping");
+    // printLongText(23, 31, 4, "Anim. Model");
 
     char gamePadSensitivityText[29];
     sprintf(gamePadSensitivityText, "Crosshair transparency: %d%%", (int)(*AllSliders[0].value * 100));
@@ -3052,6 +3133,27 @@ void drawControlsSettingsMenu()
     char buttonsSensitivityText[33];
     sprintf(buttonsSensitivityText, "Button sensitivity: %0.1f", *AllSliders[1].value);
     printLongText(2, 16, 13, buttonsSensitivityText);
+}
+
+/**
+ * @brief Draw AI settings menu
+ *
+ */
+void drawAISettingsMenu()
+{
+    // Print texts
+    NE_TextPrint(0,        // Font slot
+                 10, 1,    // Coordinates x(column), y(row)
+                 NE_White, // Color
+                 "Mod settings");
+
+    printLongText(4, 12, 4, "Equal teams:");
+    printLongText(12, 31, 4, "(Causes crashes) -Animated model:");
+    printLongText(19, 33, 20, "(May cause crashes)");
+
+    char aiAmountText[26];
+    sprintf(aiAmountText, "The amount of bots: %d", amountOfBots);
+    printLongText(5, 28, 13, aiAmountText);
 }
 
 /**

@@ -40,7 +40,6 @@ NE_Material *GroundMaterial = NULL;
 // NE_Material *GroundMaterial1 = NULL;
 NE_Material *GroundMaterialShadowed = NULL;
 
-//
 //////Players
 Player AllPlayers[MaxPlayer];
 // Player values
@@ -405,7 +404,7 @@ void checkStartGameLoop()
 		// Add bots
 		if (currentPartyMode != 2)
 		{
-			for (int i = 1; i < MaxPlayer; i++)
+			for (int i = 1; i < amountOfBots; i++)
 				AddNewPlayer(i, false, true);
 		}
 
@@ -446,7 +445,10 @@ void checkStartGameLoop()
 			}
 			UpdatePlayerTexture(i);
 		}
-		AllPlayers[2].Team = AllPlayers[1].Team;
+		if (!equalTeam)
+		{
+			AllPlayers[2].Team = AllPlayers[1].Team;
+		}
 		UpdatePlayerTexture(2);
 
 		setPlayersPositionAtSpawns();

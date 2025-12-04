@@ -29,45 +29,30 @@
 #include "soundbank.h"
 
 // 3D models
-#include "m_DustPart0Solid_bin.h"
-#include "m_DustPart0Shadows_bin.h"
-#include "m_DustPart1Solid_bin.h"
-#include "m_DustPart1Shadows_bin.h"
-#include "m_DustPart2Solid_bin.h"
-#include "m_DustPart2Shadows_bin.h"
-#include "m_DustPart3Solid_bin.h"
-#include "m_DustPart3Shadows_bin.h"
+#include "m_Dust2Part0_bin.h"
+#include "m_Dust2Part1_bin.h"
+#include "m_Dust2Part2_bin.h"
+#include "m_Dust2Part3_bin.h"
+#include "m_Dust2Part4_bin.h"
+#include "m_Dust2Part5_bin.h"
+#include "m_Dust2Part6_bin.h"
 
-#include "m_DustPart4Solid_bin.h"
-#include "m_DustPart4Shadows_bin.h"
-#include "m_DustPart5Solid_bin.h"
-#include "m_DustPart5Shadows_bin.h"
-#include "m_DustPart6Solid_bin.h"
-#include "m_DustPart6Shadows_bin.h"
+#include "m_Dust2_2x2Part3_bin.h"
+#include "m_Dust2_2x2Part4_bin.h"
 
-#include "m_Dust2_2x2Part3Solid_bin.h"
-#include "m_Dust2_2x2Part3Shadows_bin.h"
-#include "m_Dust2_2x2Part4Solid_bin.h"
-#include "m_Dust2_2x2Part4Shadows_bin.h"
+#include "m_Aim_MapPart0_bin.h"
+#include "m_Aim_MapPart1_bin.h"
+#include "m_Aim_MapPart2_bin.h"
 
-#include "m_Aim_MapPart0Shadows_bin.h"
-#include "m_Aim_MapPart0Solid_bin.h"
-#include "m_Aim_MapPart1Shadows_bin.h"
-#include "m_Aim_MapPart1Solid_bin.h"
-#include "m_Aim_MapPart2Shadows_bin.h"
-#include "m_Aim_MapPart2Solid_bin.h"
+#include "m_2000Part0_bin.h"
+#include "m_2000Part1_bin.h"
 
-#include "m_2000Part0Solid_bin.h"
-#include "m_2000Part0Shadows_bin.h"
-#include "m_2000Part1Solid_bin.h"
-#include "m_2000Part1Shadows_bin.h"
-
-#include "m_MiragePart1Solid_bin.h"
-#include "m_MiragePart1Shadows_bin.h"
-#include "m_MiragePart2Solid_bin.h"
-#include "m_MiragePart2Shadows_bin.h"
-#include "m_MiragePart3Solid_bin.h"
-#include "m_MiragePart3Shadows_bin.h"
+// #include "m_MiragePart1Solid_bin.h"
+// #include "m_MiragePart1Shadows_bin.h"
+// #include "m_MiragePart2Solid_bin.h"
+// #include "m_MiragePart2Shadows_bin.h"
+// #include "m_MiragePart3Solid_bin.h"
+// #include "m_MiragePart3Shadows_bin.h"
 
 
 #include "bomb_bin.h"
@@ -153,7 +138,7 @@
 #define Degres90 128
 
 #define JumpForce 620
-#define MaxPlayer 6
+#define MaxPlayer 10
 #define RaycastDistance 40
 #define RayAccuracy 4
 
@@ -431,6 +416,7 @@ typedef struct // Player values
 	int currentShadowCollBox;
 	float lightCoef;
 	int mapVisivilityTimer;
+
 } Player;
 
 typedef struct // 2D area (box) values for trigger with stairs start height, final height and direction

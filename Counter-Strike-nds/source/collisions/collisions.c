@@ -36,222 +36,154 @@ void CalculateAllTriggerColBoxs(int mapToLoad)
         map->zonesCount = 21;
         map->AllZones = malloc(map->zonesCount * sizeof(Zone));
 
-        map->AllZones[currentZone].ZoneCount = 6;
+        map->AllZones[currentZone].ZoneCount = 3;
         map->AllZones[currentZone].visibleMapPart[0] = 0;
         map->AllZones[currentZone].visibleMapPart[1] = 4;
         map->AllZones[currentZone].visibleMapPart[2] = 6;
-        map->AllZones[currentZone].visibleMapPart[3] = 7;
-        map->AllZones[currentZone].visibleMapPart[4] = 11;
-        map->AllZones[currentZone].visibleMapPart[5] = 13;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 1;
-        map->AllZones[currentZone].ZoneCount = 6;
+        map->AllZones[currentZone].ZoneCount = 3;
         map->AllZones[currentZone].visibleMapPart[0] = 0;
         map->AllZones[currentZone].visibleMapPart[1] = 1;
         map->AllZones[currentZone].visibleMapPart[2] = 4;
-        map->AllZones[currentZone].visibleMapPart[3] = 7;
-        map->AllZones[currentZone].visibleMapPart[4] = 8;
-        map->AllZones[currentZone].visibleMapPart[5] = 11;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 2;
-        map->AllZones[currentZone].ZoneCount = 4;
+        map->AllZones[currentZone].ZoneCount = 2;
         map->AllZones[currentZone].visibleMapPart[0] = 0;
         map->AllZones[currentZone].visibleMapPart[1] = 1;
-        map->AllZones[currentZone].visibleMapPart[2] = 7;
-        map->AllZones[currentZone].visibleMapPart[3] = 8;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 3;
-        map->AllZones[currentZone].ZoneCount = 7;
+        map->AllZones[currentZone].ZoneCount = 3;
         map->AllZones[currentZone].visibleMapPart[0] = 1;
         map->AllZones[currentZone].visibleMapPart[1] = 3;
         map->AllZones[currentZone].visibleMapPart[2] = 4;
-        map->AllZones[currentZone].visibleMapPart[3] = 7;
-        map->AllZones[currentZone].visibleMapPart[4] = 8;
-        map->AllZones[currentZone].visibleMapPart[5] = 10;
-        map->AllZones[currentZone].visibleMapPart[6] = 11;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 4;
-        map->AllZones[currentZone].ZoneCount = 6;
+        map->AllZones[currentZone].ZoneCount = 3;
         map->AllZones[currentZone].visibleMapPart[0] = 0;
         map->AllZones[currentZone].visibleMapPart[1] = 1;
         map->AllZones[currentZone].visibleMapPart[2] = 2;
-        map->AllZones[currentZone].visibleMapPart[3] = 7;
-        map->AllZones[currentZone].visibleMapPart[4] = 8;
-        map->AllZones[currentZone].visibleMapPart[5] = 9;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 5;
-        map->AllZones[currentZone].ZoneCount = 8;
+        map->AllZones[currentZone].ZoneCount = 4;
         map->AllZones[currentZone].visibleMapPart[0] = 0;
         map->AllZones[currentZone].visibleMapPart[1] = 1;
         map->AllZones[currentZone].visibleMapPart[2] = 4;
         map->AllZones[currentZone].visibleMapPart[3] = 6;
-        map->AllZones[currentZone].visibleMapPart[4] = 7;
-        map->AllZones[currentZone].visibleMapPart[5] = 8;
-        map->AllZones[currentZone].visibleMapPart[6] = 11;
-        map->AllZones[currentZone].visibleMapPart[7] = 13;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 6;
-        map->AllZones[currentZone].ZoneCount = 8;
+        map->AllZones[currentZone].ZoneCount = 4;
         map->AllZones[currentZone].visibleMapPart[0] = 0;
         map->AllZones[currentZone].visibleMapPart[1] = 3;
         map->AllZones[currentZone].visibleMapPart[2] = 4;
         map->AllZones[currentZone].visibleMapPart[3] = 6;
-        map->AllZones[currentZone].visibleMapPart[4] = 7;
-        map->AllZones[currentZone].visibleMapPart[5] = 10;
-        map->AllZones[currentZone].visibleMapPart[6] = 11;
-        map->AllZones[currentZone].visibleMapPart[7] = 13;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 7;
-        map->AllZones[currentZone].ZoneCount = 4;
+        map->AllZones[currentZone].ZoneCount = 2;
         map->AllZones[currentZone].visibleMapPart[0] = 4;
         map->AllZones[currentZone].visibleMapPart[1] = 6;
-        map->AllZones[currentZone].visibleMapPart[2] = 11;
-        map->AllZones[currentZone].visibleMapPart[3] = 13;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 8;
-        map->AllZones[currentZone].ZoneCount = 6;
+        map->AllZones[currentZone].ZoneCount = 3;
         map->AllZones[currentZone].visibleMapPart[0] = 4;
         map->AllZones[currentZone].visibleMapPart[1] = 5;
         map->AllZones[currentZone].visibleMapPart[2] = 6;
-        map->AllZones[currentZone].visibleMapPart[3] = 11;
-        map->AllZones[currentZone].visibleMapPart[4] = 12;
-        map->AllZones[currentZone].visibleMapPart[5] = 13;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 9;
-        map->AllZones[currentZone].ZoneCount = 4;
+        map->AllZones[currentZone].ZoneCount = 2;
         map->AllZones[currentZone].visibleMapPart[0] = 5;
         map->AllZones[currentZone].visibleMapPart[1] = 6;
-        map->AllZones[currentZone].visibleMapPart[2] = 12;
-        map->AllZones[currentZone].visibleMapPart[3] = 13;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 10;
-        map->AllZones[currentZone].ZoneCount = 4;
+        map->AllZones[currentZone].ZoneCount = 2;
         map->AllZones[currentZone].visibleMapPart[0] = 5;
         map->AllZones[currentZone].visibleMapPart[1] = 6;
-        map->AllZones[currentZone].visibleMapPart[2] = 12;
-        map->AllZones[currentZone].visibleMapPart[3] = 13;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 11;
-        map->AllZones[currentZone].ZoneCount = 6;
+        map->AllZones[currentZone].ZoneCount = 3;
         map->AllZones[currentZone].visibleMapPart[0] = 2;
         map->AllZones[currentZone].visibleMapPart[1] = 3;
         map->AllZones[currentZone].visibleMapPart[2] = 5;
-        map->AllZones[currentZone].visibleMapPart[3] = 9;
-        map->AllZones[currentZone].visibleMapPart[4] = 10;
-        map->AllZones[currentZone].visibleMapPart[5] = 12;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 12;
-        map->AllZones[currentZone].ZoneCount = 6;
+        map->AllZones[currentZone].ZoneCount = 3;
         map->AllZones[currentZone].visibleMapPart[0] = 1;
         map->AllZones[currentZone].visibleMapPart[1] = 3;
         map->AllZones[currentZone].visibleMapPart[2] = 4;
-        map->AllZones[currentZone].visibleMapPart[3] = 8;
-        map->AllZones[currentZone].visibleMapPart[4] = 10;
-        map->AllZones[currentZone].visibleMapPart[5] = 11;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 13;
-        map->AllZones[currentZone].ZoneCount = 8;
+        map->AllZones[currentZone].ZoneCount = 4;
         map->AllZones[currentZone].visibleMapPart[0] = 1;
         map->AllZones[currentZone].visibleMapPart[1] = 2;
         map->AllZones[currentZone].visibleMapPart[2] = 3;
         map->AllZones[currentZone].visibleMapPart[3] = 5;
-        map->AllZones[currentZone].visibleMapPart[4] = 8;
-        map->AllZones[currentZone].visibleMapPart[5] = 9;
-        map->AllZones[currentZone].visibleMapPart[6] = 10;
-        map->AllZones[currentZone].visibleMapPart[7] = 12;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 14;
-        map->AllZones[currentZone].ZoneCount = 10;
+        map->AllZones[currentZone].ZoneCount = 5;
         map->AllZones[currentZone].visibleMapPart[0] = 1;
         map->AllZones[currentZone].visibleMapPart[1] = 2;
         map->AllZones[currentZone].visibleMapPart[2] = 3;
         map->AllZones[currentZone].visibleMapPart[3] = 4;
         map->AllZones[currentZone].visibleMapPart[4] = 5;
-        map->AllZones[currentZone].visibleMapPart[5] = 8;
-        map->AllZones[currentZone].visibleMapPart[6] = 9;
-        map->AllZones[currentZone].visibleMapPart[7] = 10;
-        map->AllZones[currentZone].visibleMapPart[8] = 11;
-        map->AllZones[currentZone].visibleMapPart[9] = 12;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 15;
-        map->AllZones[currentZone].ZoneCount = 8;
+        map->AllZones[currentZone].ZoneCount = 4;
         map->AllZones[currentZone].visibleMapPart[0] = 2;
         map->AllZones[currentZone].visibleMapPart[1] = 3;
         map->AllZones[currentZone].visibleMapPart[2] = 4;
         map->AllZones[currentZone].visibleMapPart[3] = 5;
-        map->AllZones[currentZone].visibleMapPart[4] = 9;
-        map->AllZones[currentZone].visibleMapPart[5] = 10;
-        map->AllZones[currentZone].visibleMapPart[6] = 11;
-        map->AllZones[currentZone].visibleMapPart[7] = 12;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 16;
-        map->AllZones[currentZone].ZoneCount = 8;
+        map->AllZones[currentZone].ZoneCount = 4;
         map->AllZones[currentZone].visibleMapPart[0] = 1;
         map->AllZones[currentZone].visibleMapPart[1] = 2;
         map->AllZones[currentZone].visibleMapPart[2] = 3;
         map->AllZones[currentZone].visibleMapPart[3] = 5;
-        map->AllZones[currentZone].visibleMapPart[4] = 8;
-        map->AllZones[currentZone].visibleMapPart[5] = 9;
-        map->AllZones[currentZone].visibleMapPart[6] = 10;
-        map->AllZones[currentZone].visibleMapPart[7] = 12;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 17;
-        map->AllZones[currentZone].ZoneCount = 6;
+        map->AllZones[currentZone].ZoneCount = 3;
         map->AllZones[currentZone].visibleMapPart[0] = 1;
         map->AllZones[currentZone].visibleMapPart[1] = 2;
         map->AllZones[currentZone].visibleMapPart[2] = 3;
-        map->AllZones[currentZone].visibleMapPart[3] = 8;
-        map->AllZones[currentZone].visibleMapPart[4] = 9;
-        map->AllZones[currentZone].visibleMapPart[5] = 10;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 18;
-        map->AllZones[currentZone].ZoneCount = 6;
+        map->AllZones[currentZone].ZoneCount = 3;
         map->AllZones[currentZone].visibleMapPart[0] = 0;
         map->AllZones[currentZone].visibleMapPart[1] = 1;
         map->AllZones[currentZone].visibleMapPart[2] = 3;
-        map->AllZones[currentZone].visibleMapPart[3] = 7;
-        map->AllZones[currentZone].visibleMapPart[4] = 8;
-        map->AllZones[currentZone].visibleMapPart[5] = 10;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 19;
-        map->AllZones[currentZone].ZoneCount = 6;
+        map->AllZones[currentZone].ZoneCount = 3;
         map->AllZones[currentZone].visibleMapPart[0] = 3;
         map->AllZones[currentZone].visibleMapPart[1] = 4;
         map->AllZones[currentZone].visibleMapPart[2] = 6;
-        map->AllZones[currentZone].visibleMapPart[3] = 10;
-        map->AllZones[currentZone].visibleMapPart[4] = 11;
-        map->AllZones[currentZone].visibleMapPart[5] = 13;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 20;
-        map->AllZones[currentZone].ZoneCount = 8;
+        map->AllZones[currentZone].ZoneCount = 4;
         map->AllZones[currentZone].visibleMapPart[0] = 1;
         map->AllZones[currentZone].visibleMapPart[1] = 3;
         map->AllZones[currentZone].visibleMapPart[2] = 4;
         map->AllZones[currentZone].visibleMapPart[3] = 6;
-        map->AllZones[currentZone].visibleMapPart[4] = 8;
-        map->AllZones[currentZone].visibleMapPart[5] = 10;
-        map->AllZones[currentZone].visibleMapPart[6] = 11;
-        map->AllZones[currentZone].visibleMapPart[7] = 13;
         map->AllZones[currentZone].id = currentZone;
 
         // Add occlusion culling triggers
@@ -308,7 +240,7 @@ void CalculateAllTriggerColBoxs(int mapToLoad)
         CalculateShadowColBox(-9.356157, 8.267205, 57.86414, 4.4, 5.6, 17.13, 24);
         CalculateShadowColBox(39.72386, 6.616204, -19.41586, 1.99, 2.22, 3.34, 25);
 
-        map->occlusionZoneCount = 14;
+        map->occlusionZoneCount = 7;
         map->AllOcclusionZone = malloc(map->occlusionZoneCount * sizeof(OcclusionZone));
 
         // Add clipping zones
@@ -324,18 +256,6 @@ void CalculateAllTriggerColBoxs(int mapToLoad)
 
         map->AllOcclusionZone[0].angles[3].x = -11.1;
         map->AllOcclusionZone[0].angles[3].y = 20.7;
-        ////
-        map->AllOcclusionZone[7].angles[0].x = -11.1;
-        map->AllOcclusionZone[7].angles[0].y = 83.1;
-
-        map->AllOcclusionZone[7].angles[1].x = -46.5;
-        map->AllOcclusionZone[7].angles[1].y = 83.1;
-
-        map->AllOcclusionZone[7].angles[2].x = -46.5;
-        map->AllOcclusionZone[7].angles[2].y = 20.7;
-
-        map->AllOcclusionZone[7].angles[3].x = -11.1;
-        map->AllOcclusionZone[7].angles[3].y = 20.7;
         /////////////////////////////////////////////////////
         map->AllOcclusionZone[1].angles[0].x = -6.8;
         map->AllOcclusionZone[1].angles[0].y = 25.4;
@@ -348,18 +268,6 @@ void CalculateAllTriggerColBoxs(int mapToLoad)
 
         map->AllOcclusionZone[1].angles[3].x = -6.8;
         map->AllOcclusionZone[1].angles[3].y = -5.39;
-        ////
-        map->AllOcclusionZone[8].angles[0].x = -6.8;
-        map->AllOcclusionZone[8].angles[0].y = 25.4;
-
-        map->AllOcclusionZone[8].angles[1].x = -45.8;
-        map->AllOcclusionZone[8].angles[1].y = 25.4;
-
-        map->AllOcclusionZone[8].angles[2].x = -45.8;
-        map->AllOcclusionZone[8].angles[2].y = -5.39;
-
-        map->AllOcclusionZone[8].angles[3].x = -6.8;
-        map->AllOcclusionZone[8].angles[3].y = -5.39;
         /////////////////////////////////////////////////////
         map->AllOcclusionZone[2].angles[0].x = -4.1;
         map->AllOcclusionZone[2].angles[0].y = 3.5;
@@ -372,18 +280,6 @@ void CalculateAllTriggerColBoxs(int mapToLoad)
 
         map->AllOcclusionZone[2].angles[3].x = -4.1;
         map->AllOcclusionZone[2].angles[3].y = -43;
-        ////
-        map->AllOcclusionZone[9].angles[0].x = -4.1;
-        map->AllOcclusionZone[9].angles[0].y = 3.5;
-
-        map->AllOcclusionZone[9].angles[1].x = -54.8;
-        map->AllOcclusionZone[9].angles[1].y = 3.5;
-
-        map->AllOcclusionZone[9].angles[2].x = -54.8;
-        map->AllOcclusionZone[9].angles[2].y = -43;
-
-        map->AllOcclusionZone[9].angles[3].x = -4.1;
-        map->AllOcclusionZone[9].angles[3].y = -43;
         /////////////////////////////////////////////////////
         map->AllOcclusionZone[3].angles[0].x = 36;
         map->AllOcclusionZone[3].angles[0].y = 12.6;
@@ -396,18 +292,6 @@ void CalculateAllTriggerColBoxs(int mapToLoad)
 
         map->AllOcclusionZone[3].angles[3].x = 36;
         map->AllOcclusionZone[3].angles[3].y = -34.9;
-        ////
-        map->AllOcclusionZone[10].angles[0].x = 36;
-        map->AllOcclusionZone[10].angles[0].y = 12.6;
-
-        map->AllOcclusionZone[10].angles[1].x = -9.1;
-        map->AllOcclusionZone[10].angles[1].y = 12.6;
-
-        map->AllOcclusionZone[10].angles[2].x = -9.1;
-        map->AllOcclusionZone[10].angles[2].y = -34.9;
-
-        map->AllOcclusionZone[10].angles[3].x = 36;
-        map->AllOcclusionZone[10].angles[3].y = -34.9;
         /////////////////////////////////////////////////////
         map->AllOcclusionZone[4].angles[0].x = 15.54;
         map->AllOcclusionZone[4].angles[0].y = 68.4;
@@ -420,18 +304,6 @@ void CalculateAllTriggerColBoxs(int mapToLoad)
 
         map->AllOcclusionZone[4].angles[3].x = 15.54;
         map->AllOcclusionZone[4].angles[3].y = 4.43;
-        ////
-        map->AllOcclusionZone[11].angles[0].x = 15.54;
-        map->AllOcclusionZone[11].angles[0].y = 68.4;
-
-        map->AllOcclusionZone[11].angles[1].x = -13;
-        map->AllOcclusionZone[11].angles[1].y = 68.4;
-
-        map->AllOcclusionZone[11].angles[2].x = -13;
-        map->AllOcclusionZone[11].angles[2].y = 4.43;
-
-        map->AllOcclusionZone[11].angles[3].x = 15.54;
-        map->AllOcclusionZone[11].angles[3].y = 4.43;
         /////////////////////////////////////////////////////
         map->AllOcclusionZone[5].angles[0].x = 58.3;
         map->AllOcclusionZone[5].angles[0].y = 42;
@@ -444,18 +316,6 @@ void CalculateAllTriggerColBoxs(int mapToLoad)
 
         map->AllOcclusionZone[5].angles[3].x = 58.3;
         map->AllOcclusionZone[5].angles[3].y = -38.1;
-        ////
-        map->AllOcclusionZone[12].angles[0].x = 58.3;
-        map->AllOcclusionZone[12].angles[0].y = 42;
-
-        map->AllOcclusionZone[12].angles[1].x = 29.4;
-        map->AllOcclusionZone[12].angles[1].y = 42;
-
-        map->AllOcclusionZone[12].angles[2].x = 29.4;
-        map->AllOcclusionZone[12].angles[2].y = -38.1;
-
-        map->AllOcclusionZone[12].angles[3].x = 58.3;
-        map->AllOcclusionZone[12].angles[3].y = -38.1;
         /////////////////////////////////////////////////////
         map->AllOcclusionZone[6].angles[0].x = 37.2;
         map->AllOcclusionZone[6].angles[0].y = 66.2;
@@ -468,18 +328,6 @@ void CalculateAllTriggerColBoxs(int mapToLoad)
 
         map->AllOcclusionZone[6].angles[3].x = 37.2;
         map->AllOcclusionZone[6].angles[3].y = 7.8;
-        ////
-        map->AllOcclusionZone[13].angles[0].x = 37.2;
-        map->AllOcclusionZone[13].angles[0].y = 66.2;
-
-        map->AllOcclusionZone[13].angles[1].x = 7.3;
-        map->AllOcclusionZone[13].angles[1].y = 66.2;
-
-        map->AllOcclusionZone[13].angles[2].x = 7.3;
-        map->AllOcclusionZone[13].angles[2].y = 7.8;
-
-        map->AllOcclusionZone[13].angles[3].x = 37.2;
-        map->AllOcclusionZone[13].angles[3].y = 7.8;
     }
     else if (mapToLoad == TUTORIAL)
     {
@@ -545,91 +393,67 @@ void CalculateAllTriggerColBoxs(int mapToLoad)
         map->zonesCount = 10;
         map->AllZones = malloc(map->zonesCount * sizeof(Zone));
 
-        map->AllZones[currentZone].ZoneCount = 4;
+        map->AllZones[currentZone].ZoneCount = 2;
         map->AllZones[currentZone].visibleMapPart[0] = 0;
-        map->AllZones[currentZone].visibleMapPart[1] = 1;
-        map->AllZones[currentZone].visibleMapPart[2] = 4;
-        map->AllZones[currentZone].visibleMapPart[3] = 5;
+        map->AllZones[currentZone].visibleMapPart[1] = 2;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 1;
-        map->AllZones[currentZone].ZoneCount = 6;
+        map->AllZones[currentZone].ZoneCount = 3;
         map->AllZones[currentZone].visibleMapPart[0] = 0;
         map->AllZones[currentZone].visibleMapPart[1] = 1;
-        map->AllZones[currentZone].visibleMapPart[2] = 2;
-        map->AllZones[currentZone].visibleMapPart[3] = 3;
-        map->AllZones[currentZone].visibleMapPart[4] = 6;
-        map->AllZones[currentZone].visibleMapPart[5] = 7;
+        map->AllZones[currentZone].visibleMapPart[2] = 3;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 2;
-        map->AllZones[currentZone].ZoneCount = 4;
-        map->AllZones[currentZone].visibleMapPart[0] = 2;
+        map->AllZones[currentZone].ZoneCount = 2;
+        map->AllZones[currentZone].visibleMapPart[0] = 1;
         map->AllZones[currentZone].visibleMapPart[1] = 3;
-        map->AllZones[currentZone].visibleMapPart[2] = 6;
-        map->AllZones[currentZone].visibleMapPart[3] = 7;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 3;
-        map->AllZones[currentZone].ZoneCount = 6;
-        map->AllZones[currentZone].visibleMapPart[0] = 2;
-        map->AllZones[currentZone].visibleMapPart[1] = 3;
-        map->AllZones[currentZone].visibleMapPart[2] = 4;
-        map->AllZones[currentZone].visibleMapPart[3] = 5;
-        map->AllZones[currentZone].visibleMapPart[4] = 6;
-        map->AllZones[currentZone].visibleMapPart[5] = 7;
+        map->AllZones[currentZone].ZoneCount = 3;
+        map->AllZones[currentZone].visibleMapPart[0] = 1;
+        map->AllZones[currentZone].visibleMapPart[1] = 2;
+        map->AllZones[currentZone].visibleMapPart[2] = 3;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 4;
-        map->AllZones[currentZone].ZoneCount = 4;
-        map->AllZones[currentZone].visibleMapPart[0] = 4;
-        map->AllZones[currentZone].visibleMapPart[1] = 5;
-        map->AllZones[currentZone].visibleMapPart[2] = 6;
-        map->AllZones[currentZone].visibleMapPart[3] = 7;
+        map->AllZones[currentZone].ZoneCount = 2;
+        map->AllZones[currentZone].visibleMapPart[0] = 2;
+        map->AllZones[currentZone].visibleMapPart[1] = 3;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 5;
-        map->AllZones[currentZone].ZoneCount = 4;
-        map->AllZones[currentZone].visibleMapPart[0] = 4;
-        map->AllZones[currentZone].visibleMapPart[1] = 5;
-        map->AllZones[currentZone].visibleMapPart[2] = 6;
-        map->AllZones[currentZone].visibleMapPart[3] = 7;
+        map->AllZones[currentZone].ZoneCount = 2;
+        map->AllZones[currentZone].visibleMapPart[0] = 2;
+        map->AllZones[currentZone].visibleMapPart[1] = 3;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 6;
-        map->AllZones[currentZone].ZoneCount = 4;
-        map->AllZones[currentZone].visibleMapPart[0] = 2;
+        map->AllZones[currentZone].ZoneCount = 2;
+        map->AllZones[currentZone].visibleMapPart[0] = 1;
         map->AllZones[currentZone].visibleMapPart[1] = 3;
-        map->AllZones[currentZone].visibleMapPart[2] = 6;
-        map->AllZones[currentZone].visibleMapPart[3] = 7;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 7;
-        map->AllZones[currentZone].ZoneCount = 4;
+        map->AllZones[currentZone].ZoneCount = 2;
         map->AllZones[currentZone].visibleMapPart[0] = 0;
         map->AllZones[currentZone].visibleMapPart[1] = 1;
-        map->AllZones[currentZone].visibleMapPart[2] = 2;
-        map->AllZones[currentZone].visibleMapPart[3] = 3;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 8;
-        map->AllZones[currentZone].ZoneCount = 6;
+        map->AllZones[currentZone].ZoneCount = 3;
         map->AllZones[currentZone].visibleMapPart[0] = 0;
         map->AllZones[currentZone].visibleMapPart[1] = 1;
-        map->AllZones[currentZone].visibleMapPart[2] = 2;
-        map->AllZones[currentZone].visibleMapPart[3] = 3;
-        map->AllZones[currentZone].visibleMapPart[4] = 6;
-        map->AllZones[currentZone].visibleMapPart[5] = 7;
+        map->AllZones[currentZone].visibleMapPart[2] = 3;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 9;
-        map->AllZones[currentZone].ZoneCount = 6;
+        map->AllZones[currentZone].ZoneCount = 3;
         map->AllZones[currentZone].visibleMapPart[0] = 0;
         map->AllZones[currentZone].visibleMapPart[1] = 1;
-        map->AllZones[currentZone].visibleMapPart[2] = 2;
-        map->AllZones[currentZone].visibleMapPart[3] = 3;
-        map->AllZones[currentZone].visibleMapPart[4] = 6;
-        map->AllZones[currentZone].visibleMapPart[5] = 7;
+        map->AllZones[currentZone].visibleMapPart[2] = 3;
         map->AllZones[currentZone].id = currentZone;
 
         // Add occlusion culling triggers
@@ -682,90 +506,42 @@ void CalculateAllTriggerColBoxs(int mapToLoad)
 
         map->AllOcclusionZone[0].angles[3].x = 36;
         map->AllOcclusionZone[0].angles[3].y = -34.9;
-
-        map->AllOcclusionZone[1].angles[0].x = 36;
-        map->AllOcclusionZone[1].angles[0].y = 12.6;
-
-        map->AllOcclusionZone[1].angles[1].x = -9.1;
-        map->AllOcclusionZone[1].angles[1].y = 12.6;
-
-        map->AllOcclusionZone[1].angles[2].x = -9.1;
-        map->AllOcclusionZone[1].angles[2].y = -34.9;
-
-        map->AllOcclusionZone[1].angles[3].x = 36;
-        map->AllOcclusionZone[1].angles[3].y = -34.9;
         /////////////////////////////////////////////////////
-        map->AllOcclusionZone[2].angles[0].x = 15.54;
-        map->AllOcclusionZone[2].angles[0].y = 68.4;
+        map->AllOcclusionZone[1].angles[0].x = 15.54;
+        map->AllOcclusionZone[1].angles[0].y = 68.4;
 
-        map->AllOcclusionZone[2].angles[1].x = -13;
-        map->AllOcclusionZone[2].angles[1].y = 68.4;
+        map->AllOcclusionZone[1].angles[1].x = -13;
+        map->AllOcclusionZone[1].angles[1].y = 68.4;
 
-        map->AllOcclusionZone[2].angles[2].x = -13;
-        map->AllOcclusionZone[2].angles[2].y = 4.43;
+        map->AllOcclusionZone[1].angles[2].x = -13;
+        map->AllOcclusionZone[1].angles[2].y = 4.43;
 
-        map->AllOcclusionZone[2].angles[3].x = 15.54;
-        map->AllOcclusionZone[2].angles[3].y = 4.43;
-
-        map->AllOcclusionZone[3].angles[0].x = 15.54;
-        map->AllOcclusionZone[3].angles[0].y = 68.4;
-
-        map->AllOcclusionZone[3].angles[1].x = -13;
-        map->AllOcclusionZone[3].angles[1].y = 68.4;
-
-        map->AllOcclusionZone[3].angles[2].x = -13;
-        map->AllOcclusionZone[3].angles[2].y = 4.43;
-
-        map->AllOcclusionZone[3].angles[3].x = 15.54;
-        map->AllOcclusionZone[3].angles[3].y = 4.43;
+        map->AllOcclusionZone[1].angles[3].x = 15.54;
+        map->AllOcclusionZone[1].angles[3].y = 4.43;
         /////////////////////////////////////////////////////
-        map->AllOcclusionZone[4].angles[0].x = 58.3;
-        map->AllOcclusionZone[4].angles[0].y = 42;
+        map->AllOcclusionZone[2].angles[0].x = 58.3;
+        map->AllOcclusionZone[2].angles[0].y = 42;
 
-        map->AllOcclusionZone[4].angles[1].x = 29.4;
-        map->AllOcclusionZone[4].angles[1].y = 42;
+        map->AllOcclusionZone[2].angles[1].x = 29.4;
+        map->AllOcclusionZone[2].angles[1].y = 42;
 
-        map->AllOcclusionZone[4].angles[2].x = 29.4;
-        map->AllOcclusionZone[4].angles[2].y = -38.1;
+        map->AllOcclusionZone[2].angles[2].x = 29.4;
+        map->AllOcclusionZone[2].angles[2].y = -38.1;
 
-        map->AllOcclusionZone[4].angles[3].x = 58.3;
-        map->AllOcclusionZone[4].angles[3].y = -38.1;
-
-        map->AllOcclusionZone[5].angles[0].x = 58.3;
-        map->AllOcclusionZone[5].angles[0].y = 42;
-
-        map->AllOcclusionZone[5].angles[1].x = 29.4;
-        map->AllOcclusionZone[5].angles[1].y = 42;
-
-        map->AllOcclusionZone[5].angles[2].x = 29.4;
-        map->AllOcclusionZone[5].angles[2].y = -38.1;
-
-        map->AllOcclusionZone[5].angles[3].x = 58.3;
-        map->AllOcclusionZone[5].angles[3].y = -38.1;
+        map->AllOcclusionZone[2].angles[3].x = 58.3;
+        map->AllOcclusionZone[2].angles[3].y = -38.1;
         /////////////////////////////////////////////////////
-        map->AllOcclusionZone[6].angles[0].x = 37.2;
-        map->AllOcclusionZone[6].angles[0].y = 66.2;
+        map->AllOcclusionZone[3].angles[0].x = 37.2;
+        map->AllOcclusionZone[3].angles[0].y = 66.2;
 
-        map->AllOcclusionZone[6].angles[1].x = 7.3;
-        map->AllOcclusionZone[6].angles[1].y = 66.2;
+        map->AllOcclusionZone[3].angles[1].x = 7.3;
+        map->AllOcclusionZone[3].angles[1].y = 66.2;
 
-        map->AllOcclusionZone[6].angles[2].x = 7.3;
-        map->AllOcclusionZone[6].angles[2].y = 7.8;
+        map->AllOcclusionZone[3].angles[2].x = 7.3;
+        map->AllOcclusionZone[3].angles[2].y = 7.8;
 
-        map->AllOcclusionZone[6].angles[3].x = 37.2;
-        map->AllOcclusionZone[6].angles[3].y = 7.8;
-
-        map->AllOcclusionZone[7].angles[0].x = 37.2;
-        map->AllOcclusionZone[7].angles[0].y = 66.2;
-
-        map->AllOcclusionZone[7].angles[1].x = 7.3;
-        map->AllOcclusionZone[7].angles[1].y = 66.2;
-
-        map->AllOcclusionZone[7].angles[2].x = 7.3;
-        map->AllOcclusionZone[7].angles[2].y = 7.8;
-
-        map->AllOcclusionZone[7].angles[3].x = 37.2;
-        map->AllOcclusionZone[7].angles[3].y = 7.8;
+        map->AllOcclusionZone[3].angles[3].x = 37.2;
+        map->AllOcclusionZone[3].angles[3].y = 7.8;
     }
     else if (mapToLoad == AIM_MAP)
     {
@@ -773,23 +549,17 @@ void CalculateAllTriggerColBoxs(int mapToLoad)
         map->zonesCount = 2;
         map->AllZones = malloc(map->zonesCount * sizeof(Zone));
 
-        map->AllZones[currentZone].ZoneCount = 6;
+        map->AllZones[currentZone].ZoneCount = 3;
         map->AllZones[currentZone].visibleMapPart[0] = 0;
         map->AllZones[currentZone].visibleMapPart[1] = 1;
         map->AllZones[currentZone].visibleMapPart[2] = 2;
-        map->AllZones[currentZone].visibleMapPart[3] = 3;
-        map->AllZones[currentZone].visibleMapPart[4] = 4;
-        map->AllZones[currentZone].visibleMapPart[5] = 5;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 1;
-        map->AllZones[currentZone].ZoneCount = 6;
-        map->AllZones[currentZone].visibleMapPart[0] = 5;
-        map->AllZones[currentZone].visibleMapPart[1] = 4;
-        map->AllZones[currentZone].visibleMapPart[2] = 3;
-        map->AllZones[currentZone].visibleMapPart[3] = 2;
-        map->AllZones[currentZone].visibleMapPart[4] = 1;
-        map->AllZones[currentZone].visibleMapPart[5] = 0;
+        map->AllZones[currentZone].ZoneCount = 3;
+        map->AllZones[currentZone].visibleMapPart[0] = 2;
+        map->AllZones[currentZone].visibleMapPart[1] = 1;
+        map->AllZones[currentZone].visibleMapPart[2] = 0;
         map->AllZones[currentZone].id = currentZone;
 
         // Add occlusion culling triggers
@@ -807,7 +577,7 @@ void CalculateAllTriggerColBoxs(int mapToLoad)
         CalculateShadowColBox(15.93, 4.28, -22.99, 1.12, 2.9, 12.29, 4);
         CalculateShadowColBox(15.66, 3.7, 23.33, 1.12, 7.69, 12.1, 5);
 
-        map->occlusionZoneCount = 6;
+        map->occlusionZoneCount = 3;
         map->AllOcclusionZone = malloc(map->occlusionZoneCount * sizeof(OcclusionZone));
 
         // Add clipping zones
@@ -824,70 +594,33 @@ void CalculateAllTriggerColBoxs(int mapToLoad)
         map->AllOcclusionZone[0].angles[3].x = 16.2;
         map->AllOcclusionZone[0].angles[3].y = -23.5;
 
-        map->AllOcclusionZone[1].angles[0].x = 16.2;
-        map->AllOcclusionZone[1].angles[0].y = 23;
-
-        map->AllOcclusionZone[1].angles[1].x = -16.2;
-        map->AllOcclusionZone[1].angles[1].y = 23;
-
-        map->AllOcclusionZone[1].angles[2].x = -16.2;
-        map->AllOcclusionZone[1].angles[2].y = -23.5;
-
-        map->AllOcclusionZone[1].angles[3].x = 16.2;
-        map->AllOcclusionZone[1].angles[3].y = -23.5;
-
         //////////////////////////////////////////////////
 
-        map->AllOcclusionZone[2].angles[0].x = 16.5;
-        map->AllOcclusionZone[2].angles[0].y = -22.5;
+        map->AllOcclusionZone[1].angles[0].x = 16.5;
+        map->AllOcclusionZone[1].angles[0].y = -22.5;
 
-        map->AllOcclusionZone[2].angles[1].x = -16.5;
-        map->AllOcclusionZone[2].angles[1].y = -22.5;
+        map->AllOcclusionZone[1].angles[1].x = -16.5;
+        map->AllOcclusionZone[1].angles[1].y = -22.5;
 
-        map->AllOcclusionZone[2].angles[2].x = -16.5;
-        map->AllOcclusionZone[2].angles[2].y = -35.6;
+        map->AllOcclusionZone[1].angles[2].x = -16.5;
+        map->AllOcclusionZone[1].angles[2].y = -35.6;
 
-        map->AllOcclusionZone[2].angles[3].x = 16.5;
-        map->AllOcclusionZone[2].angles[3].y = -35.6;
-
-        map->AllOcclusionZone[3].angles[0].x = 16.5;
-        map->AllOcclusionZone[3].angles[0].y = -22.5;
-
-        map->AllOcclusionZone[3].angles[1].x = -16.5;
-        map->AllOcclusionZone[3].angles[1].y = -22.5;
-
-        map->AllOcclusionZone[3].angles[2].x = -16.5;
-        map->AllOcclusionZone[3].angles[2].y = -35.6;
-
-        map->AllOcclusionZone[3].angles[3].x = 16.5;
-        map->AllOcclusionZone[3].angles[3].y = -35.6;
+        map->AllOcclusionZone[1].angles[3].x = 16.5;
+        map->AllOcclusionZone[1].angles[3].y = -35.6;
 
         ////////////////////////////////////////////////
 
-        map->AllOcclusionZone[4].angles[0].x = 16.5;
-        map->AllOcclusionZone[4].angles[0].y = 35.6;
+        map->AllOcclusionZone[2].angles[0].x = 16.5;
+        map->AllOcclusionZone[2].angles[0].y = 35.6;
 
-        map->AllOcclusionZone[4].angles[1].x = -16.5;
-        map->AllOcclusionZone[4].angles[1].y = 35.6;
+        map->AllOcclusionZone[2].angles[1].x = -16.5;
+        map->AllOcclusionZone[2].angles[1].y = 35.6;
 
-        map->AllOcclusionZone[4].angles[2].x = -16.5;
-        map->AllOcclusionZone[4].angles[2].y = 22.2;
+        map->AllOcclusionZone[2].angles[2].x = -16.5;
+        map->AllOcclusionZone[2].angles[2].y = 22.2;
 
-        map->AllOcclusionZone[4].angles[3].x = 16.5;
-        map->AllOcclusionZone[4].angles[3].y = 22.2;
-
-        map->AllOcclusionZone[5].angles[0].x = 16.5;
-        map->AllOcclusionZone[5].angles[0].y = 35.6;
-
-        map->AllOcclusionZone[5].angles[1].x = -16.5;
-        map->AllOcclusionZone[5].angles[1].y = 35.6;
-
-        map->AllOcclusionZone[5].angles[2].x = -16.5;
-        map->AllOcclusionZone[5].angles[2].y = 22.2;
-
-        map->AllOcclusionZone[5].angles[3].x = 16.5;
-        map->AllOcclusionZone[5].angles[3].y = 22.2;
-
+        map->AllOcclusionZone[2].angles[3].x = 16.5;
+        map->AllOcclusionZone[2].angles[3].y = 22.2;
     }
     else if (mapToLoad == B2000)
     {
@@ -895,19 +628,15 @@ void CalculateAllTriggerColBoxs(int mapToLoad)
         map->zonesCount = 2;
         map->AllZones = malloc(map->zonesCount * sizeof(Zone));
 
-        map->AllZones[currentZone].ZoneCount = 4;
+        map->AllZones[currentZone].ZoneCount = 2;
         map->AllZones[currentZone].visibleMapPart[0] = 0;
         map->AllZones[currentZone].visibleMapPart[1] = 1;
-        map->AllZones[currentZone].visibleMapPart[2] = 2;
-        map->AllZones[currentZone].visibleMapPart[3] = 3;
         map->AllZones[currentZone].id = currentZone;
 
         currentZone = 1;
-        map->AllZones[currentZone].ZoneCount = 4;
-        map->AllZones[currentZone].visibleMapPart[0] = 3;
-        map->AllZones[currentZone].visibleMapPart[1] = 2;
-        map->AllZones[currentZone].visibleMapPart[2] = 1;
-        map->AllZones[currentZone].visibleMapPart[3] = 0;
+        map->AllZones[currentZone].ZoneCount = 2;
+        map->AllZones[currentZone].visibleMapPart[0] = 1;
+        map->AllZones[currentZone].visibleMapPart[1] = 0;
         map->AllZones[currentZone].id = currentZone;
 
         // Add occlusion culling triggers
@@ -937,7 +666,7 @@ void CalculateAllTriggerColBoxs(int mapToLoad)
         CalculateShadowColBox(-5.51, 2.77, -2.98, 1.74, 9, 3.83, 16);
         CalculateShadowColBox(6.5, 2.77, -2.98, 1.74, 9, 3.83, 17);
 
-        map->occlusionZoneCount = 4;
+        map->occlusionZoneCount = 2;
         map->AllOcclusionZone = malloc(map->occlusionZoneCount * sizeof(OcclusionZone));
 
         // Add clipping zones
@@ -955,193 +684,169 @@ void CalculateAllTriggerColBoxs(int mapToLoad)
         map->AllOcclusionZone[0].angles[3].x = 23;
         map->AllOcclusionZone[0].angles[3].y = -25;
 
+        ///////////
+
         map->AllOcclusionZone[1].angles[0].x = 23;
-        map->AllOcclusionZone[1].angles[0].y = 5;
+        map->AllOcclusionZone[1].angles[0].y = 25;
 
         map->AllOcclusionZone[1].angles[1].x = -23;
-        map->AllOcclusionZone[1].angles[1].y = 5;
+        map->AllOcclusionZone[1].angles[1].y = 25;
 
         map->AllOcclusionZone[1].angles[2].x = -23;
-        map->AllOcclusionZone[1].angles[2].y = -25;
+        map->AllOcclusionZone[1].angles[2].y = -5;
 
         map->AllOcclusionZone[1].angles[3].x = 23;
-        map->AllOcclusionZone[1].angles[3].y = -25;
-
-        //////////////////////////////////////////////////
-
-        map->AllOcclusionZone[2].angles[0].x = 23;
-        map->AllOcclusionZone[2].angles[0].y = 25;
-
-        map->AllOcclusionZone[2].angles[1].x = -23;
-        map->AllOcclusionZone[2].angles[1].y = 25;
-
-        map->AllOcclusionZone[2].angles[2].x = -23;
-        map->AllOcclusionZone[2].angles[2].y = -5;
-
-        map->AllOcclusionZone[2].angles[3].x = 23;
-        map->AllOcclusionZone[2].angles[3].y = -5;
-
-        map->AllOcclusionZone[3].angles[0].x = 23;
-        map->AllOcclusionZone[3].angles[0].y = 25;
-
-        map->AllOcclusionZone[3].angles[1].x = -23;
-        map->AllOcclusionZone[3].angles[1].y = 25;
-
-        map->AllOcclusionZone[3].angles[2].x = -23;
-        map->AllOcclusionZone[3].angles[2].y = -5;
-
-        map->AllOcclusionZone[3].angles[3].x = 23;
-        map->AllOcclusionZone[3].angles[3].y = -5;
+        map->AllOcclusionZone[1].angles[3].y = -5;
     }
-    else if (mapToLoad == MIRAGEA)
-    {
-        // All occlusion culling zones data (a zone will show one or multiple zones)
-        map->zonesCount = 5;
-        map->AllZones = malloc(map->zonesCount * sizeof(Zone));
+    // else if (mapToLoad == MIRAGEA)
+    // {
+    //     // All occlusion culling zones data (a zone will show one or multiple zones)
+    //     map->zonesCount = 5;
+    //     map->AllZones = malloc(map->zonesCount * sizeof(Zone));
 
-        map->AllZones[currentZone].ZoneCount = 2;
-        map->AllZones[currentZone].visibleMapPart[0] = 0; //1 = tspawn, 2 = site, 3 ct spawn
-        map->AllZones[currentZone].visibleMapPart[1] = 1;
-        map->AllZones[currentZone].id = currentZone;
+    //     map->AllZones[currentZone].ZoneCount = 2;
+    //     map->AllZones[currentZone].visibleMapPart[0] = 0; //1 = tspawn, 2 = site, 3 ct spawn
+    //     map->AllZones[currentZone].visibleMapPart[1] = 1;
+    //     map->AllZones[currentZone].id = currentZone;
 
-        currentZone = 1;
-        map->AllZones[currentZone].ZoneCount = 2;
-        map->AllZones[currentZone].visibleMapPart[0] = 4;
-        map->AllZones[currentZone].visibleMapPart[1] = 5;
-        map->AllZones[currentZone].id = currentZone;
+    //     currentZone = 1;
+    //     map->AllZones[currentZone].ZoneCount = 2;
+    //     map->AllZones[currentZone].visibleMapPart[0] = 4;
+    //     map->AllZones[currentZone].visibleMapPart[1] = 5;
+    //     map->AllZones[currentZone].id = currentZone;
 
-        currentZone = 2;
-        map->AllZones[currentZone].ZoneCount = 2;
-        map->AllZones[currentZone].visibleMapPart[0] = 2;
-        map->AllZones[currentZone].visibleMapPart[1] = 3;
-        map->AllZones[currentZone].id = currentZone;
+    //     currentZone = 2;
+    //     map->AllZones[currentZone].ZoneCount = 2;
+    //     map->AllZones[currentZone].visibleMapPart[0] = 2;
+    //     map->AllZones[currentZone].visibleMapPart[1] = 3;
+    //     map->AllZones[currentZone].id = currentZone;
 
-        currentZone = 3;
-        map->AllZones[currentZone].ZoneCount = 2;
-        map->AllZones[currentZone].visibleMapPart[0] = 0;
-        map->AllZones[currentZone].visibleMapPart[1] = 1;
-        map->AllZones[currentZone].id = currentZone;
+    //     currentZone = 3;
+    //     map->AllZones[currentZone].ZoneCount = 2;
+    //     map->AllZones[currentZone].visibleMapPart[0] = 0;
+    //     map->AllZones[currentZone].visibleMapPart[1] = 1;
+    //     map->AllZones[currentZone].id = currentZone;
 
-        currentZone = 4;
-        map->AllZones[currentZone].ZoneCount = 2;
-        map->AllZones[currentZone].visibleMapPart[0] = 2;
-        map->AllZones[currentZone].visibleMapPart[1] = 3;
-        map->AllZones[currentZone].id = currentZone;
+    //     currentZone = 4;
+    //     map->AllZones[currentZone].ZoneCount = 2;
+    //     map->AllZones[currentZone].visibleMapPart[0] = 2;
+    //     map->AllZones[currentZone].visibleMapPart[1] = 3;
+    //     map->AllZones[currentZone].id = currentZone;
 
 
-        // Add occlusion culling triggers
-        CalculateTriggerColBox(-12.3, 38.6, 65, 35, 0);
-        CalculateTriggerColBox(-23.9, -32.3, 51, 29.84, 1);
-        CalculateTriggerColBox(-30.2, -1.1, 39.22, 32.3, 2);
-        CalculateTriggerColBox(-40.4, 15.64, 8, 1, 3);
-        CalculateTriggerColBox(-20.12, 20.52, 10, 1, 4);
+    //     // Add occlusion culling triggers
+    //     CalculateTriggerColBox(-12.3, 38.6, 65, 35, 0);
+    //     CalculateTriggerColBox(-23.9, -32.3, 51, 29.84, 1);
+    //     CalculateTriggerColBox(-30.2, -1.1, 39.22, 32.3, 2);
+    //     CalculateTriggerColBox(-40.4, 15.64, 8, 1, 3);
+    //     CalculateTriggerColBox(-20.12, 20.52, 10, 1, 4);
 
-        map->shadowCollisionBoxCount = 12;
-        map->AllShadowCollisionBox = malloc(map->shadowCollisionBoxCount * sizeof(CollisionBox));
+    //     map->shadowCollisionBoxCount = 12;
+    //     map->AllShadowCollisionBox = malloc(map->shadowCollisionBoxCount * sizeof(CollisionBox));
 
-        // Add shadow collision boxes
-        CalculateShadowColBox(15.26385, 3.877197, 33.48413, 39.3, 7.9, 16.4, 0);
-        CalculateShadowColBox(-14.00616, 2.267197, 40.72415, 14.19, 5.58, 14.1, 1);
-        CalculateShadowColBox(-36.78616, 6.637207, 24.82413, 9.2, 6.6, 28.18, 2);
-        CalculateShadowColBox(-30.24615, 4.657196, 34.68414, 20.8, 3.42, 12.9, 3);
-        CalculateShadowColBox(-31.59616, 3.277206, 12.26413, 7.82, 3.42, 4.98, 4);
-        CalculateShadowColBox(-41.82614, 5.847198, 1.774139, 7.82, 7.26, 20.7, 5);
-        CalculateShadowColBox(-23.25616, 5.847198, -11.69586, 21.59, 7.26, 5.79, 6);
-        CalculateShadowColBox(-44.39615, 3.5672, -21.27585, 7.82, 8.9, 27.48, 7);
-        CalculateShadowColBox(-38.27615, 3.5672, -35.83585, 20.9, 8.9, 13.14, 8);
-        CalculateShadowColBox(-7.886139, 3.5672, -34.79587, 25.9, 8.9, 7.86, 9);
-        CalculateShadowColBox(-8.586151, 6.707199, -20.90585, 21.93, 8.9, 7.62, 10);
-        CalculateShadowColBox(-14.96616, 4.137207, 22.34415, 19.5, 8.4, 12, 11);
+    //     // Add shadow collision boxes
+    //     CalculateShadowColBox(15.26385, 3.877197, 33.48413, 39.3, 7.9, 16.4, 0);
+    //     CalculateShadowColBox(-14.00616, 2.267197, 40.72415, 14.19, 5.58, 14.1, 1);
+    //     CalculateShadowColBox(-36.78616, 6.637207, 24.82413, 9.2, 6.6, 28.18, 2);
+    //     CalculateShadowColBox(-30.24615, 4.657196, 34.68414, 20.8, 3.42, 12.9, 3);
+    //     CalculateShadowColBox(-31.59616, 3.277206, 12.26413, 7.82, 3.42, 4.98, 4);
+    //     CalculateShadowColBox(-41.82614, 5.847198, 1.774139, 7.82, 7.26, 20.7, 5);
+    //     CalculateShadowColBox(-23.25616, 5.847198, -11.69586, 21.59, 7.26, 5.79, 6);
+    //     CalculateShadowColBox(-44.39615, 3.5672, -21.27585, 7.82, 8.9, 27.48, 7);
+    //     CalculateShadowColBox(-38.27615, 3.5672, -35.83585, 20.9, 8.9, 13.14, 8);
+    //     CalculateShadowColBox(-7.886139, 3.5672, -34.79587, 25.9, 8.9, 7.86, 9);
+    //     CalculateShadowColBox(-8.586151, 6.707199, -20.90585, 21.93, 8.9, 7.62, 10);
+    //     CalculateShadowColBox(-14.96616, 4.137207, 22.34415, 19.5, 8.4, 12, 11);
 
-        map->occlusionZoneCount = 6;
-        map->AllOcclusionZone = malloc(map->occlusionZoneCount * sizeof(OcclusionZone));
+    //     map->occlusionZoneCount = 6;
+    //     map->AllOcclusionZone = malloc(map->occlusionZoneCount * sizeof(OcclusionZone));
 
-        // Add clipping zones
-        ///////////////////////////////////////////////////// Y must be inverted compared to Unity project
+    //     // Add clipping zones
+    //     ///////////////////////////////////////////////////// Y must be inverted compared to Unity project
 
-        map->AllOcclusionZone[0].angles[0].x = 40;
-        map->AllOcclusionZone[0].angles[0].y = 70;
+    //     map->AllOcclusionZone[0].angles[0].x = 40;
+    //     map->AllOcclusionZone[0].angles[0].y = 70;
 
-        map->AllOcclusionZone[0].angles[1].x = -42;
-        map->AllOcclusionZone[0].angles[1].y = 70;
+    //     map->AllOcclusionZone[0].angles[1].x = -42;
+    //     map->AllOcclusionZone[0].angles[1].y = 70;
 
-        map->AllOcclusionZone[0].angles[2].x = -42;
-        map->AllOcclusionZone[0].angles[2].y = 13;
+    //     map->AllOcclusionZone[0].angles[2].x = -42;
+    //     map->AllOcclusionZone[0].angles[2].y = 13;
 
-        map->AllOcclusionZone[0].angles[3].x = 40;
-        map->AllOcclusionZone[0].angles[3].y = 13;
+    //     map->AllOcclusionZone[0].angles[3].x = 40;
+    //     map->AllOcclusionZone[0].angles[3].y = 13;
 
-        //shad
+    //     //shad
 
-        map->AllOcclusionZone[1].angles[0].x = 40;
-        map->AllOcclusionZone[1].angles[0].y = 70;
+    //     map->AllOcclusionZone[1].angles[0].x = 40;
+    //     map->AllOcclusionZone[1].angles[0].y = 70;
 
-        map->AllOcclusionZone[1].angles[1].x = -42;
-        map->AllOcclusionZone[1].angles[1].y = 70;
+    //     map->AllOcclusionZone[1].angles[1].x = -42;
+    //     map->AllOcclusionZone[1].angles[1].y = 70;
 
-        map->AllOcclusionZone[1].angles[2].x = -42;
-        map->AllOcclusionZone[1].angles[2].y = 13;
+    //     map->AllOcclusionZone[1].angles[2].x = -42;
+    //     map->AllOcclusionZone[1].angles[2].y = 13;
 
-        map->AllOcclusionZone[1].angles[3].x = 40;
-        map->AllOcclusionZone[1].angles[3].y = 13;
+    //     map->AllOcclusionZone[1].angles[3].x = 40;
+    //     map->AllOcclusionZone[1].angles[3].y = 13;
 
-        ///////////////////////////////////////////////////
+    //     ///////////////////////////////////////////////////
 
-        map->AllOcclusionZone[2].angles[0].x = -2.5;
-        map->AllOcclusionZone[2].angles[0].y = 24;
+    //     map->AllOcclusionZone[2].angles[0].x = -2.5;
+    //     map->AllOcclusionZone[2].angles[0].y = 24;
 
-        map->AllOcclusionZone[2].angles[1].x = -46;
-        map->AllOcclusionZone[2].angles[1].y = 24;
+    //     map->AllOcclusionZone[2].angles[1].x = -46;
+    //     map->AllOcclusionZone[2].angles[1].y = 24;
 
-        map->AllOcclusionZone[2].angles[2].x = -46;
-        map->AllOcclusionZone[2].angles[2].y = -30;
+    //     map->AllOcclusionZone[2].angles[2].x = -46;
+    //     map->AllOcclusionZone[2].angles[2].y = -30;
 
-        map->AllOcclusionZone[2].angles[3].x = 2.5;
-        map->AllOcclusionZone[2].angles[3].y = -30;
+    //     map->AllOcclusionZone[2].angles[3].x = 2.5;
+    //     map->AllOcclusionZone[2].angles[3].y = -30;
 
-        //shad
+    //     //shad
 
-        map->AllOcclusionZone[3].angles[0].x = -2.5;
-        map->AllOcclusionZone[3].angles[0].y = 24;
+    //     map->AllOcclusionZone[3].angles[0].x = -2.5;
+    //     map->AllOcclusionZone[3].angles[0].y = 24;
 
-        map->AllOcclusionZone[3].angles[1].x = -46;
-        map->AllOcclusionZone[3].angles[1].y = 24;
+    //     map->AllOcclusionZone[3].angles[1].x = -46;
+    //     map->AllOcclusionZone[3].angles[1].y = 24;
 
-        map->AllOcclusionZone[3].angles[2].x = -46;
-        map->AllOcclusionZone[3].angles[2].y = -30;
+    //     map->AllOcclusionZone[3].angles[2].x = -46;
+    //     map->AllOcclusionZone[3].angles[2].y = -30;
 
-        map->AllOcclusionZone[3].angles[3].x = 2.5;
-        map->AllOcclusionZone[3].angles[3].y = -30;
+    //     map->AllOcclusionZone[3].angles[3].x = 2.5;
+    //     map->AllOcclusionZone[3].angles[3].y = -30;
 
-        ///////////////////////////////////////////////////
+    //     ///////////////////////////////////////////////////
 
-        map->AllOcclusionZone[4].angles[0].x = 15;
-        map->AllOcclusionZone[4].angles[0].y = -16;
+    //     map->AllOcclusionZone[4].angles[0].x = 15;
+    //     map->AllOcclusionZone[4].angles[0].y = -16;
 
-        map->AllOcclusionZone[4].angles[1].x = -47;
-        map->AllOcclusionZone[4].angles[1].y = -16;
+    //     map->AllOcclusionZone[4].angles[1].x = -47;
+    //     map->AllOcclusionZone[4].angles[1].y = -16;
 
-        map->AllOcclusionZone[4].angles[2].x = -47;
-        map->AllOcclusionZone[4].angles[2].y = -60;
+    //     map->AllOcclusionZone[4].angles[2].x = -47;
+    //     map->AllOcclusionZone[4].angles[2].y = -60;
 
-        map->AllOcclusionZone[4].angles[3].x = 15;
-        map->AllOcclusionZone[4].angles[3].y = -60;
+    //     map->AllOcclusionZone[4].angles[3].x = 15;
+    //     map->AllOcclusionZone[4].angles[3].y = -60;
 
-        //shad
+    //     //shad
 
-        map->AllOcclusionZone[5].angles[0].x = 15;
-        map->AllOcclusionZone[5].angles[0].y = -16;
+    //     map->AllOcclusionZone[5].angles[0].x = 15;
+    //     map->AllOcclusionZone[5].angles[0].y = -16;
 
-        map->AllOcclusionZone[5].angles[1].x = -47;
-        map->AllOcclusionZone[5].angles[1].y = -16;
+    //     map->AllOcclusionZone[5].angles[1].x = -47;
+    //     map->AllOcclusionZone[5].angles[1].y = -16;
 
-        map->AllOcclusionZone[5].angles[2].x = -47;
-        map->AllOcclusionZone[5].angles[2].y = -60;
+    //     map->AllOcclusionZone[5].angles[2].x = -47;
+    //     map->AllOcclusionZone[5].angles[2].y = -60;
 
-        map->AllOcclusionZone[5].angles[3].x = 15;
-        map->AllOcclusionZone[5].angles[3].y = -60;
+    //     map->AllOcclusionZone[5].angles[3].x = 15;
+    //     map->AllOcclusionZone[5].angles[3].y = -60;
 
-    }
+    // }
     
 
     // Convert map limits to a int format
@@ -1164,7 +869,7 @@ void LoadAllCollisions(int mapToLoad)
     if (mapToLoad == DUST2)
     {
         mapToSet = DUST2;
-        allMaps[mapToLoad].CollisionsCount = 202;
+        allMaps[mapToLoad].CollisionsCount = 205;
         allMaps[mapToLoad].AllWallsCollisions = malloc(allMaps[mapToLoad].CollisionsCount * sizeof(Wall));
         CreateWall(9.38846, -1.4, -8.007592, 35.77919, 1, 33.08558, 3, 0);
         CreateWall(3.991, 0.285, 4.786, 2.423, 2.423, 2.423, 3, 1);
@@ -1288,7 +993,7 @@ void LoadAllCollisions(int mapToLoad)
         CreateWall(-5.272417, 5.538648, 36.227, 4.824834, 6.477295, 4, 4, 119);
         CreateWall(-6.90057, 6.730637, 46.3273, 11.26114, 8.861274, 20.97461, -1, 120);
         CreateWall(-7.831, 5.3, 30.99, 1, 6, 6.5, 4, 121);
-        CreateWall(5.074815, 4.301765, 56.40557, 13.1601, 4.062151, 0.7663727, 4, 122);
+        CreateWall(5.074815, 2.271, 56.40557, 13.1601, 1.58, 0.7663727, 4, 122);
         CreateWall(0.24, 7.568765, 47.13827, 3.5, 4.062151, 12.90346, 4, 123);
         CreateWall(-0.4394904, 4.314489, 43.90987, 1.612981, 4.03266, 3.21767, 4, 124);
         CreateWall(-11.73649, 7.54249, 64.4865, 1.612981, 4.03266, 4.060944, 0, 125);
@@ -1368,6 +1073,9 @@ void LoadAllCollisions(int mapToLoad)
         CreateWall(-21.006, 6.713649, 14.14657, 0.8, 0.895143, 0.8783064, 1, 199);
         CreateWall(-2.28019, 2.288647, 25.35139, 2.052381, 6.477295, 1.62215, 4, 200);
         CreateWall(-13.63971, 2.708109, -25.22188, 11.81, 2.43, 2.35, 2, 201);
+        CreateWall(0.03000021, 3.63, 56.40557, 13.1601, 1, 0.7663727, 4, 202);
+        CreateWall(-4.47, 4.82, 56.40557, 13.1601, 1, 0.7663727, 4, 203);
+        CreateWall(-3.97, 5.49, 56.40557, 7.02, 1, 0.7663727, 4, 204);
     }
     else if (mapToLoad == TUTORIAL)
     {
@@ -1386,7 +1094,7 @@ void LoadAllCollisions(int mapToLoad)
     else if (mapToLoad == DUST2_2x2)
     {
         mapToSet = DUST2_2x2;
-        allMaps[mapToLoad].CollisionsCount = 104;
+        allMaps[mapToLoad].CollisionsCount = 107;
         allMaps[mapToLoad].AllWallsCollisions = malloc(allMaps[mapToLoad].CollisionsCount * sizeof(Wall));
         CreateWall(9.38846, -1.4, -8.007592, 35.77919, 1, 33.08558, 3, 0);
         CreateWall(3.991, 0.285, 4.786, 2.423, 2.423, 2.423, 3, 1);
@@ -1472,7 +1180,7 @@ void LoadAllCollisions(int mapToLoad)
         CreateWall(-5.272417, 5.538648, 36.227, 4.824834, 6.477295, 4, 4, 81);
         CreateWall(-6.90057, 6.730637, 46.3273, 11.26114, 8.861274, 20.97461, -1, 82);
         CreateWall(-7.831, 5.3, 30.99, 1, 6, 6.5, 4, 83);
-        CreateWall(5.074815, 4.301765, 56.40557, 13.1601, 4.062151, 0.7663727, 4, 84);
+        CreateWall(5.074815, 2.721, 56.40557, 13.1601, 0.88, 0.7663727, 4, 84);
         CreateWall(0.24, 7.568765, 47.13827, 3.5, 4.062151, 12.90346, 4, 85);
         CreateWall(-0.4394904, 4.314489, 43.90987, 1.612981, 4.03266, 3.21767, 4, 86);
         CreateWall(-11.73649, 7.54249, 61.2065, 1.612981, 4.03266, 12.21, 0, 87);
@@ -1492,6 +1200,9 @@ void LoadAllCollisions(int mapToLoad)
         CreateWall(43.89105, 0.4453565, 40.36826, 1.712103, 3.551087, 0.9915719, 5, 101);
         CreateWall(56.639, 4.118, 26.56685, 1.222159, 0.4, 4.037703, 5, 102);
         CreateWall(-2.28019, 2.288647, 25.35139, 2.052381, 6.477295, 1.62215, 4, 103);
+        CreateWall(0.03000021, 3.63, 56.40557, 13.1601, 1, 0.7663727, 4, 104);
+        CreateWall(-4.47, 4.82, 56.40557, 13.1601, 1, 0.7663727, 4, 105);
+        CreateWall(-3.97, 5.49, 56.40557, 7.02, 1, 0.7663727, 4, 106);
     }
     else if (mapToLoad == AIM_MAP)
     {
@@ -1634,109 +1345,109 @@ void LoadAllCollisions(int mapToLoad)
         CreateWall(17.04, 0.521, -20.21, 1.7, 1, 1.68, 0, 40);
         CreateWall(17.979, 1.539, -20.21, 0.2, 1, 1.68, 0, 41);
     }
-    else if (mapToLoad == MIRAGEA)
-    {
-        mapToSet = MIRAGEA;
-        allMaps[mapToLoad].CollisionsCount = 97;
-        allMaps[mapToLoad].AllWallsCollisions = malloc(allMaps[mapToLoad].CollisionsCount * sizeof(Wall));
-        CreateWall(-17.82, -1.47, -31.56, 57.7, 1, 30.9, 4, 0);
-        CreateWall(17.065, 0.98, 40.86, 14.37, 1, 4.7, 0, 1);
-        CreateWall(19.19, 3.57, 43.22, 1.3, 9, 20.3, 0, 2);
-        CreateWall(12.78, 4.03, 31.67, 36.8, 10, 14.58, 0, 3);
-        CreateWall(16.8, 6.54, 49.281, 14, 10, 1, 0, 4);
-        CreateWall(-4.15, 6.75, 47.76, 29.8, 10, 3, 0, 5);
-        CreateWall(-8, -1.47, 31.2, 38, 1, 25, 0, 6);
-        CreateWall(1.73, 0.98, 46.17, 39.83, 1, 6, 0, 7);
-        CreateWall(-11.3, 3.4, -36.69, 25.63, 8.35, 8.32, 4, 8);
-        CreateWall(-39.89, 3.4, -36.91, 15.38, 8.35, 8.72, 4, 9);
-        CreateWall(-28.1, 3.4, -41.77, 11.7, 8.35, 1, 4, 10);
-        CreateWall(-3.23, -0.4, 43.61, 24.14, 1, 1, 0, 11);
-        CreateWall(-9.7, 5.25, 12.93, 11.5, 7.5, 23, 3, 12);
-        CreateWall(-4.72, 1.8, 43.31, 14.8, 0.6, 0.2, 0, 13);
-        CreateWall(-0.65, 0.98, -21.91, 20.54, 1, 9.3, 4, 14);
-        CreateWall(-28.59, 0.98, 0.21, 32.47, 1, 33, 3, 15);
-        CreateWall(-14.87, 0.98, -16.93, 10.46, 1, 11.8, 4, 16);
-        CreateWall(-40.38, 0.98, -14.825, 8.2, 1, 3.12, 3, 17);
-        CreateWall(-21.15, 0.98, 15.125, 6.5, 1, 3.12, 3, 18);
-        CreateWall(-16.89, 0.98, 20.15, 2, 1, 8, 0, 19);
-        CreateWall(-24.51, 3.75, 24.38, 1, 9.5, 17.16, 0, 20);
-        CreateWall(-15.35, 2.44, 20.14, 1, 6.71, 7.9, 0, 21);
-        CreateWall(-22.345, 3.75, 16.612, 3.16, 4.4, 0.82, 3, 22);
-        CreateWall(-26.09, 3.95, 14.03, 4.1, 5.23, 2.6, 3, 23);
-        CreateWall(-31.09, 5.22, 15.79, 10.04, 7.2, 0.82, 3, 24);
-        CreateWall(-39.49, 5.22, 10.11, 8, 7.2, 3, 3, 25);
-        CreateWall(-13.4, 3.69, 38.16, 2.46, 9, 10.5, 0, 26);
-        CreateWall(-20.82, 3.69, 33.19, 17, 9, 1.65, 0, 27);
-        CreateWall(-13.78, 3.69, 24.59, 11.5, 9, 0.85, 0, 28);
-        CreateWall(-7.09, 3.69, 26.93, 2, 9, 3.5, 0, 29);
-        CreateWall(-11.19, 0.8200001, 35.65, 1.9, 3.5, 10.34, 0, 30);
-        CreateWall(-17.5, 0.8200001, 31.41, 14.02, 3.5, 1.9, 0, 31);
-        CreateWall(-11.3, -0.325, 42.324, 1.7, 1.7, 1.7, 0, 32);
-        CreateWall(-11.714, 1.215, 42.212, 0.9, 0.9, 0.9, 0, 33);
-        CreateWall(-8.915, 0.691, 26.53, 1.6, 3.2, 3.5, 0, 34);
-        CreateWall(-19.96, 0.98, 38.72, 11.28, 1, 9.8, 0, 35);
-        CreateWall(-30.115, 3.436, 36.26, 10.67, 1, 8, 0, 36);
-        CreateWall(-38.445, 4.51, 35.66, 7.67, 0.5, 6.5, 0, 37);
-        CreateWall(-31.81, 4.51, 24.385, 4.9, 0.5, 13.67, 0, 38);
-        CreateWall(-37.69, 4.51, 21.85, 6.83, 0.5, 22, 0, 39);
-        CreateWall(-32.78, 4.61, 39.3, 17, 9, 1, 0, 40);
-        CreateWall(-21.18, 4.61, 41.99, 6.61, 7, 9.5, 0, 41);
-        CreateWall(-41.29, 6.26, 25.11, 1, 4, 28, 0, 42);
-        CreateWall(-28.87, 6.26, 25.41, 1, 4, 17, 0, 43);
-        CreateWall(-33.468, 6.29, 17.14, 7.94, 3, 1, 0, 44);
-        CreateWall(-35.086, 6.29, 21.727, 1.65, 3, 1.65, 0, 45);
-        CreateWall(-35.086, 6.29, 26.641, 1.65, 3, 1.65, 0, 46);
-        CreateWall(-35.086, 6.29, 31.549, 1.65, 3, 1.65, 0, 47);
-        CreateWall(-39.982, 5.576, 26.847, 1.64, 1.64, 1.64, 0, 48);
-        CreateWall(-12.594, 3.061, 43.366, 0.8, 3, 0.5, 0, 49);
-        CreateWall(-35.689, 6.44, 15.55, 3.7, 3.2, 3.62, 0, 50);
-        CreateWall(-33.26, 4.51, 12.58, 4.51, 0.5, 5.42, 3, 51);
-        CreateWall(-28.738, 4.51, 12.58, 1.21, 0.5, 5.42, 3, 52);
-        CreateWall(-30.179, 4.51, 12.008, 1.7, 0.5, 4.3, 3, 53);
-        CreateWall(-30.897, 4.87, 9.959, 5.48, 1, 0.2, 3, 54);
-        CreateWall(-27.318, 3.156, 11.701, 1.65, 3.2, 2, 3, 55);
-        CreateWall(-25.664, 2.116, 11.861, 1.63, 1.63, 1.63, 3, 56);
-        CreateWall(-16.262, 2.1, 6.187, 1.63, 1.63, 1.63, 3, 57);
-        CreateWall(-16.628, 3.585, 5.821, 0.9, 0.9, 0.9, 3, 58);
-        CreateWall(-18.72, 3.203, 6.179, 3.3, 3.1, 1.65, 3, 59);
-        CreateWall(-36.17, 2.169, 7.956, 1.4, 1.4, 1.4, 3, 60);
-        CreateWall(-34.356, 2.611, 8.981998, 2.3, 2.3, 2.3, 3, 61);
-        CreateWall(-38.774, 2.299, 4.519, 1.65, 1.65, 1.65, 3, 62);
-        CreateWall(-40.402, 2.299, 3.237, 1.65, 1.65, 1.65, 3, 63);
-        CreateWall(-33.245, 2.299, 2.704, 1.65, 1.65, 1.65, 3, 64);
-        CreateWall(-32.642, 2.299, -3.541, 1.65, 1.65, 1.65, 3, 65);
-        CreateWall(-33.642, 2.299, -5.189, 1.65, 1.65, 1.65, 3, 66);
-        CreateWall(-33.099, 3.955, -4.446, 1.65, 1.65, 1.65, 3, 67);
-        CreateWall(-32.842, 3.13, 4.333, 1.65, 3.3, 1.65, 3, 68);
-        CreateWall(-40.591, 2.83, -9.155001, 1.3, 2.56, 1.3, 3, 69);
-        CreateWall(-42.422, 2.117, -11.013, 1.65, 1.65, 1.65, 4, 70);
-        CreateWall(-36.725, 2.299, -11.007, 1.65, 1.65, 1.65, 3, 71);
-        CreateWall(-43.217, 4.99, -0.71, 4, 7, 19.01, 3, 72);
-        CreateWall(-27.72, 5.78, -17.95, 17.2, 13.7, 12.3, 4, 73);
-        CreateWall(-27.72, 4.61, -11.16, 16.5, 6.1, 3.6, 3, 74);
-        CreateWall(-45.46, 3.95, -20.26, 2, 10, 28, 4, 75);
-        CreateWall(-15.56, 4.61, 2.08, 5.55, 6.1, 6.6, 3, 76);
-        CreateWall(-26.026, 3.588, 12.247, 0.9, 0.9, 0.9, 3, 77);
-        CreateWall(-19.94, 3.12, -0.5700001, 3.3, 3.3, 3.3, 3, 78);
-        CreateWall(-19.96, 4.828, 22.224, 8.24, 1, 3.3, 0, 79);
-        CreateWall(-16.674, 2.609, -1.503, 2, 2.1, 0.6, 3, 80);
-        CreateWall(-14.214, 2.069, -1.503, 2, 1, 0.6, 3, 81);
-        CreateWall(-11.74, 4.99, -8.6, 1.72, 7, 18.8, 3, 82);
-        CreateWall(-13.44, 4.99, -12.846, 2, 7, 2.1, 3, 83);
-        CreateWall(-15.5, 4.03, -24.29, 10.8, 9.5, 4.6, 4, 84);
-        CreateWall(-28.73, 1.56, -25.04, 11.1, 5, 1.5, 4, 85);
-        CreateWall(-7.81, 3.4, -23.49, 5.2, 8.35, 1.2, 4, 86);
-        CreateWall(-0.986, 3.4, -23.49, 5.2, 8.35, 1.2, 4, 87);
-        CreateWall(-4.387, 7.54, -23.49, 1.5, 8.35, 1.2, 4, 88);
-        CreateWall(5.11, 5.04, -24.91, 7.66, 8.35, 17.99, 4, 89);
-        CreateWall(2.98, 3.96, -22.05, 12.33, 4, 1.65, 4, 90);
-        CreateWall(-0.1, 2.299, -20.42, 3.3, 1.65, 1.65, 4, 91);
-        CreateWall(-18.312, 2.313, -18.785, 1.65, 1.65, 3.3, 4, 92);
-        CreateWall(0.575, 0.98, -29.605, 2.67, 1, 6.1, 4, 93);
-        CreateWall(-0.87, 3.56, -16.362, 19.53, 7.43, 1.65, 4, 94);
-        CreateWall(-10.549, 4.74, -18.017, 0.9, 7.43, 1.65, 4, 95);
-        CreateWall(-10.549, 4.74, -22.095, 0.9, 7.43, 1.65, 4, 96);
-    }
+    // else if (mapToLoad == MIRAGEA)
+    // {
+    //     mapToSet = MIRAGEA;
+    //     allMaps[mapToLoad].CollisionsCount = 97;
+    //     allMaps[mapToLoad].AllWallsCollisions = malloc(allMaps[mapToLoad].CollisionsCount * sizeof(Wall));
+    //     CreateWall(-17.82, -1.47, -31.56, 57.7, 1, 30.9, 4, 0);
+    //     CreateWall(17.065, 0.98, 40.86, 14.37, 1, 4.7, 0, 1);
+    //     CreateWall(19.19, 3.57, 43.22, 1.3, 9, 20.3, 0, 2);
+    //     CreateWall(12.78, 4.03, 31.67, 36.8, 10, 14.58, 0, 3);
+    //     CreateWall(16.8, 6.54, 49.281, 14, 10, 1, 0, 4);
+    //     CreateWall(-4.15, 6.75, 47.76, 29.8, 10, 3, 0, 5);
+    //     CreateWall(-8, -1.47, 31.2, 38, 1, 25, 0, 6);
+    //     CreateWall(1.73, 0.98, 46.17, 39.83, 1, 6, 0, 7);
+    //     CreateWall(-11.3, 3.4, -36.69, 25.63, 8.35, 8.32, 4, 8);
+    //     CreateWall(-39.89, 3.4, -36.91, 15.38, 8.35, 8.72, 4, 9);
+    //     CreateWall(-28.1, 3.4, -41.77, 11.7, 8.35, 1, 4, 10);
+    //     CreateWall(-3.23, -0.4, 43.61, 24.14, 1, 1, 0, 11);
+    //     CreateWall(-9.7, 5.25, 12.93, 11.5, 7.5, 23, 3, 12);
+    //     CreateWall(-4.72, 1.8, 43.31, 14.8, 0.6, 0.2, 0, 13);
+    //     CreateWall(-0.65, 0.98, -21.91, 20.54, 1, 9.3, 4, 14);
+    //     CreateWall(-28.59, 0.98, 0.21, 32.47, 1, 33, 3, 15);
+    //     CreateWall(-14.87, 0.98, -16.93, 10.46, 1, 11.8, 4, 16);
+    //     CreateWall(-40.38, 0.98, -14.825, 8.2, 1, 3.12, 3, 17);
+    //     CreateWall(-21.15, 0.98, 15.125, 6.5, 1, 3.12, 3, 18);
+    //     CreateWall(-16.89, 0.98, 20.15, 2, 1, 8, 0, 19);
+    //     CreateWall(-24.51, 3.75, 24.38, 1, 9.5, 17.16, 0, 20);
+    //     CreateWall(-15.35, 2.44, 20.14, 1, 6.71, 7.9, 0, 21);
+    //     CreateWall(-22.345, 3.75, 16.612, 3.16, 4.4, 0.82, 3, 22);
+    //     CreateWall(-26.09, 3.95, 14.03, 4.1, 5.23, 2.6, 3, 23);
+    //     CreateWall(-31.09, 5.22, 15.79, 10.04, 7.2, 0.82, 3, 24);
+    //     CreateWall(-39.49, 5.22, 10.11, 8, 7.2, 3, 3, 25);
+    //     CreateWall(-13.4, 3.69, 38.16, 2.46, 9, 10.5, 0, 26);
+    //     CreateWall(-20.82, 3.69, 33.19, 17, 9, 1.65, 0, 27);
+    //     CreateWall(-13.78, 3.69, 24.59, 11.5, 9, 0.85, 0, 28);
+    //     CreateWall(-7.09, 3.69, 26.93, 2, 9, 3.5, 0, 29);
+    //     CreateWall(-11.19, 0.8200001, 35.65, 1.9, 3.5, 10.34, 0, 30);
+    //     CreateWall(-17.5, 0.8200001, 31.41, 14.02, 3.5, 1.9, 0, 31);
+    //     CreateWall(-11.3, -0.325, 42.324, 1.7, 1.7, 1.7, 0, 32);
+    //     CreateWall(-11.714, 1.215, 42.212, 0.9, 0.9, 0.9, 0, 33);
+    //     CreateWall(-8.915, 0.691, 26.53, 1.6, 3.2, 3.5, 0, 34);
+    //     CreateWall(-19.96, 0.98, 38.72, 11.28, 1, 9.8, 0, 35);
+    //     CreateWall(-30.115, 3.436, 36.26, 10.67, 1, 8, 0, 36);
+    //     CreateWall(-38.445, 4.51, 35.66, 7.67, 0.5, 6.5, 0, 37);
+    //     CreateWall(-31.81, 4.51, 24.385, 4.9, 0.5, 13.67, 0, 38);
+    //     CreateWall(-37.69, 4.51, 21.85, 6.83, 0.5, 22, 0, 39);
+    //     CreateWall(-32.78, 4.61, 39.3, 17, 9, 1, 0, 40);
+    //     CreateWall(-21.18, 4.61, 41.99, 6.61, 7, 9.5, 0, 41);
+    //     CreateWall(-41.29, 6.26, 25.11, 1, 4, 28, 0, 42);
+    //     CreateWall(-28.87, 6.26, 25.41, 1, 4, 17, 0, 43);
+    //     CreateWall(-33.468, 6.29, 17.14, 7.94, 3, 1, 0, 44);
+    //     CreateWall(-35.086, 6.29, 21.727, 1.65, 3, 1.65, 0, 45);
+    //     CreateWall(-35.086, 6.29, 26.641, 1.65, 3, 1.65, 0, 46);
+    //     CreateWall(-35.086, 6.29, 31.549, 1.65, 3, 1.65, 0, 47);
+    //     CreateWall(-39.982, 5.576, 26.847, 1.64, 1.64, 1.64, 0, 48);
+    //     CreateWall(-12.594, 3.061, 43.366, 0.8, 3, 0.5, 0, 49);
+    //     CreateWall(-35.689, 6.44, 15.55, 3.7, 3.2, 3.62, 0, 50);
+    //     CreateWall(-33.26, 4.51, 12.58, 4.51, 0.5, 5.42, 3, 51);
+    //     CreateWall(-28.738, 4.51, 12.58, 1.21, 0.5, 5.42, 3, 52);
+    //     CreateWall(-30.179, 4.51, 12.008, 1.7, 0.5, 4.3, 3, 53);
+    //     CreateWall(-30.897, 4.87, 9.959, 5.48, 1, 0.2, 3, 54);
+    //     CreateWall(-27.318, 3.156, 11.701, 1.65, 3.2, 2, 3, 55);
+    //     CreateWall(-25.664, 2.116, 11.861, 1.63, 1.63, 1.63, 3, 56);
+    //     CreateWall(-16.262, 2.1, 6.187, 1.63, 1.63, 1.63, 3, 57);
+    //     CreateWall(-16.628, 3.585, 5.821, 0.9, 0.9, 0.9, 3, 58);
+    //     CreateWall(-18.72, 3.203, 6.179, 3.3, 3.1, 1.65, 3, 59);
+    //     CreateWall(-36.17, 2.169, 7.956, 1.4, 1.4, 1.4, 3, 60);
+    //     CreateWall(-34.356, 2.611, 8.981998, 2.3, 2.3, 2.3, 3, 61);
+    //     CreateWall(-38.774, 2.299, 4.519, 1.65, 1.65, 1.65, 3, 62);
+    //     CreateWall(-40.402, 2.299, 3.237, 1.65, 1.65, 1.65, 3, 63);
+    //     CreateWall(-33.245, 2.299, 2.704, 1.65, 1.65, 1.65, 3, 64);
+    //     CreateWall(-32.642, 2.299, -3.541, 1.65, 1.65, 1.65, 3, 65);
+    //     CreateWall(-33.642, 2.299, -5.189, 1.65, 1.65, 1.65, 3, 66);
+    //     CreateWall(-33.099, 3.955, -4.446, 1.65, 1.65, 1.65, 3, 67);
+    //     CreateWall(-32.842, 3.13, 4.333, 1.65, 3.3, 1.65, 3, 68);
+    //     CreateWall(-40.591, 2.83, -9.155001, 1.3, 2.56, 1.3, 3, 69);
+    //     CreateWall(-42.422, 2.117, -11.013, 1.65, 1.65, 1.65, 4, 70);
+    //     CreateWall(-36.725, 2.299, -11.007, 1.65, 1.65, 1.65, 3, 71);
+    //     CreateWall(-43.217, 4.99, -0.71, 4, 7, 19.01, 3, 72);
+    //     CreateWall(-27.72, 5.78, -17.95, 17.2, 13.7, 12.3, 4, 73);
+    //     CreateWall(-27.72, 4.61, -11.16, 16.5, 6.1, 3.6, 3, 74);
+    //     CreateWall(-45.46, 3.95, -20.26, 2, 10, 28, 4, 75);
+    //     CreateWall(-15.56, 4.61, 2.08, 5.55, 6.1, 6.6, 3, 76);
+    //     CreateWall(-26.026, 3.588, 12.247, 0.9, 0.9, 0.9, 3, 77);
+    //     CreateWall(-19.94, 3.12, -0.5700001, 3.3, 3.3, 3.3, 3, 78);
+    //     CreateWall(-19.96, 4.828, 22.224, 8.24, 1, 3.3, 0, 79);
+    //     CreateWall(-16.674, 2.609, -1.503, 2, 2.1, 0.6, 3, 80);
+    //     CreateWall(-14.214, 2.069, -1.503, 2, 1, 0.6, 3, 81);
+    //     CreateWall(-11.74, 4.99, -8.6, 1.72, 7, 18.8, 3, 82);
+    //     CreateWall(-13.44, 4.99, -12.846, 2, 7, 2.1, 3, 83);
+    //     CreateWall(-15.5, 4.03, -24.29, 10.8, 9.5, 4.6, 4, 84);
+    //     CreateWall(-28.73, 1.56, -25.04, 11.1, 5, 1.5, 4, 85);
+    //     CreateWall(-7.81, 3.4, -23.49, 5.2, 8.35, 1.2, 4, 86);
+    //     CreateWall(-0.986, 3.4, -23.49, 5.2, 8.35, 1.2, 4, 87);
+    //     CreateWall(-4.387, 7.54, -23.49, 1.5, 8.35, 1.2, 4, 88);
+    //     CreateWall(5.11, 5.04, -24.91, 7.66, 8.35, 17.99, 4, 89);
+    //     CreateWall(2.98, 3.96, -22.05, 12.33, 4, 1.65, 4, 90);
+    //     CreateWall(-0.1, 2.299, -20.42, 3.3, 1.65, 1.65, 4, 91);
+    //     CreateWall(-18.312, 2.313, -18.785, 1.65, 1.65, 3.3, 4, 92);
+    //     CreateWall(0.575, 0.98, -29.605, 2.67, 1, 6.1, 4, 93);
+    //     CreateWall(-0.87, 3.56, -16.362, 19.53, 7.43, 1.65, 4, 94);
+    //     CreateWall(-10.549, 4.74, -18.017, 0.9, 7.43, 1.65, 4, 95);
+    //     CreateWall(-10.549, 4.74, -22.095, 0.9, 7.43, 1.65, 4, 96);
+    // }
 }
 
 /**
@@ -1748,7 +1459,7 @@ void LoadAllStairs(int mapToLoad)
     if (mapToLoad == DUST2)
     {
         mapToSet = DUST2;
-        allMaps[mapToLoad].StairsCount = 31;
+        allMaps[mapToLoad].StairsCount = 32;
         allMaps[mapToLoad].AllStairs = malloc(allMaps[mapToLoad].StairsCount * sizeof(Stairs));
         CreateStairs(-1.257, 5.2, 8.419, 21.325, 0, 3.211, 2, 0);
         CreateStairs(-1.252, -0.85, 3.576, 6.8, 0, 0.388, 1, 1);
@@ -1781,6 +1492,7 @@ void LoadAllStairs(int mapToLoad)
         CreateStairs(-20.585, -18.3, -25.084, -23.196, 6.058, 6.893, 0, 28);
         CreateStairs(-22.7, -22.23, -27.867, -26.293, 6.457, 6.843, 3, 29);
         CreateStairs(-23.845, -22.226, -26.263, -25.927, 6.052, 6.439, 0, 30);
+        CreateStairs(-1.248, 11.659, 56, 56.83001, 4.077, 7.291, 1, 31);
     }
     else if (mapToLoad == TUTORIAL)
     {
@@ -1792,7 +1504,7 @@ void LoadAllStairs(int mapToLoad)
     else if (mapToLoad == DUST2_2x2)
     {
         mapToSet = DUST2_2x2;
-        allMaps[mapToLoad].StairsCount = 14;
+        allMaps[mapToLoad].StairsCount = 15;
         allMaps[mapToLoad].AllStairs = malloc(allMaps[mapToLoad].StairsCount * sizeof(Stairs));
         CreateStairs(-1.257, 5.2, 8.419, 21.325, 0, 3.211, 2, 0);
         CreateStairs(5.3, 6.45, 21.313, 56.32, 3.24, 3.24, 1, 1);
@@ -1808,6 +1520,7 @@ void LoadAllStairs(int mapToLoad)
         CreateStairs(37.13, 38.37, -28.69, -20.22, 5.632, 5.632, 2, 11);
         CreateStairs(18.89, 24.98, -20.98, -19.1, 5.632, 5.632, 3, 12);
         CreateStairs(-1.248, 11.659, 56.79, 66.49001, 3.227, 6.441, 1, 13);
+        CreateStairs(-1.248, 11.659, 56, 56.83001, 4.077, 7.291, 1, 14);
     }
     else if (mapToLoad == AIM_MAP)
     {
@@ -1831,19 +1544,19 @@ void LoadAllStairs(int mapToLoad)
         CreateStairs(-18.23, -12.492, -21.078, -19.386, -0.073, 3.277, 1, 2);
         CreateStairs(12.25, 18.043, 19.73, 21.34, -0.07300002, 3.298, 3, 3);
     }
-    else if (mapToLoad == MIRAGEA)
-    {
-        mapToSet = MIRAGEA;
-        allMaps[mapToLoad].StairsCount = 7;
-        allMaps[mapToLoad].AllStairs = malloc(allMaps[mapToLoad].StairsCount * sizeof(Stairs));
-        CreateStairs(-0.3000029, 9.553, 38.49, 43.2, -0.043, 2.505, 3, 0);
-        CreateStairs(-24.41, -17.87301, 17.02, 24.2, -0.013, 2.419, 0, 1);
-        CreateStairs(-24.45, -19.562, 32.28, 40.28, 2.434, 4.89, 1, 2);
-        CreateStairs(-44.49, -36.315, -24.1, -16.711, -0.043, 2.426, 2, 3);
-        CreateStairs(-10.127, -1.075, -32.645, -26.56, -0.042, 2.495, 3, 4);
-        CreateStairs(-34.294, -32.68, 32.373, 38.91, 4.877, 5.707, 1, 5);
-        CreateStairs(-34.233, -29.37, 31.502, 33.01, 4.88, 5.697, 0, 6);
-    }
+    // else if (mapToLoad == MIRAGEA)
+    // {
+    //     mapToSet = MIRAGEA;
+    //     allMaps[mapToLoad].StairsCount = 7;
+    //     allMaps[mapToLoad].AllStairs = malloc(allMaps[mapToLoad].StairsCount * sizeof(Stairs));
+    //     CreateStairs(-0.3000029, 9.553, 38.49, 43.2, -0.043, 2.505, 3, 0);
+    //     CreateStairs(-24.41, -17.87301, 17.02, 24.2, -0.013, 2.419, 0, 1);
+    //     CreateStairs(-24.45, -19.562, 32.28, 40.28, 2.434, 4.89, 1, 2);
+    //     CreateStairs(-44.49, -36.315, -24.1, -16.711, -0.043, 2.426, 2, 3);
+    //     CreateStairs(-10.127, -1.075, -32.645, -26.56, -0.042, 2.495, 3, 4);
+    //     CreateStairs(-34.294, -32.68, 32.373, 38.91, 4.877, 5.707, 1, 5);
+    //     CreateStairs(-34.233, -29.37, 31.502, 33.01, 4.88, 5.697, 0, 6);
+    // }
 }
 
 /**
@@ -1905,16 +1618,16 @@ void LoadAllBombZones(int mapToLoad)
         int nearWaypoints0[26] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25};
         SetBombZone(-1.76, -28.5, 4, 4, 0, 24, 26, nearWaypoints0); // A
     }
-    else if (mapToLoad == MIRAGEA)
-    {
-        // Set the number of bomb zones
-        TwoSites = false;
-        allMaps[mapToLoad].BombsTriggersCollisionsCount = 1;
-        allMaps[mapToLoad].AllBombsTriggersCollisions = malloc(allMaps[mapToLoad].BombsTriggersCollisionsCount * sizeof(Site));
+    // else if (mapToLoad == MIRAGEA)
+    // {
+    //     // Set the number of bomb zones
+    //     TwoSites = false;
+    //     allMaps[mapToLoad].BombsTriggersCollisionsCount = 1;
+    //     allMaps[mapToLoad].AllBombsTriggersCollisions = malloc(allMaps[mapToLoad].BombsTriggersCollisionsCount * sizeof(Site));
 
-        int nearWaypoints0[13] = {0,1,2,3,4,5,13,14,15,16,17,18,31};
-        SetBombZone(-36.61, -0.39, 5, 6.6, 0, 4, 13, nearWaypoints0); // A
-    }
+    //     int nearWaypoints0[13] = {0,1,2,3,4,5,13,14,15,16,17,18,31};
+    //     SetBombZone(-36.61, -0.39, 5, 6.6, 0, 4, 13, nearWaypoints0); // A
+    // }
 }
 /**
  * @brief Create a stairs
