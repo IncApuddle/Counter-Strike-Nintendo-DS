@@ -1,6 +1,9 @@
 # Counter Strike Nintendo DS
 **Counter Strike demake on Nintendo DS with online multiplayer** (Works on **emulator** and on **real hardware**).
 
+> [!WARNING]
+> The multiplayer server is now closed.
+
 For **multiplayer** on **emulator**, please use [melonDS](https://melonds.kuribo64.net/downloads.php).<br/>
 There is no emulator with **online** support on **Android** at this time.<br/>
 **Ad hoc (Ni-Fi) multiplayer** is not supported (I'm looking for help with that!)<br/>
