@@ -332,23 +332,23 @@ void CalculateAllTriggerColBoxs(int mapToLoad)
     else if (mapToLoad == TUTORIAL)
     {
         // All occlusion culling zones data (a zone will show one or multiple zones)
-        map->zonesCount = 2;
+        map->zonesCount = 1;
         map->AllZones = malloc(map->zonesCount * sizeof(Zone));
 
-        map->AllZones[currentZone].ZoneCount = 2;
+        map->AllZones[currentZone].ZoneCount = 1;
         map->AllZones[currentZone].visibleMapPart[0] = 0;
-        map->AllZones[currentZone].visibleMapPart[1] = 1;
+        // map->AllZones[currentZone].visibleMapPart[1] = 1;
         map->AllZones[currentZone].id = currentZone;
 
-        currentZone = 1;
-        map->AllZones[currentZone].ZoneCount = 2;
-        map->AllZones[currentZone].visibleMapPart[0] = 1;
-        map->AllZones[currentZone].visibleMapPart[1] = 0;
-        map->AllZones[currentZone].id = currentZone;
+        // currentZone = 1;
+        // map->AllZones[currentZone].ZoneCount = 2;
+        // map->AllZones[currentZone].visibleMapPart[0] = 1;
+        // map->AllZones[currentZone].visibleMapPart[1] = 0;
+        // map->AllZones[currentZone].id = currentZone;
 
         // Add occlusion culling triggers
         CalculateTriggerColBox(0, 2, 22.7, 22.7, 0);
-        CalculateTriggerColBox(0, 2, 22.7, 22.7, 1);
+        // CalculateTriggerColBox(0, 2, 22.7, 22.7, 1);
 
         map->shadowCollisionBoxCount = 3;
         map->AllShadowCollisionBox = malloc(map->shadowCollisionBoxCount * sizeof(CollisionBox));
@@ -358,7 +358,7 @@ void CalculateAllTriggerColBoxs(int mapToLoad)
         CalculateShadowColBox(7.583056, 4.5, 1.242216, 7.533887, 9, 24.21557, 1);
         CalculateShadowColBox(-1.585769, 1.017356, 1.17581, 2.752997, 2.034714, 2.829585, 2);
 
-        map->occlusionZoneCount = 2;
+        map->occlusionZoneCount = 1;
         map->AllOcclusionZone = malloc(map->occlusionZoneCount * sizeof(OcclusionZone));
 
         // Add clipping zones
@@ -375,17 +375,17 @@ void CalculateAllTriggerColBoxs(int mapToLoad)
         map->AllOcclusionZone[0].angles[3].x = 11.335;
         map->AllOcclusionZone[0].angles[3].y = 9.395;
 
-        map->AllOcclusionZone[1].angles[0].x = 11.335;
-        map->AllOcclusionZone[1].angles[0].y = 13.278;
+        // map->AllOcclusionZone[1].angles[0].x = 11.335;
+        // map->AllOcclusionZone[1].angles[0].y = 13.278;
 
-        map->AllOcclusionZone[1].angles[1].x = -11.332;
-        map->AllOcclusionZone[1].angles[1].y = 13.278;
+        // map->AllOcclusionZone[1].angles[1].x = -11.332;
+        // map->AllOcclusionZone[1].angles[1].y = 13.278;
 
-        map->AllOcclusionZone[1].angles[2].x = -11.332;
-        map->AllOcclusionZone[1].angles[2].y = -9.395;
+        // map->AllOcclusionZone[1].angles[2].x = -11.332;
+        // map->AllOcclusionZone[1].angles[2].y = -9.395;
 
-        map->AllOcclusionZone[1].angles[3].x = 11.335;
-        map->AllOcclusionZone[1].angles[3].y = 9.395;
+        // map->AllOcclusionZone[1].angles[3].x = 11.335;
+        // map->AllOcclusionZone[1].angles[3].y = 9.395;
     }
     else if (mapToLoad == DUST2_2x2)
     {
@@ -698,155 +698,333 @@ void CalculateAllTriggerColBoxs(int mapToLoad)
         map->AllOcclusionZone[1].angles[3].x = 23;
         map->AllOcclusionZone[1].angles[3].y = -5;
     }
-    // else if (mapToLoad == MIRAGEA)
-    // {
-    //     // All occlusion culling zones data (a zone will show one or multiple zones)
-    //     map->zonesCount = 5;
-    //     map->AllZones = malloc(map->zonesCount * sizeof(Zone));
+    else if (mapToLoad == MIRAGE)
+    {
+        // All occlusion culling zones data (a zone will show one or multiple zones)
+        map->zonesCount = 19;
+        map->AllZones = malloc(map->zonesCount * sizeof(Zone));
 
-    //     map->AllZones[currentZone].ZoneCount = 2;
-    //     map->AllZones[currentZone].visibleMapPart[0] = 0; //1 = tspawn, 2 = site, 3 ct spawn
-    //     map->AllZones[currentZone].visibleMapPart[1] = 1;
-    //     map->AllZones[currentZone].id = currentZone;
+        map->AllZones[currentZone].ZoneCount = 2;
+        map->AllZones[currentZone].visibleMapPart[0] = 0;
+        map->AllZones[currentZone].visibleMapPart[1] = 1;
+        map->AllZones[currentZone].id = currentZone;
 
-    //     currentZone = 1;
-    //     map->AllZones[currentZone].ZoneCount = 2;
-    //     map->AllZones[currentZone].visibleMapPart[0] = 4;
-    //     map->AllZones[currentZone].visibleMapPart[1] = 5;
-    //     map->AllZones[currentZone].id = currentZone;
+        currentZone = 1;
+        map->AllZones[currentZone].ZoneCount = 3;
+        map->AllZones[currentZone].visibleMapPart[0] = 1;
+        map->AllZones[currentZone].visibleMapPart[1] = 2;
+        map->AllZones[currentZone].visibleMapPart[2] = 3;
+        map->AllZones[currentZone].id = currentZone;
 
-    //     currentZone = 2;
-    //     map->AllZones[currentZone].ZoneCount = 2;
-    //     map->AllZones[currentZone].visibleMapPart[0] = 2;
-    //     map->AllZones[currentZone].visibleMapPart[1] = 3;
-    //     map->AllZones[currentZone].id = currentZone;
+        currentZone = 2;
+        map->AllZones[currentZone].ZoneCount = 2;
+        map->AllZones[currentZone].visibleMapPart[0] = 1;
+        map->AllZones[currentZone].visibleMapPart[1] = 2;
+        map->AllZones[currentZone].id = currentZone;
 
-    //     currentZone = 3;
-    //     map->AllZones[currentZone].ZoneCount = 2;
-    //     map->AllZones[currentZone].visibleMapPart[0] = 0;
-    //     map->AllZones[currentZone].visibleMapPart[1] = 1;
-    //     map->AllZones[currentZone].id = currentZone;
+        currentZone = 3;
+        map->AllZones[currentZone].ZoneCount = 3;
+        map->AllZones[currentZone].visibleMapPart[0] = 1;
+        map->AllZones[currentZone].visibleMapPart[1] = 2;
+        map->AllZones[currentZone].visibleMapPart[2] = 3;
+        map->AllZones[currentZone].id = currentZone;
 
-    //     currentZone = 4;
-    //     map->AllZones[currentZone].ZoneCount = 2;
-    //     map->AllZones[currentZone].visibleMapPart[0] = 2;
-    //     map->AllZones[currentZone].visibleMapPart[1] = 3;
-    //     map->AllZones[currentZone].id = currentZone;
+        currentZone = 4;
+        map->AllZones[currentZone].ZoneCount = 2;
+        map->AllZones[currentZone].visibleMapPart[0] = 0;
+        map->AllZones[currentZone].visibleMapPart[1] = 4;
+        map->AllZones[currentZone].id = currentZone;
+
+        currentZone = 5;
+        map->AllZones[currentZone].ZoneCount = 3;
+        map->AllZones[currentZone].visibleMapPart[0] = 2;
+        map->AllZones[currentZone].visibleMapPart[1] = 3;
+        map->AllZones[currentZone].visibleMapPart[2] = 5;
+        map->AllZones[currentZone].id = currentZone;
+
+        currentZone = 6;
+        map->AllZones[currentZone].ZoneCount = 2;
+        map->AllZones[currentZone].visibleMapPart[0] = 0;
+        map->AllZones[currentZone].visibleMapPart[1] = 4;
+        map->AllZones[currentZone].id = currentZone;
+
+        currentZone = 7;
+        map->AllZones[currentZone].ZoneCount = 3;
+        map->AllZones[currentZone].visibleMapPart[0] = 3;
+        map->AllZones[currentZone].visibleMapPart[1] = 4;
+        map->AllZones[currentZone].visibleMapPart[2] = 5;
+        map->AllZones[currentZone].id = currentZone;
+
+        currentZone = 8;
+        map->AllZones[currentZone].ZoneCount = 2;
+        map->AllZones[currentZone].visibleMapPart[0] = 4;
+        map->AllZones[currentZone].visibleMapPart[1] = 5;
+        map->AllZones[currentZone].id = currentZone;
+
+        currentZone = 9;
+        map->AllZones[currentZone].ZoneCount = 2;
+        map->AllZones[currentZone].visibleMapPart[0] = 3;
+        map->AllZones[currentZone].visibleMapPart[1] = 4;
+        map->AllZones[currentZone].id = currentZone;
+
+        currentZone = 10;
+        map->AllZones[currentZone].ZoneCount = 3;
+        map->AllZones[currentZone].visibleMapPart[0] = 2;
+        map->AllZones[currentZone].visibleMapPart[1] = 3;
+        map->AllZones[currentZone].visibleMapPart[2] = 4;
+        map->AllZones[currentZone].id = currentZone;
+
+        currentZone = 11;
+        map->AllZones[currentZone].ZoneCount = 3;
+        map->AllZones[currentZone].visibleMapPart[0] = 1;
+        map->AllZones[currentZone].visibleMapPart[1] = 3;
+        map->AllZones[currentZone].visibleMapPart[2] = 4;
+        map->AllZones[currentZone].id = currentZone;
+
+        currentZone = 12;
+        map->AllZones[currentZone].ZoneCount = 3;
+        map->AllZones[currentZone].visibleMapPart[0] = 3;
+        map->AllZones[currentZone].visibleMapPart[1] = 4;
+        map->AllZones[currentZone].visibleMapPart[2] = 5;
+        map->AllZones[currentZone].id = currentZone;
+
+        currentZone = 13;
+        map->AllZones[currentZone].ZoneCount = 2;
+        map->AllZones[currentZone].visibleMapPart[0] = 4;
+        map->AllZones[currentZone].visibleMapPart[1] = 5;
+        map->AllZones[currentZone].id = currentZone;
+
+        currentZone = 14;
+        map->AllZones[currentZone].ZoneCount = 2;
+        map->AllZones[currentZone].visibleMapPart[0] = 3;
+        map->AllZones[currentZone].visibleMapPart[1] = 5;
+        map->AllZones[currentZone].id = currentZone;
+
+        currentZone = 15;
+        map->AllZones[currentZone].ZoneCount = 3;
+        map->AllZones[currentZone].visibleMapPart[0] = 2;
+        map->AllZones[currentZone].visibleMapPart[1] = 3;
+        map->AllZones[currentZone].visibleMapPart[2] = 5;
+        map->AllZones[currentZone].id = currentZone;
+
+        currentZone = 16;
+        map->AllZones[currentZone].ZoneCount = 4;
+        map->AllZones[currentZone].visibleMapPart[0] = 1;
+        map->AllZones[currentZone].visibleMapPart[1] = 2;
+        map->AllZones[currentZone].visibleMapPart[2] = 3;
+        map->AllZones[currentZone].visibleMapPart[3] = 5;
+        map->AllZones[currentZone].id = currentZone;
+
+        currentZone = 17;
+        map->AllZones[currentZone].ZoneCount = 4;
+        map->AllZones[currentZone].visibleMapPart[0] = 0;
+        map->AllZones[currentZone].visibleMapPart[1] = 1;
+        map->AllZones[currentZone].visibleMapPart[2] = 2;
+        map->AllZones[currentZone].visibleMapPart[3] = 3;
+        map->AllZones[currentZone].id = currentZone;
+        
+        currentZone = 18;
+        map->AllZones[currentZone].ZoneCount = 3;
+        map->AllZones[currentZone].visibleMapPart[0] = 1;
+        map->AllZones[currentZone].visibleMapPart[1] = 2;
+        map->AllZones[currentZone].visibleMapPart[2] = 3;
+        map->AllZones[currentZone].id = currentZone;
 
 
-    //     // Add occlusion culling triggers
-    //     CalculateTriggerColBox(-12.3, 38.6, 65, 35, 0);
-    //     CalculateTriggerColBox(-23.9, -32.3, 51, 29.84, 1);
-    //     CalculateTriggerColBox(-30.2, -1.1, 39.22, 32.3, 2);
-    //     CalculateTriggerColBox(-40.4, 15.64, 8, 1, 3);
-    //     CalculateTriggerColBox(-20.12, 20.52, 10, 1, 4);
+        // Add occlusion culling triggers
+        CalculateTriggerColBox(-20.08, 52.45, 41, 39, 0);
+        CalculateTriggerColBox(-20.68, 16.4, 38, 20, 1);
+        CalculateTriggerColBox(-28.62, -10.32, 24, 33.4, 2);
+        CalculateTriggerColBox(-10.58, -6.9, 12, 26.6, 3);
+        CalculateTriggerColBox(25.47, 61.45, 50, 23, 4);
+        CalculateTriggerColBox(20.32, -31.35, 43, 30, 5);
+        CalculateTriggerColBox(42.92, 37.41, 18, 25.1, 6);
+        CalculateTriggerColBox(36.17, 12.81, 26, 24, 7);
+        CalculateTriggerColBox(42.00999, -0.9700012, 16, 3.5, 8);
+        CalculateTriggerColBox(17, 31, 33.7, 26.4, 9);
+        CalculateTriggerColBox(10.42, -2.75, 29.9, 7.1, 10);
+        CalculateTriggerColBox(10.76, 9.299999, 24.8, 17, 11);
+        CalculateTriggerColBox(45.57, -26.83, 7.5, 33.3, 12);
+        CalculateTriggerColBox(45.57, -6.450001, 7.5, 7.4, 13);
+        CalculateTriggerColBox(30.28, -1.1, 7.5, 3.8, 14);
+        CalculateTriggerColBox(29.32, -9.65, 25, 13.3, 15);
+        CalculateTriggerColBox(5.42, -11.35, 20, 10, 16);
+        CalculateTriggerColBox(-30.31, 29.67, 17, 6.5, 17);
+        CalculateTriggerColBox(-13.28, 29.67, 17, 6.5, 18);
 
-    //     map->shadowCollisionBoxCount = 12;
-    //     map->AllShadowCollisionBox = malloc(map->shadowCollisionBoxCount * sizeof(CollisionBox));
+        map->shadowCollisionBoxCount = 26;
+        map->AllShadowCollisionBox = malloc(map->shadowCollisionBoxCount * sizeof(CollisionBox));
 
-    //     // Add shadow collision boxes
-    //     CalculateShadowColBox(15.26385, 3.877197, 33.48413, 39.3, 7.9, 16.4, 0);
-    //     CalculateShadowColBox(-14.00616, 2.267197, 40.72415, 14.19, 5.58, 14.1, 1);
-    //     CalculateShadowColBox(-36.78616, 6.637207, 24.82413, 9.2, 6.6, 28.18, 2);
-    //     CalculateShadowColBox(-30.24615, 4.657196, 34.68414, 20.8, 3.42, 12.9, 3);
-    //     CalculateShadowColBox(-31.59616, 3.277206, 12.26413, 7.82, 3.42, 4.98, 4);
-    //     CalculateShadowColBox(-41.82614, 5.847198, 1.774139, 7.82, 7.26, 20.7, 5);
-    //     CalculateShadowColBox(-23.25616, 5.847198, -11.69586, 21.59, 7.26, 5.79, 6);
-    //     CalculateShadowColBox(-44.39615, 3.5672, -21.27585, 7.82, 8.9, 27.48, 7);
-    //     CalculateShadowColBox(-38.27615, 3.5672, -35.83585, 20.9, 8.9, 13.14, 8);
-    //     CalculateShadowColBox(-7.886139, 3.5672, -34.79587, 25.9, 8.9, 7.86, 9);
-    //     CalculateShadowColBox(-8.586151, 6.707199, -20.90585, 21.93, 8.9, 7.62, 10);
-    //     CalculateShadowColBox(-14.96616, 4.137207, 22.34415, 19.5, 8.4, 12, 11);
+        // Add shadow collision boxes
+        CalculateShadowColBox(20.66385, 3.877197, 50.85413, 39.3, 7.9, 16.4, 0);
+        CalculateShadowColBox(-7.086151, 2.267197, 58.09415, 11.2, 5.58, 14.1, 1);
+        CalculateShadowColBox(-31.38617, 6.637207, 42.19412, 9.2, 6.6, 28.18, 2);
+        CalculateShadowColBox(-19.92615, 4.657196, 52.05414, 20.8, 3.42, 9.4, 3);
+        CalculateShadowColBox(-26.19617, 3.277206, 29.63412, 7.82, 3.42, 4.98, 4);
+        CalculateShadowColBox(-36.42615, 5.847198, 19.14413, 7.82, 7.26, 20.7, 5);
+        CalculateShadowColBox(-17.85617, 5.847198, 5.674133, 21.59, 7.26, 5.79, 6);
+        CalculateShadowColBox(-38.99615, 3.5672, -3.905853, 7.82, 8.9, 27.48, 7);
+        CalculateShadowColBox(-32.87616, 3.5672, -18.46585, 20.9, 8.9, 13.14, 8);
+        CalculateShadowColBox(-2.486145, 3.5672, -17.42587, 25.9, 8.9, 7.86, 9);
+        CalculateShadowColBox(-3.186157, 6.707199, -3.535858, 21.93, 8.9, 7.62, 10);
+        CalculateShadowColBox(23.03384, 6.707199, -0.9558716, 18, 8.9, 15.66, 11);
+        CalculateShadowColBox(10.89383, 3.007202, 1.784149, 11.86, 11.47, 3.5, 12);
+        CalculateShadowColBox(6.923859, 4.137207, 11.11414, 3.85, 8.4, 22.38, 13);
+        CalculateShadowColBox(2.153839, 5.277206, 29.63412, 3.85, 8.4, 23.64, 14);
+        CalculateShadowColBox(32.29385, 4.137207, 33.94412, 23.45, 8.4, 3.2, 15);
+        CalculateShadowColBox(-9.566162, 4.137207, 39.71414, 19.5, 8.4, 12, 16);
+        CalculateShadowColBox(34.09384, 6.6772, -8.165863, 11.75, 8.4, 3.06, 17);
+        CalculateShadowColBox(34.25385, 6.6772, -23.31586, 12.19, 8.4, 11.87, 18);
+        CalculateShadowColBox(45.86383, 6.6772, -30.40585, 5.83, 8.4, 5.6, 19);
+        CalculateShadowColBox(31.47385, 6.6772, -36.10587, 21.93, 8.4, 8.9, 20);
+        CalculateShadowColBox(14.65384, 6.6772, -21.35587, 15.73, 8.4, 24.23, 21);
+        CalculateShadowColBox(44.75385, 6.6772, -11.22586, 5.04, 8.4, 19.87, 22);
+        CalculateShadowColBox(40.20386, 1.557205, 12.86414, 12.01, 16.67, 25.62, 23);
+        CalculateShadowColBox(46.72385, 3.777206, 34.94412, 4, 14, 22.4, 24);
+        CalculateShadowColBox(24.76385, -0.7127991, 1.354126, 22.3, 4.3, 5.6, 25);
 
-    //     map->occlusionZoneCount = 6;
-    //     map->AllOcclusionZone = malloc(map->occlusionZoneCount * sizeof(OcclusionZone));
+        map->occlusionZoneCount = 6;
+        map->AllOcclusionZone = malloc(map->occlusionZoneCount * sizeof(OcclusionZone));
 
-    //     // Add clipping zones
-    //     ///////////////////////////////////////////////////// Y must be inverted compared to Unity project
+        // Add clipping zones
+        ///////////////////////////////////////////////////// Y (Z in Unity) must be inverted compared to Unity project
 
-    //     map->AllOcclusionZone[0].angles[0].x = 40;
-    //     map->AllOcclusionZone[0].angles[0].y = 70;
+        map->AllOcclusionZone[0].angles[0].x = 45;
+        map->AllOcclusionZone[0].angles[0].y = 71;
 
-    //     map->AllOcclusionZone[0].angles[1].x = -42;
-    //     map->AllOcclusionZone[0].angles[1].y = 70;
+        map->AllOcclusionZone[0].angles[1].x = -38;
+        map->AllOcclusionZone[0].angles[1].y = 71;
 
-    //     map->AllOcclusionZone[0].angles[2].x = -42;
-    //     map->AllOcclusionZone[0].angles[2].y = 13;
+        map->AllOcclusionZone[0].angles[2].x = -38;
+        map->AllOcclusionZone[0].angles[2].y = 23;
 
-    //     map->AllOcclusionZone[0].angles[3].x = 40;
-    //     map->AllOcclusionZone[0].angles[3].y = 13;
+        map->AllOcclusionZone[0].angles[3].x = 45;
+        map->AllOcclusionZone[0].angles[3].y = 23;
 
-    //     //shad
+        ///////////////////////////////////////////////////
 
-    //     map->AllOcclusionZone[1].angles[0].x = 40;
-    //     map->AllOcclusionZone[1].angles[0].y = 70;
+        map->AllOcclusionZone[1].angles[0].x = -2;
+        map->AllOcclusionZone[1].angles[0].y = 52;
 
-    //     map->AllOcclusionZone[1].angles[1].x = -42;
-    //     map->AllOcclusionZone[1].angles[1].y = 70;
+        map->AllOcclusionZone[1].angles[1].x = -43;
+        map->AllOcclusionZone[1].angles[1].y = 52;
 
-    //     map->AllOcclusionZone[1].angles[2].x = -42;
-    //     map->AllOcclusionZone[1].angles[2].y = 13;
+        map->AllOcclusionZone[1].angles[2].x = -43;
+        map->AllOcclusionZone[1].angles[2].y = -23;
 
-    //     map->AllOcclusionZone[1].angles[3].x = 40;
-    //     map->AllOcclusionZone[1].angles[3].y = 13;
+        map->AllOcclusionZone[1].angles[3].x = -2;
+        map->AllOcclusionZone[1].angles[3].y = -23;
 
-    //     ///////////////////////////////////////////////////
+        ///////////////////////////////////////////////////
 
-    //     map->AllOcclusionZone[2].angles[0].x = -2.5;
-    //     map->AllOcclusionZone[2].angles[0].y = 24;
+        map->AllOcclusionZone[2].angles[0].x = 21;
+        map->AllOcclusionZone[2].angles[0].y = 7;
 
-    //     map->AllOcclusionZone[2].angles[1].x = -46;
-    //     map->AllOcclusionZone[2].angles[1].y = 24;
+        map->AllOcclusionZone[2].angles[1].x = -36;
+        map->AllOcclusionZone[2].angles[1].y = 7;
 
-    //     map->AllOcclusionZone[2].angles[2].x = -46;
-    //     map->AllOcclusionZone[2].angles[2].y = -30;
+        map->AllOcclusionZone[2].angles[2].x = -36;
+        map->AllOcclusionZone[2].angles[2].y = -36;
 
-    //     map->AllOcclusionZone[2].angles[3].x = 2.5;
-    //     map->AllOcclusionZone[2].angles[3].y = -30;
+        map->AllOcclusionZone[2].angles[3].x = 21;
+        map->AllOcclusionZone[2].angles[3].y = -36;
 
-    //     //shad
+        ///////////////////////////////////////////////////
 
-    //     map->AllOcclusionZone[3].angles[0].x = -2.5;
-    //     map->AllOcclusionZone[3].angles[0].y = 24;
+        map->AllOcclusionZone[3].angles[0].x = 38;
+        map->AllOcclusionZone[3].angles[0].y = 28;
 
-    //     map->AllOcclusionZone[3].angles[1].x = -46;
-    //     map->AllOcclusionZone[3].angles[1].y = 24;
+        map->AllOcclusionZone[3].angles[1].x = -18;
+        map->AllOcclusionZone[3].angles[1].y = 28;
 
-    //     map->AllOcclusionZone[3].angles[2].x = -46;
-    //     map->AllOcclusionZone[3].angles[2].y = -30;
+        map->AllOcclusionZone[3].angles[2].x = -18;
+        map->AllOcclusionZone[3].angles[2].y = -12;
 
-    //     map->AllOcclusionZone[3].angles[3].x = 2.5;
-    //     map->AllOcclusionZone[3].angles[3].y = -30;
+        map->AllOcclusionZone[3].angles[3].x = 38;
+        map->AllOcclusionZone[3].angles[3].y = -12;
 
-    //     ///////////////////////////////////////////////////
+        ///////////////////////////////////////////////////
 
-    //     map->AllOcclusionZone[4].angles[0].x = 15;
-    //     map->AllOcclusionZone[4].angles[0].y = -16;
+        map->AllOcclusionZone[4].angles[0].x = 54;
+        map->AllOcclusionZone[4].angles[0].y = 60;
 
-    //     map->AllOcclusionZone[4].angles[1].x = -47;
-    //     map->AllOcclusionZone[4].angles[1].y = -16;
+        map->AllOcclusionZone[4].angles[1].x = -5;
+        map->AllOcclusionZone[4].angles[1].y = 60;
 
-    //     map->AllOcclusionZone[4].angles[2].x = -47;
-    //     map->AllOcclusionZone[4].angles[2].y = -60;
+        map->AllOcclusionZone[4].angles[2].x = -5;
+        map->AllOcclusionZone[4].angles[2].y = -13;
 
-    //     map->AllOcclusionZone[4].angles[3].x = 15;
-    //     map->AllOcclusionZone[4].angles[3].y = -60;
+        map->AllOcclusionZone[4].angles[3].x = 54;
+        map->AllOcclusionZone[4].angles[3].y = -13;
 
-    //     //shad
+        ///////////////////////////////////////////////////
 
-    //     map->AllOcclusionZone[5].angles[0].x = 15;
-    //     map->AllOcclusionZone[5].angles[0].y = -16;
+        map->AllOcclusionZone[5].angles[0].x = 52;
+        map->AllOcclusionZone[5].angles[0].y = 13;
 
-    //     map->AllOcclusionZone[5].angles[1].x = -47;
-    //     map->AllOcclusionZone[5].angles[1].y = -16;
+        map->AllOcclusionZone[5].angles[1].x = 3;
+        map->AllOcclusionZone[5].angles[1].y = 13;
 
-    //     map->AllOcclusionZone[5].angles[2].x = -47;
-    //     map->AllOcclusionZone[5].angles[2].y = -60;
+        map->AllOcclusionZone[5].angles[2].x = 3;
+        map->AllOcclusionZone[5].angles[2].y = -45;
 
-    //     map->AllOcclusionZone[5].angles[3].x = 15;
-    //     map->AllOcclusionZone[5].angles[3].y = -60;
+        map->AllOcclusionZone[5].angles[3].x = 52;
+        map->AllOcclusionZone[5].angles[3].y = -45;
 
-    // }
+    }
+    else if (mapToLoad == FYSNOW)
+    {
+        // All occlusion culling zones data (a zone will show one or multiple zones)
+        map->zonesCount = 2;
+        map->AllZones = malloc(map->zonesCount * sizeof(Zone));
+
+        map->AllZones[currentZone].ZoneCount = 2;
+        map->AllZones[currentZone].visibleMapPart[0] = 0;
+        map->AllZones[currentZone].visibleMapPart[1] = 1;
+        map->AllZones[currentZone].id = currentZone;
+
+        currentZone = 1;
+        map->AllZones[currentZone].ZoneCount = 2;
+        map->AllZones[currentZone].visibleMapPart[0] = 1;
+        map->AllZones[currentZone].visibleMapPart[1] = 0;
+        map->AllZones[currentZone].id = currentZone;
+
+        // Add occlusion culling triggers
+        CalculateTriggerColBox(0, 0, 60, 60, 0);
+        CalculateTriggerColBox(0, 0, 60, 60, 1);
+
+        map->occlusionZoneCount = 2;
+        map->AllOcclusionZone = malloc(map->occlusionZoneCount * sizeof(OcclusionZone));
+
+        // Add clipping zones
+        ///////////////////////////////////////////////////// Y (Unity Z) Most be inverted and zone 1 and 0 info most be switched
+
+        map->AllOcclusionZone[0].angles[0].x = 30;
+        map->AllOcclusionZone[0].angles[0].y = 5;
+
+        map->AllOcclusionZone[0].angles[1].x = -30;
+        map->AllOcclusionZone[0].angles[1].y = 5;
+
+        map->AllOcclusionZone[0].angles[2].x = -30;
+        map->AllOcclusionZone[0].angles[2].y = -30;
+
+        map->AllOcclusionZone[0].angles[3].x = 30;
+        map->AllOcclusionZone[0].angles[3].y = -30;
+
+        ///////////
+
+        map->AllOcclusionZone[1].angles[0].x = 30;
+        map->AllOcclusionZone[1].angles[0].y = 30;
+
+        map->AllOcclusionZone[1].angles[1].x = -30;
+        map->AllOcclusionZone[1].angles[1].y = 25;
+
+        map->AllOcclusionZone[1].angles[2].x = -30;
+        map->AllOcclusionZone[1].angles[2].y = -5;
+
+        map->AllOcclusionZone[1].angles[3].x = 30;
+        map->AllOcclusionZone[1].angles[3].y = -5;
+    }
     
 
     // Convert map limits to a int format
@@ -1345,109 +1523,312 @@ void LoadAllCollisions(int mapToLoad)
         CreateWall(17.04, 0.521, -20.21, 1.7, 1, 1.68, 0, 40);
         CreateWall(17.979, 1.539, -20.21, 0.2, 1, 1.68, 0, 41);
     }
-    // else if (mapToLoad == MIRAGEA)
-    // {
-    //     mapToSet = MIRAGEA;
-    //     allMaps[mapToLoad].CollisionsCount = 97;
-    //     allMaps[mapToLoad].AllWallsCollisions = malloc(allMaps[mapToLoad].CollisionsCount * sizeof(Wall));
-    //     CreateWall(-17.82, -1.47, -31.56, 57.7, 1, 30.9, 4, 0);
-    //     CreateWall(17.065, 0.98, 40.86, 14.37, 1, 4.7, 0, 1);
-    //     CreateWall(19.19, 3.57, 43.22, 1.3, 9, 20.3, 0, 2);
-    //     CreateWall(12.78, 4.03, 31.67, 36.8, 10, 14.58, 0, 3);
-    //     CreateWall(16.8, 6.54, 49.281, 14, 10, 1, 0, 4);
-    //     CreateWall(-4.15, 6.75, 47.76, 29.8, 10, 3, 0, 5);
-    //     CreateWall(-8, -1.47, 31.2, 38, 1, 25, 0, 6);
-    //     CreateWall(1.73, 0.98, 46.17, 39.83, 1, 6, 0, 7);
-    //     CreateWall(-11.3, 3.4, -36.69, 25.63, 8.35, 8.32, 4, 8);
-    //     CreateWall(-39.89, 3.4, -36.91, 15.38, 8.35, 8.72, 4, 9);
-    //     CreateWall(-28.1, 3.4, -41.77, 11.7, 8.35, 1, 4, 10);
-    //     CreateWall(-3.23, -0.4, 43.61, 24.14, 1, 1, 0, 11);
-    //     CreateWall(-9.7, 5.25, 12.93, 11.5, 7.5, 23, 3, 12);
-    //     CreateWall(-4.72, 1.8, 43.31, 14.8, 0.6, 0.2, 0, 13);
-    //     CreateWall(-0.65, 0.98, -21.91, 20.54, 1, 9.3, 4, 14);
-    //     CreateWall(-28.59, 0.98, 0.21, 32.47, 1, 33, 3, 15);
-    //     CreateWall(-14.87, 0.98, -16.93, 10.46, 1, 11.8, 4, 16);
-    //     CreateWall(-40.38, 0.98, -14.825, 8.2, 1, 3.12, 3, 17);
-    //     CreateWall(-21.15, 0.98, 15.125, 6.5, 1, 3.12, 3, 18);
-    //     CreateWall(-16.89, 0.98, 20.15, 2, 1, 8, 0, 19);
-    //     CreateWall(-24.51, 3.75, 24.38, 1, 9.5, 17.16, 0, 20);
-    //     CreateWall(-15.35, 2.44, 20.14, 1, 6.71, 7.9, 0, 21);
-    //     CreateWall(-22.345, 3.75, 16.612, 3.16, 4.4, 0.82, 3, 22);
-    //     CreateWall(-26.09, 3.95, 14.03, 4.1, 5.23, 2.6, 3, 23);
-    //     CreateWall(-31.09, 5.22, 15.79, 10.04, 7.2, 0.82, 3, 24);
-    //     CreateWall(-39.49, 5.22, 10.11, 8, 7.2, 3, 3, 25);
-    //     CreateWall(-13.4, 3.69, 38.16, 2.46, 9, 10.5, 0, 26);
-    //     CreateWall(-20.82, 3.69, 33.19, 17, 9, 1.65, 0, 27);
-    //     CreateWall(-13.78, 3.69, 24.59, 11.5, 9, 0.85, 0, 28);
-    //     CreateWall(-7.09, 3.69, 26.93, 2, 9, 3.5, 0, 29);
-    //     CreateWall(-11.19, 0.8200001, 35.65, 1.9, 3.5, 10.34, 0, 30);
-    //     CreateWall(-17.5, 0.8200001, 31.41, 14.02, 3.5, 1.9, 0, 31);
-    //     CreateWall(-11.3, -0.325, 42.324, 1.7, 1.7, 1.7, 0, 32);
-    //     CreateWall(-11.714, 1.215, 42.212, 0.9, 0.9, 0.9, 0, 33);
-    //     CreateWall(-8.915, 0.691, 26.53, 1.6, 3.2, 3.5, 0, 34);
-    //     CreateWall(-19.96, 0.98, 38.72, 11.28, 1, 9.8, 0, 35);
-    //     CreateWall(-30.115, 3.436, 36.26, 10.67, 1, 8, 0, 36);
-    //     CreateWall(-38.445, 4.51, 35.66, 7.67, 0.5, 6.5, 0, 37);
-    //     CreateWall(-31.81, 4.51, 24.385, 4.9, 0.5, 13.67, 0, 38);
-    //     CreateWall(-37.69, 4.51, 21.85, 6.83, 0.5, 22, 0, 39);
-    //     CreateWall(-32.78, 4.61, 39.3, 17, 9, 1, 0, 40);
-    //     CreateWall(-21.18, 4.61, 41.99, 6.61, 7, 9.5, 0, 41);
-    //     CreateWall(-41.29, 6.26, 25.11, 1, 4, 28, 0, 42);
-    //     CreateWall(-28.87, 6.26, 25.41, 1, 4, 17, 0, 43);
-    //     CreateWall(-33.468, 6.29, 17.14, 7.94, 3, 1, 0, 44);
-    //     CreateWall(-35.086, 6.29, 21.727, 1.65, 3, 1.65, 0, 45);
-    //     CreateWall(-35.086, 6.29, 26.641, 1.65, 3, 1.65, 0, 46);
-    //     CreateWall(-35.086, 6.29, 31.549, 1.65, 3, 1.65, 0, 47);
-    //     CreateWall(-39.982, 5.576, 26.847, 1.64, 1.64, 1.64, 0, 48);
-    //     CreateWall(-12.594, 3.061, 43.366, 0.8, 3, 0.5, 0, 49);
-    //     CreateWall(-35.689, 6.44, 15.55, 3.7, 3.2, 3.62, 0, 50);
-    //     CreateWall(-33.26, 4.51, 12.58, 4.51, 0.5, 5.42, 3, 51);
-    //     CreateWall(-28.738, 4.51, 12.58, 1.21, 0.5, 5.42, 3, 52);
-    //     CreateWall(-30.179, 4.51, 12.008, 1.7, 0.5, 4.3, 3, 53);
-    //     CreateWall(-30.897, 4.87, 9.959, 5.48, 1, 0.2, 3, 54);
-    //     CreateWall(-27.318, 3.156, 11.701, 1.65, 3.2, 2, 3, 55);
-    //     CreateWall(-25.664, 2.116, 11.861, 1.63, 1.63, 1.63, 3, 56);
-    //     CreateWall(-16.262, 2.1, 6.187, 1.63, 1.63, 1.63, 3, 57);
-    //     CreateWall(-16.628, 3.585, 5.821, 0.9, 0.9, 0.9, 3, 58);
-    //     CreateWall(-18.72, 3.203, 6.179, 3.3, 3.1, 1.65, 3, 59);
-    //     CreateWall(-36.17, 2.169, 7.956, 1.4, 1.4, 1.4, 3, 60);
-    //     CreateWall(-34.356, 2.611, 8.981998, 2.3, 2.3, 2.3, 3, 61);
-    //     CreateWall(-38.774, 2.299, 4.519, 1.65, 1.65, 1.65, 3, 62);
-    //     CreateWall(-40.402, 2.299, 3.237, 1.65, 1.65, 1.65, 3, 63);
-    //     CreateWall(-33.245, 2.299, 2.704, 1.65, 1.65, 1.65, 3, 64);
-    //     CreateWall(-32.642, 2.299, -3.541, 1.65, 1.65, 1.65, 3, 65);
-    //     CreateWall(-33.642, 2.299, -5.189, 1.65, 1.65, 1.65, 3, 66);
-    //     CreateWall(-33.099, 3.955, -4.446, 1.65, 1.65, 1.65, 3, 67);
-    //     CreateWall(-32.842, 3.13, 4.333, 1.65, 3.3, 1.65, 3, 68);
-    //     CreateWall(-40.591, 2.83, -9.155001, 1.3, 2.56, 1.3, 3, 69);
-    //     CreateWall(-42.422, 2.117, -11.013, 1.65, 1.65, 1.65, 4, 70);
-    //     CreateWall(-36.725, 2.299, -11.007, 1.65, 1.65, 1.65, 3, 71);
-    //     CreateWall(-43.217, 4.99, -0.71, 4, 7, 19.01, 3, 72);
-    //     CreateWall(-27.72, 5.78, -17.95, 17.2, 13.7, 12.3, 4, 73);
-    //     CreateWall(-27.72, 4.61, -11.16, 16.5, 6.1, 3.6, 3, 74);
-    //     CreateWall(-45.46, 3.95, -20.26, 2, 10, 28, 4, 75);
-    //     CreateWall(-15.56, 4.61, 2.08, 5.55, 6.1, 6.6, 3, 76);
-    //     CreateWall(-26.026, 3.588, 12.247, 0.9, 0.9, 0.9, 3, 77);
-    //     CreateWall(-19.94, 3.12, -0.5700001, 3.3, 3.3, 3.3, 3, 78);
-    //     CreateWall(-19.96, 4.828, 22.224, 8.24, 1, 3.3, 0, 79);
-    //     CreateWall(-16.674, 2.609, -1.503, 2, 2.1, 0.6, 3, 80);
-    //     CreateWall(-14.214, 2.069, -1.503, 2, 1, 0.6, 3, 81);
-    //     CreateWall(-11.74, 4.99, -8.6, 1.72, 7, 18.8, 3, 82);
-    //     CreateWall(-13.44, 4.99, -12.846, 2, 7, 2.1, 3, 83);
-    //     CreateWall(-15.5, 4.03, -24.29, 10.8, 9.5, 4.6, 4, 84);
-    //     CreateWall(-28.73, 1.56, -25.04, 11.1, 5, 1.5, 4, 85);
-    //     CreateWall(-7.81, 3.4, -23.49, 5.2, 8.35, 1.2, 4, 86);
-    //     CreateWall(-0.986, 3.4, -23.49, 5.2, 8.35, 1.2, 4, 87);
-    //     CreateWall(-4.387, 7.54, -23.49, 1.5, 8.35, 1.2, 4, 88);
-    //     CreateWall(5.11, 5.04, -24.91, 7.66, 8.35, 17.99, 4, 89);
-    //     CreateWall(2.98, 3.96, -22.05, 12.33, 4, 1.65, 4, 90);
-    //     CreateWall(-0.1, 2.299, -20.42, 3.3, 1.65, 1.65, 4, 91);
-    //     CreateWall(-18.312, 2.313, -18.785, 1.65, 1.65, 3.3, 4, 92);
-    //     CreateWall(0.575, 0.98, -29.605, 2.67, 1, 6.1, 4, 93);
-    //     CreateWall(-0.87, 3.56, -16.362, 19.53, 7.43, 1.65, 4, 94);
-    //     CreateWall(-10.549, 4.74, -18.017, 0.9, 7.43, 1.65, 4, 95);
-    //     CreateWall(-10.549, 4.74, -22.095, 0.9, 7.43, 1.65, 4, 96);
-    // }
+    else if (mapToLoad == MIRAGE)
+    {
+        mapToSet = MIRAGE;
+        allMaps[mapToLoad].CollisionsCount = 213;
+        allMaps[mapToLoad].AllWallsCollisions = malloc(allMaps[mapToLoad].CollisionsCount * sizeof(Wall));
+        CreateWall(-12.42, -1.47, -14.61, 57.7, 1, 30.9, 2, 0);
+        CreateWall(22.3, 0.98, 61.10001, 14.7, 1, 11.6, 0, 1);
+        CreateWall(44.15, 3.57, 54.31001, 1.3, 9, 20.3, 4, 2);
+        CreateWall(18.18, 4.03, 48.62, 37, 10, 14.58, -1, 3);
+        CreateWall(22.2, 6.54, 66.231, 14, 10, 1, 0, 4);
+        CreateWall(1.25, 6.75, 64.71001, 29.8, 10, 3, 0, 5);
+        CreateWall(35.98, 4, 64.91, 16, 10, 3.52, 0, 6);
+        CreateWall(44.16, 4.17, 33.35, 1.25, 10, 17.7, 4, 7);
+        CreateWall(25.31, -4.13, 3.08, 32.1, 1, 30.1, -1, 8);
+        CreateWall(12.38, -1.47, 48.72001, 70, 1, 37.9, -1, 9);
+        CreateWall(0.7699995, 0.98, 62.22001, 29, 1, 4, 0, 10);
+        CreateWall(29.98, -0.58, 61.95001, 3.35, 0.92, 4, 0, 11);
+        CreateWall(-5.900001, 3.4, -19.74, 25.63, 8.35, 8.32, 2, 12);
+        CreateWall(-34.49, 3.4, -19.96, 15.38, 8.35, 8.72, 1, 13);
+        CreateWall(-22.7, 3.4, -24.82, 11.7, 8.35, 1, 2, 14);
+        CreateWall(17.325, 0.98, 36.9, 10.07, 1, 9.5, 4, 15);
+        CreateWall(8.77, 0.98, 37.045, 7.4, 1, 9.17, 4, 16);
+        CreateWall(2.22, 0.98, 31.33, 5.7, 1, 26.15, 4, 17);
+        CreateWall(2.17, -0.4, 60.56001, 24.14, 1, 1, 0, 18);
+        CreateWall(15.31, 0.98, 18.23, 5.7, 1, 27.8, 4, 19);
+        CreateWall(10.61, -1.47, 17.78, 12.5, 1, 28.15, 3, 20);
+        CreateWall(8.059999, -1.47, 2.105, 5.94, 1, 2.54, 3, 21);
+        CreateWall(25.12, -3.46, 0.3279991, 27.16, 4.82, 1, 3, 22);
+        CreateWall(22.71, -2.73, 6.25, 23.1, 3.28, 5.41, 3, 23);
+        CreateWall(14.379, 3.73, 0.01499939, 4.24, 8.97, 0.5, 3, 24);
+        CreateWall(0.5499997, 3.73, 0.01499939, 14, 8.97, 0.5, 3, 25);
+        CreateWall(9.9, 0.702, 0.01499939, 4.67, 3.2, 0.5, 3, 26);
+        CreateWall(29.2, 3.4, 40.15001, 14.7, 8.7, 3.1, 4, 27);
+        CreateWall(31.19, 3.87, 28.22, 26.96, 8.7, 7.85, 4, 28);
+        CreateWall(9.9, 6.68, 0.01499939, 4.67, 3.2, 0.5, 3, 29);
+        CreateWall(-4.3, 5.25, 29.88, 11.5, 7.5, 23, -1, 30);
+        CreateWall(4.69, 2.92, 15.56, 0.8, 7.5, 5.3, 3, 31);
+        CreateWall(4.69, 2.92, 4.77, 0.8, 7.5, 8.9, 3, 32);
+        CreateWall(-0.5700002, 3.51, 16.689, 11.2, 9.26, 3.1, 3, 33);
+        CreateWall(4.69, 5.16, 11.11, 0.8, 3.57, 3.41, 3, 34);
+        CreateWall(25.34, 5.16, 20.76, 16.1, 6.8, 22.4, -1, 35);
+        CreateWall(12.562, 1.81, 15.38, 0.2, 0.65, 22, 3, 36);
+        CreateWall(14.63, 1.81, 4.406, 3.8, 0.65, 0.2, 3, 37);
+        CreateWall(0.6799998, 1.8, 60.26001, 14.8, 0.6, 0.2, 0, 38);
+        CreateWall(25.94, 0.98, -15.18999, 15.7, 1, 50.5, 5, 39);
+        CreateWall(41.58, 0.98, -21.73, 15.7, 1, 39.6, 5, 40);
+        CreateWall(11.8, 0.98, -20, 15, 1, 39.6, -1, 41);
+        CreateWall(5.599999, 0.98, -4.960003, 20.54, 1, 9.3, 2, 42);
+        CreateWall(-23.19, 0.98, 17.16, 32.47, 1, 33, 1, 43);
+        CreateWall(-9.47, 0.98, 0.02000046, 10.46, 1, 11.8, 2, 44);
+        CreateWall(-34.98, 0.98, 2.124999, 8.2, 1, 3.12, 1, 45);
+        CreateWall(-15.75, 0.98, 32.075, 6.5, 1, 3.12, 1, 46);
+        CreateWall(-11.49, 0.98, 37.1, 2, 1, 8, 1, 47);
+        CreateWall(-21.35, 3.75, 41.33, 5.5, 9.5, 17.16, 1, 48);
+        CreateWall(-9.950001, 2.44, 37.09, 1, 6.71, 7.9, 1, 49);
+        CreateWall(-16.945, 3.75, 33.562, 3.16, 4.4, 0.82, 1, 50);
+        CreateWall(-20.69, 3.95, 30.98, 4.1, 5.23, 2.6, 1, 51);
+        CreateWall(-25.68, 5.22, 33.49, 13, 7.2, 2.4, 1, 52);
+        CreateWall(-34.09, 5.22, 27.06, 8, 7.2, 3, -1, 53);
+        CreateWall(-8, 3.69, 55.11, 2.46, 9, 10.5, 0, 54);
+        CreateWall(-15.42, 3.69, 50.14, 17, 9, 1.65, 0, 55);
+        CreateWall(-19.39, 1.82, 41.54, 2.37, 5.5, 0.85, -1, 56);
+        CreateWall(-8.38, 3.69, 41.54, 11.5, 9, 0.85, -1, 57);
+        CreateWall(-1.690001, 3.69, 43.88, 2, 9, 3.5, 0, 58);
+        CreateWall(-5.79, 0.8200001, 52.6, 1.9, 3.5, 10.34, 0, 59);
+        CreateWall(-12.1, 0.8200001, 48.36, 14.02, 3.5, 1.9, 0, 60);
+        CreateWall(-5.900001, -0.325, 59.27401, 1.7, 1.7, 1.7, 0, 61);
+        CreateWall(-6.314, 1.215, 59.16201, 0.9, 0.9, 0.9, 0, 62);
+        CreateWall(-3.515, 0.691, 43.48, 1.6, 3.2, 3.5, 0, 63);
+        CreateWall(-14.56, 0.98, 55.67, 11.28, 1, 9.8, 0, 64);
+        CreateWall(-24.715, 3.436, 53.21, 10.67, 1, 8, 0, 65);
+        CreateWall(-33.045, 4.51, 52.61, 7.67, 0.5, 6.5, 0, 66);
+        CreateWall(-26.41, 4.51, 41.335, 4.9, 0.5, 13.67, 0, 67);
+        CreateWall(-32.29, 4.51, 38.8, 6.83, 0.5, 22, 0, 68);
+        CreateWall(-27.38, 4.61, 56.25, 17, 9, 1, 0, 69);
+        CreateWall(-15.78, 4.61, 58.94001, 6.61, 7, 9.5, 0, 70);
+        CreateWall(-35.89, 6.26, 42.06, 1, 4, 28, 0, 71);
+        CreateWall(-29.686, 6.29, 38.677, 1.65, 3, 1.65, 0, 72);
+        CreateWall(-29.686, 6.29, 43.591, 1.65, 3, 1.65, 0, 73);
+        CreateWall(-29.686, 6.29, 48.499, 1.65, 3, 1.65, 0, 74);
+        CreateWall(-34.582, 5.576, 43.797, 1.64, 1.64, 1.64, 0, 75);
+        CreateWall(-7.194, 3.061, 60.31601, 0.8, 3, 0.5, 0, 76);
+        CreateWall(41.915, -0.346, 48.9, 3.28, 1.64, 1.64, 4, 77);
+        CreateWall(42.54, 0.67, 44.82, 4.55, 3.28, 6.56, 4, 78);
+        CreateWall(43.087, 1.129, 48.557, 0.9, 0.9, 0.9, 4, 79);
+        CreateWall(-30.289, 6.44, 32.5, 3.7, 3.2, 3.62, 1, 80);
+        CreateWall(-27.86, 4.51, 29.53, 4.51, 0.5, 5.42, 1, 81);
+        CreateWall(-23.338, 4.51, 29.53, 1.21, 0.5, 5.42, 1, 82);
+        CreateWall(-24.779, 4.51, 28.958, 1.7, 0.5, 4.3, 1, 83);
+        CreateWall(-25.497, 4.87, 26.909, 5.48, 1, 0.2, 1, 84);
+        CreateWall(-21.918, 3.18, 28.608, 1.65, 3.2, 2.1, 1, 85);
+        CreateWall(-20.264, 2.116, 28.811, 1.63, 1.63, 1.63, 1, 86);
+        CreateWall(-10.862, 2.1, 23.137, 1.63, 1.63, 1.63, 1, 87);
+        CreateWall(-11.228, 3.585, 22.771, 0.9, 0.9, 0.9, 1, 88);
+        CreateWall(-13.32, 3.203, 23.129, 3.3, 3.1, 1.65, 1, 89);
+        CreateWall(-30.77, 2.169, 24.906, 1.4, 1.4, 1.4, 1, 90);
+        CreateWall(-28.956, 2.611, 25.932, 2.3, 2.3, 2.3, 1, 91);
+        CreateWall(-33.374, 2.299, 21.469, 1.65, 1.65, 1.65, 1, 92);
+        CreateWall(-35.002, 2.299, 20.187, 1.65, 1.65, 1.65, 1, 93);
+        CreateWall(-27.845, 2.299, 19.654, 1.65, 1.65, 1.65, 1, 94);
+        CreateWall(-27.242, 2.299, 13.409, 1.65, 1.65, 1.65, 1, 95);
+        CreateWall(-28.242, 2.299, 11.761, 1.65, 1.65, 1.65, 1, 96);
+        CreateWall(-27.442, 3.13, 21.283, 1.65, 3.3, 1.65, 1, 97);
+        CreateWall(-35.191, 2.83, 7.795, 1.3, 2.56, 1.3, 1, 98);
+        CreateWall(-37.022, 2.117, 5.937, 1.65, 1.65, 1.65, 1, 99);
+        CreateWall(-31.325, 2.299, 5.943001, 1.65, 1.65, 1.65, 1, 100);
+        CreateWall(-37.817, 4.99, 16.24, 4, 7, 19.01, 1, 101);
+        CreateWall(-22.32, 5.78, -1, 17.2, 13.7, 12.3, -1, 102);
+        CreateWall(-22.32, 4.61, 5.790001, 16.5, 6.1, 3.6, 1, 103);
+        CreateWall(-40.06, 3.95, -3.310001, 2, 10, 28, 1, 104);
+        CreateWall(-10.16, 4.61, 19.03, 5.55, 6.1, 6.6, 1, 105);
+        CreateWall(-20.626, 3.588, 29.197, 0.9, 0.9, 0.9, 1, 106);
+        CreateWall(-14.54, 3.12, 16.38, 3.3, 3.3, 3.3, 1, 107);
+        CreateWall(-14.56, 4.54, 38.73, 8.24, 1, 4.4, 1, 108);
+        CreateWall(-11.274, 2.609, 15.447, 2, 2.1, 0.6, 1, 109);
+        CreateWall(-8.814, 2.069, 15.447, 2, 1, 0.6, 1, 110);
+        CreateWall(-6.77, 4.99, 15.79, 0.8, 7, 5.78, 1, 111);
+        CreateWall(-6.77, 4.99, 4.09, 0.8, 7, 10.29, 1, 112);
+        CreateWall(-8.04, 4.99, 4.104, 2, 7, 2.1, 1, 113);
+        CreateWall(-10.1, 4.03, -7.34, 10.8, 9.5, 4.6, -1, 114);
+        CreateWall(-1.05, 3.46, 6.48, 11, 5, 1, 1, 115);
+        CreateWall(-1.05, 0.3099999, 8.124001, 11.05, 2.36, 2.17, 1, 116);
+        CreateWall(-1.05, 0.3099999, 13.99, 11.05, 2.36, 2.17, 1, 117);
+        CreateWall(2.594, 2.301, 14.318, 3.2, 1.6, 1.6, 1, 118);
+        CreateWall(-2.077001, 2.707, 7.582001, 1.2, 2.4, 1.2, 1, 119);
+        CreateWall(0.8699994, 4.61, 11.06, 6.6, 1, 7.19, 1, 120);
+        CreateWall(-23.33, 1.56, -8.09, 11.1, 5, 1.5, 2, 121);
+        CreateWall(-2.41, 3.4, -6.540001, 5.2, 8.35, 1.2, 2, 122);
+        CreateWall(4.414, 3.4, -6.540001, 5.2, 8.35, 1.2, 2, 123);
+        CreateWall(1.013, 7.54, -6.540001, 1.5, 8.35, 1.2, 2, 124);
+        CreateWall(10.51, 5.04, -9.420002, 7.66, 8.35, 4.5, 2, 125);
+        CreateWall(7.137, 5.04, -23.56, 0.9, 8.35, 18.95, 2, 126);
+        CreateWall(8.379999, 3.96, -5.100002, 12.33, 4, 1.65, 3, 127);
+        CreateWall(5.3, 2.299, -3.470001, 3.3, 1.65, 1.65, 3, 128);
+        CreateWall(13.673, 2.287, -3.470001, 1.65, 1.65, 1.65, 3, 129);
+        CreateWall(19.98, 3.053, -2.609999, 11, 2.6, 4.04, 3, 130);
+        CreateWall(20.618, 3.053, 0.6349983, 1.7, 2.6, 2.85, 3, 131);
+        CreateWall(14.802, 6.17, -0.5139999, 0.6, 3.75, 1.04, 3, 132);
+        CreateWall(14.802, 6.17, -3.653, 0.6, 3.75, 2, 3, 133);
+        CreateWall(14.802, 8.054, -1.838001, 0.6, 3.75, 1.9, 3, 134);
+        CreateWall(21.1, 4.7, -6.920002, 12.14, 8.3, 7.88, -1, 135);
+        CreateWall(26.36, 5.07, -3.260002, 3.3, 7.33, 15.2, -1, 136);
+        CreateWall(19.592, 5.07, 3.944, 5.8, 7, 1, 3, 137);
+        CreateWall(23.6, 7.24, 3.944, 3, 4, 1, 3, 138);
+        CreateWall(26.368, 3.116, 5.129, 1.65, 3.3, 1.65, 3, 139);
+        CreateWall(23.911, 2.296, 0.2069969, 1.65, 1.65, 1.65, 3, 140);
+        CreateWall(24.269, 1.947, 1.502001, 0.9, 0.9, 0.9, 3, 141);
+        CreateWall(6.058, -0.02499998, 1.160999, 1.75, 1.75, 1.75, 3, 142);
+        CreateWall(5.57, -0.499, 2.504999, 0.9, 0.9, 0.9, 3, 143);
+        CreateWall(2.24, 3.116, 30.497, 1.65, 3.3, 1.65, 4, 144);
+        CreateWall(8.98, 3.116, 35.598, 5.75, 3.3, 3.35, 4, 145);
+        CreateWall(34.025, 3.809, 10.64, 0.65, 8.7, 27.93, -1, 146);
+        CreateWall(38.05, 3.809, -3.07, 8.38, 8.7, 0.9, -1, 147);
+        CreateWall(41.1, 3.809, -6.77, 2.56, 8.7, 8.2, -1, 148);
+        CreateWall(33.95, 5.72, -9.193001, 2.1, 8.7, 3.38, 5, 149);
+        CreateWall(46.48, 0.67, 34.4, 4.55, 3.28, 22.2, 4, 150);
+        CreateWall(46.63, 3.24, 17.095, 3.7, 1, 13.81, 4, 151);
+        CreateWall(36.37, 3.24, 21.615, 4.1, 1, 5.75, 4, 152);
+        CreateWall(41.61, 3.24, 10.83, 6.35, 1, 27.4, 4, 153);
+        CreateWall(45.19, 3.24, -3.550003, 6.35, 1, 13.31, 4, 154);
+        CreateWall(36.46, 3.24, 0.009998322, 4.59, 1, 6.3, 4, 155);
+        CreateWall(45.25, 4.06, -17.025, 5.5, 1, 16.67, 5, 156);
+        CreateWall(48.92, 4.91, 30.26, 1, 7, 29.9, 4, 157);
+        CreateWall(46.62, 5.777, 45.29, 4.4, 7, 1, 4, 158);
+        CreateWall(45.41, 5.777, 9.230001, 7.09, 7, 13.2, 4, 159);
+        CreateWall(36.47, 6.41, 6.048, 4.38, 7, 6.8, 4, 160);
+        CreateWall(38.93, 0.1, 9.450001, 1, 6.66, 18.1, 4, 161);
+        CreateWall(38.54, 4.22, 13.461, 0.2, 0.65, 8.3, 4, 162);
+        CreateWall(42.711, 4.96, -10.65, 1.3, 7.65, 1.5, 5, 163);
+        CreateWall(46.4, 6, -10.65, 1.3, 4, 1.5, 5, 164);
+        CreateWall(46.806, 7.76, -21.457, 1.6, 6.45, 2.51, 5, 165);
+        CreateWall(42.964, 7.76, -20.861, 1.2, 6.45, 1.25, 5, 166);
+        CreateWall(42.54, 8.3, -19.65, 0.5, 6.45, 1.25, 5, 167);
+        CreateWall(42.54, 8.3, -15.737, 0.5, 6.45, 1.63, 5, 168);
+        CreateWall(42.527, 3.36, -18.04, 0.5, 3.6, 15, 5, 169);
+        CreateWall(47.27, 5.777, -7.75, 1, 7, 25.6, 5, 170);
+        CreateWall(48.11, 4.73, -27.98, 1, 7, 13.2, 5, 171);
+        CreateWall(42.54, 8.3, -11.659, 0.5, 6.45, 1.63, 5, 172);
+        CreateWall(42.54, 6.406, -14.189, 0.2, 2.5, 0.4, 5, 173);
+        CreateWall(42.54, 6.406, -13.241, 0.2, 2.5, 0.4, 5, 174);
+        CreateWall(45.08, 3.28, -25.463, 5.4, 3.81, 0.2, 5, 175);
+        CreateWall(16.09, 5, -14.27, 4, 7.29, 7.04, 5, 176);
+        CreateWall(16.08, 5, -28.02, 4, 7.29, 4.1, 5, 177);
+        CreateWall(17.82, 5, -36.90999, 20.46, 7.29, 8, 5, 178);
+        CreateWall(8.368999, 2.969, -22.93, 1.65, 3.5, 1.65, 5, 179);
+        CreateWall(13.11, 2.3, -15.993, 2.3, 1.65, 1.65, 5, 180);
+        CreateWall(16.94, 2.727, -24.733, 2.65, 2.65, 2.65, 5, 181);
+        CreateWall(18.594, 4.91, -26.06, 0.85, 7, 8.4, 5, 182);
+        CreateWall(18.594, 4.91, -15.524, 0.85, 7, 9.42, 5, 183);
+        CreateWall(18.594, 2.007, -21.064, 0.85, 1, 2, 5, 184);
+        CreateWall(18.594, 5.067, -21.064, 0.85, 1, 2, 5, 185);
+        CreateWall(34.1, 3.22, -40.77999, 13.32, 7, 1, 5, 186);
+        CreateWall(45.81, 4.94, -37.86, 12, 7, 9.88, 5, 187);
+        CreateWall(32.32, 6.15, -24.49, 12, 2, 11, 5, 188);
+        CreateWall(27.085, 2.302, -11.656, 1.65, 1.65, 1.65, 5, 189);
+        CreateWall(33.529, 2.302, -35.387, 3, 1.65, 1.65, 5, 190);
+        CreateWall(43.968, 3.02, -30.99, 3.3, 3.5, 4.68, 5, 191);
+        CreateWall(41.516, 2.525, -32.107, 1.65, 1.65, 1.65, 5, 192);
+        CreateWall(40.226, 1.955, -32.455, 0.9, 0.9, 0.9, 5, 193);
+        CreateWall(36.188, 2.12, -21.067, 1.65, 1.65, 1.65, 5, 194);
+        CreateWall(29.229, 2.307, -21.067, 3.3, 1.65, 1.65, 5, 195);
+        CreateWall(28.416, 2.307, -22.702, 1.65, 1.65, 1.65, 5, 196);
+        CreateWall(36.188, 3.114, -28, 1.65, 3.3, 1.65, 5, 197);
+        CreateWall(37.41, 3.57, -28.298, 0.9, 4.5, 2.6, 5, 198);
+        CreateWall(37.41, 3.57, -20.783, 0.9, 4.5, 2.6, 5, 199);
+        CreateWall(36.262, 3.57, -19.82, 3, 4.5, 0.9, 5, 200);
+        CreateWall(28.353, 3.57, -19.82, 3, 4.5, 0.9, 5, 201);
+        CreateWall(28.353, 3.57, -29.249, 3, 4.5, 0.9, 5, 202);
+        CreateWall(36.265, 3.57, -29.249, 3, 4.5, 0.9, 5, 203);
+        CreateWall(27.189, 3.57, -28.298, 0.9, 4.5, 2.6, 5, 204);
+        CreateWall(27.189, 3.57, -20.776, 0.9, 4.5, 2.6, 5, 205);
+        CreateWall(17.86, 4.5, 1.73, 4.03, 8.6, 4.67, 3, 206);
+        CreateWall(-12.912, 2.313, -1.835003, 1.65, 1.65, 3.3, 2, 207);
+        CreateWall(-9.027, 0.98, 11.049, 4.67, 1, 3.7, 1, 208);
+        CreateWall(5.974999, 0.98, -12.655, 2.67, 1, 6.1, 2, 209);
+        CreateWall(12.8, 5.86, -22.05, 10, 1, 22, 5, 210);
+        CreateWall(-5.42, 3.73, -0.2299995, 1.4, 8.97, 3.27, 3, 211);
+        CreateWall(-5.42, 3.73, -5.299999, 1.4, 8.97, 2, 3, 212);
+    }
+    else if (mapToLoad == FYSNOW)
+    {
+        mapToSet = FYSNOW;
+        allMaps[mapToLoad].CollisionsCount = 81;
+        allMaps[mapToLoad].AllWallsCollisions = malloc(allMaps[mapToLoad].CollisionsCount * sizeof(Wall));
+        CreateWall(-0.1639996, -1.6, 0.3489971, 62, 1, 62, 0, 0);
+        CreateWall(-0.1639996, 1.13, -28.53, 57, 7, 1, 0, 1);
+        CreateWall(-0.1639996, 1.13, 28.53, 57, 7, 1, 0, 2);
+        CreateWall(28.51, 1.13, -0.11, 1, 7, 57, 0, 3);
+        CreateWall(-28.53, 1.13, -0.11, 1, 7, 57, 0, 4);
+        CreateWall(-7.48, 1.13, 7.49, 10.6, 7, 7, 0, 5);
+        CreateWall(-7.48, 1.13, 7.49, 7, 7, 10.6, 0, 6);
+        CreateWall(7.49, 1.13, 7.49, 10.6, 7, 7, 0, 7);
+        CreateWall(7.489999, 1.13, 7.49, 7, 7, 10.6, 0, 8);
+        CreateWall(-7.48, 1.13, -7.489999, 10.6, 7, 7, 0, 9);
+        CreateWall(-7.48, 1.13, -7.489999, 7, 7, 10.6, 0, 10);
+        CreateWall(7.49, 1.13, -7.489999, 10.6, 7, 7, 0, 11);
+        CreateWall(7.489999, 1.13, -7.49, 7, 7, 10.6, 0, 12);
+        CreateWall(27.4, 1.13, -15.92, 2, 7, 1.9, 0, 13);
+        CreateWall(27.4, 1.13, -8.9, 2, 7, 1.9, 0, 14);
+        CreateWall(27.4, 1.13, 8.9, 2, 7, 1.9, 0, 15);
+        CreateWall(27.4, 1.13, 15.91, 2, 7, 1.9, 0, 16);
+        CreateWall(-27.46, 1.13, -15.92, 2, 7, 1.9, 0, 17);
+        CreateWall(-27.46, 1.13, -8.9, 2, 7, 1.9, 0, 18);
+        CreateWall(-27.46, 1.13, 8.9, 2, 7, 1.9, 0, 19);
+        CreateWall(-27.46, 1.13, 15.91, 2, 7, 1.9, 0, 20);
+        CreateWall(-27.45, 1.03, 0.02, 1.6, 5.33, 0.8, 0, 21);
+        CreateWall(-25.84, 0.26, 0.02, 1.6, 5.33, 0.8, 0, 22);
+        CreateWall(-23.147, -0.14, 0.02, 3.8, 4, 0.8, 0, 23);
+        CreateWall(-20.923, -1.59, 0.02, 0.7, 4, 0.8, 0, 24);
+        CreateWall(-27.82, -0.562, 0.02, 2, 1, 7, 0, 25);
+        CreateWall(-26.31, -0.562, 0.02, 1, 1, 4.5, 0, 26);
+        CreateWall(-25.313, -0.562, 0.02, 1, 1, 2.5, 0, 27);
+        CreateWall(27.34, 1.03, 0.02, 1.6, 5.33, 0.8, 0, 28);
+        CreateWall(25.75, 0.26, 0.02, 1.6, 5.33, 0.8, 0, 29);
+        CreateWall(23.06, -0.14, 0.02, 3.8, 4, 0.8, 0, 30);
+        CreateWall(20.9, -1.59, 0.02, 0.7, 4, 0.8, 0, 31);
+        CreateWall(28.01, -0.562, 0.02, 2, 1, 7, 0, 32);
+        CreateWall(26.52, -0.562, 0.02, 1, 1, 4.5, 0, 33);
+        CreateWall(25.51, -0.562, 0.02, 1, 1, 2.5, 0, 34);
+        CreateWall(14.25, -0.21, 10.44, 3.8, 4, 0.8, 0, 35);
+        CreateWall(16.492, -1.6, 10.44, 0.7, 4, 0.8, 0, 36);
+        CreateWall(-14.23, -0.21, 10.44, 3.8, 4, 0.8, 0, 37);
+        CreateWall(-16.48, -1.6, 10.44, 0.7, 4, 0.8, 0, 38);
+        CreateWall(-14.23, -0.21, -10.42, 3.8, 4, 0.8, 0, 39);
+        CreateWall(-16.48, -1.6, -10.42, 0.7, 4, 0.8, 0, 40);
+        CreateWall(14.26, -0.21, -10.42, 3.8, 4, 0.8, 0, 41);
+        CreateWall(16.497, -1.6, -10.42, 0.7, 4, 0.8, 0, 42);
+        CreateWall(13.456, -1.17, -9.224, 1.6, 3, 1.6, 0, 43);
+        CreateWall(13.456, -1.17, 9.22, 1.6, 3, 1.6, 0, 44);
+        CreateWall(-13.47, -1.17, -9.224, 1.6, 3, 1.6, 0, 45);
+        CreateWall(-13.47, -1.17, 9.22, 1.6, 3, 1.6, 0, 46);
+        CreateWall(-10.98, 1.13, 10.91, 2, 7, 2, 0, 47);
+        CreateWall(-4.01, 1.13, 10.91, 2, 7, 2, 0, 48);
+        CreateWall(-10.98, 1.13, 3.97, 2, 7, 2, 0, 49);
+        CreateWall(-4.01, 1.13, 3.97, 2, 7, 2, 0, 50);
+        CreateWall(-10.98, 1.13, -4.030001, 2, 7, 2, 0, 51);
+        CreateWall(-4.01, 1.13, -4.030001, 2, 7, 2, 0, 52);
+        CreateWall(-10.98, 1.13, -10.97, 2, 7, 2, 0, 53);
+        CreateWall(-4.01, 1.13, -10.97, 2, 7, 2, 0, 54);
+        CreateWall(4, 1.13, 10.91, 2, 7, 2, 0, 55);
+        CreateWall(10.97, 1.13, 10.91, 2, 7, 2, 0, 56);
+        CreateWall(4, 1.13, 3.97, 2, 7, 2, 0, 57);
+        CreateWall(10.97, 1.13, 3.97, 2, 7, 2, 0, 58);
+        CreateWall(4, 1.13, -4.030001, 2, 7, 2, 0, 59);
+        CreateWall(10.97, 1.13, -4.030001, 2, 7, 2, 0, 60);
+        CreateWall(4, 1.13, -10.97, 2, 7, 2, 0, 61);
+        CreateWall(10.97, 1.13, -10.97, 2, 7, 2, 0, 62);
+        CreateWall(27.85, 1.13, -27.85, 2, 7, 2, 0, 63);
+        CreateWall(-27.86, 1.13, -27.85, 2, 7, 2, 0, 64);
+        CreateWall(27.85, 1.13, 27.82, 2, 7, 2, 0, 65);
+        CreateWall(-27.86, 1.13, 27.82, 2, 7, 2, 0, 66);
+        CreateWall(0, 0.1160001, -24.9, 33.23, 4, 0.8, 0, 67);
+        CreateWall(-2.087, 2.7, -24.9, 3, 1.3, 0.8, 0, 68);
+        CreateWall(2.083, 2.7, -24.9, 3, 1.3, 0.8, 0, 69);
+        CreateWall(0, 3.991, -24.9, 6, 1.2, 0.8, 0, 70);
+        CreateWall(0, 0.1160001, 24.9, 33.23, 4, 0.8, 0, 71);
+        CreateWall(-2.087, 2.7, 24.9, 3, 1.3, 0.8, 0, 72);
+        CreateWall(2.083, 2.7, 24.9, 3, 1.3, 0.8, 0, 73);
+        CreateWall(0, 3.991, 24.9, 6, 1.2, 0.8, 0, 74);
+        CreateWall(0, -0.07300001, -26.67, 25.34, 1.9, 2.8, 0, 75);
+        CreateWall(0, -0.07300001, 26.67, 25.34, 1.9, 2.8, 0, 76);
+        CreateWall(-30, 2.3, 0, 2, 20, 62, 0, 77);
+        CreateWall(30, 2.3, 0, 2, 20, 62, 0, 78);
+        CreateWall(0, 2.3, -30, 62, 20, 2, 0, 79);
+        CreateWall(0, 2.3, 30, 62, 20, 2, 0, 80);
+    }
 }
 
 /**
@@ -1544,19 +1925,37 @@ void LoadAllStairs(int mapToLoad)
         CreateStairs(-18.23, -12.492, -21.078, -19.386, -0.073, 3.277, 1, 2);
         CreateStairs(12.25, 18.043, 19.73, 21.34, -0.07300002, 3.298, 3, 3);
     }
-    // else if (mapToLoad == MIRAGEA)
-    // {
-    //     mapToSet = MIRAGEA;
-    //     allMaps[mapToLoad].StairsCount = 7;
-    //     allMaps[mapToLoad].AllStairs = malloc(allMaps[mapToLoad].StairsCount * sizeof(Stairs));
-    //     CreateStairs(-0.3000029, 9.553, 38.49, 43.2, -0.043, 2.505, 3, 0);
-    //     CreateStairs(-24.41, -17.87301, 17.02, 24.2, -0.013, 2.419, 0, 1);
-    //     CreateStairs(-24.45, -19.562, 32.28, 40.28, 2.434, 4.89, 1, 2);
-    //     CreateStairs(-44.49, -36.315, -24.1, -16.711, -0.043, 2.426, 2, 3);
-    //     CreateStairs(-10.127, -1.075, -32.645, -26.56, -0.042, 2.495, 3, 4);
-    //     CreateStairs(-34.294, -32.68, 32.373, 38.91, 4.877, 5.707, 1, 5);
-    //     CreateStairs(-34.233, -29.37, 31.502, 33.01, 4.88, 5.697, 0, 6);
-    // }
+    else if (mapToLoad == MIRAGE)
+    {
+        mapToSet = MIRAGE;
+        allMaps[mapToLoad].StairsCount = 15;
+        allMaps[mapToLoad].AllStairs = malloc(allMaps[mapToLoad].StairsCount * sizeof(Stairs));
+        CreateStairs(5.106994, 12.457, 21.51, 32.18, -0.023, 2.451, 2, 0);
+        CreateStairs(29.619, 34.407, 60.013, 63.259, 0, 2.59, 1, 1);
+        CreateStairs(5.079997, 14.933, 55.58, 60.19, -0.043, 2.505, 3, 2);
+        CreateStairs(-19.032, -12.49501, 33.97, 41.15, -0.013, 2.419, 0, 3);
+        CreateStairs(-19.05, -14.162, 49.2, 57.2, 2.434, 4.89, 1, 4);
+        CreateStairs(44.789, 48.466, 24.324, 26.024, 3.236, 4.69, 0, 5);
+        CreateStairs(42.34, 46.824, -8.346, -5.818, 4.667, 5.49, 0, 6);
+        CreateStairs(-6.39, 4.279001, 9.27, 12.932, -0.041, 2.424, 1, 7);
+        CreateStairs(34.35999, 38.44, 4.536999, 18.47, -2.706, 4.698, 2, 8);
+        CreateStairs(11, 16, 0.5, 4, -2.673, 0.211, 1, 9);
+        CreateStairs(-39.085, -30.91, -7.11, 0.2790003, -0.043, 2.426, 2, 10);
+        CreateStairs(-4.763002, 4.289001, -15.655, -9.57, -0.042, 2.495, 3, 11);
+        CreateStairs(22.614, 31.271, 32.19, 41.61, -0.041, 2.498, 1, 12);
+        CreateStairs(-28.904, -27.29, 49.363, 55.9, 4.877, 5.707, 1, 13);
+        CreateStairs(-28.843, -23.98, 48.492, 50, 4.88, 5.697, 0, 14);
+    }
+    else if (mapToLoad == FYSNOW)
+    {
+        mapToSet = FYSNOW;
+        allMaps[mapToLoad].StairsCount = 4;
+        allMaps[mapToLoad].AllStairs = malloc(allMaps[mapToLoad].StairsCount * sizeof(Stairs));
+        CreateStairs(13.065, 16.494, 25.289, 28.067, -0.073, 1.849, 1, 0);
+        CreateStairs(-16.55, -13.06, -28.057, -25.284, -0.07300002, 1.875, 3, 1);
+        CreateStairs(13.066, 16.43, -28.064, -25.279, -0.073, 1.836, 1, 2);
+        CreateStairs(-16.36, -13.073, 25.28, 28.064, -0.07300002, 1.851, 3, 3);
+    }
 }
 
 /**
@@ -1569,7 +1968,7 @@ void LoadAllBombZones(int mapToLoad)
     if (mapToLoad == DUST2)
     {
         // Set the number of bomb zones
-        TwoSites = true;
+        TwoSites = 2;
         allMaps[mapToLoad].BombsTriggersCollisionsCount = 2;
         allMaps[mapToLoad].AllBombsTriggersCollisions = malloc(allMaps[mapToLoad].BombsTriggersCollisionsCount * sizeof(Site));
 
@@ -1581,7 +1980,7 @@ void LoadAllBombZones(int mapToLoad)
     else if (mapToLoad == TUTORIAL)
     {
         // Set the number of bomb zones
-        TwoSites = false;
+        TwoSites = 0;
         allMaps[mapToLoad].BombsTriggersCollisionsCount = 1;
         allMaps[mapToLoad].AllBombsTriggersCollisions = malloc(allMaps[mapToLoad].BombsTriggersCollisionsCount * sizeof(Site));
 
@@ -1591,7 +1990,7 @@ void LoadAllBombZones(int mapToLoad)
     else if (mapToLoad == DUST2_2x2)
     {
         // Set the number of bomb zones
-        TwoSites = false;
+        TwoSites = 1;
         allMaps[mapToLoad].BombsTriggersCollisionsCount = 1;
         allMaps[mapToLoad].AllBombsTriggersCollisions = malloc(allMaps[mapToLoad].BombsTriggersCollisionsCount * sizeof(Site));
 
@@ -1601,7 +2000,7 @@ void LoadAllBombZones(int mapToLoad)
     else if (mapToLoad == AIM_MAP)
     {
         // Set the number of bomb zones
-        TwoSites = false;
+        TwoSites = 0;
         allMaps[mapToLoad].BombsTriggersCollisionsCount = 1;
         allMaps[mapToLoad].AllBombsTriggersCollisions = malloc(allMaps[mapToLoad].BombsTriggersCollisionsCount * sizeof(Site));
 
@@ -1611,23 +2010,37 @@ void LoadAllBombZones(int mapToLoad)
     else if (mapToLoad == B2000)
     {
         // Set the number of bomb zones
-        TwoSites = false;
+        TwoSites = 0;
         allMaps[mapToLoad].BombsTriggersCollisionsCount = 1;
         allMaps[mapToLoad].AllBombsTriggersCollisions = malloc(allMaps[mapToLoad].BombsTriggersCollisionsCount * sizeof(Site));
 
         int nearWaypoints0[26] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25};
         SetBombZone(-1.76, -28.5, 4, 4, 0, 24, 26, nearWaypoints0); // A
     }
-    // else if (mapToLoad == MIRAGEA)
-    // {
-    //     // Set the number of bomb zones
-    //     TwoSites = false;
-    //     allMaps[mapToLoad].BombsTriggersCollisionsCount = 1;
-    //     allMaps[mapToLoad].AllBombsTriggersCollisions = malloc(allMaps[mapToLoad].BombsTriggersCollisionsCount * sizeof(Site));
+    else if (mapToLoad == MIRAGE)
+    {
+        // Set the number of bomb zones
+        TwoSites = 2;
+        allMaps[mapToLoad].BombsTriggersCollisionsCount = 2;
+        allMaps[mapToLoad].AllBombsTriggersCollisions = malloc(allMaps[mapToLoad].BombsTriggersCollisionsCount * sizeof(Site));
 
-    //     int nearWaypoints0[13] = {0,1,2,3,4,5,13,14,15,16,17,18,31};
-    //     SetBombZone(-36.61, -0.39, 5, 6.6, 0, 4, 13, nearWaypoints0); // A
-    // }
+        int nearWaypoints0[16] = {0,1,2,3,4,5,22,23,24,25,27,42,43,44,45,57};
+        SetBombZone(-31.82, 16.7, 7.4, 8, 0, 4, 16, nearWaypoints0); //A
+
+        int nearWaypoints1[8] = {26,29,30,31,32,33,34,35};
+        SetBombZone(32.297, -24.54, 9, 8.5, 1, 32, 8, nearWaypoints1); //B
+        
+    }
+    else if (mapToLoad == FYSNOW)
+    {
+        // Set the number of bomb zones
+        TwoSites = 0;
+        allMaps[mapToLoad].BombsTriggersCollisionsCount = 1;
+        allMaps[mapToLoad].AllBombsTriggersCollisions = malloc(allMaps[mapToLoad].BombsTriggersCollisionsCount * sizeof(Site));
+
+        int nearWaypoints0[23] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22};
+        SetBombZone(-1.75, -35, 4, 4, 0, 15, 23, nearWaypoints0); // A
+    }
 }
 /**
  * @brief Create a stairs

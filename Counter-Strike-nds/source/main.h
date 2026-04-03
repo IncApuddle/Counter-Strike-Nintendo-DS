@@ -37,6 +37,8 @@
 #include "m_Dust2Part5_bin.h"
 #include "m_Dust2Part6_bin.h"
 
+#include "m_tutorialMap_bin.h"
+
 #include "m_Dust2_2x2Part3_bin.h"
 #include "m_Dust2_2x2Part4_bin.h"
 
@@ -47,31 +49,38 @@
 #include "m_2000Part0_bin.h"
 #include "m_2000Part1_bin.h"
 
-// #include "m_MiragePart1Solid_bin.h"
-// #include "m_MiragePart1Shadows_bin.h"
-// #include "m_MiragePart2Solid_bin.h"
-// #include "m_MiragePart2Shadows_bin.h"
-// #include "m_MiragePart3Solid_bin.h"
-// #include "m_MiragePart3Shadows_bin.h"
+#include "m_MiragePart0_bin.h"
+#include "m_MiragePart1_bin.h"
+#include "m_MiragePart2_bin.h"
+#include "m_MiragePart3_bin.h"
+#include "m_MiragePart4_bin.h"
+#include "m_MiragePart5_bin.h"
 
+#include "m_FySnowPart0_bin.h"
+#include "m_FySnowPart1_bin.h"
+
+//--
 
 #include "bomb_bin.h"
 #include "plane_bin.h"
-#include "repeat_bin.h"
 #include "explosion_bin.h"
 #include "smokeSphere_bin.h"
+#include "grenade_bin.h"
 
-#include "m_tutorialMapUnShadowed_3ds_bin.h"
-#include "m_tutorialMapShadowed_3ds_bin.h"
-
-#include "grenade_3ds_bin.h"
 #include "obj_PlayerAnim_bin.h"
 #include "obj_PlayerStatic_bin.h"
 
-// Textures
+// Terrain textures
+#include "texMap_Dust2_bin.h"
+#include "texMap_General_Map_bin.h"
+
+// General Textures
+#include "tex_General_bin.h"
+
 #include "MapUI_Dust2_bin.h"
 #include "MapUI_Dust2_2x2_bin.h"
 #include "MapUI_General_bin.h"
+#include "MapUI_Mirage_bin.h"
 
 #include "bomb_logo_bin.h"
 #include "MapPointUI_bin.h"
@@ -91,11 +100,7 @@
 // crosshairs
 #include "crosshair2_bin.h"
 
-// Terrain textures
-#include "tex_Dust2_bin.h"
-#include "tex_General_Map_bin.h"
-
-// Gun sprites and 3D models
+// Gun sprites
 #include "knifect_bin.h"
 #include "deagle_bin.h"
 #include "elite_bin.h"
@@ -168,7 +173,7 @@
 
 #define DEFAULTTERRORISTGUN 1
 #define DEFAULTCOUNTERTERRORISTGUN 2
-#define wallCount 210
+#define wallCount 215
 
 #define WaypointA 14
 #define WaypointB 29
@@ -189,7 +194,7 @@
 #define INPUT_NAMES_COUNT 15
 #define SHOP_DISABLE_TIMER 900
 
-#define GAME_VERSION "1.1.0"
+#define GAME_VERSION "1.1.1"
 
 enum connectionType
 {
@@ -519,8 +524,7 @@ extern int ButtonToShow;
 extern int currentMenu;
 extern NE_Sprite *BottomScreenSprites[1];
 extern NE_Material *GroundMaterial;
-extern NE_Material *GroundMaterialShadowed;
-// extern NE_Material *GroundMaterial1;
+extern NE_Material *GeneralMaterial;
 extern float xWithoutYForMap;
 extern float zWithoutYForMap;
 extern float xWithoutYForOcclusionSide1;

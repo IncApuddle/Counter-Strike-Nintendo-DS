@@ -14,7 +14,8 @@
 #include "tex_map_image_dust2_2x2_bin.h"
 #include "tex_map_image_aim_bin.h"
 #include "tex_map_image_2000_bin.h"
-// #include "tex_map_image_mirage_bin.h"
+#include "tex_map_image_mirage_bin.h"
+#include "tex_map_image_fysnow_bin.h"
 
 enum mapEnum
 {
@@ -23,13 +24,14 @@ enum mapEnum
     DUST2_2x2 = 2,
     AIM_MAP = 3,
     B2000 = 4,
-    // MIRAGEA = 5
+    MIRAGE = 5,
+    FYSNOW = 6
 };
 
 typedef struct //
 {
     NE_Model *Model;
-    bool shadowed;
+    // bool shadowed;
 } MapModel;
 
 typedef struct //
@@ -56,14 +58,14 @@ typedef struct //
 
     MapModel *models;
     void *image;
-    void *MapImage;
+    // void *MapImage;
     int forcePartyMode;
 
     Vector3 cameraPosition;
     Vector3 cameraLookPosition;
 } Map;
 
-#define MAP_COUNT 5
+#define MAP_COUNT 7
 extern Map allMaps[MAP_COUNT];
 
 void AddAllSpawnPoints();
@@ -77,5 +79,6 @@ void UnLoadMap(int mapToUnload);
 void SetMapNames();
 void SetMapPartyMode();
 void SetMapCameraPosition();
+void TextureToLoad(int TextureNumb);
 
 #endif // MAP_H_

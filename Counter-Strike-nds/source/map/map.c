@@ -97,9 +97,10 @@ void LoadMapTextures()
     allMaps[DUST2_2x2].image = (void *)tex_map_image_dust2_2x2_bin;
     allMaps[AIM_MAP].image = (void *)tex_map_image_aim_bin;
     allMaps[B2000].image = (void *)tex_map_image_2000_bin;
-    // allMaps[MIRAGEA].image = (void *)tex_map_image_mirage_bin;
+    allMaps[MIRAGE].image = (void *)tex_map_image_mirage_bin;
+    allMaps[FYSNOW].image = (void *)tex_map_image_fysnow_bin;
 
-    allMaps[DUST2].MapImage = (void *)tex_Dust2_bin;
+    // allMaps[DUST2].MapImage = (void *)tex_Dust2_bin;
     // allMaps[AIM_MAP].MapImage = (void *)tex_General_Map_bin;
 }
 
@@ -114,7 +115,8 @@ void SetMapNames()
     allMaps[DUST2_2x2].name = "Dust II_2x2";
     allMaps[AIM_MAP].name = "Aim_Map";
     allMaps[B2000].name = "$2000$";
-    // allMaps[MIRAGEA].name = "Mirage(A site)";
+    allMaps[MIRAGE].name = "Mirage(Cpl_Strike)";
+    allMaps[FYSNOW].name = "Fy_Snow";
 }
 
 /**
@@ -128,7 +130,8 @@ void SetMapPartyMode()
     allMaps[DUST2_2x2].forcePartyMode = -1;
     allMaps[AIM_MAP].forcePartyMode = -1;
     allMaps[B2000].forcePartyMode = -1;
-    // allMaps[MIRAGEA].forcePartyMode = -1;
+    allMaps[MIRAGE].forcePartyMode = -1;
+    allMaps[FYSNOW].forcePartyMode = -1;
 }
 
 /**
@@ -182,13 +185,23 @@ void SetMapCameraPosition()
     allMaps[B2000].cameraLookPosition.y = 3.2;
     allMaps[B2000].cameraLookPosition.z = -0;
 
-    // allMaps[MIRAGEA].cameraPosition.x = -7;
-    // allMaps[MIRAGEA].cameraPosition.y = 8.5;
-    // allMaps[MIRAGEA].cameraPosition.z = 27;
+    // Mirage
+    allMaps[MIRAGE].cameraPosition.x = -1;
+    allMaps[MIRAGE].cameraPosition.y = 8.5;
+    allMaps[MIRAGE].cameraPosition.z = 43;
 
-    // allMaps[MIRAGEA].cameraLookPosition.x = -16;
-    // allMaps[MIRAGEA].cameraLookPosition.y = 0;
-    // allMaps[MIRAGEA].cameraLookPosition.z = 33;
+    allMaps[MIRAGE].cameraLookPosition.x = -16;
+    allMaps[MIRAGE].cameraLookPosition.y = 0;
+    allMaps[MIRAGE].cameraLookPosition.z = 56;
+
+    // Fy_Snow
+    allMaps[FYSNOW].cameraPosition.x = -23;
+    allMaps[FYSNOW].cameraPosition.y = 5;
+    allMaps[FYSNOW].cameraPosition.z = -21;
+
+    allMaps[FYSNOW].cameraLookPosition.x = -10;
+    allMaps[FYSNOW].cameraLookPosition.y = -2;
+    allMaps[FYSNOW].cameraLookPosition.z = -15;
 }
 
 /**
@@ -272,21 +285,40 @@ void AddAllSpawnPoints()
 
     SetAngles(B2000, -256, 0);
 
-    // AddSpawnPoint(MIRAGEA, TERRORISTS, 0, 13, 2.6, 41);
-    // AddSpawnPoint(MIRAGEA, TERRORISTS, 1, 16, 2.6, 41);
-    // AddSpawnPoint(MIRAGEA, TERRORISTS, 2, 10, 2.6, 41);
-    // AddSpawnPoint(MIRAGEA, TERRORISTS, 3, 13, 2.6, 44);
-    // AddSpawnPoint(MIRAGEA, TERRORISTS, 4, 16, 2.6, 44);
-    // AddSpawnPoint(MIRAGEA, TERRORISTS, 5, 10, 2.6, 44);
+    // Mirage
 
-    // AddSpawnPoint(MIRAGEA, COUNTERTERRORISTS, 0, -28, 0.15, -29);
-    // AddSpawnPoint(MIRAGEA, COUNTERTERRORISTS, 1, -25.5, 0.15, -29);
-    // AddSpawnPoint(MIRAGEA, COUNTERTERRORISTS, 2, -30.5, 0.15, -29);
-    // AddSpawnPoint(MIRAGEA, COUNTERTERRORISTS, 3, -28, 0.15, -33);
-    // AddSpawnPoint(MIRAGEA, COUNTERTERRORISTS, 4, -25.5, 0.15, -33);
-    // AddSpawnPoint(MIRAGEA, COUNTERTERRORISTS, 5, -30.5, 0.15, -33);
+    AddSpawnPoint(MIRAGE, TERRORISTS, 0, 22.5, 2.45, 58);
+    AddSpawnPoint(MIRAGE, TERRORISTS, 1, 25, 2.45, 58);
+    AddSpawnPoint(MIRAGE, TERRORISTS, 2, 20, 2.45, 58);
+    AddSpawnPoint(MIRAGE, TERRORISTS, 3, 22.5, 2.45, 61);
+    AddSpawnPoint(MIRAGE, TERRORISTS, 4, 15, 2.45, 61);
+    AddSpawnPoint(MIRAGE, TERRORISTS, 5, 20, 2.45, 61);
 
-    // SetAngles(MIRAGEA, 0, -256);
+    AddSpawnPoint(MIRAGE, COUNTERTERRORISTS, 0, -22.5, 0, -10);
+    AddSpawnPoint(MIRAGE, COUNTERTERRORISTS, 1, -20, 0, -10);
+    AddSpawnPoint(MIRAGE, COUNTERTERRORISTS, 2, -25, 0, -10);
+    AddSpawnPoint(MIRAGE, COUNTERTERRORISTS, 3, -22.5, 0, -14);
+    AddSpawnPoint(MIRAGE, COUNTERTERRORISTS, 4, -20, 0, -14);
+    AddSpawnPoint(MIRAGE, COUNTERTERRORISTS, 5, -25, 0, -14);
+
+    SetAngles(MIRAGE, 0, -256);
+
+    // Fy_SNow
+    AddSpawnPoint(FYSNOW, TERRORISTS, 0, 0, 0, -16);
+    AddSpawnPoint(FYSNOW, TERRORISTS, 1, -7, 0, -16);
+    AddSpawnPoint(FYSNOW, TERRORISTS, 2, 7, 0, -16);
+    AddSpawnPoint(FYSNOW, TERRORISTS, 3, 0, 0, -21);
+    AddSpawnPoint(FYSNOW, TERRORISTS, 4, -7, 0, -21);
+    AddSpawnPoint(FYSNOW, TERRORISTS, 5, 7, 0, -21);
+
+    AddSpawnPoint(FYSNOW, COUNTERTERRORISTS, 0, 0, 0, 16);
+    AddSpawnPoint(FYSNOW, COUNTERTERRORISTS, 1, -7, 0, 16);
+    AddSpawnPoint(FYSNOW, COUNTERTERRORISTS, 2, 7, 0, 16);
+    AddSpawnPoint(FYSNOW, COUNTERTERRORISTS, 3, 0, 0, 21);
+    AddSpawnPoint(FYSNOW, COUNTERTERRORISTS, 4, -7, 0, 21);
+    AddSpawnPoint(FYSNOW, COUNTERTERRORISTS, 5, 7, 0, 21);
+
+    SetAngles(FYSNOW, -256, 0);
 }
 
 /**
@@ -310,14 +342,24 @@ void loadMapModels(int mapToLoad)
         mapPos.y = 1.5 + 0.8;
         mapPos.z = 0;
         Scale.x = Scale.y = Scale.z = 40808;
+
+        if(CurrentTexture == 2)
+        {
+            TextureToLoad(1);
+        }
     }
     else if (mapToLoad == TUTORIAL)
     {
-        mapPartCount = 2;
+        mapPartCount = 1;
         mapPos.x = 0;
         mapPos.y = -1.5 + 0.5;
         mapPos.z = 0;
-        Scale.x = Scale.y = Scale.z = 2048;
+        Scale.x = Scale.y = Scale.z = 21808;
+
+        if(CurrentTexture == 2)
+        {
+            TextureToLoad(1);
+        }
     }
     else if (mapToLoad == DUST2_2x2)
     {
@@ -326,6 +368,11 @@ void loadMapModels(int mapToLoad)
         mapPos.y = 1.5 + 0.8;
         mapPos.z = 0;
         Scale.x = Scale.y = Scale.z = 40808;
+
+        if(CurrentTexture == 2)
+        {
+            TextureToLoad(1);
+        }
     }
     else if (mapToLoad == AIM_MAP)
     {
@@ -334,6 +381,11 @@ void loadMapModels(int mapToLoad)
         mapPos.y = -1.5 + 0.5;
         mapPos.z = 0;
         Scale.x = Scale.y = Scale.z = 15808;
+
+        if(CurrentTexture == 2)
+        {
+            TextureToLoad(1);
+        }
     }
     else if (mapToLoad == B2000)
     {
@@ -342,15 +394,38 @@ void loadMapModels(int mapToLoad)
         mapPos.y = -1.5 + 0.5;
         mapPos.z = 0;
         Scale.x = Scale.y = Scale.z = 13808;
+
+        if(CurrentTexture == 2)
+        {
+            TextureToLoad(1);
+        }
     }
-    // else if (mapToLoad == MIRAGEA)
-    // {
-    //     mapPartCount = 6;
-    //     mapPos.x = 0;
-    //     mapPos.y = -1.5 + 0.5;
-    //     mapPos.z = 0;
-    //     Scale.x = Scale.y = Scale.z = 4096;
-    // }
+    else if (mapToLoad == MIRAGE)
+    {
+        mapPartCount = 6;
+        mapPos.x = 0;
+        mapPos.y = -1.5 + 0.5;
+        mapPos.z = 0;
+        Scale.x = Scale.y = Scale.z = 41308;
+
+        if(CurrentTexture == 2)
+        {
+            TextureToLoad(1);
+        }
+    }
+    else if (mapToLoad == FYSNOW)
+    {
+        mapPartCount = 2;
+        mapPos.x = 0;
+        mapPos.y = -1.5 + 0.5;
+        mapPos.z = 0;
+        Scale.x = Scale.y = Scale.z = 15808;
+
+        if(CurrentTexture == 1)
+        {
+            TextureToLoad(2);
+        }
+    }
 
     // Set for each map parts, position, rotation and scale
     for (int i = 0; i < mapPartCount; i++)
@@ -362,98 +437,81 @@ void loadMapModels(int mapToLoad)
         map->models[i].Model->rx = 128;
         map->models[i].Model->ry = 256;
     }
-    // if(CurrentTexture == 1)
-    // {
-    //     for (int i = 0; i < mapPartCount; i++)
-    //     {
-    //         map->models[i].Model = NE_ModelCreate(NE_Static);
-    //         NE_ModelSetMaterial(map->models[i].Model, GroundMaterial);
-    //         NE_ModelScaleI(map->models[i].Model, Scale.x, Scale.y, Scale.z);
-    //         NE_ModelSetCoord(map->models[i].Model, mapPos.x, mapPos.y, mapPos.z);
-    //         map->models[i].Model->rx = 128;
-    //         map->models[i].Model->ry = 256;
-    //     }
-    // }
-    // else if(CurrentTexture == 2)
-    // {
-    //     for (int i = 0; i < mapPartCount; i++)
-    //     {
-    //         map->models[i].Model = NE_ModelCreate(NE_Static);
-    //         NE_ModelSetMaterial(map->models[i].Model, GroundMaterial1);
-    //         NE_ModelScaleI(map->models[i].Model, Scale.x, Scale.y, Scale.z);
-    //         NE_ModelSetCoord(map->models[i].Model, mapPos.x, mapPos.y, mapPos.z);
-    //         map->models[i].Model->rx = 128;
-    //         map->models[i].Model->ry = 256;
-    //     }
-    // }
 
     // Set for each map parts, the model and the position
     if (mapToLoad == DUST2)
     {
         NE_ModelLoadStaticMesh(map->models[0].Model, (u32 *)m_Dust2Part0_bin);
-        map->models[0].shadowed = false;
         NE_ModelLoadStaticMesh(map->models[1].Model, (u32 *)m_Dust2Part1_bin);
-        map->models[1].shadowed = false;
         NE_ModelLoadStaticMesh(map->models[2].Model, (u32 *)m_Dust2Part2_bin);
-        map->models[2].shadowed = false;
         NE_ModelLoadStaticMesh(map->models[3].Model, (u32 *)m_Dust2Part3_bin);
-        map->models[3].shadowed = false;
         NE_ModelLoadStaticMesh(map->models[4].Model, (u32 *)m_Dust2Part4_bin);
-        map->models[4].shadowed = false;
         NE_ModelLoadStaticMesh(map->models[5].Model, (u32 *)m_Dust2Part5_bin);
-        map->models[5].shadowed = false;
         NE_ModelLoadStaticMesh(map->models[6].Model, (u32 *)m_Dust2Part6_bin);
-        map->models[6].shadowed = false;
     }
     else if (mapToLoad == TUTORIAL)
     {
-        NE_ModelLoadStaticMesh(map->models[0].Model, (u32 *)m_tutorialMapUnShadowed_3ds_bin);
-        map->models[0].shadowed = false;
-        NE_ModelLoadStaticMesh(map->models[1].Model, (u32 *)m_tutorialMapShadowed_3ds_bin);
-        map->models[1].shadowed = true;
+        NE_ModelLoadStaticMesh(map->models[0].Model, (u32 *)m_tutorialMap_bin);
+        // NE_ModelLoadStaticMesh(map->models[0].Model, (u32 *)m_tutorialMapUnShadowed_3ds_bin);
+        // map->models[0].shadowed = false;
+        // NE_ModelLoadStaticMesh(map->models[1].Model, (u32 *)m_tutorialMapShadowed_3ds_bin);
+        // map->models[1].shadowed = true;
     }
     else if (mapToLoad == DUST2_2x2)
     {
         NE_ModelLoadStaticMesh(map->models[0].Model, (u32 *)m_Dust2_2x2Part3_bin);
-        map->models[0].shadowed = false;
         NE_ModelLoadStaticMesh(map->models[1].Model, (u32 *)m_Dust2_2x2Part4_bin);
-        map->models[1].shadowed = false;
         NE_ModelLoadStaticMesh(map->models[2].Model, (u32 *)m_Dust2Part5_bin);
-        map->models[2].shadowed = false;
         NE_ModelLoadStaticMesh(map->models[3].Model, (u32 *)m_Dust2Part6_bin);
-        map->models[3].shadowed = false;
     }
     else if (mapToLoad == AIM_MAP)
     {
         NE_ModelLoadStaticMesh(map->models[0].Model, (u32 *)m_Aim_MapPart0_bin);
-        map->models[0].shadowed = false;
         NE_ModelLoadStaticMesh(map->models[1].Model, (u32 *)m_Aim_MapPart1_bin);
-        map->models[1].shadowed = false;
         NE_ModelLoadStaticMesh(map->models[2].Model, (u32 *)m_Aim_MapPart2_bin);
-        map->models[2].shadowed = false;
     }
     else if (mapToLoad == B2000)
     {
         NE_ModelLoadStaticMesh(map->models[0].Model, (u32 *)m_2000Part0_bin);
-        map->models[0].shadowed = false;
         NE_ModelLoadStaticMesh(map->models[1].Model, (u32 *)m_2000Part1_bin);
-        map->models[1].shadowed = false;
     }
-    // else if (mapToLoad == MIRAGEA)
-    // {
-    //     NE_ModelLoadStaticMesh(map->models[0].Model, (u32 *)m_MiragePart1Solid_bin);
-    //     map->models[0].shadowed = false;
-    //     NE_ModelLoadStaticMesh(map->models[1].Model, (u32 *)m_MiragePart1Shadows_bin);
-    //     map->models[1].shadowed = true;
-    //     NE_ModelLoadStaticMesh(map->models[2].Model, (u32 *)m_MiragePart2Solid_bin);
-    //     map->models[2].shadowed = false;
-    //     NE_ModelLoadStaticMesh(map->models[3].Model, (u32 *)m_MiragePart2Shadows_bin);
-    //     map->models[3].shadowed = true;
-    //     NE_ModelLoadStaticMesh(map->models[4].Model, (u32 *)m_MiragePart3Solid_bin);
-    //     map->models[4].shadowed = false;
-    //     NE_ModelLoadStaticMesh(map->models[5].Model, (u32 *)m_MiragePart3Shadows_bin);
-    //     map->models[5].shadowed = true;
-    // }
+    else if (mapToLoad == MIRAGE)
+    {
+        NE_ModelLoadStaticMesh(map->models[0].Model, (u32 *)m_MiragePart0_bin);
+        NE_ModelLoadStaticMesh(map->models[1].Model, (u32 *)m_MiragePart1_bin);
+        NE_ModelLoadStaticMesh(map->models[2].Model, (u32 *)m_MiragePart2_bin);
+        NE_ModelLoadStaticMesh(map->models[3].Model, (u32 *)m_MiragePart3_bin);
+        NE_ModelLoadStaticMesh(map->models[4].Model, (u32 *)m_MiragePart4_bin);
+        NE_ModelLoadStaticMesh(map->models[5].Model, (u32 *)m_MiragePart5_bin);
+    }
+    else if (mapToLoad == FYSNOW)
+    {
+        NE_ModelLoadStaticMesh(map->models[0].Model, (u32 *)m_FySnowPart0_bin);
+        NE_ModelLoadStaticMesh(map->models[1].Model, (u32 *)m_FySnowPart1_bin);
+    }
+}
+
+void TextureToLoad(int TextureNumb)
+{
+	NE_MaterialDelete(GroundMaterial);
+	GroundMaterial = NE_MaterialCreate();
+	// NE_MaterialDelete(GroundMaterialShadowed);
+	// GroundMaterialShadowed = NE_MaterialCreate();
+	NE_PaletteDelete(Palettes[1]);
+	Palettes[1] = NE_PaletteCreate();
+
+	if(TextureNumb == 1)
+	{
+        NE_MaterialTexLoadBMPtoRGB256(GroundMaterial, Palettes[1], (void *)texMap_Dust2_bin, 1);
+		CurrentTexture = 1;
+	}
+	else if(TextureNumb == 2)
+	{
+        NE_MaterialTexLoadBMPtoRGB256(GroundMaterial, Palettes[1], (void *)texMap_General_Map_bin, 1);
+		CurrentTexture = 2;
+	}
+
+    // NE_MaterialTexClone(GroundMaterial, GroundMaterialShadowed);
 }
 
 Wall *getMapWalls()

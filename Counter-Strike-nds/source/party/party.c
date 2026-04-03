@@ -329,7 +329,10 @@ void partyTimerTick()
                                 // Buy guns for guns
                                 checkShopForBots();
                                 // Give the bomb to a player
-                                setBombForARandomPlayer();
+                                if(TwoSites == 1 || TwoSites == 2)
+                                {
+                                    setBombForARandomPlayer();
+                                }
                                 // Set players position to their spawns
                                 setPlayersPositionAtSpawns();
                                 // Put a weapons in the hands of each player
@@ -420,7 +423,10 @@ void partyTimerTick()
                                 resetPlayer(i);
                             }
                             checkShopForBots();
-                            setBombForARandomPlayer();
+                            if(TwoSites == 1 || TwoSites == 2)
+                            {
+                                setBombForARandomPlayer();
+                            }
                             setPlayersPositionAtSpawns();
                             setNewRoundHandWeapon();
                             shopDisableTimer = SHOP_DISABLE_TIMER;
@@ -804,7 +810,6 @@ void OnPartyQuit()
  */
 void StartSinglePlayer(int partyMode)
 {
-    // CheckCurTextur();
     MapImgToLoadFunc();
     Connection = OFFLINE;
     currentPartyMode = partyMode;

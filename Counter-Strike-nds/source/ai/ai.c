@@ -40,7 +40,7 @@ int amountOfBots = 6;
 //NomberPoint for Sites | Is there two sites or one
 int SiteAPoint = 0;
 int SiteBPoint = 0;
-bool TwoSites;
+int TwoSites = 2;
 
 // Timer to check the player's distance between the bot and the player
 int checkPlayerDistanceFromAiTimer = 1;
@@ -440,7 +440,7 @@ void AiCheckForAction()
 
                 if (playerToCheck->haveBomb)
                 {
-                    if(TwoSites == true)
+                    if(TwoSites == 2)
                     {
                         float distanceA = GetDistanceBewteenPlayerAndWaypoint(currentAiToCheck, SiteAPoint);
                         float distanceB = GetDistanceBewteenPlayerAndWaypoint(currentAiToCheck, SiteBPoint);
@@ -455,7 +455,7 @@ void AiCheckForAction()
                             StartChecking(currentAiToCheck, SiteBPoint); // Bomb site B
                         }
                     }
-                    else
+                    else if(TwoSites == 1)
                     {
                         StartChecking(currentAiToCheck, SiteAPoint);
                     }
@@ -491,7 +491,7 @@ void AiCheckForAction()
 
 void GetRandomPoint(int currentAiToCheck)
 {
-    if(TwoSites == true)
+    if(TwoSites == 2)
     {
         if (IsExplode || (BombPlanted && ((BombSeconds <= 5 && AllPlayers[currentAiToCheck].Team == TERRORISTS) || (BombSeconds <= 3 && AllPlayers[currentAiToCheck].Team == COUNTERTERRORISTS)))) // Run away from the bomb
         {

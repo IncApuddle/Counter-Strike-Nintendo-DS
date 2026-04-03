@@ -37,8 +37,7 @@ NE_Model *flashModels[FLASH_MODELS_COUNT];
 
 // Materials
 NE_Material *GroundMaterial = NULL;
-// NE_Material *GroundMaterial1 = NULL;
-NE_Material *GroundMaterialShadowed = NULL;
+NE_Material *GeneralMaterial = NULL;
 
 //////Players
 Player AllPlayers[MaxPlayer];

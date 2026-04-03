@@ -35,7 +35,7 @@ extern bool equalTeam;
 
 extern int SiteAPoint;
 extern int SiteBPoint;
-extern bool TwoSites;
+extern int TwoSites;
 extern int amountOfBots;
 
 void StartChecking(int playerIndex, int FinalWaypoint);
