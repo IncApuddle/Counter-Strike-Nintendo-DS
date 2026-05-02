@@ -2,7 +2,7 @@
 **Counter Strike demake on Nintendo DS with online multiplayer** (Works on **emulator** and on **real hardware**).
 
 > [!WARNING]
-> The multiplayer server is now closed.
+> The multiplayer server is now closed. Single player mode is still available!
 
 For **multiplayer** on **emulator**, please use [melonDS](https://melonds.kuribo64.net/downloads.php).<br/>
 There is no emulator with **online** support on **Android** at this time.<br/>
