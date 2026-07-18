@@ -78,7 +78,6 @@
 #include "tex_General_bin.h"
 
 #include "MapUI_Dust2_bin.h"
-#include "MapUI_Dust2_2x2_bin.h"
 #include "MapUI_General_bin.h"
 #include "MapUI_Mirage_bin.h"
 
