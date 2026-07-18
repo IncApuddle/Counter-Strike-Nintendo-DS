@@ -183,10 +183,6 @@ void MapImgToLoadFunc()
 	{
 		NE_MaterialTexLoadBMPtoRGB256(TopScreenSpritesMaterials[4], Palettes[17], (void *)MapUI_Dust2_bin, 0);
 	}
-	else if(MapImgToLoad == 2)
-	{
-		NE_MaterialTexLoadBMPtoRGB256(TopScreenSpritesMaterials[4], Palettes[17], (void *)MapUI_Dust2_2x2_bin, 0);
-	}
     else if(MapImgToLoad == 5)
 	{
 		NE_MaterialTexLoadBMPtoRGB256(TopScreenSpritesMaterials[4], Palettes[17], (void *)MapUI_Mirage_bin, 0);
