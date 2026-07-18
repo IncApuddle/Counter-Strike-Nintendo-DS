@@ -183,7 +183,7 @@ void MapImgToLoadFunc()
 	{
 		NE_MaterialTexLoadBMPtoRGB256(TopScreenSpritesMaterials[4], Palettes[17], (void *)MapUI_Dust2_bin, 0);
 	}
-    else if(MapImgToLoad == 5)
+    else if(MapImgToLoad == 6)
 	{
 		NE_MaterialTexLoadBMPtoRGB256(TopScreenSpritesMaterials[4], Palettes[17], (void *)MapUI_Mirage_bin, 0);
 	}
@@ -520,14 +520,6 @@ void Draw3DSceneNotInGame(void)
             NE_ModelDraw(map->models[i].Model);
         }
     }
-    else if (currentMap == MIRAGE)
-    {
-        GroundMaterial->diffuse = RGB15(0, 0, 0);
-        GroundMaterial->emission = RGB15(14, 14, 14);
-        GroundMaterial->specular = RGB15(10, 10, 10);
-        NE_ModelDraw(map->models[0].Model);
-        NE_ModelDraw(map->models[1].Model);
-    }
     else if (currentMap == FYSNOW)
     {
         for (int i = 0; i < 2; i++)
@@ -537,6 +529,14 @@ void Draw3DSceneNotInGame(void)
             GroundMaterial->specular = RGB15(10, 10, 10);
             NE_ModelDraw(map->models[i].Model);
         }
+    }
+    else if (currentMap == MIRAGE)
+    {
+        GroundMaterial->diffuse = RGB15(0, 0, 0);
+        GroundMaterial->emission = RGB15(14, 14, 14);
+        GroundMaterial->specular = RGB15(10, 10, 10);
+        NE_ModelDraw(map->models[0].Model);
+        NE_ModelDraw(map->models[1].Model);
     }
 
     NE_2DViewInit();

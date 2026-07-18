@@ -698,6 +698,59 @@ void CalculateAllTriggerColBoxs(int mapToLoad)
         map->AllOcclusionZone[1].angles[3].x = 23;
         map->AllOcclusionZone[1].angles[3].y = -5;
     }
+    else if (mapToLoad == FYSNOW)
+    {
+        // All occlusion culling zones data (a zone will show one or multiple zones)
+        map->zonesCount = 2;
+        map->AllZones = malloc(map->zonesCount * sizeof(Zone));
+
+        map->AllZones[currentZone].ZoneCount = 2;
+        map->AllZones[currentZone].visibleMapPart[0] = 0;
+        map->AllZones[currentZone].visibleMapPart[1] = 1;
+        map->AllZones[currentZone].id = currentZone;
+
+        currentZone = 1;
+        map->AllZones[currentZone].ZoneCount = 2;
+        map->AllZones[currentZone].visibleMapPart[0] = 1;
+        map->AllZones[currentZone].visibleMapPart[1] = 0;
+        map->AllZones[currentZone].id = currentZone;
+
+        // Add occlusion culling triggers
+        CalculateTriggerColBox(0, 0, 60, 60, 0);
+        CalculateTriggerColBox(0, 0, 60, 60, 1);
+
+        map->occlusionZoneCount = 2;
+        map->AllOcclusionZone = malloc(map->occlusionZoneCount * sizeof(OcclusionZone));
+
+        // Add clipping zones
+        ///////////////////////////////////////////////////// Y (Unity Z) Most be inverted and zone 1 and 0 info most be switched
+
+        map->AllOcclusionZone[0].angles[0].x = 30;
+        map->AllOcclusionZone[0].angles[0].y = 5;
+
+        map->AllOcclusionZone[0].angles[1].x = -30;
+        map->AllOcclusionZone[0].angles[1].y = 5;
+
+        map->AllOcclusionZone[0].angles[2].x = -30;
+        map->AllOcclusionZone[0].angles[2].y = -30;
+
+        map->AllOcclusionZone[0].angles[3].x = 30;
+        map->AllOcclusionZone[0].angles[3].y = -30;
+
+        ///////////
+
+        map->AllOcclusionZone[1].angles[0].x = 30;
+        map->AllOcclusionZone[1].angles[0].y = 30;
+
+        map->AllOcclusionZone[1].angles[1].x = -30;
+        map->AllOcclusionZone[1].angles[1].y = 25;
+
+        map->AllOcclusionZone[1].angles[2].x = -30;
+        map->AllOcclusionZone[1].angles[2].y = -5;
+
+        map->AllOcclusionZone[1].angles[3].x = 30;
+        map->AllOcclusionZone[1].angles[3].y = -5;
+    }
     else if (mapToLoad == MIRAGE)
     {
         // All occlusion culling zones data (a zone will show one or multiple zones)
@@ -971,59 +1024,6 @@ void CalculateAllTriggerColBoxs(int mapToLoad)
         map->AllOcclusionZone[5].angles[3].x = 52;
         map->AllOcclusionZone[5].angles[3].y = -45;
 
-    }
-    else if (mapToLoad == FYSNOW)
-    {
-        // All occlusion culling zones data (a zone will show one or multiple zones)
-        map->zonesCount = 2;
-        map->AllZones = malloc(map->zonesCount * sizeof(Zone));
-
-        map->AllZones[currentZone].ZoneCount = 2;
-        map->AllZones[currentZone].visibleMapPart[0] = 0;
-        map->AllZones[currentZone].visibleMapPart[1] = 1;
-        map->AllZones[currentZone].id = currentZone;
-
-        currentZone = 1;
-        map->AllZones[currentZone].ZoneCount = 2;
-        map->AllZones[currentZone].visibleMapPart[0] = 1;
-        map->AllZones[currentZone].visibleMapPart[1] = 0;
-        map->AllZones[currentZone].id = currentZone;
-
-        // Add occlusion culling triggers
-        CalculateTriggerColBox(0, 0, 60, 60, 0);
-        CalculateTriggerColBox(0, 0, 60, 60, 1);
-
-        map->occlusionZoneCount = 2;
-        map->AllOcclusionZone = malloc(map->occlusionZoneCount * sizeof(OcclusionZone));
-
-        // Add clipping zones
-        ///////////////////////////////////////////////////// Y (Unity Z) Most be inverted and zone 1 and 0 info most be switched
-
-        map->AllOcclusionZone[0].angles[0].x = 30;
-        map->AllOcclusionZone[0].angles[0].y = 5;
-
-        map->AllOcclusionZone[0].angles[1].x = -30;
-        map->AllOcclusionZone[0].angles[1].y = 5;
-
-        map->AllOcclusionZone[0].angles[2].x = -30;
-        map->AllOcclusionZone[0].angles[2].y = -30;
-
-        map->AllOcclusionZone[0].angles[3].x = 30;
-        map->AllOcclusionZone[0].angles[3].y = -30;
-
-        ///////////
-
-        map->AllOcclusionZone[1].angles[0].x = 30;
-        map->AllOcclusionZone[1].angles[0].y = 30;
-
-        map->AllOcclusionZone[1].angles[1].x = -30;
-        map->AllOcclusionZone[1].angles[1].y = 25;
-
-        map->AllOcclusionZone[1].angles[2].x = -30;
-        map->AllOcclusionZone[1].angles[2].y = -5;
-
-        map->AllOcclusionZone[1].angles[3].x = 30;
-        map->AllOcclusionZone[1].angles[3].y = -5;
     }
     
 
@@ -1523,6 +1523,93 @@ void LoadAllCollisions(int mapToLoad)
         CreateWall(17.04, 0.521, -20.21, 1.7, 1, 1.68, 0, 40);
         CreateWall(17.979, 1.539, -20.21, 0.2, 1, 1.68, 0, 41);
     }
+    else if (mapToLoad == FYSNOW)
+    {
+        mapToSet = FYSNOW;
+        allMaps[mapToLoad].CollisionsCount = 81;
+        allMaps[mapToLoad].AllWallsCollisions = malloc(allMaps[mapToLoad].CollisionsCount * sizeof(Wall));
+        CreateWall(-0.1639996, -1.6, 0.3489971, 62, 1, 62, 0, 0);
+        CreateWall(-0.1639996, 1.13, -28.53, 57, 7, 1, 0, 1);
+        CreateWall(-0.1639996, 1.13, 28.53, 57, 7, 1, 0, 2);
+        CreateWall(28.51, 1.13, -0.11, 1, 7, 57, 0, 3);
+        CreateWall(-28.53, 1.13, -0.11, 1, 7, 57, 0, 4);
+        CreateWall(-7.48, 1.13, 7.49, 10.6, 7, 7, 0, 5);
+        CreateWall(-7.48, 1.13, 7.49, 7, 7, 10.6, 0, 6);
+        CreateWall(7.49, 1.13, 7.49, 10.6, 7, 7, 0, 7);
+        CreateWall(7.489999, 1.13, 7.49, 7, 7, 10.6, 0, 8);
+        CreateWall(-7.48, 1.13, -7.489999, 10.6, 7, 7, 0, 9);
+        CreateWall(-7.48, 1.13, -7.489999, 7, 7, 10.6, 0, 10);
+        CreateWall(7.49, 1.13, -7.489999, 10.6, 7, 7, 0, 11);
+        CreateWall(7.489999, 1.13, -7.49, 7, 7, 10.6, 0, 12);
+        CreateWall(27.4, 1.13, -15.92, 2, 7, 1.9, 0, 13);
+        CreateWall(27.4, 1.13, -8.9, 2, 7, 1.9, 0, 14);
+        CreateWall(27.4, 1.13, 8.9, 2, 7, 1.9, 0, 15);
+        CreateWall(27.4, 1.13, 15.91, 2, 7, 1.9, 0, 16);
+        CreateWall(-27.46, 1.13, -15.92, 2, 7, 1.9, 0, 17);
+        CreateWall(-27.46, 1.13, -8.9, 2, 7, 1.9, 0, 18);
+        CreateWall(-27.46, 1.13, 8.9, 2, 7, 1.9, 0, 19);
+        CreateWall(-27.46, 1.13, 15.91, 2, 7, 1.9, 0, 20);
+        CreateWall(-27.45, 1.03, 0.02, 1.6, 5.33, 0.8, 0, 21);
+        CreateWall(-25.84, 0.26, 0.02, 1.6, 5.33, 0.8, 0, 22);
+        CreateWall(-23.147, -0.14, 0.02, 3.8, 4, 0.8, 0, 23);
+        CreateWall(-20.923, -1.59, 0.02, 0.7, 4, 0.8, 0, 24);
+        CreateWall(-27.82, -0.562, 0.02, 2, 1, 7, 0, 25);
+        CreateWall(-26.31, -0.562, 0.02, 1, 1, 4.5, 0, 26);
+        CreateWall(-25.313, -0.562, 0.02, 1, 1, 2.5, 0, 27);
+        CreateWall(27.34, 1.03, 0.02, 1.6, 5.33, 0.8, 0, 28);
+        CreateWall(25.75, 0.26, 0.02, 1.6, 5.33, 0.8, 0, 29);
+        CreateWall(23.06, -0.14, 0.02, 3.8, 4, 0.8, 0, 30);
+        CreateWall(20.9, -1.59, 0.02, 0.7, 4, 0.8, 0, 31);
+        CreateWall(28.01, -0.562, 0.02, 2, 1, 7, 0, 32);
+        CreateWall(26.52, -0.562, 0.02, 1, 1, 4.5, 0, 33);
+        CreateWall(25.51, -0.562, 0.02, 1, 1, 2.5, 0, 34);
+        CreateWall(14.25, -0.21, 10.44, 3.8, 4, 0.8, 0, 35);
+        CreateWall(16.492, -1.6, 10.44, 0.7, 4, 0.8, 0, 36);
+        CreateWall(-14.23, -0.21, 10.44, 3.8, 4, 0.8, 0, 37);
+        CreateWall(-16.48, -1.6, 10.44, 0.7, 4, 0.8, 0, 38);
+        CreateWall(-14.23, -0.21, -10.42, 3.8, 4, 0.8, 0, 39);
+        CreateWall(-16.48, -1.6, -10.42, 0.7, 4, 0.8, 0, 40);
+        CreateWall(14.26, -0.21, -10.42, 3.8, 4, 0.8, 0, 41);
+        CreateWall(16.497, -1.6, -10.42, 0.7, 4, 0.8, 0, 42);
+        CreateWall(13.456, -1.17, -9.224, 1.6, 3, 1.6, 0, 43);
+        CreateWall(13.456, -1.17, 9.22, 1.6, 3, 1.6, 0, 44);
+        CreateWall(-13.47, -1.17, -9.224, 1.6, 3, 1.6, 0, 45);
+        CreateWall(-13.47, -1.17, 9.22, 1.6, 3, 1.6, 0, 46);
+        CreateWall(-10.98, 1.13, 10.91, 2, 7, 2, 0, 47);
+        CreateWall(-4.01, 1.13, 10.91, 2, 7, 2, 0, 48);
+        CreateWall(-10.98, 1.13, 3.97, 2, 7, 2, 0, 49);
+        CreateWall(-4.01, 1.13, 3.97, 2, 7, 2, 0, 50);
+        CreateWall(-10.98, 1.13, -4.030001, 2, 7, 2, 0, 51);
+        CreateWall(-4.01, 1.13, -4.030001, 2, 7, 2, 0, 52);
+        CreateWall(-10.98, 1.13, -10.97, 2, 7, 2, 0, 53);
+        CreateWall(-4.01, 1.13, -10.97, 2, 7, 2, 0, 54);
+        CreateWall(4, 1.13, 10.91, 2, 7, 2, 0, 55);
+        CreateWall(10.97, 1.13, 10.91, 2, 7, 2, 0, 56);
+        CreateWall(4, 1.13, 3.97, 2, 7, 2, 0, 57);
+        CreateWall(10.97, 1.13, 3.97, 2, 7, 2, 0, 58);
+        CreateWall(4, 1.13, -4.030001, 2, 7, 2, 0, 59);
+        CreateWall(10.97, 1.13, -4.030001, 2, 7, 2, 0, 60);
+        CreateWall(4, 1.13, -10.97, 2, 7, 2, 0, 61);
+        CreateWall(10.97, 1.13, -10.97, 2, 7, 2, 0, 62);
+        CreateWall(27.85, 1.13, -27.85, 2, 7, 2, 0, 63);
+        CreateWall(-27.86, 1.13, -27.85, 2, 7, 2, 0, 64);
+        CreateWall(27.85, 1.13, 27.82, 2, 7, 2, 0, 65);
+        CreateWall(-27.86, 1.13, 27.82, 2, 7, 2, 0, 66);
+        CreateWall(0, 0.1160001, -24.9, 33.23, 4, 0.8, 0, 67);
+        CreateWall(-2.087, 2.7, -24.9, 3, 1.3, 0.8, 0, 68);
+        CreateWall(2.083, 2.7, -24.9, 3, 1.3, 0.8, 0, 69);
+        CreateWall(0, 3.991, -24.9, 6, 1.2, 0.8, 0, 70);
+        CreateWall(0, 0.1160001, 24.9, 33.23, 4, 0.8, 0, 71);
+        CreateWall(-2.087, 2.7, 24.9, 3, 1.3, 0.8, 0, 72);
+        CreateWall(2.083, 2.7, 24.9, 3, 1.3, 0.8, 0, 73);
+        CreateWall(0, 3.991, 24.9, 6, 1.2, 0.8, 0, 74);
+        CreateWall(0, -0.07300001, -26.67, 25.34, 1.9, 2.8, 0, 75);
+        CreateWall(0, -0.07300001, 26.67, 25.34, 1.9, 2.8, 0, 76);
+        CreateWall(-30, 2.3, 0, 2, 20, 62, 0, 77);
+        CreateWall(30, 2.3, 0, 2, 20, 62, 0, 78);
+        CreateWall(0, 2.3, -30, 62, 20, 2, 0, 79);
+        CreateWall(0, 2.3, 30, 62, 20, 2, 0, 80);
+    }
     else if (mapToLoad == MIRAGE)
     {
         mapToSet = MIRAGE;
@@ -1742,93 +1829,6 @@ void LoadAllCollisions(int mapToLoad)
         CreateWall(-5.42, 3.73, -0.2299995, 1.4, 8.97, 3.27, 3, 211);
         CreateWall(-5.42, 3.73, -5.299999, 1.4, 8.97, 2, 3, 212);
     }
-    else if (mapToLoad == FYSNOW)
-    {
-        mapToSet = FYSNOW;
-        allMaps[mapToLoad].CollisionsCount = 81;
-        allMaps[mapToLoad].AllWallsCollisions = malloc(allMaps[mapToLoad].CollisionsCount * sizeof(Wall));
-        CreateWall(-0.1639996, -1.6, 0.3489971, 62, 1, 62, 0, 0);
-        CreateWall(-0.1639996, 1.13, -28.53, 57, 7, 1, 0, 1);
-        CreateWall(-0.1639996, 1.13, 28.53, 57, 7, 1, 0, 2);
-        CreateWall(28.51, 1.13, -0.11, 1, 7, 57, 0, 3);
-        CreateWall(-28.53, 1.13, -0.11, 1, 7, 57, 0, 4);
-        CreateWall(-7.48, 1.13, 7.49, 10.6, 7, 7, 0, 5);
-        CreateWall(-7.48, 1.13, 7.49, 7, 7, 10.6, 0, 6);
-        CreateWall(7.49, 1.13, 7.49, 10.6, 7, 7, 0, 7);
-        CreateWall(7.489999, 1.13, 7.49, 7, 7, 10.6, 0, 8);
-        CreateWall(-7.48, 1.13, -7.489999, 10.6, 7, 7, 0, 9);
-        CreateWall(-7.48, 1.13, -7.489999, 7, 7, 10.6, 0, 10);
-        CreateWall(7.49, 1.13, -7.489999, 10.6, 7, 7, 0, 11);
-        CreateWall(7.489999, 1.13, -7.49, 7, 7, 10.6, 0, 12);
-        CreateWall(27.4, 1.13, -15.92, 2, 7, 1.9, 0, 13);
-        CreateWall(27.4, 1.13, -8.9, 2, 7, 1.9, 0, 14);
-        CreateWall(27.4, 1.13, 8.9, 2, 7, 1.9, 0, 15);
-        CreateWall(27.4, 1.13, 15.91, 2, 7, 1.9, 0, 16);
-        CreateWall(-27.46, 1.13, -15.92, 2, 7, 1.9, 0, 17);
-        CreateWall(-27.46, 1.13, -8.9, 2, 7, 1.9, 0, 18);
-        CreateWall(-27.46, 1.13, 8.9, 2, 7, 1.9, 0, 19);
-        CreateWall(-27.46, 1.13, 15.91, 2, 7, 1.9, 0, 20);
-        CreateWall(-27.45, 1.03, 0.02, 1.6, 5.33, 0.8, 0, 21);
-        CreateWall(-25.84, 0.26, 0.02, 1.6, 5.33, 0.8, 0, 22);
-        CreateWall(-23.147, -0.14, 0.02, 3.8, 4, 0.8, 0, 23);
-        CreateWall(-20.923, -1.59, 0.02, 0.7, 4, 0.8, 0, 24);
-        CreateWall(-27.82, -0.562, 0.02, 2, 1, 7, 0, 25);
-        CreateWall(-26.31, -0.562, 0.02, 1, 1, 4.5, 0, 26);
-        CreateWall(-25.313, -0.562, 0.02, 1, 1, 2.5, 0, 27);
-        CreateWall(27.34, 1.03, 0.02, 1.6, 5.33, 0.8, 0, 28);
-        CreateWall(25.75, 0.26, 0.02, 1.6, 5.33, 0.8, 0, 29);
-        CreateWall(23.06, -0.14, 0.02, 3.8, 4, 0.8, 0, 30);
-        CreateWall(20.9, -1.59, 0.02, 0.7, 4, 0.8, 0, 31);
-        CreateWall(28.01, -0.562, 0.02, 2, 1, 7, 0, 32);
-        CreateWall(26.52, -0.562, 0.02, 1, 1, 4.5, 0, 33);
-        CreateWall(25.51, -0.562, 0.02, 1, 1, 2.5, 0, 34);
-        CreateWall(14.25, -0.21, 10.44, 3.8, 4, 0.8, 0, 35);
-        CreateWall(16.492, -1.6, 10.44, 0.7, 4, 0.8, 0, 36);
-        CreateWall(-14.23, -0.21, 10.44, 3.8, 4, 0.8, 0, 37);
-        CreateWall(-16.48, -1.6, 10.44, 0.7, 4, 0.8, 0, 38);
-        CreateWall(-14.23, -0.21, -10.42, 3.8, 4, 0.8, 0, 39);
-        CreateWall(-16.48, -1.6, -10.42, 0.7, 4, 0.8, 0, 40);
-        CreateWall(14.26, -0.21, -10.42, 3.8, 4, 0.8, 0, 41);
-        CreateWall(16.497, -1.6, -10.42, 0.7, 4, 0.8, 0, 42);
-        CreateWall(13.456, -1.17, -9.224, 1.6, 3, 1.6, 0, 43);
-        CreateWall(13.456, -1.17, 9.22, 1.6, 3, 1.6, 0, 44);
-        CreateWall(-13.47, -1.17, -9.224, 1.6, 3, 1.6, 0, 45);
-        CreateWall(-13.47, -1.17, 9.22, 1.6, 3, 1.6, 0, 46);
-        CreateWall(-10.98, 1.13, 10.91, 2, 7, 2, 0, 47);
-        CreateWall(-4.01, 1.13, 10.91, 2, 7, 2, 0, 48);
-        CreateWall(-10.98, 1.13, 3.97, 2, 7, 2, 0, 49);
-        CreateWall(-4.01, 1.13, 3.97, 2, 7, 2, 0, 50);
-        CreateWall(-10.98, 1.13, -4.030001, 2, 7, 2, 0, 51);
-        CreateWall(-4.01, 1.13, -4.030001, 2, 7, 2, 0, 52);
-        CreateWall(-10.98, 1.13, -10.97, 2, 7, 2, 0, 53);
-        CreateWall(-4.01, 1.13, -10.97, 2, 7, 2, 0, 54);
-        CreateWall(4, 1.13, 10.91, 2, 7, 2, 0, 55);
-        CreateWall(10.97, 1.13, 10.91, 2, 7, 2, 0, 56);
-        CreateWall(4, 1.13, 3.97, 2, 7, 2, 0, 57);
-        CreateWall(10.97, 1.13, 3.97, 2, 7, 2, 0, 58);
-        CreateWall(4, 1.13, -4.030001, 2, 7, 2, 0, 59);
-        CreateWall(10.97, 1.13, -4.030001, 2, 7, 2, 0, 60);
-        CreateWall(4, 1.13, -10.97, 2, 7, 2, 0, 61);
-        CreateWall(10.97, 1.13, -10.97, 2, 7, 2, 0, 62);
-        CreateWall(27.85, 1.13, -27.85, 2, 7, 2, 0, 63);
-        CreateWall(-27.86, 1.13, -27.85, 2, 7, 2, 0, 64);
-        CreateWall(27.85, 1.13, 27.82, 2, 7, 2, 0, 65);
-        CreateWall(-27.86, 1.13, 27.82, 2, 7, 2, 0, 66);
-        CreateWall(0, 0.1160001, -24.9, 33.23, 4, 0.8, 0, 67);
-        CreateWall(-2.087, 2.7, -24.9, 3, 1.3, 0.8, 0, 68);
-        CreateWall(2.083, 2.7, -24.9, 3, 1.3, 0.8, 0, 69);
-        CreateWall(0, 3.991, -24.9, 6, 1.2, 0.8, 0, 70);
-        CreateWall(0, 0.1160001, 24.9, 33.23, 4, 0.8, 0, 71);
-        CreateWall(-2.087, 2.7, 24.9, 3, 1.3, 0.8, 0, 72);
-        CreateWall(2.083, 2.7, 24.9, 3, 1.3, 0.8, 0, 73);
-        CreateWall(0, 3.991, 24.9, 6, 1.2, 0.8, 0, 74);
-        CreateWall(0, -0.07300001, -26.67, 25.34, 1.9, 2.8, 0, 75);
-        CreateWall(0, -0.07300001, 26.67, 25.34, 1.9, 2.8, 0, 76);
-        CreateWall(-30, 2.3, 0, 2, 20, 62, 0, 77);
-        CreateWall(30, 2.3, 0, 2, 20, 62, 0, 78);
-        CreateWall(0, 2.3, -30, 62, 20, 2, 0, 79);
-        CreateWall(0, 2.3, 30, 62, 20, 2, 0, 80);
-    }
 }
 
 /**
@@ -1925,6 +1925,16 @@ void LoadAllStairs(int mapToLoad)
         CreateStairs(-18.23, -12.492, -21.078, -19.386, -0.073, 3.277, 1, 2);
         CreateStairs(12.25, 18.043, 19.73, 21.34, -0.07300002, 3.298, 3, 3);
     }
+    else if (mapToLoad == FYSNOW)
+    {
+        mapToSet = FYSNOW;
+        allMaps[mapToLoad].StairsCount = 4;
+        allMaps[mapToLoad].AllStairs = malloc(allMaps[mapToLoad].StairsCount * sizeof(Stairs));
+        CreateStairs(13.065, 16.494, 25.289, 28.067, -0.073, 1.849, 1, 0);
+        CreateStairs(-16.55, -13.06, -28.057, -25.284, -0.07300002, 1.875, 3, 1);
+        CreateStairs(13.066, 16.43, -28.064, -25.279, -0.073, 1.836, 1, 2);
+        CreateStairs(-16.36, -13.073, 25.28, 28.064, -0.07300002, 1.851, 3, 3);
+    }
     else if (mapToLoad == MIRAGE)
     {
         mapToSet = MIRAGE;
@@ -1945,16 +1955,6 @@ void LoadAllStairs(int mapToLoad)
         CreateStairs(22.614, 31.271, 32.19, 41.61, -0.041, 2.498, 1, 12);
         CreateStairs(-28.904, -27.29, 49.363, 55.9, 4.877, 5.707, 1, 13);
         CreateStairs(-28.843, -23.98, 48.492, 50, 4.88, 5.697, 0, 14);
-    }
-    else if (mapToLoad == FYSNOW)
-    {
-        mapToSet = FYSNOW;
-        allMaps[mapToLoad].StairsCount = 4;
-        allMaps[mapToLoad].AllStairs = malloc(allMaps[mapToLoad].StairsCount * sizeof(Stairs));
-        CreateStairs(13.065, 16.494, 25.289, 28.067, -0.073, 1.849, 1, 0);
-        CreateStairs(-16.55, -13.06, -28.057, -25.284, -0.07300002, 1.875, 3, 1);
-        CreateStairs(13.066, 16.43, -28.064, -25.279, -0.073, 1.836, 1, 2);
-        CreateStairs(-16.36, -13.073, 25.28, 28.064, -0.07300002, 1.851, 3, 3);
     }
 }
 
@@ -2017,6 +2017,16 @@ void LoadAllBombZones(int mapToLoad)
         int nearWaypoints0[26] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25};
         SetBombZone(-1.76, -28.5, 4, 4, 0, 24, 26, nearWaypoints0); // A
     }
+    else if (mapToLoad == FYSNOW)
+    {
+        // Set the number of bomb zones
+        TwoSites = 0;
+        allMaps[mapToLoad].BombsTriggersCollisionsCount = 1;
+        allMaps[mapToLoad].AllBombsTriggersCollisions = malloc(allMaps[mapToLoad].BombsTriggersCollisionsCount * sizeof(Site));
+
+        int nearWaypoints0[23] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22};
+        SetBombZone(-1.75, -35, 4, 4, 0, 15, 23, nearWaypoints0); // A
+    }
     else if (mapToLoad == MIRAGE)
     {
         // Set the number of bomb zones
@@ -2030,16 +2040,6 @@ void LoadAllBombZones(int mapToLoad)
         int nearWaypoints1[8] = {26,29,30,31,32,33,34,35};
         SetBombZone(32.297, -24.54, 9, 8.5, 1, 32, 8, nearWaypoints1); //B
         
-    }
-    else if (mapToLoad == FYSNOW)
-    {
-        // Set the number of bomb zones
-        TwoSites = 0;
-        allMaps[mapToLoad].BombsTriggersCollisionsCount = 1;
-        allMaps[mapToLoad].AllBombsTriggersCollisions = malloc(allMaps[mapToLoad].BombsTriggersCollisionsCount * sizeof(Site));
-
-        int nearWaypoints0[23] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22};
-        SetBombZone(-1.75, -35, 4, 4, 0, 15, 23, nearWaypoints0); // A
     }
 }
 /**

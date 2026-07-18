@@ -49,15 +49,15 @@
 #include "m_2000Part0_bin.h"
 #include "m_2000Part1_bin.h"
 
+#include "m_FySnowPart0_bin.h"
+#include "m_FySnowPart1_bin.h"
+
 #include "m_MiragePart0_bin.h"
 #include "m_MiragePart1_bin.h"
 #include "m_MiragePart2_bin.h"
 #include "m_MiragePart3_bin.h"
 #include "m_MiragePart4_bin.h"
 #include "m_MiragePart5_bin.h"
-
-#include "m_FySnowPart0_bin.h"
-#include "m_FySnowPart1_bin.h"
 
 //--
 

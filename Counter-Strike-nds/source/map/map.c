@@ -97,8 +97,8 @@ void LoadMapTextures()
     allMaps[DUST2_2x2].image = (void *)tex_map_image_dust2_2x2_bin;
     allMaps[AIM_MAP].image = (void *)tex_map_image_aim_bin;
     allMaps[B2000].image = (void *)tex_map_image_2000_bin;
-    allMaps[MIRAGE].image = (void *)tex_map_image_mirage_bin;
     allMaps[FYSNOW].image = (void *)tex_map_image_fysnow_bin;
+    allMaps[MIRAGE].image = (void *)tex_map_image_mirage_bin;
 
     // allMaps[DUST2].MapImage = (void *)tex_Dust2_bin;
     // allMaps[AIM_MAP].MapImage = (void *)tex_General_Map_bin;
@@ -115,8 +115,8 @@ void SetMapNames()
     allMaps[DUST2_2x2].name = "Dust II_2x2";
     allMaps[AIM_MAP].name = "Aim_Map";
     allMaps[B2000].name = "$2000$";
-    allMaps[MIRAGE].name = "Mirage(Cpl_Strike)";
     allMaps[FYSNOW].name = "Fy_Snow";
+    allMaps[MIRAGE].name = "Mirage(Cpl_Strike)";
 }
 
 /**
@@ -130,8 +130,8 @@ void SetMapPartyMode()
     allMaps[DUST2_2x2].forcePartyMode = -1;
     allMaps[AIM_MAP].forcePartyMode = -1;
     allMaps[B2000].forcePartyMode = -1;
-    allMaps[MIRAGE].forcePartyMode = -1;
     allMaps[FYSNOW].forcePartyMode = -1;
+    allMaps[MIRAGE].forcePartyMode = -1;
 }
 
 /**
@@ -185,15 +185,6 @@ void SetMapCameraPosition()
     allMaps[B2000].cameraLookPosition.y = 3.2;
     allMaps[B2000].cameraLookPosition.z = -0;
 
-    // Mirage
-    allMaps[MIRAGE].cameraPosition.x = -1;
-    allMaps[MIRAGE].cameraPosition.y = 8.5;
-    allMaps[MIRAGE].cameraPosition.z = 43;
-
-    allMaps[MIRAGE].cameraLookPosition.x = -16;
-    allMaps[MIRAGE].cameraLookPosition.y = 0;
-    allMaps[MIRAGE].cameraLookPosition.z = 56;
-
     // Fy_Snow
     allMaps[FYSNOW].cameraPosition.x = -23;
     allMaps[FYSNOW].cameraPosition.y = 5;
@@ -202,6 +193,15 @@ void SetMapCameraPosition()
     allMaps[FYSNOW].cameraLookPosition.x = -10;
     allMaps[FYSNOW].cameraLookPosition.y = -2;
     allMaps[FYSNOW].cameraLookPosition.z = -15;
+
+    // Mirage
+    allMaps[MIRAGE].cameraPosition.x = -1;
+    allMaps[MIRAGE].cameraPosition.y = 8.5;
+    allMaps[MIRAGE].cameraPosition.z = 43;
+
+    allMaps[MIRAGE].cameraLookPosition.x = -16;
+    allMaps[MIRAGE].cameraLookPosition.y = 0;
+    allMaps[MIRAGE].cameraLookPosition.z = 56;
 }
 
 /**
@@ -285,24 +285,6 @@ void AddAllSpawnPoints()
 
     SetAngles(B2000, -256, 0);
 
-    // Mirage
-
-    AddSpawnPoint(MIRAGE, TERRORISTS, 0, 22.5, 2.45, 58);
-    AddSpawnPoint(MIRAGE, TERRORISTS, 1, 25, 2.45, 58);
-    AddSpawnPoint(MIRAGE, TERRORISTS, 2, 20, 2.45, 58);
-    AddSpawnPoint(MIRAGE, TERRORISTS, 3, 22.5, 2.45, 61);
-    AddSpawnPoint(MIRAGE, TERRORISTS, 4, 15, 2.45, 61);
-    AddSpawnPoint(MIRAGE, TERRORISTS, 5, 20, 2.45, 61);
-
-    AddSpawnPoint(MIRAGE, COUNTERTERRORISTS, 0, -22.5, 0, -10);
-    AddSpawnPoint(MIRAGE, COUNTERTERRORISTS, 1, -20, 0, -10);
-    AddSpawnPoint(MIRAGE, COUNTERTERRORISTS, 2, -25, 0, -10);
-    AddSpawnPoint(MIRAGE, COUNTERTERRORISTS, 3, -22.5, 0, -14);
-    AddSpawnPoint(MIRAGE, COUNTERTERRORISTS, 4, -20, 0, -14);
-    AddSpawnPoint(MIRAGE, COUNTERTERRORISTS, 5, -25, 0, -14);
-
-    SetAngles(MIRAGE, 0, -256);
-
     // Fy_SNow
     AddSpawnPoint(FYSNOW, TERRORISTS, 0, 0, 0, -16);
     AddSpawnPoint(FYSNOW, TERRORISTS, 1, -7, 0, -16);
@@ -319,6 +301,24 @@ void AddAllSpawnPoints()
     AddSpawnPoint(FYSNOW, COUNTERTERRORISTS, 5, 7, 0, 21);
 
     SetAngles(FYSNOW, -256, 0);
+
+    // Mirage
+
+    AddSpawnPoint(MIRAGE, TERRORISTS, 0, 22.5, 2.45, 58);
+    AddSpawnPoint(MIRAGE, TERRORISTS, 1, 25, 2.45, 58);
+    AddSpawnPoint(MIRAGE, TERRORISTS, 2, 20, 2.45, 58);
+    AddSpawnPoint(MIRAGE, TERRORISTS, 3, 22.5, 2.45, 61);
+    AddSpawnPoint(MIRAGE, TERRORISTS, 4, 25, 2.45, 61);
+    AddSpawnPoint(MIRAGE, TERRORISTS, 5, 20, 2.45, 61);
+
+    AddSpawnPoint(MIRAGE, COUNTERTERRORISTS, 0, -22.5, 0, -10);
+    AddSpawnPoint(MIRAGE, COUNTERTERRORISTS, 1, -20, 0, -10);
+    AddSpawnPoint(MIRAGE, COUNTERTERRORISTS, 2, -25, 0, -10);
+    AddSpawnPoint(MIRAGE, COUNTERTERRORISTS, 3, -22.5, 0, -14);
+    AddSpawnPoint(MIRAGE, COUNTERTERRORISTS, 4, -20, 0, -14);
+    AddSpawnPoint(MIRAGE, COUNTERTERRORISTS, 5, -25, 0, -14);
+
+    SetAngles(MIRAGE, 0, -256);
 }
 
 /**
@@ -400,19 +400,6 @@ void loadMapModels(int mapToLoad)
             TextureToLoad(1);
         }
     }
-    else if (mapToLoad == MIRAGE)
-    {
-        mapPartCount = 6;
-        mapPos.x = 0;
-        mapPos.y = -1.5 + 0.5;
-        mapPos.z = 0;
-        Scale.x = Scale.y = Scale.z = 41308;
-
-        if(CurrentTexture == 2)
-        {
-            TextureToLoad(1);
-        }
-    }
     else if (mapToLoad == FYSNOW)
     {
         mapPartCount = 2;
@@ -424,6 +411,19 @@ void loadMapModels(int mapToLoad)
         if(CurrentTexture == 1)
         {
             TextureToLoad(2);
+        }
+    }
+    else if (mapToLoad == MIRAGE)
+    {
+        mapPartCount = 6;
+        mapPos.x = 0;
+        mapPos.y = -1.5 + 0.5;
+        mapPos.z = 0;
+        Scale.x = Scale.y = Scale.z = 41308;
+
+        if(CurrentTexture == 2)
+        {
+            TextureToLoad(1);
         }
     }
 
@@ -475,6 +475,11 @@ void loadMapModels(int mapToLoad)
         NE_ModelLoadStaticMesh(map->models[0].Model, (u32 *)m_2000Part0_bin);
         NE_ModelLoadStaticMesh(map->models[1].Model, (u32 *)m_2000Part1_bin);
     }
+    else if (mapToLoad == FYSNOW)
+    {
+        NE_ModelLoadStaticMesh(map->models[0].Model, (u32 *)m_FySnowPart0_bin);
+        NE_ModelLoadStaticMesh(map->models[1].Model, (u32 *)m_FySnowPart1_bin);
+    }
     else if (mapToLoad == MIRAGE)
     {
         NE_ModelLoadStaticMesh(map->models[0].Model, (u32 *)m_MiragePart0_bin);
@@ -483,11 +488,6 @@ void loadMapModels(int mapToLoad)
         NE_ModelLoadStaticMesh(map->models[3].Model, (u32 *)m_MiragePart3_bin);
         NE_ModelLoadStaticMesh(map->models[4].Model, (u32 *)m_MiragePart4_bin);
         NE_ModelLoadStaticMesh(map->models[5].Model, (u32 *)m_MiragePart5_bin);
-    }
-    else if (mapToLoad == FYSNOW)
-    {
-        NE_ModelLoadStaticMesh(map->models[0].Model, (u32 *)m_FySnowPart0_bin);
-        NE_ModelLoadStaticMesh(map->models[1].Model, (u32 *)m_FySnowPart1_bin);
     }
 }
 

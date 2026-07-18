@@ -14,8 +14,8 @@
 #include "tex_map_image_dust2_2x2_bin.h"
 #include "tex_map_image_aim_bin.h"
 #include "tex_map_image_2000_bin.h"
-#include "tex_map_image_mirage_bin.h"
 #include "tex_map_image_fysnow_bin.h"
+#include "tex_map_image_mirage_bin.h"
 
 enum mapEnum
 {
@@ -24,8 +24,8 @@ enum mapEnum
     DUST2_2x2 = 2,
     AIM_MAP = 3,
     B2000 = 4,
-    MIRAGE = 5,
-    FYSNOW = 6
+    FYSNOW = 5,
+    MIRAGE = 6
 };
 
 typedef struct //
