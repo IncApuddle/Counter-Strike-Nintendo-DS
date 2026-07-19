@@ -1,5 +1,5 @@
 # New version! 1.1.1
-New maps(Aim_map, $2000$, fy_snow, De_Mirage,),<br/>
+New maps(Aim_map, "$2000$", fy_snow, De_Mirage,),<br/>
 New modes(Deathmatch, Gungame\Arms Race),<br/>
 New texture for Terrorists,<br/>
 New player models (Animated and Static),<br/>
