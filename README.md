@@ -5,8 +5,8 @@ New texture for Terrorists,<br/>
 New player models (Animated and Static),<br/>
 Now you can choose to which server to connect via IP.
 
-![](/Screenshots/1.png)
-![](/Screenshots/2.png)
+![image](/Screenshots/1.png)
+![image](/Screenshots/2.png)
 
 # Counter Strike Nintendo DS
 **Counter Strike demake on Nintendo DS with online multiplayer** (Works on **emulator** and on **real hardware**).
