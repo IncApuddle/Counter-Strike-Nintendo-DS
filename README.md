@@ -1,6 +1,6 @@
 # New version! 1.1.1
-New maps,<br/>
-New modes,<br/>
+New maps(Aim_map, $2000$, fy_snow, De_Mirage,),<br/>
+New modes(Deathmatch, Gungame\Arms Race),<br/>
 New texture for Terrorists,<br/>
 New player models (Animated and Static),<br/>
 Now you can choose to which server to connect via IP.
