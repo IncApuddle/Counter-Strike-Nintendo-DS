@@ -48,12 +48,13 @@ There is no emulator with **online** support on **Android** at this time.<br/>
 4. Search for an access point and add your Wi-Fi
 
 ## How to compile the game
-1. Install [DevKitPro](https://github.com/devkitPro/installer/releases/latest) and check the **NDS Development** option
-2. Download the modified version of Nitro Engine [here](https://github.com/Fewnity/nitro-engine) and put the folder like this : **"C:\devkitPro\nitro-engine"**
-3. Compile the engine (Open a **CMD**, write **"cd C:\devkitPro\nitro-engine"** then **"make"**)
-4. Put the game source code folder in **"C:\devkitPro\nitro-engine\examples"**
-5. Compile the game (Open a **CMD**, write **"cd C:\devkitPro\nitro-engine\examples\Counter-Strike-nds"** then **"make"**)
-6. Copy the **Counter-Strike-nds.nds** from the project folder and the **soundbank.bin** file from the build folder
+1. Установите BlocksDS: https://blocksds.skylyrac.net/docs/setup/
+2. Установите Nitro Engine 0.15.4 одним из способов:
+   - пакетом: `wf-pacman -Sy blocksds-nitroengine`;
+   - из исходников: в папке `nitro-engine-0.15.4` выполните `make install`.
+     Будут собраны обе версии библиотеки, `libNE` и `libNE_debug`.
+3. В терминале **MSYS2 UCRT64** (не в cmd.exe) перейдите в папку игры
+   (`cd /opt/Counter-Strike-nds`) и выполните `make`. Получится файл `counter_strike_ds.nds`.
 
 Note : To avoid coding collisions, path finding..., there is an Unity project to export code : https://github.com/Fewnity/Counter-Strike-DS-Unity-Project
 
