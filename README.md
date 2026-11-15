@@ -3,7 +3,7 @@
 
 
 # New version! 1.1.2
-The game now ported to a new version of Nitro Engine (0.16)
+The game now ported to a new version of Nitro Engine (0.16)<br/>
 New maps(Aim_map, "$2000$", fy_snow, De_Mirage,),<br/>
 New modes(Deathmatch, Gungame\Arms Race),<br/>
 New "Mod" menu, <br/>
