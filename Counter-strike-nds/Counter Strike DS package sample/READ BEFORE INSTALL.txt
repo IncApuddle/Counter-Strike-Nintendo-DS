@@ -1,0 +1,23 @@
+- For EACH new update, replace all the files with the new files.
+
+- Since the BlocksDS / Nitro Engine 0.15 version, the sound bank and the music
+  are stored inside counter_strike_ds.nds. You only need to copy the .nds file.
+  The save file (counter_strike_ds.sav) is created on the SD card.
+
+- If there is no sound:
+
+Make sure that your loader passes the path of the .nds file to the game (most
+modern loaders do). If it doesn't, the game can't open its own files. In that
+case, copy soundbank.bin and counter_strike_music.raw to the root of your SD
+card (example: C:/soundbank.bin).
+Or for Nintendo 2DS/3DS, try to put all the files in "roms/nds"
+
+
+- If the game crash with a 2DS/3DS :
+
+Go in the game settings and uncheck "Use Rumble Pack" and check "3DS mode".
+
+
+- To keep saves on an emulator, enable DLDI SD card emulation. Melon DS supports
+  DLDI: https://melonds.kuribo64.net/downloads.php
+  "make sdimage" creates an SD card image from the "sdroot" folder.
