@@ -51,7 +51,7 @@ There is no emulator with **online** support on **Android** at this time.<br/>
 1. Install BlocksDS: https://blocksds.skylyrac.net/docs/setup/
 2. Install Nitro Engine 0.15.4 in one of the following ways:
   - using the package: `wf-pacman -Sy blocksds-nitroengine`;
-  - from the source code: in the `nitro-engine-0.15.4` folder, run `make install`.
+  - from the source code: in the `nitro-engine-0.15.4` folder, run `make install`.<br/>
   This will build both versions of the library, `libNE` and `libNE_debug`.
 3. In the **MSYS2 UCRT64** terminal (not cmd.exe), navigate to the game folder
 (`cd /opt/Counter-Strike-nds`) and run `make`. This will create the file `counter_strike_ds.nds`.
@@ -59,9 +59,12 @@ There is no emulator with **online** support on **Android** at this time.<br/>
 Note : To avoid coding collisions, path finding..., there is an Unity project to export code : https://github.com/Fewnity/Counter-Strike-DS-Unity-Project
 
 ## TODO
-- [ ] Ad hoc (Ni-Fi) multiplayer : **Difficult**
+- [ ] Ad hoc (Ni-Fi) multiplayer
 - [ ] Disable sleep mode in multiplayer : **?**
-- [ ] Add fall damage : **Easy**
-- [ ] Smoke doesn't affect bots at this time : **Easy**
-- [ ] Languege system : **Medium/Difficult**
-- [ ] Add more maps : **Difficult**
+- [ ] Add fall damage
+- [ ] Smoke doesn't affect bots at this time
+- [ ] Languege system
+- [ ] Add more maps
+- [ ] Add hostage rescue mode
+- [ ] make a few strategies for bots
+- [ ] Add dropping weapons
