@@ -48,13 +48,13 @@ There is no emulator with **online** support on **Android** at this time.<br/>
 4. Search for an access point and add your Wi-Fi
 
 ## How to compile the game
-1. Установите BlocksDS: https://blocksds.skylyrac.net/docs/setup/
-2. Установите Nitro Engine 0.15.4 одним из способов:
-   - пакетом: `wf-pacman -Sy blocksds-nitroengine`;
-   - из исходников: в папке `nitro-engine-0.15.4` выполните `make install`.
-     Будут собраны обе версии библиотеки, `libNE` и `libNE_debug`.
-3. В терминале **MSYS2 UCRT64** (не в cmd.exe) перейдите в папку игры
-   (`cd /opt/Counter-Strike-nds`) и выполните `make`. Получится файл `counter_strike_ds.nds`.
+1. Install BlocksDS: https://blocksds.skylyrac.net/docs/setup/
+2. Install Nitro Engine 0.15.4 in one of the following ways:
+  - using the package: `wf-pacman -Sy blocksds-nitroengine`;
+  - from the source code: in the `nitro-engine-0.15.4` folder, run `make install`.
+  This will build both versions of the library, `libNE` and `libNE_debug`.
+3. In the **MSYS2 UCRT64** terminal (not cmd.exe), navigate to the game folder
+(`cd /opt/Counter-Strike-nds`) and run `make`. This will create the file `counter_strike_ds.nds`.
 
 Note : To avoid coding collisions, path finding..., there is an Unity project to export code : https://github.com/Fewnity/Counter-Strike-DS-Unity-Project
 
