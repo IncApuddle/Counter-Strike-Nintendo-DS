@@ -1,4 +1,9 @@
-# New version! 1.1.1
+# Counter Strike Nintendo DS
+**Counter Strike demake on Nintendo DS with online multiplayer** (Works on **emulator** and on **real hardware**).
+
+
+# New version! 1.1.2
+The game now ported to a new version of Nitro Engine (0.16)
 New maps(Aim_map, "$2000$", fy_snow, De_Mirage,),<br/>
 New modes(Deathmatch, Gungame\Arms Race),<br/>
 New "Mod" menu, <br/>
@@ -8,36 +13,19 @@ Now you can choose to which server to connect via IP.
 
 <img src="/Screenshots/1.png" width="31%"> <img src="/Screenshots/2.png" width="31%"> <img src="/Screenshots/3.png" width="31%">
 
-# Counter Strike Nintendo DS
-**Counter Strike demake on Nintendo DS with online multiplayer** (Works on **emulator** and on **real hardware**).
-
-> [!WARNING]
-> The multiplayer server is now closed. Single player mode is still available!
-
 For **multiplayer** on **emulator**, please use [melonDS](https://melonds.kuribo64.net/downloads.php).<br/>
 There is no emulator with **online** support on **Android** at this time.<br/>
-**Ad hoc (Ni-Fi) multiplayer** is not supported (I'm looking for help with that!)<br/>
-
-![image](https://user-images.githubusercontent.com/39272935/176778790-14707835-d15d-473b-baeb-3cb51864b004.png)
-![image](https://user-images.githubusercontent.com/39272935/176778935-59555499-c40e-4325-83f8-8d89778a75af.png)
 
 ## How to install the game
 
 ### On DS flashcard
 1. Put the .nds on the microSD card
-2. Put soundbank.bin and counter_strike_music.raw on the root of the microSD card
 
 ### On DSi/3DS SD card
 1. Install [TWiLight Menu++](https://wiki.ds-homebrew.com/twilightmenu/installing)
 2. Put the .nds on the SD card
-3. Put soundbank.bin and counter_strike_music.raw on the root of the SD card
-4. In TWiLight Menu++, find the game and press Y on it
-5. Set **Run in** to **DS mode*
-
-### On emulator (melonDS) :
-To have sounds and music, you need to use a virtual SD card, because sounds and music are not included in the .nds file.
-
-- Set in the DLDI settings (**Config**->**Emu settings**->**DLDI**) the counter_strike_sd.raw file as SD card. Or create your own [here](https://melonds.kuribo64.net/board/thread.php?pid=2902) and put soundbank.bin and counter_strike_music.raw in the virtual SD card
+3. In TWiLight Menu++, find the game and press Y on it
+4. Set **Run in** to **DS mode*
 
 ## Network Setup
 - Create a Wi-Fi network without a password or with WEP security. You can use your Android phone, a compatible router, or a Linux/MacOS computer with Wi-Fi adapter to do a hotspot
@@ -74,13 +62,5 @@ Note : To avoid coding collisions, path finding..., there is an Unity project to
 - [ ] Disable sleep mode in multiplayer : **?**
 - [ ] Add fall damage : **Easy**
 - [ ] Smoke doesn't affect bots at this time : **Easy**
-- [ ] Online chat (empty menu already exists) : **Medium**
-- [ ] Create a NitroFS version for sounds and musics (and keep the FAT version for better compatibility) : **Medium**
-- [ ] Put data in JSON files (weapons/equipments/bots names/ai waypoints) : **Medium**
-- [ ] Add Wingman mode : **Medium**
-- [ ] Add input profiles : **Medium**
-- [ ] Possibility to change cursor : **Medium**
-- [ ] Add bot difficulty : **Medium/Difficult**
-- [ ] Translate system : **Medium/Difficult**
+- [ ] Languege system : **Medium/Difficult**
 - [ ] Add more maps : **Difficult**
-- [ ] Optimise the map with a tiled textures system instead of duplicate model faces : **Difficult**
