@@ -60,6 +60,8 @@ There is emulator with **online** support on **Android**. RetroArch with MelonDS
 Note : To avoid coding collisions, path finding..., there is an Unity project to export code : https://github.com/Fewnity/Counter-Strike-DS-Unity-Project
 
 ## TODO
+- [ ] make a few strategies for bots
+- [ ] make shotgun reload work.
 - [ ] Ad hoc (Ni-Fi) multiplayer
 - [ ] Disable sleep mode in multiplayer : **?**
 - [ ] Add fall damage
@@ -67,5 +69,4 @@ Note : To avoid coding collisions, path finding..., there is an Unity project to
 - [ ] Languege system
 - [ ] Add more maps
 - [ ] Add hostage rescue mode
-- [ ] make a few strategies for bots
 - [ ] Add dropping weapons
