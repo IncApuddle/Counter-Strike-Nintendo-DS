@@ -57,7 +57,7 @@ There is emulator with **online** support on **Android**. RetroArch with MelonDS
 3. In the **MSYS2 UCRT64** terminal (not cmd.exe), navigate to the game folder
 (`cd /opt/Counter-Strike-nds`) and run `make`. This will create the file `counter_strike_ds.nds`.
 
-Note : To avoid coding collisions, path finding..., there is an Unity project to export code : https://github.com/Fewnity/Counter-Strike-DS-Unity-Project
+Note : To avoid coding collisions, path finding..., there is an Unity project to export code : https://github.com/IncApuddle/Counter-Strike-DS-Unity-Project-NewMaps-
 
 ## TODO
 - [ ] make a few strategies for bots
