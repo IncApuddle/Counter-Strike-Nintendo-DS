@@ -63,6 +63,38 @@ static inline bool CS_ModelIsAnimated(const NE_Model *model)
 int CS_MaterialTexLoadBMPtoRGB256(NE_Material *tex, NE_Palette *pal,
                                   const void *pointer, bool transpcolor);
 
+// The same loading in two steps. Loading a texture switches the VRAM banks to
+// LCD mode: if this happens while the screen is drawn, the image is broken for
+// a frame (the screen blinks). CS_TexturePrepareBMP() does the slow conversion
+// in main RAM at any time, CS_MaterialTexLoadPrepared() only copies the data to
+// VRAM (fast enough to be done during the vertical blank).
+typedef struct
+{
+    u8 *buffer;
+    u16 *palette;
+    int texwidth;  // Width in VRAM (power of 2)
+    int width;     // Real width of the image
+    int height;
+    int numcolors;
+} CS_PreparedTexture;
+
+int CS_TexturePrepareBMP(CS_PreparedTexture *out, const void *pointer);
+int CS_MaterialTexLoadPrepared(NE_Material *tex, NE_Palette *pal,
+                               const CS_PreparedTexture *prepared,
+                               bool transpcolor);
+void CS_TextureFreePrepared(CS_PreparedTexture *prepared);
+
+// Load a BMP texture without making the screens blink. The BMP is converted
+// now, but it is copied to VRAM by CS_TextureApplyDeferred(), at the start of
+// the vertical blank. Until then, the material keeps its old texture (a new
+// empty material is not drawn by the CS_2DDraw functions). The material and the
+// palette are replaced: pass the variables that hold them (if they are NULL,
+// they are created).
+int CS_TextureLoadDeferred(NE_Material **mat, NE_Palette **pal,
+                           const void *bmp, bool transpcolor);
+// Call right after NE_WaitForVBL()
+void CS_TextureApplyDeferred(void);
+
 // Textures loaded with CS_MaterialTexLoadBMPtoRGB256() may be wider than the
 // image (the width is padded to a power of 2). These functions draw only the
 // real image, like the old modified engine did. Use them instead of
@@ -78,8 +110,13 @@ void CS_SpriteSetMaterial(NE_Sprite *sprite, NE_Material *mat);
 // Delete a material or a palette only if it exists, and set the pointer to
 // NULL. Nitro Engine 0.15 crashes with NULL pointers, and the game deleted some
 // of them twice or before creating them.
+// Deferred texture loading (see CS_TextureLoadDeferred() below)
+void CS_TextureCancelDeferred(NE_Material **mat);
+
 static inline void CS_MaterialDeleteSafe(NE_Material **mat)
 {
+    // Forget a texture waiting to be loaded in this material
+    CS_TextureCancelDeferred(mat);
     if (*mat != NULL)
         NE_MaterialDelete(*mat);
     *mat = NULL;

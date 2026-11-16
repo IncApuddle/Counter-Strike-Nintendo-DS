@@ -222,6 +222,9 @@ enum connectionType Connection = UNSELECTED;
 // Local player pointer
 Player *localPlayer = &AllPlayers[0];
 
+// Set after a grenade throw, cleared when the fire button is released
+bool fireLockedAfterGrenade = false;
+
 // Wait before doing some action (for example, save the party), we want to wait to avoid a screen refresh at the same time and cause a visual bug
 int uiTimer = 0;
 // Action to do after the ui timer
@@ -1090,8 +1093,13 @@ void GameLoop()
 			setPlayerPositionAtSpawns(0);
 		}
 
+		// After a grenade throw, the fire button must be released before the
+		// next weapon can shoot (or plant the bomb).
+		if (fireLockedAfterGrenade && !isKey(FIRE_BUTTON))
+			fireLockedAfterGrenade = false;
+
 		// Gun shoot
-		if (canShoot && !localPlayer->isReloading && ((getPlayerCurrentGunIndex(localPlayer) < GunCount && ((isKey(FIRE_BUTTON) && getPlayerCurrentGun(localPlayer).holdFireButton) || (isKeyDown(FIRE_BUTTON) && !getPlayerCurrentGun(localPlayer).holdFireButton)) && localPlayer->GunWaitCount >= getPlayerCurrentGun(localPlayer).fireRate)) && !isUsingBomb)
+		if (canShoot && !fireLockedAfterGrenade && !localPlayer->isReloading && ((getPlayerCurrentGunIndex(localPlayer) < GunCount && ((isKey(FIRE_BUTTON) && getPlayerCurrentGun(localPlayer).holdFireButton) || (isKeyDown(FIRE_BUTTON) && !getPlayerCurrentGun(localPlayer).holdFireButton)) && localPlayer->GunWaitCount >= getPlayerCurrentGun(localPlayer).fireRate)) && !isUsingBomb)
 		{
 			if (((localPlayer->currentGunInInventory == 1 || localPlayer->currentGunInInventory == 2) && localPlayer->AllAmmoMagazine[localPlayer->currentGunInInventory - 1].AmmoCount > 0) || getPlayerCurrentGun(localPlayer).isKnife)
 			{
@@ -1155,7 +1163,7 @@ void GameLoop()
 				startReloadGun(0);
 			}
 		}
-		else if (getPlayerCurrentGunIndex(localPlayer) >= GunCount + shopGrenadeCount && isKey(FIRE_BUTTON) && !isLocalPlayerMoving())
+		else if (getPlayerCurrentGunIndex(localPlayer) >= GunCount + shopGrenadeCount && isKey(FIRE_BUTTON) && !fireLockedAfterGrenade && !isLocalPlayerMoving())
 		{
 			if (getPlayerCurrentGunIndex(localPlayer) == GunCount + shopGrenadeCount && CanPutBomb && roundState == PLAYING && !BombPlanted && (CanJumpRealTimer == 0 || CanJump > 0))
 			{
@@ -1217,6 +1225,7 @@ void GameLoop()
 
 				localPlayer->AllGunsInInventory[localPlayer->currentGunInInventory] = EMPTY;
 				ChangeGunInInventoryForLocalPlayer(1);
+				fireLockedAfterGrenade = true;
 
 				SendGrenade = true;
 				// Force player to send position
@@ -1623,6 +1632,7 @@ void UpdateEngineNotInGame()
 	}
 
 	NE_WaitForVBL(NE_CAN_SKIP_VBL);
+	CS_TextureApplyDeferred(); // Must be the first thing after the wait
 }
 
 /**
@@ -1706,6 +1716,7 @@ void UpdateEngine()
 	PlayerAnimUpdateAll();
 
 	NE_WaitForVBL(NE_CAN_SKIP_VBL);
+	CS_TextureApplyDeferred(); // Must be the first thing after the wait
 }
 
 /**

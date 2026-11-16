@@ -36,6 +36,16 @@ extern int gamepadTouchAreaY1;
 extern int gamepadTouchAreaY2;
 extern float sensitivity;
 extern float buttonsSensitivity;
+
+// Touch camera acceleration settings
+#define DEFAULT_TOUCH_ACCELERATION 0.1f
+#define MIN_TOUCH_ACCELERATION 0.0f
+#define MAX_TOUCH_ACCELERATION 0.3f
+#define DEFAULT_TOUCH_MAX_GAIN 2.5f
+#define MIN_TOUCH_MAX_GAIN 2.5f
+#define MAX_TOUCH_MAX_GAIN 4.0f
+extern float touchAcceleration;
+extern float touchMaxGain;
 extern int xAngleAdded;
 extern int yAngleAdded;
 extern Input inputs[INPUT_COUNT];

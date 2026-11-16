@@ -53,7 +53,7 @@
 int ping = 0;
 
 //IP to which player connecting
-char IpToGo[16] = "cs.fewnity.com";
+char IpToGo[16] = "192.168.0.1";
 
 // Socket
 int my_socket = 0;
@@ -103,6 +103,11 @@ char Values[2048] = ""; // Store all the values received from the wifi and waint
 // packet in two, and the server then read broken data.
 static char pendingSend[2048];
 static int pendingSendLength = 0;
+
+// Seconds without data from the server before disconnecting
+#define NETWORK_TIMEOUT_SECONDS 7
+
+static time_t lastDataTime = 0;
 
 // UDP (player positions). With TCP, a packet lost on the wifi blocks all the
 // following packets until it is sent again. Positions are sent over UDP: a lost
@@ -340,6 +345,12 @@ void connectToServer(char *url, bool LocalMode, int my_socket, enum JoinType opt
 
     pendingSendLength = 0;
     Values[0] = '\0';
+    // Reset the timeout of the previous connection. If the previous game
+    // ended while no data was received, the old time was kept and the new
+    // connection was closed at once ("No data for 7 seconds"): it was only
+    // possible to reconnect after restarting the game.
+    timeOut = 0;
+    lastDataTime = time(NULL);
     serverAddress = sain;
     udpClose();
     resetNetworkVariables();
@@ -1245,10 +1256,6 @@ void treatData()
  * @brief Read data from the game server
  *
  */
-// Seconds without data from the server before disconnecting
-#define NETWORK_TIMEOUT_SECONDS 7
-
-static time_t lastDataTime = 0;
 
 // Write free RAM and VRAM to the network log
 static void logNetworkMemory(const char *reason)

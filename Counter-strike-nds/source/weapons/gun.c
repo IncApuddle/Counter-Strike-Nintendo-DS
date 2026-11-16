@@ -333,31 +333,34 @@ void startReloadGun(int playerIndx)
 }
 
 /**
- * @brief Update weapons/grenades texture
+ * @brief Get the BMP of the gun in the hand of the viewed player
  *
+ * @return const void* BMP data, NULL if the player has no gun in the hand
+ */
+static const void *getViewedGunBMP(void)
+{
+    Player *viewedPlayer = &AllPlayers[CurrentCameraPlayer];
+    if (viewedPlayer->AllGunsInInventory[viewedPlayer->currentGunInInventory] == EMPTY)
+        return NULL;
+
+    int gunIndex = getPlayerCurrentGunIndex(viewedPlayer);
+    if (gunIndex < GunCount)
+        return getPlayerCurrentGun(viewedPlayer).texture; // Gun texture
+    else if (gunIndex < GunCount + shopGrenadeCount)
+        return AllGrenades[gunIndex - GunCount].texture; // Grenade texture
+    else
+        return allEquipments[gunIndex - GunCount - shopGrenadeCount].texture; // Equipment texture
+}
+
+/**
+ * @brief Update weapons/grenades texture. The texture is copied to VRAM at the
+ * start of the next vertical blank, so the screens don't blink.
  */
 void UpdateGunTexture()
 {
-    Player *viewedPlayer = &AllPlayers[CurrentCameraPlayer];
-    if (viewedPlayer->AllGunsInInventory[viewedPlayer->currentGunInInventory] != EMPTY)
-    {
-        // unload old texture
-        if (TopScreenSpritesMaterials[1] != NULL)
-        {
-            CS_MaterialDeleteSafe(&TopScreenSpritesMaterials[1]);
-            CS_PaletteDeleteSafe(&Palettes[4]);
-        }
+    const void *bmp = getViewedGunBMP();
+    if (bmp == NULL)
+        return;
 
-        // Reserve memory for new texture
-        TopScreenSpritesMaterials[1] = NE_MaterialCreate();
-        Palettes[4] = NE_PaletteCreate();
-
-        //  Load new texture
-        if (getPlayerCurrentGunIndex(viewedPlayer) < GunCount)
-            CS_MaterialTexLoadBMPtoRGB256(TopScreenSpritesMaterials[1], Palettes[4], getPlayerCurrentGun(viewedPlayer).texture, 1); // Load gun texture
-        else if (getPlayerCurrentGunIndex(viewedPlayer) < GunCount + shopGrenadeCount)
-            CS_MaterialTexLoadBMPtoRGB256(TopScreenSpritesMaterials[1], Palettes[4], AllGrenades[getPlayerCurrentGunIndex(viewedPlayer) - GunCount].texture, 1); // Load grenade texture
-        else
-            CS_MaterialTexLoadBMPtoRGB256(TopScreenSpritesMaterials[1], Palettes[4], allEquipments[getPlayerCurrentGunIndex(viewedPlayer) - GunCount - shopGrenadeCount].texture, 1); // Load equipment texture
-    }
+    CS_TextureLoadDeferred(&TopScreenSpritesMaterials[1], &Palettes[4], bmp, 1);
 }

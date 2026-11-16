@@ -24,7 +24,7 @@
 
 #define ButtonCount 8
 #define CheckBoxCount 3
-#define SliderCount 2
+#define SliderCount 3
 
 #define ColorTerroristsTeam RGB15(26, 26, 13)
 #define ColorCounterTeam RGB15(14, 20, 29)
@@ -81,6 +81,7 @@ enum UiMenu
     STATS = 20,
     ENTER_IP = 21,
     AI_Set = 22,
+    TOUCH_SETTINGS = 23,
 };
 
 enum shopCategory
@@ -178,6 +179,7 @@ void initControllerMenu();
 void initMainMenu();
 void initChatMenu();
 void initControlsSettingsMenu();
+void initTouchSettingsMenu();
 void initControlsChangeMenu();
 void initSelectionMapImageMenu();
 void initSelectionMapListMenu();
@@ -209,6 +211,7 @@ void drawServersMenu();
 void drawChangeNameMenu();
 void drawChatMenu();
 void drawControlsSettingsMenu();
+void drawTouchSettingsMenu();
 void drawAISettingsMenu();
 void drawControlsChangeMenu();
 void drawSelectionMapImageMenu();

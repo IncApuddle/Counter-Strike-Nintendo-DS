@@ -41,7 +41,7 @@ void Save()
         }
     }
 
-    char saveText[512];
+    char saveText[1024];
     sprintf(saveText, "game_version %s\n", GAME_VERSION);
     sprintf(saveText + strlen(saveText), "player_name %s\n", localPlayer->name);
     sprintf(saveText + strlen(saveText), "player_ip %s\n", IpToGo);
@@ -58,6 +58,8 @@ void Save()
     }
     sprintf(saveText + strlen(saveText), "cursor_transparency %f\n", cursorTransparency);
     sprintf(saveText + strlen(saveText), "buttons_sensitivity %f\n", buttonsSensitivity);
+    sprintf(saveText + strlen(saveText), "touch_acceleration %f\n", touchAcceleration);
+    sprintf(saveText + strlen(saveText), "touch_max_gain %f\n", touchMaxGain);
 
     // Stats
     sprintf(saveText + strlen(saveText), "total_bots_kill_count %d\n", totalBotsKillCount);
@@ -175,6 +177,20 @@ void Load()
                 float tmpbuttonsSensitivity;
                 fscanf(savefile, "%f", &tmpbuttonsSensitivity);
                 buttonsSensitivity = tmpbuttonsSensitivity;
+            }
+            else if (strcmp(word, "touch_acceleration") == 0)
+            {
+                float tmp;
+                fscanf(savefile, "%f", &tmp);
+                if (tmp >= MIN_TOUCH_ACCELERATION && tmp <= MAX_TOUCH_ACCELERATION)
+                    touchAcceleration = tmp;
+            }
+            else if (strcmp(word, "touch_max_gain") == 0)
+            {
+                float tmp;
+                fscanf(savefile, "%f", &tmp);
+                if (tmp >= MIN_TOUCH_MAX_GAIN && tmp <= MAX_TOUCH_MAX_GAIN)
+                    touchMaxGain = tmp;
             }
             else if (strcmp(word, "total_bots_kill_count") == 0)
             {

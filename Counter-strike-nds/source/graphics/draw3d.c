@@ -14,6 +14,7 @@
 #include "draw3d.h"
 #include "party.h"
 #include "player.h"
+#include "camera.h"
 
 int t1x = 0;
 int t1z = 0;
@@ -269,7 +270,12 @@ void Draw3DScene(void)
     // aren't created yet (pointers are NULL). devkitPro let the game read
     // address 0 without problems, BlocksDS stops the game (Data abort).
     bool sceneReady = map->AllZones != NULL && map->AllOcclusionZone != NULL && map->models != NULL &&
-                      AllPlayers[CurrentCameraPlayer].PlayerModel != NULL;
+                      AllPlayers[CurrentCameraPlayer].PlayerModel != NULL &&
+                      // Not joined a team yet (online "Join" screen): the
+                      // player sits at the map origin, which on Mirage is
+                      // outside every occlusion zone, so nothing was drawn.
+                      // Show the menu preview instead.
+                      !(localPlayer->Team == SPECTATOR && CurrentCameraPlayer == 0);
 
     if (!isShowingMap && sceneReady)
     {
@@ -396,6 +402,17 @@ void Draw3DScene(void)
         }
 
         DrawPlayers();
+    }
+    else if (!isShowingMap && map->models != NULL)
+    {
+        // Connecting to a server: the local player doesn't exist yet. Show
+        // the same view of the map as in the menus (before, the old code drew
+        // the map with a camera of a player that didn't exist yet).
+        // Force the menu camera: the game loop may have moved it to the
+        // player's position (map origin), which on Mirage looks at parts
+        // that the preview doesn't draw.
+        setCameraMapPosition();
+        Draw3DSceneNotInGame();
     }
 
     // Draw UI

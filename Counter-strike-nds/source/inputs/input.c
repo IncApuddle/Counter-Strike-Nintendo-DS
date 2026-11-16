@@ -155,8 +155,9 @@ static TouchAxis touchAxisX = {0, 0, 0, 0, 0};
 static TouchAxis touchAxisY = {0, 0, 0, 0, 0};
 
 // Settings (see the comment above)
-#define TOUCH_ACCELERATION 0.1f    // Extra rotation per unit of movement in a frame
-#define TOUCH_MAX_GAIN 2.5f         // Limit of the acceleration
+// Touch camera acceleration (set in Settings > Controls > Touch camera)
+float touchAcceleration = DEFAULT_TOUCH_ACCELERATION; // Extra rotation per unit of movement in a frame
+float touchMaxGain = DEFAULT_TOUCH_MAX_GAIN;          // Limit of the acceleration
 #define TOUCH_INERTIA_MIN_SPEED 1.0f // Slower movements stop when the stylus is lifted
 #define TOUCH_INERTIA_FRICTION_X 0.3f // Speed kept per frame (horizontal)
 #define TOUCH_INERTIA_FRICTION_Y 0.15f // Vertical inertia stops faster
@@ -169,9 +170,9 @@ static void touchAxisAdd(TouchAxis *axis, float movement)
         return;
 
     // Acceleration: fast movements turn more
-    float gain = 1 + TOUCH_ACCELERATION * fabsf(movement);
-    if (gain > TOUCH_MAX_GAIN)
-        gain = TOUCH_MAX_GAIN;
+    float gain = 1 + touchAcceleration * fabsf(movement);
+    if (gain > touchMaxGain)
+        gain = touchMaxGain;
     movement *= gain;
 
     int frames = axis->framesSinceMove;
@@ -301,6 +302,17 @@ void ReadTouchScreen(touchPosition touch, bool *NeedChangeScreen, bool *AlwaysUp
                 if ((touch.px >= AllSliders[currentSlider].xPos && touch.px <= AllSliders[currentSlider].xPos + AllSliders[currentSlider].xSize && touch.py >= AllSliders[currentSlider].yPos - 10 && touch.py <= AllSliders[currentSlider].yPos + 10))
                 {
                     *AllSliders[currentSlider].value = map(touch.px, AllSliders[currentSlider].xPos, AllSliders[currentSlider].xPos + AllSliders[currentSlider].xSize, AllSliders[currentSlider].min, AllSliders[currentSlider].max);
+                    // Snap the value to the slider step
+                    Slider *slider = &AllSliders[currentSlider];
+                    if (slider->step > 0)
+                    {
+                        float snapped = slider->min + roundf((*slider->value - slider->min) / slider->step) * slider->step;
+                        if (snapped < slider->min)
+                            snapped = slider->min;
+                        if (snapped > slider->max)
+                            snapped = slider->max;
+                        *slider->value = snapped;
+                    }
                 }
                 return;
             }

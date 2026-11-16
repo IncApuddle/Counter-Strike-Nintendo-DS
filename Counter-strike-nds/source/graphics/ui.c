@@ -51,6 +51,10 @@ void (*lastOpenedMenu)();
 bool haveToCallOnCloseMenu = false;
 // Is the menu using the quit button?
 bool useQuitButton = false;
+
+// Palettes of the gamepad menu buttons (jump and reload icons)
+static NE_Palette *controllerJumpPalette = NULL;
+static NE_Palette *controllerReloadPalette = NULL;
 // Number of checkbox in the menu to render
 int checkBoxToShow = 0;
 // Number of Slider in the menu to render
@@ -409,6 +413,10 @@ void ChangeMenu(int menuId)
     {
         initEnterIPMenu();
     }
+    else if (menuId == TOUCH_SETTINGS)
+    {
+        initTouchSettingsMenu();
+    }
 }
 
 /**
@@ -514,17 +522,13 @@ void ChangeShopElement(int Left)
     if (!FoundNewGun)
         Selected = FirstGunFound;
 
-    // Update the texture
-    CS_PaletteDeleteSafe(&Palettes[10]);
-    CS_MaterialDeleteSafe(&BottomScreenSpritesMaterials[6]);
-    BottomScreenSpritesMaterials[6] = NE_MaterialCreate();
-    Palettes[10] = NE_PaletteCreate();
+    // Update the texture (loaded during the vertical blank, no blinking)
     if (ShopCategory < EQUIPMENT)
-        CS_MaterialTexLoadBMPtoRGB256(BottomScreenSpritesMaterials[6], Palettes[10], AllGuns[Selected].texture, 1);
+        CS_TextureLoadDeferred(&BottomScreenSpritesMaterials[6], &Palettes[10], AllGuns[Selected].texture, 1);
     else if (ShopCategory == GRENADES)
-        CS_MaterialTexLoadBMPtoRGB256(BottomScreenSpritesMaterials[6], Palettes[10], GetAllGrenades()[Selected - GunCount].texture, 1);
+        CS_TextureLoadDeferred(&BottomScreenSpritesMaterials[6], &Palettes[10], GetAllGrenades()[Selected - GunCount].texture, 1);
     else if (ShopCategory == EQUIPMENT)
-        CS_MaterialTexLoadBMPtoRGB256(BottomScreenSpritesMaterials[6], Palettes[10], allEquipments[Selected - GunCount - shopGrenadeCount].texture, 1);
+        CS_TextureLoadDeferred(&BottomScreenSpritesMaterials[6], &Palettes[10], allEquipments[Selected - GunCount - shopGrenadeCount].texture, 1);
 
     SetSelectedGunShop(Selected);
 
@@ -566,12 +570,8 @@ void ChangeMap(int Left)
 
     MapImgToLoad = currentSelectionMap;
 
-    // Update texture
-    CS_PaletteDeleteSafe(&Palettes[10]);
-    CS_MaterialDeleteSafe(&BottomScreenSpritesMaterials[6]);
-    BottomScreenSpritesMaterials[6] = NE_MaterialCreate();
-    Palettes[10] = NE_PaletteCreate();
-    CS_MaterialTexLoadBMPtoRGB256(BottomScreenSpritesMaterials[6], Palettes[10], allMaps[currentSelectionMap].image, 1);
+    // Update texture (loaded during the vertical blank, no blinking)
+    CS_TextureLoadDeferred(&BottomScreenSpritesMaterials[6], &Palettes[10], allMaps[currentSelectionMap].image, 1);
 }
 
 void setQuitButton(bool value)
@@ -1861,10 +1861,8 @@ void initShopMenu()
 
     lastOpenedMenu = &initShopCategoriesMenu;
 
-    CS_MaterialDeleteSafe(&BottomScreenSpritesMaterials[6]);
-    CS_PaletteDeleteSafe(&Palettes[10]);
-    BottomScreenSpritesMaterials[6] = NE_MaterialCreate();
-    Palettes[10] = NE_PaletteCreate();
+    // The image is loaded during the vertical blank (no blinking). The old
+    // image stays until then.
 
     // OpenShopCategory() calls this function with SelectedGunShop = -1, and
     // then ChangeShopElement() loads the right image. The image of item -1 was
@@ -1874,20 +1872,20 @@ void initShopMenu()
     if (ShopCategory < EQUIPMENT)
     {
         if (selected >= 0 && selected < GunCount)
-            CS_MaterialTexLoadBMPtoRGB256(BottomScreenSpritesMaterials[6], Palettes[10], AllGuns[selected].texture, 1);
+            CS_TextureLoadDeferred(&BottomScreenSpritesMaterials[6], &Palettes[10], AllGuns[selected].texture, 1);
     }
     else if (ShopCategory == GRENADES)
     {
         int index = selected - GunCount;
         if (index >= 0 && index < shopGrenadeCount)
-            CS_MaterialTexLoadBMPtoRGB256(BottomScreenSpritesMaterials[6], Palettes[10], GetAllGrenades()[index].texture, 1);
+            CS_TextureLoadDeferred(&BottomScreenSpritesMaterials[6], &Palettes[10], GetAllGrenades()[index].texture, 1);
     }
     else if (ShopCategory == EQUIPMENT)
     {
         // This used the grenades array instead of the equipment array
         int index = selected - GunCount - shopGrenadeCount;
         if (index >= 0 && index < equipementCount)
-            CS_MaterialTexLoadBMPtoRGB256(BottomScreenSpritesMaterials[6], Palettes[10], allEquipments[index].texture, 1);
+            CS_TextureLoadDeferred(&BottomScreenSpritesMaterials[6], &Palettes[10], allEquipments[index].texture, 1);
     }
     setQuitButton(true);
 
@@ -1945,13 +1943,11 @@ void initControllerMenu()
 
     setQuitButton(true);
 
-    BottomScreenSpritesMaterials[7] = NE_MaterialCreate();
-    Palettes[14] = NE_PaletteCreate();
-    CS_MaterialTexLoadBMPtoRGB256(BottomScreenSpritesMaterials[7], Palettes[14], (void *)JumpArrow_bin, 1);
-
-    BottomScreenSpritesMaterials[8] = NE_MaterialCreate();
-    Palettes[15] = NE_PaletteCreate();
-    CS_MaterialTexLoadBMPtoRGB256(BottomScreenSpritesMaterials[8], Palettes[15], (void *)reload_bin, 1);
+    // Loaded during the vertical blank (no blinking)
+    // Own palettes: Palettes[15] is the palette of the player shadow, it must
+    // not be replaced here.
+    CS_TextureLoadDeferred(&BottomScreenSpritesMaterials[7], &controllerJumpPalette, (void *)JumpArrow_bin, 1);
+    CS_TextureLoadDeferred(&BottomScreenSpritesMaterials[8], &controllerReloadPalette, (void *)reload_bin, 1);
 
     int buttonXPosition = 2;
     int mapButtonXPosition = 2;
@@ -2143,25 +2139,99 @@ void initControlsSettingsMenu()
     AllButtons[0].yTextPos = 6;
     AllButtons[0].text = "";
 
-    AllSliders[0].xPos = 140;
-    AllSliders[0].yPos = 148;
-    AllSliders[0].xSize = 100;
+    // Buttons (X/Y) camera sensitivity. The touch screen sensitivity is in
+    // the touch camera menu.
+    AllSliders[0].xPos = 53;
+    AllSliders[0].yPos = 136;
+    AllSliders[0].xSize = 150;
+    AllSliders[0].min = MIN_SENSITIVITY;
+    AllSliders[0].max = MAX_SENSITIVITY;
+    AllSliders[0].step = 0.1;
+    AllSliders[0].value = &buttonsSensitivity;
+
+    // Touch camera settings button
+    AllButtons[1].xPos = 70;
+    AllButtons[1].yPos = 162;
+    AllButtons[1].xSize = 116;
+    AllButtons[1].ySize = 24;
+    AllButtons[1].OnClick = &initTouchSettingsMenu;
+    AllButtons[1].xTextPos = 10;
+    AllButtons[1].yTextPos = 21;
+    AllButtons[1].text = "Touch camera";
+
+    SetSliderToShow(1);
+    SetButtonToShow(2);
+    SetCheckBoxToShow(1);
+}
+
+/**
+ * @brief Reset touch camera settings to default values
+ *
+ */
+void resetTouchSettings()
+{
+    sensitivity = DEFAULT_SENSITIVITY;
+    touchAcceleration = DEFAULT_TOUCH_ACCELERATION;
+    touchMaxGain = DEFAULT_TOUCH_MAX_GAIN;
+    UpdateBottomScreenFrameCount += 8;
+}
+
+/**
+ * @brief Init touch camera settings menu
+ *
+ */
+void initTouchSettingsMenu()
+{
+    SetTwoScreenMode(true);
+
+    startChangeMenu(TOUCH_SETTINGS);
+
+    renderFunction = &drawTouchSettingsMenu;
+
+    lastOpenedMenu = &initControlsSettingsMenu;
+
+    setQuitButton(true);
+
+    // Touch screen sensitivity slider
+    AllSliders[0].xPos = 28;
+    AllSliders[0].yPos = 48;
+    AllSliders[0].xSize = 200;
     AllSliders[0].min = MIN_SENSITIVITY;
     AllSliders[0].max = MAX_SENSITIVITY;
     AllSliders[0].step = 0.1;
     AllSliders[0].value = &sensitivity;
 
-    AllSliders[1].xPos = 20;
-    AllSliders[1].yPos = 148;
-    AllSliders[1].xSize = 100;
-    AllSliders[1].min = MIN_SENSITIVITY;
-    AllSliders[1].max = MAX_SENSITIVITY;
-    AllSliders[1].step = 0.1;
-    AllSliders[1].value = &buttonsSensitivity;
+    // Acceleration slider
+    AllSliders[1].xPos = 28;
+    AllSliders[1].yPos = 88;
+    AllSliders[1].xSize = 200;
+    AllSliders[1].min = MIN_TOUCH_ACCELERATION;
+    AllSliders[1].max = MAX_TOUCH_ACCELERATION;
+    AllSliders[1].step = 0.01;
+    AllSliders[1].value = &touchAcceleration;
 
-    SetSliderToShow(2);
+    // Max gain slider
+    AllSliders[2].xPos = 28;
+    AllSliders[2].yPos = 128;
+    AllSliders[2].xSize = 200;
+    AllSliders[2].min = MIN_TOUCH_MAX_GAIN;
+    AllSliders[2].max = MAX_TOUCH_MAX_GAIN;
+    AllSliders[2].step = 0.1;
+    AllSliders[2].value = &touchMaxGain;
+
+    // Reset button
+    AllButtons[0].xPos = 78;
+    AllButtons[0].yPos = 146;
+    AllButtons[0].xSize = 100;
+    AllButtons[0].ySize = 24;
+    AllButtons[0].OnClick = &resetTouchSettings;
+    AllButtons[0].xTextPos = 12;
+    AllButtons[0].yTextPos = 19;
+    AllButtons[0].text = "Default";
+
+    SetSliderToShow(3);
     SetButtonToShow(1);
-    SetCheckBoxToShow(1);
+    SetCheckBoxToShow(0);
 }
 
 /**
@@ -2420,9 +2490,8 @@ void initSelectionMapImageMenu()
 
     setQuitButton(true);
 
-    BottomScreenSpritesMaterials[6] = NE_MaterialCreate();
-    Palettes[10] = NE_PaletteCreate();
-    CS_MaterialTexLoadBMPtoRGB256(BottomScreenSpritesMaterials[6], Palettes[10], allMaps[currentSelectionMap].image, 1);
+    // Loaded during the vertical blank (no blinking)
+    CS_TextureLoadDeferred(&BottomScreenSpritesMaterials[6], &Palettes[10], allMaps[currentSelectionMap].image, 1);
 
     // Set change controls button
     AllButtons[0].xPos = 35;
@@ -3149,13 +3218,31 @@ void drawControlsSettingsMenu()
                  NE_White, // Color
                  "Camera");
 
-    char gamePadSensitivityText[26];
-    sprintf(gamePadSensitivityText, "Gamepad sensitivity: %0.1f", *AllSliders[0].value);
-    printLongText(16, 32, 13, gamePadSensitivityText);
-
     char buttonsSensitivityText[33];
-    sprintf(buttonsSensitivityText, "Button sensitivity: %0.1f", *AllSliders[1].value);
-    printLongText(2, 16, 13, buttonsSensitivityText);
+    snprintf(buttonsSensitivityText, sizeof(buttonsSensitivityText), "Button sensitivity: %0.1f", *AllSliders[0].value);
+    NE_TextPrint(0, 4, 14, NE_White, buttonsSensitivityText);
+}
+
+/**
+ * @brief Draw touch camera settings menu
+ *
+ */
+void drawTouchSettingsMenu()
+{
+    NE_TextPrint(0,        // Font slot
+                 10, 1,    // Coordinates x(column), y(row)
+                 NE_White, // Color
+                 "Touch camera");
+
+    char text[32];
+    snprintf(text, sizeof(text), "Sensitivity: %0.1f", *AllSliders[0].value);
+    NE_TextPrint(0, 4, 4, NE_White, text);
+
+    snprintf(text, sizeof(text), "Acceleration: %0.2f", *AllSliders[1].value);
+    NE_TextPrint(0, 4, 9, NE_White, text);
+
+    snprintf(text, sizeof(text), "Max gain: %0.1f", *AllSliders[2].value);
+    NE_TextPrint(0, 4, 14, NE_White, text);
 }
 
 /**
@@ -3429,9 +3516,9 @@ void unloadControllerMenu()
 
     // Delete button images
     CS_MaterialDeleteSafe(&BottomScreenSpritesMaterials[7]);
-    CS_PaletteDeleteSafe(&Palettes[14]);
+    CS_PaletteDeleteSafe(&controllerJumpPalette);
     CS_MaterialDeleteSafe(&BottomScreenSpritesMaterials[8]);
-    CS_PaletteDeleteSafe(&Palettes[15]);
+    CS_PaletteDeleteSafe(&controllerReloadPalette);
 }
 
 /**
