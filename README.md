@@ -15,7 +15,7 @@ Now there is an acceleration to a touch screen.
 <img src="/Screenshots/1.png" width="31%"> <img src="/Screenshots/2.png" width="31%"> <img src="/Screenshots/3.png" width="31%">
 
 For **multiplayer** on **emulator**, please use [melonDS](https://melonds.kuribo64.net/downloads.php).<br/>
-There is no emulator with **online** support on **Android** at this time.<br/>
+There is emulator with **online** support on **Android**. RetroArch with MelonDS<br/>
 
 ## How to install the game
 
