@@ -1014,18 +1014,33 @@ void treatData()
 
             int Reset = intParse(arr[2]);
 
-            if (Reset == 0)
+            // The message has the player id, the functions need the player index
+            int playerIndex = -1;
+            for (int i = 0; i < MaxPlayer; i++)
             {
-                ReloadGun(ParsedPlayerId);
+                if (AllPlayers[i].Id == ParsedPlayerId)
+                {
+                    playerIndex = i;
+                    break;
+                }
+            }
+
+            if (playerIndex == -1)
+            {
+                // Unknown player
+            }
+            else if (Reset == 0)
+            {
+                ReloadGun(playerIndex);
             }
             else if (Reset == 1)
             {
-                ResetGunsAmmo(ParsedPlayerId);
+                ResetGunsAmmo(playerIndex);
             }
             else if (Reset == 2)
             {
                 int GunId = intParse(arr[4]);
-                ResetGunAmmo(ParsedPlayerId, GunId);
+                ResetGunAmmo(playerIndex, GunId);
             }
         }
         else if (strcmp(arr[REQUEST_NAME_INDEX], "SETNAME") == 0) // Get a player name
@@ -1092,6 +1107,10 @@ void treatData()
             {
                 strcpy(errorText, "You have been kicked (Team kill).");
             }
+            else if (errorId == KickSpeedHack)
+            {
+                strcpy(errorText, "You have been kicked (game speed-up is not allowed).");
+            }
             else
             {
                 strcpy(errorText, "An error has occurred!");
@@ -1147,8 +1166,9 @@ void treatData()
         {
             int ParsedPlayerId = intParse(arr[1]);
 
+            // Heard from farther than the other sounds (about 32 units)
             int Panning, Volume;
-            GetPanning(ParsedPlayerId, &Panning, &Volume, xWithoutYForAudio, zWithoutYForAudio, 0.10);
+            GetPanning(ParsedPlayerId, &Panning, &Volume, xWithoutYForAudio, zWithoutYForAudio, 0.25);
 
             Play3DSound(SFX_BOMBPLANTING, Volume, Panning, GetPlayer(ParsedPlayerId));
         }

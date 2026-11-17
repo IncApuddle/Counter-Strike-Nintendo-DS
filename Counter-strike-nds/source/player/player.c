@@ -451,6 +451,10 @@ void setPlayerHealth(int playerIndex, int health)
             deathCameraAnimation = 0;
             deathCameraYOffset = 0;
             redHealthTextCounter = 0;
+
+            // Online respawn (warm up): stop watching the other player
+            if (player->IsDead && CurrentCameraPlayer != 0)
+                SetCurrentCameraPlayer(0);
         }
 
         player->IsDead = false;

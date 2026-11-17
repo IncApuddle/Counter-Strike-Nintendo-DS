@@ -1088,11 +1088,11 @@ void drawTopScreenUI()
         else
         {
             // Show defusing bomb animation
-            if (localPlayer->bombTimer < bombDefuseTime && localPlayer->bombTimer > 0 && !localPlayer->IsDead)
+            if (localPlayer->bombTimer < getDefuseTime(localPlayer) && localPlayer->bombTimer > 0 && !localPlayer->IsDead)
             {
                 // Draw Background
                 NE_PolyFormat(20, 0, NE_LIGHT_0, NE_CULL_BACK, NE_MODULATION);
-                NE_2DDrawQuad(ScreenWidthDivided4, 155, ScreenWidth - mapInt(localPlayer->bombTimer, -2, bombDefuseTime, ScreenWidth / 4 * 3, ScreenWidthDivided4), 170, 1, RGB15(3, 3, 3));
+                NE_2DDrawQuad(ScreenWidthDivided4, 155, ScreenWidth - mapInt(localPlayer->bombTimer, -2, getDefuseTime(localPlayer), ScreenWidth / 4 * 3, ScreenWidthDivided4), 170, 1, RGB15(3, 3, 3));
                 NE_PolyFormat(24, 0, NE_LIGHT_0, NE_CULL_BACK, NE_MODULATION);
                 NE_2DDrawQuad(84, 140, 176, 155, 1, RGB15(3, 3, 3));
                 NE_PolyFormat(31, 0, NE_LIGHT_0, NE_CULL_BACK, NE_MODULATION);

@@ -496,7 +496,7 @@ void SetOnlinelPlayersPositions()
                             {
                                 player->isPlantingBomb = true;
                                 if (!BombDefused && BombPlanted) // Set timer
-                                    player->bombTimer = bombDefuseTime;
+                                    player->bombTimer = getDefuseTime(player);
                                 else if (!BombPlanted) // Set timer
                                     player->bombTimer = bombPlantingTime;
                             }

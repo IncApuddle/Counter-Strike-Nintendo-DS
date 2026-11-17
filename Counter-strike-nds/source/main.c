@@ -1266,7 +1266,7 @@ void GameLoop()
 		{
 			isUsingBomb = true;
 			// On bomb defuse make a sound
-			if (localPlayer->bombTimer == bombDefuseTime)
+			if (localPlayer->bombTimer == getDefuseTime(localPlayer))
 			{
 				PlayBasicSound(SFX_BOMBPLANTING);
 				SendBombPlacing = true;
@@ -1306,7 +1306,7 @@ void GameLoop()
 			if (localPlayer->Team == COUNTERTERRORISTS)
 			{
 				if (!BombDefused && BombPlanted) // Set timer
-					localPlayer->bombTimer = bombDefuseTime;
+					localPlayer->bombTimer = getDefuseTime(localPlayer);
 				else
 				{
 					localPlayer->bombTimer = 0;
@@ -1425,7 +1425,7 @@ void GameLoop()
 						if (!BombDefused)
 						{
 							// On bomb defuse make a sound
-							if (player->bombTimer == bombDefuseTime)
+							if (player->bombTimer == getDefuseTime(player))
 							{
 								int Panning, Volume;
 								GetPanning(player->Id, &Panning, &Volume, xWithoutYForAudio, zWithoutYForAudio, 0.10);

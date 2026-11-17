@@ -154,6 +154,7 @@
 //#define OcclusionZonesCount 21
 
 #define bombDefuseTime 600	 // 10 secs
+#define bombDefuseTimeWithKit 300 // 5 secs with a defuse kit (like Counter-Strike)
 #define bombPlantingTime 210 // 3,5 secs
 
 #define maxPoint 58
@@ -443,6 +444,12 @@ typedef struct // Player values
 	int animPrevZ;
 
 } Player;
+
+// Time to defuse the bomb for a player (frames): shorter with a defuse kit
+static inline int getDefuseTime(const Player *player)
+{
+	return player->haveDefuseKit ? bombDefuseTimeWithKit : bombDefuseTime;
+}
 
 typedef struct // 2D area (box) values for trigger with stairs start height, final height and direction
 {

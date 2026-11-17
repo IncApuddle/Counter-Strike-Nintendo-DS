@@ -752,6 +752,13 @@ void CheckShopForBot(int playerIndex)
 
         if (player->Team == COUNTERTERRORISTS)
         {
+            // Defuse kit (faster defuse), one time in two
+            if (!player->haveDefuseKit && player->Money >= allEquipments[1].Price + 1500 && rand() % 2 == 0)
+            {
+                player->Money -= allEquipments[1].Price;
+                player->haveDefuseKit = true;
+            }
+
             // Buy only counter terrorist gun
 
             // Take a random gun category

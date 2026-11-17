@@ -19,7 +19,8 @@ enum ErrorType
     ServerStopped = 5,
     SaveCorrupted = 6,
     IncorrectCode = 7,
-    KickTeamKill = 8
+    KickTeamKill = 8,
+    KickSpeedHack = 9
 };
 
 enum JoinType
