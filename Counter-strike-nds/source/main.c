@@ -425,6 +425,7 @@ int main(void)
 	AddAllSpawnPoints();
 	SetMapNames();
 	SetMapPartyMode();
+	SetMapTypes();
 
 	// Camera
 	Camera = NE_CameraCreate();
@@ -797,6 +798,8 @@ void SetCurrentCameraPlayer(int Value)
 {
 	CurrentCameraPlayer = Value;
 	UpdateGunTexture();
+	// Look with the vertical angle of the new viewed player
+	ForceUpdateLookRotation(AllPlayers[CurrentCameraPlayer].cameraAngle);
 }
 
 int GetCurrentCameraPlayer()
@@ -936,7 +939,9 @@ void GameLoop()
 		// Update look rotation value
 		if (NeedUpdateViewRotation || CurrentCameraPlayer != 0)
 		{
-			UpdateLookRotation(localPlayer->cameraAngle);
+			// Use the vertical angle of the viewed player (spectator mode):
+			// bots look straight ahead, online players send their angle.
+			UpdateLookRotation(AllPlayers[CurrentCameraPlayer].cameraAngle);
 			NeedUpdateViewRotation = false;
 		}
 
@@ -1064,8 +1069,22 @@ void GameLoop()
 			// If reload timer is ended, reload gun and stop reloading
 			if (player->GunReloadWaitCount == getPlayerCurrentGun(player).ReloadTime)
 			{
-				player->isReloading = false;
-				ReloadGun(i);
+				if (getPlayerCurrentGunIndex(player) < GunCount && getPlayerCurrentGun(player).reloadOneByOne &&
+					(player->currentGunInInventory == 1 || player->currentGunInInventory == 2))
+				{
+					// Shotguns: add one shell, continue until the magazine is full
+					ReloadGun(i);
+					AmmoMagazine *magazine = &player->AllAmmoMagazine[player->currentGunInInventory - 1];
+					if (magazine->AmmoCount < getPlayerCurrentGun(player).MagazineCapacity && magazine->TotalAmmoCount > 0)
+						player->GunReloadWaitCount = 0; // Next shell
+					else
+						player->isReloading = false;
+				}
+				else
+				{
+					player->isReloading = false;
+					ReloadGun(i);
+				}
 			}
 		}
 	}
@@ -1097,6 +1116,16 @@ void GameLoop()
 		// next weapon can shoot (or plant the bomb).
 		if (fireLockedAfterGrenade && !isKey(FIRE_BUTTON))
 			fireLockedAfterGrenade = false;
+
+		// Shotguns: shooting stops the shell by shell reload (like in
+		// Counter-Strike) if there is at least one shell in the magazine
+		if (localPlayer->isReloading && !fireLockedAfterGrenade && isKeyDown(FIRE_BUTTON) &&
+			(localPlayer->currentGunInInventory == 1 || localPlayer->currentGunInInventory == 2) &&
+			getPlayerCurrentGunIndex(localPlayer) < GunCount && getPlayerCurrentGun(localPlayer).reloadOneByOne &&
+			localPlayer->AllAmmoMagazine[localPlayer->currentGunInInventory - 1].AmmoCount > 0)
+		{
+			StopReloading(0);
+		}
 
 		// Gun shoot
 		if (canShoot && !fireLockedAfterGrenade && !localPlayer->isReloading && ((getPlayerCurrentGunIndex(localPlayer) < GunCount && ((isKey(FIRE_BUTTON) && getPlayerCurrentGun(localPlayer).holdFireButton) || (isKeyDown(FIRE_BUTTON) && !getPlayerCurrentGun(localPlayer).holdFireButton)) && localPlayer->GunWaitCount >= getPlayerCurrentGun(localPlayer).fireRate)) && !isUsingBomb)

@@ -35,6 +35,8 @@ void killPlayer(Player *player)
     if (player == localPlayer)
     {
         totalDeathCount++;
+        // Look straight ahead again (for the next spawn)
+        player->cameraAngle = 128;
     }
 }
 

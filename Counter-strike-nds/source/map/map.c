@@ -155,6 +155,21 @@ void SetMapPartyMode()
 }
 
 /**
+ * @brief Set maps scenario (defuse, hostage rescue, no objective)
+ *
+ */
+void SetMapTypes()
+{
+    allMaps[DUST2].mapType = MAP_TYPE_DEFUSE;
+    allMaps[TUTORIAL].mapType = MAP_TYPE_OTHER;
+    allMaps[DUST2_2x2].mapType = MAP_TYPE_DEFUSE;
+    allMaps[AIM_MAP].mapType = MAP_TYPE_OTHER;
+    allMaps[B2000].mapType = MAP_TYPE_OTHER;
+    allMaps[FYSNOW].mapType = MAP_TYPE_OTHER;
+    allMaps[MIRAGE].mapType = MAP_TYPE_DEFUSE;
+}
+
+/**
  * @brief Set the map camera position (used when the player is not in game)
  *
  */

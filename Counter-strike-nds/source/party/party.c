@@ -260,6 +260,9 @@ void onNewRoundStart()
     BombExplosionScale = 0;
     currentDefuserIndex = NO_PLAYER;
 
+    // New plan for the terrorist bots
+    ChooseTerroristsStrategy();
+
     // Delete grenades
     DeleteAllGrenade();
     // Disable player aim
@@ -824,6 +827,9 @@ void StartSinglePlayer(int partyMode)
  */
 void prepareParty(/*bool multiplayerMode*/ int mode)
 {
+    // No plan for the terrorist bots before the first round
+    terroristsStrategy = T_STRATEGY_NONE;
+
     if (mode == 0)
     {
         applyRules = true;

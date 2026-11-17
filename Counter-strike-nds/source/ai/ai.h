@@ -36,6 +36,17 @@ extern bool equalTeam;
 extern int SiteAPoint;
 extern int SiteBPoint;
 extern int TwoSites;
+
+// Plan of the terrorist bots for the round, on defuse maps with two bomb sites
+enum TerroristsStrategy
+{
+    T_STRATEGY_NONE = 0,  // One site or not a defuse map
+    T_STRATEGY_RUSH_A,    // Everyone goes to site A
+    T_STRATEGY_RUSH_B,    // Everyone goes to site B
+    T_STRATEGY_SPLIT,     // Bots spread on both sites, the bomber goes to a random site
+};
+extern enum TerroristsStrategy terroristsStrategy;
+void ChooseTerroristsStrategy();
 extern int amountOfBots;
 
 void StartChecking(int playerIndex, int FinalWaypoint);

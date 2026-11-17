@@ -42,6 +42,44 @@ int SiteAPoint = 0;
 int SiteBPoint = 0;
 int TwoSites = 2;
 
+// Terrorists plan for this round (see ChooseTerroristsStrategy())
+enum TerroristsStrategy terroristsStrategy = T_STRATEGY_NONE;
+// Site of the bomber in the split strategy (0 = A, 1 = B)
+static int splitBomberSite = 0;
+
+/**
+ * @brief Choose the plan of the terrorist bots. Called at the start of each
+ * round. Only on defuse maps with two bomb sites:
+ * - all bots go to site A,
+ * - all bots go to site B,
+ * - bots spread on both sites and the bomber goes to a random site.
+ */
+void ChooseTerroristsStrategy()
+{
+    if (allMaps[currentMap].mapType != MAP_TYPE_DEFUSE || TwoSites != 2)
+    {
+        terroristsStrategy = T_STRATEGY_NONE;
+        return;
+    }
+
+    terroristsStrategy = T_STRATEGY_RUSH_A + random() % 3;
+    splitBomberSite = random() % 2;
+}
+
+/**
+ * @brief Get the bomb site where the terrorists go for this round
+ *
+ * @return int 0 = A, 1 = B, -1 = no plan (random site for each bot)
+ */
+static int getTerroristsPlanSite(void)
+{
+    if (terroristsStrategy == T_STRATEGY_RUSH_A)
+        return 0;
+    if (terroristsStrategy == T_STRATEGY_RUSH_B)
+        return 1;
+    return -1;
+}
+
 // Timer to check the player's distance between the bot and the player
 int checkPlayerDistanceFromAiTimer = 1;
 Waypoint Waypoints[maxPoint]; // TODO replace this by a malloc
@@ -372,7 +410,15 @@ void AiCheckForAction()
                 // Check if the target is visible
                 prepareAiRaycast(currentAiToCheck, randomPlayerToCheck, true);
                 float hitDistance = 0;
-                if (Raycast(currentAiToCheck, 0, &hitDistance) != NO_PLAYER && inFov)
+                Player *seenPlayer = &AllPlayers[randomPlayerToCheck];
+                // Bots can't see through smoke (eyes to eyes and eyes to feet,
+                // a player is visible if one of them is not in the smoke)
+                bool hiddenBySmoke =
+                    IsLineBlockedBySmoke(playerToCheck->PlayerModel->x, playerToCheck->PlayerModel->y + CameraOffsetYMultiplied, playerToCheck->PlayerModel->z,
+                                         seenPlayer->PlayerModel->x, seenPlayer->PlayerModel->y + CameraOffsetYMultiplied, seenPlayer->PlayerModel->z) &&
+                    IsLineBlockedBySmoke(playerToCheck->PlayerModel->x, playerToCheck->PlayerModel->y + CameraOffsetYMultiplied, playerToCheck->PlayerModel->z,
+                                         seenPlayer->PlayerModel->x, seenPlayer->PlayerModel->y, seenPlayer->PlayerModel->z);
+                if (!hiddenBySmoke && Raycast(currentAiToCheck, 0, &hitDistance) != NO_PLAYER && inFov)
                 {
                     playerToCheck->target = randomPlayerToCheck;
                     playerToCheck->lastSeenTarget = randomPlayerToCheck;
@@ -445,7 +491,19 @@ void AiCheckForAction()
 
                 if (playerToCheck->haveBomb)
                 {
-                    if(TwoSites == 2)
+                    if (TwoSites == 2 && terroristsStrategy != T_STRATEGY_NONE)
+                    {
+                        // Site of the plan of the round
+                        int site = getTerroristsPlanSite();
+                        if (site == -1)
+                            site = splitBomberSite;
+
+                        if (site == 0)
+                            StartChecking(currentAiToCheck, SiteAPoint); // Bomb site A
+                        else
+                            StartChecking(currentAiToCheck, SiteBPoint); // Bomb site B
+                    }
+                    else if(TwoSites == 2)
                     {
                         float distanceA = GetDistanceBewteenPlayerAndWaypoint(currentAiToCheck, SiteAPoint);
                         float distanceB = GetDistanceBewteenPlayerAndWaypoint(currentAiToCheck, SiteBPoint);
@@ -505,6 +563,15 @@ void GetRandomPoint(int currentAiToCheck)
         else
         {
             int site = random() % 2;
+
+            // Before the bomb is planted, terrorists follow the plan of the
+            // round (rush A or B)
+            if (AllPlayers[currentAiToCheck].Team == TERRORISTS && !BombPlanted)
+            {
+                int planSite = getTerroristsPlanSite();
+                if (planSite != -1)
+                    site = planSite;
+            }
 
             if (bombPlantedAt == SiteAPoint)
                 site = 0;

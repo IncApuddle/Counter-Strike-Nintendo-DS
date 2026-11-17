@@ -34,9 +34,18 @@ typedef struct //
     // bool shadowed;
 } MapModel;
 
+// Map scenario (the prefix of the map name in Counter-Strike)
+enum MapType
+{
+    MAP_TYPE_OTHER = 0,   // No objective (aim_, fy_, ...)
+    MAP_TYPE_DEFUSE = 1,  // de_: bomb defuse
+    MAP_TYPE_HOSTAGE = 2, // cs_: hostage rescue (not made yet)
+};
+
 typedef struct //
 {
     const char *name;
+    enum MapType mapType;
     Vector3 allTerroristsSpawns[6];
     Vector3 allCounterTerroristsSpawns[6];
     float startPlayerAngleTerrorists;
@@ -79,6 +88,7 @@ void LoadMap(int mapToLoad);
 void UnLoadMap(int mapToUnload);
 void SetMapNames();
 void SetMapPartyMode();
+void SetMapTypes();
 void SetMapCameraPosition();
 void TextureToLoad(int TextureNumb);
 

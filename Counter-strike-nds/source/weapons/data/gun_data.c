@@ -203,7 +203,7 @@ void LoadGuns()
     // M3
     AllGuns[gunIndex].fireRate = 53; // 1 / 68 * 3600
     AllGuns[gunIndex].DamageFalloff = 0.7;
-    AllGuns[gunIndex].Damage = 171 / 6; // 1 shoot is 6 bullets
+    AllGuns[gunIndex].Damage = 55; // Per pellet (1 shoot is 6 pellets): 2 pellets kill
     AllGuns[gunIndex].texture = (void *)m3super90_bin;
     AllGuns[gunIndex].holdFireButton = false;
     AllGuns[gunIndex].Price = 1700;
@@ -214,7 +214,8 @@ void LoadGuns()
     AllGuns[gunIndex].team = BOTH;         // 0 for terrorist only, 1 for counter terrorists only, -1 for both teams
     AllGuns[gunIndex].MagazineCapacity = 8;
     AllGuns[gunIndex].MaxAmmoCount = 48;
-    AllGuns[gunIndex].ReloadTime = 276; // 4.6 * 60 from empty
+    AllGuns[gunIndex].ReloadTime = 30; // 0.5 * 60 per shell
+    AllGuns[gunIndex].reloadOneByOne = true;
     AllGuns[gunIndex].xMuzzleFlashOffset = -1;
     AllGuns[gunIndex].yMuzzleFlashOffset = 3;
     AllGuns[gunIndex].isBigGun = true;
@@ -229,7 +230,7 @@ void LoadGuns()
     // XM1014
     AllGuns[gunIndex].fireRate = 15; // 1 / 240 * 3600
     AllGuns[gunIndex].DamageFalloff = 0.7;
-    AllGuns[gunIndex].Damage = 114 / 6; // 1 shoot is 6 bullets
+    AllGuns[gunIndex].Damage = 37; // Per pellet (1 shoot is 6 pellets): 3 pellets kill
     AllGuns[gunIndex].texture = (void *)xm1014_bin;
     AllGuns[gunIndex].holdFireButton = false;
     AllGuns[gunIndex].Price = 3000;
@@ -240,7 +241,8 @@ void LoadGuns()
     AllGuns[gunIndex].team = BOTH;         // 0 for terrorist only, 1 for counter terrorists only, -1 for both teams
     AllGuns[gunIndex].MagazineCapacity = 7;
     AllGuns[gunIndex].MaxAmmoCount = 32;
-    AllGuns[gunIndex].ReloadTime = 168; // 2.8 * 60 from empty
+    AllGuns[gunIndex].ReloadTime = 27; // 0.45 * 60 per shell
+    AllGuns[gunIndex].reloadOneByOne = true;
     AllGuns[gunIndex].xMuzzleFlashOffset = -8;
     AllGuns[gunIndex].yMuzzleFlashOffset = 1;
     AllGuns[gunIndex].isBigGun = true;

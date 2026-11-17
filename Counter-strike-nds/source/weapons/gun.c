@@ -83,7 +83,14 @@ void ReloadGun(int playerIndex)
         int ammoIndex = player->currentGunInInventory - 1;
         // Get how many ammo are missing
         int missingAmmoCount = getPlayerCurrentGun(player).MagazineCapacity - player->AllAmmoMagazine[ammoIndex].AmmoCount;
-        if (missingAmmoCount < player->AllAmmoMagazine[ammoIndex].TotalAmmoCount)
+        // Shotguns: one shell at a time
+        if (getPlayerCurrentGunIndex(player) < GunCount && getPlayerCurrentGun(player).reloadOneByOne && missingAmmoCount > 1)
+            missingAmmoCount = 1;
+        if (missingAmmoCount <= 0)
+        {
+            // Magazine already full
+        }
+        else if (missingAmmoCount < player->AllAmmoMagazine[ammoIndex].TotalAmmoCount)
         {
             player->AllAmmoMagazine[ammoIndex].AmmoCount += missingAmmoCount;
             if (!allPartyModes[currentPartyMode].infiniteGunAmmo)

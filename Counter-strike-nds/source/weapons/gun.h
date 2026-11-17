@@ -27,7 +27,8 @@ typedef struct //
     enum teamEnum team; // 0 for terrorist only, 1 for counter terrorists only, -1 for both teams
     int MagazineCapacity;
     int MaxAmmoCount;
-    int ReloadTime;
+    int ReloadTime; // For guns reloaded shell by shell: time to load one shell
+    bool reloadOneByOne; // Shotguns: reload one shell at a time (can be stopped by shooting)
     float MaxSoundDistance;
     int xMuzzleFlashOffset;
     int yMuzzleFlashOffset;

@@ -100,8 +100,10 @@ PhysicalGrenade *CreateGrenade(int id, int ownerId)
 
                 // Set scale and rotation
                 NE_ModelScaleI(grenade->EffectModel, 0, 0, 0);
-                grenade->EffectModel->rx = 0;
-                grenade->EffectModel->ry = 256;
+                // Same rotation as the smoke sphere: the hole of the mesh (on
+                // the -Z side) is turned to the ground
+                grenade->EffectModel->rx = -128;
+                grenade->EffectModel->ry = 0;
 
                 // Set grenade values
                 grenade->Timer = 85;      // 4s * 60 frames
@@ -462,4 +464,62 @@ void UpdateGrenades()
             grenade->Timer--;
         }
     }
+}
+
+/**
+ * @brief Check if a smoke cloud is between two points (used by the bots: they
+ * can't see through smoke). Positions in Nitro Engine model units (like
+ * NE_Model x/y/z).
+ *
+ * @return true The line goes through a smoke cloud
+ */
+bool IsLineBlockedBySmoke(float x1, float y1, float z1, float x2, float y2, float z2)
+{
+    float dx = x2 - x1;
+    float dy = y2 - y1;
+    float dz = z2 - z1;
+    float lengthSquared = dx * dx + dy * dy + dz * dz;
+
+    for (int i = 0; i < GrenadeCount; i++)
+    {
+        PhysicalGrenade *grenade = grenades[i];
+        if (grenade == NULL || grenade->GrenadeType != SMOKE || grenade->Timer != 0 || grenade->Model == NULL)
+            continue;
+
+        // The smoke is disappearing, bots can see through it again
+        if (grenade->effectAlpha < 12)
+            continue;
+
+        // Same size as the drawn sphere (see UpdateGrenades()): the sphere
+        // model has a radius of about 5.95 units at scale 1.0. The sphere grows
+        // during the first 40 frames. A bit smaller for the soft edges.
+        int coef = grenade->EffectTimer;
+        if (coef < 1040)
+            coef = 1040;
+        float scale = 80 * (1080 - coef);
+        float radius = 5.95f * scale * 0.85f;
+        if (radius <= 0)
+            continue;
+
+        // Distance between the smoke center and the segment
+        float cx = grenade->Model->x - x1;
+        float cy = grenade->Model->y - y1;
+        float cz = grenade->Model->z - z1;
+        float t = 0;
+        if (lengthSquared > 0)
+        {
+            t = (cx * dx + cy * dy + cz * dz) / lengthSquared;
+            if (t < 0)
+                t = 0;
+            else if (t > 1)
+                t = 1;
+        }
+        float px = cx - dx * t;
+        float py = cy - dy * t;
+        float pz = cz - dz * t;
+
+        if (px * px + py * py + pz * pz < radius * radius)
+            return true;
+    }
+    return false;
 }

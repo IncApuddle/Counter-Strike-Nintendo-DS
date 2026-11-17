@@ -57,5 +57,6 @@ void DeleteGrenade(int grenadeIndex);
 void lanchGrenade(PhysicalGrenade *grenade, float xDirection, float yDirection, float zDirection, int xPosition, int yPosition, int zPosition);
 void UpdateGrenades();
 void DeleteAllGrenade();
+bool IsLineBlockedBySmoke(float x1, float y1, float z1, float x2, float y2, float z2);
 
 #endif // GRENADE_H_
