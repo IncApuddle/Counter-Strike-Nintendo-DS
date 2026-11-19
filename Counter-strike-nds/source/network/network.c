@@ -5,6 +5,7 @@
 // This file is part of Counter Strike Nintendo DS Multiplayer Edition (CS:DS)
 
 #include "../main.h"
+#include "droppedGuns.h"
 // ioctl() and FIONBIO (non-blocking sockets)
 #if __has_include(<sys/ioctl.h>)
 #include <sys/ioctl.h>
@@ -394,6 +395,7 @@ void resetNetworkVariables()
     SendKeyResponse = false;
     SendGetDroppedBomb = false;
     SendReloaded = false;
+    SendDropGun = false;
 }
 
 static void logNetworkMemory(const char *reason);
@@ -665,8 +667,15 @@ void treatData()
                 if (AllPlayers[i].Id == PlayerIdInt)
                 {
                     int newGun = intParse(arr[2]);
+                    // Gun changed by the server (dropped or picked up gun): stop the reload and the scope
+                    if (i == 0 && AllPlayers[i].currentGunInInventory != newGun)
+                    {
+                        StopReloading(0);
+                        DisableAim();
+                    }
                     AllPlayers[i].currentGunInInventory = newGun;
-                    if (i == CurrentCameraPlayer)
+                    // The slot can be empty until the inventory is received
+                    if (i == CurrentCameraPlayer && getPlayerCurrentGunIndex(&AllPlayers[i]) != EMPTY)
                         UpdateGunTexture();
 
                     break;
@@ -746,6 +755,8 @@ void treatData()
         {
             // Parse mode id text to int
             currentPartyMode = intParse(arr[1]);
+            // New game (back to the warm up after the end of a game): the timer and the texts work again
+            partyFinished = false;
         }
         else if (strcmp(arr[REQUEST_NAME_INDEX], "TEAM") == 0) // Change team
         {
@@ -1264,6 +1275,27 @@ void treatData()
         {
             firstConnection = false;
         }
+        else if (strcmp(arr[REQUEST_NAME_INDEX], "DROPGUN") == 0) // A gun is on the floor
+        {
+            // DROPGUN;netId;gunId;x;y;z (positions * 4096)
+            if (SplitCount >= 6)
+            {
+                int netId = intParse(arr[1]);
+                int gunId = intParse(arr[2]);
+                float x = intParse(arr[3]) / 4096.0;
+                float y = intParse(arr[4]) / 4096.0;
+                float z = intParse(arr[5]) / 4096.0;
+
+                // The gun can be sent again (join during a round)
+                if (netId >= 0)
+                    removeDroppedGunByNetId(netId);
+                addDroppedGun(gunId, x, y, z, 0, 0, NO_PLAYER, netId);
+            }
+        }
+        else if (strcmp(arr[REQUEST_NAME_INDEX], "REMOVEGUN") == 0) // A gun was taken (-1: remove all guns)
+        {
+            removeDroppedGunByNetId(intParse(arr[1]));
+        }
         else if (strcmp(arr[REQUEST_NAME_INDEX], "INVTORY") == 0) // Get the inventory of a player
         {
             int ParsedPlayerId = intParse(arr[1]);
@@ -1274,10 +1306,33 @@ void treatData()
                 if (AllPlayers[i].Id == ParsedPlayerId)
                 {
                     FoundPlayer = i;
-                    for (int i2 = 2; i2 < SplitCount; i2++)
+                    // Set all the slots first: checking the gun in the hands after each
+                    // slot would see a slot not set yet as empty (and change the gun)
+                    for (int i2 = 2; i2 < SplitCount && i2 - 2 < inventoryCapacity; i2++)
                     {
-                        int FoundGunId = intParse(arr[i2]);
-                        SetGunInInventoryForNonLocalPlayer(i, FoundGunId, i2 - 2);
+                        AllPlayers[i].AllGunsInInventory[i2 - 2] = intParse(arr[i2]);
+                        ResetGunAmmo(i, i2 - 2);
+                    }
+
+                    // No gun in the hands (gun removed): take the best gun
+                    if (getPlayerCurrentGunIndex(&AllPlayers[i]) == EMPTY)
+                    {
+                        int newSlot = 0;
+                        if (AllPlayers[i].AllGunsInInventory[2] != EMPTY)
+                            newSlot = 2;
+                        else if (AllPlayers[i].AllGunsInInventory[1] != EMPTY)
+                            newSlot = 1;
+
+                        if (i == 0)
+                        {
+                            StopReloading(0);
+                            DisableAim();
+                            setSelectedGunInInventory(0, newSlot);
+                        }
+                        else
+                        {
+                            AllPlayers[i].currentGunInInventory = newSlot;
+                        }
                     }
                     break;
                 }
@@ -1769,6 +1824,13 @@ void sendDataToServer()
     {
         SendGetDroppedBomb = false;
         sprintf(InfoToSend + strlen(InfoToSend), "{%d}", GETBOMB);
+    }
+
+    // Drop the gun in the hands
+    if (SendDropGun)
+    {
+        SendDropGun = false;
+        sprintf(InfoToSend + strlen(InfoToSend), "{%d}", DROPGUN);
     }
 
     // Get string data length

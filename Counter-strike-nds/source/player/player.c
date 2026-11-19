@@ -15,6 +15,7 @@
 #include "stats.h"
 #include "network.h"
 #include "playerAnim.h"
+#include "droppedGuns.h"
 
 bool PlayerAnim = true;
 
@@ -493,6 +494,7 @@ void setPlayerHealth(int playerIndex, int health)
 void removeAllPlayers()
 {
     PlayerCount = 0;
+    clearDroppedGuns();
     for (int i = 0; i < MaxPlayer; i++)
     {
         Player *player = &AllPlayers[i];

@@ -15,6 +15,7 @@
 #include "party.h"
 #include "player.h"
 #include "camera.h"
+#include "droppedGuns.h"
 
 int t1x = 0;
 int t1z = 0;
@@ -177,7 +178,9 @@ void initGraphics()
     Model[10]->rx = 0;
     Model[10]->ry = 256;
     NE_ModelScaleI(Model[10], 0, 0, 0);
-    
+
+    // Texture of the guns dropped on the floor
+    initDroppedGuns();
 }
 
 // Create texture map sprite
@@ -373,6 +376,9 @@ void Draw3DScene(void)
         // If bomb is planted, draw bomb
         if (BombPlanted || bombDropped)
             NE_ModelDraw(Model[7]);
+
+        // Draw the guns dropped on the floor
+        drawDroppedGuns();
 
         // Show wall bullet hit flash
         for (int i = 0; i < FLASH_MODELS_COUNT; i++)

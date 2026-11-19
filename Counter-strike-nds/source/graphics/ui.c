@@ -24,6 +24,7 @@
 #include "draw3d.h"
 #include "stats.h"
 #include "debug.h"
+#include "droppedGuns.h"
 
 enum shopCategory ShopCategory = PISTOLS; // 0 pistols, 1 Heavy, 2 sgm, 3 rifles, 4 equipment, 5 grenades
 
@@ -1513,6 +1514,17 @@ void drawBottomScreenUI()
 }
 
 /**
+ * @brief Drop button of the game menu
+ *
+ * @param unused Button parameter (unused)
+ */
+static void onDropGunButton(int unused)
+{
+    (void)unused;
+    dropCurrentGun(0);
+}
+
+/**
  * @brief Init in game menu
  *
  */
@@ -2029,7 +2041,21 @@ void initControllerMenu()
     else
         AllButtons[4].isHidden = false;
 
-    SetButtonToShow(5);
+    // Drop the gun in the hands (Competitive and Casual), right of the map
+    // button. With the left controls, the map button is on the right of the
+    // screen: the drop button is on its left.
+    AllButtons[5].xPos = isLeftControls ? mapButtonXPosition - 42 : mapButtonXPosition + 40;
+    AllButtons[5].yPos = 2;
+    AllButtons[5].xSize = 42;
+    AllButtons[5].ySize = 20;
+    AllButtons[5].OnClick = &onDropGunButton;
+    AllButtons[5].parameter = 0;
+    AllButtons[5].xTextPos = (AllButtons[5].xPos + 9) / 8; // Text centered
+    AllButtons[5].yTextPos = 1;
+    AllButtons[5].text = "Drop";
+    AllButtons[5].isHidden = !canDropGunsInCurrentMode() || isInTutorial;
+
+    SetButtonToShow(6);
 }
 
 /**
@@ -2448,7 +2474,12 @@ void initControlsChangeMenu()
         AllButtons[3].yTextPos = 4;
         AllButtons[3].text = "Next weapon";
 
-        SetButtonToShow(4);
+        AllButtons[4].parameter = DROP_GUN_BUTTON;
+        AllButtons[4].xTextPos = 3;
+        AllButtons[4].yTextPos = 9;
+        AllButtons[4].text = "Drop weapon";
+
+        SetButtonToShow(5);
     }
 
     AllButtons[3].xPos = 140;
@@ -3161,10 +3192,11 @@ void drawControllerMenu()
         CS_2DDrawTexturedQuad(220, 74, 220 + 36 - 4, 72 + 36 - 2, 1, BottomScreenSpritesMaterials[8]); // Reload button
     }
 
-    // Print texts
-    NE_TextPrint(0,        // Font slot
-                 13, 1,    // Coordinates x(column), y(row)
-                 NE_White, // Color
+    // Print texts (with the left controls, the drop button is on the right of
+    // the title: the title is moved to the left)
+    NE_TextPrint(0,                         // Font slot
+                 isLeftControls ? 9 : 13, 1, // Coordinates x(column), y(row)
+                 NE_White,                  // Color
                  "Gamepad");
 }
 

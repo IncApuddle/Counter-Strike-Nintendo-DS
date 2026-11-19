@@ -195,7 +195,7 @@
 
 #define FLASH_MODELS_COUNT 6
 
-#define INPUT_COUNT 14
+#define INPUT_COUNT 15
 #define INPUT_NAMES_COUNT 15
 #define SHOP_DISABLE_TIMER 900
 
@@ -230,6 +230,8 @@ enum inputButtons
 
 	LEFT_GUN = 12,
 	RIGHT_GUN = 13,
+
+	DROP_GUN_BUTTON = 14,
 };
 
 enum teamEnum

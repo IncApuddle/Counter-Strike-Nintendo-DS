@@ -165,6 +165,9 @@ void Load()
                 int tmpinputsFound;
                 fscanf(savefile, "%d", &tmpinputsFound);
                 inputsFound = tmpinputsFound;
+                // Saves of older versions have less inputs (default values for the new ones)
+                if (inputsFound > INPUT_COUNT)
+                    inputsFound = INPUT_COUNT;
             }
             else if (strcmp(word, "cursor_transparency") == 0)
             {

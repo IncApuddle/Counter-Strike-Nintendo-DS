@@ -76,6 +76,7 @@ enum RequestType
     FRAME = 41,
     RELOADED = 42,
     STATUS = 43,
+    DROPGUN = 44,
 };
 
 #define REQUEST_NAME_INDEX 0

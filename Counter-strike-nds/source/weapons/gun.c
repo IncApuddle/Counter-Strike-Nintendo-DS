@@ -246,6 +246,10 @@ void ResetGunAmmo(int playerIndex, int inventoryIndex)
     if (inventoryIndex < 1 || inventoryIndex > 2)
         return;
 
+    // Empty slot (dropped gun): AllGuns[-1] doesn't exist
+    if (AllPlayers[playerIndex].AllGunsInInventory[inventoryIndex] < 0)
+        return;
+
     Player *player = &AllPlayers[playerIndex];
 
     // Set the ammo to max capacity

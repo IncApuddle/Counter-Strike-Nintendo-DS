@@ -31,6 +31,7 @@
 #include "tutorial.h"
 #include "stats.h"
 #include "camera.h"
+#include "droppedGuns.h"
 
 //
 //////Level
@@ -919,6 +920,9 @@ void GameLoop()
 
 	checkTakingBombZone(bombDefuseZone);
 
+	// Take the guns on the floor
+	updateDroppedGuns();
+
 	// Check if the player is in the shop zone
 	if (allPartyModes[currentPartyMode].limitedShopByZoneAndTimer)
 		checkShopZone(); // Check
@@ -1105,6 +1109,10 @@ void GameLoop()
 	}
 
 	// Force launch vote (START) removed: the warm up is used to vote for the mode
+
+	// Drop the gun in the hands (key set in the controls menu)
+	if (isKeyDown(DROP_GUN_BUTTON))
+		dropCurrentGun(0);
 
 	if (localPlayer->Team != SPECTATOR && !localPlayer->IsDead && roundState != WAIT_START)
 	{

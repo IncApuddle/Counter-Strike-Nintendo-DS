@@ -13,6 +13,7 @@
 #include "camera.h"
 #include "sounds.h"
 #include "draw3d.h"
+#include "droppedGuns.h"
 
 // Party modes data
 PartyMode allPartyModes[5];
@@ -265,6 +266,8 @@ void onNewRoundStart()
 
     // Delete grenades
     DeleteAllGrenade();
+    // Remove the guns on the floor
+    clearDroppedGuns();
     // Disable player aim
     DisableAim();
 }
@@ -434,8 +437,9 @@ void partyTimerTick()
                             setNewRoundHandWeapon();
                             shopDisableTimer = SHOP_DISABLE_TIMER;
                         }
-                        else if (roundState == END)
+                        else if (roundState == END && Connection == OFFLINE)
                         {
+                            // Online, the server ends the game (GAMEOVER, then back to the warm up)
                             partyFinished = true;
                             initFinalScoreMenu();
                             // initGameFinishedMenu();
@@ -651,6 +655,9 @@ void checkAfterDamage(int shooterPlayerIndex, int hittedPlayerIndex, bool CheckS
         {
             dropBomb(HittedClient, hittedPlayerIndex);
         }
+
+        // Drop the primary gun (or the pistol) on the floor (offline only)
+        dropGunOnDeath(hittedPlayerIndex);
 
         HittedClient->target = NO_PLAYER;
         HittedClient->bombTimer = 0;
