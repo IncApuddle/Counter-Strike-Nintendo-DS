@@ -75,6 +75,12 @@ bool SendWallHit = false;
 bool SendSelectedGun = false;
 bool SendPlayerName = false;
 bool SendVoteStartNow = false;
+
+// Vote for the next mode during the warm up (online)
+bool SendVoteMode = false;
+int voteModeIndex = 0;         // 0 Competitive, 1 Casual, 2 Deathmatch, 3 GunGame
+int modeVotes[MODE_VOTE_COUNT]; // Votes of all players (MODEVOTES)
+int myModeVote = -1;            // Vote of the local player
 bool SendKeyResponse = false;
 bool SendGetDroppedBomb = false;
 bool SendReloaded = false;
@@ -95,6 +101,12 @@ char partyCode[PARTY_CODE_LENGTH];
 
 // Is the party private?
 bool isPrivate = false;
+
+// Map change on the server: reconnect after the disconnection
+bool autoReconnect = false;          // The server asked to reconnect (RECONNECT)
+bool reconnectPending = false;       // Waiting before the reconnection
+int reconnectDelay = 0;              // Frames before the reconnection
+int reconnectOption = 0;             // JOIN_RANDOM_PARTY or JOIN_PRIVATE_PARTY (same code)
 
 char Values[2048] = ""; // Store all the values received from the wifi and wainting for treatment
 
@@ -1187,7 +1199,62 @@ void treatData()
         else if (strcmp(arr[REQUEST_NAME_INDEX], "ENDGAME") == 0) // End the party
         {
             partyFinished = true;
-            initFinalScoreMenu();
+            // Map change: no final score, the game reconnects
+            if (!autoReconnect)
+                initFinalScoreMenu();
+        }
+        else if (strcmp(arr[REQUEST_NAME_INDEX], "MODEVOTES") == 0) // Votes for the next mode
+        {
+            for (int i = 0; i < MODE_VOTE_COUNT && i + 1 < SplitCount; i++)
+                modeVotes[i] = intParse(arr[i + 1]);
+
+            // New warm up: the local vote is forgotten when all votes are 0
+            int total = 0;
+            for (int i = 0; i < MODE_VOTE_COUNT; i++)
+                total += modeVotes[i];
+            if (total == 0)
+                myModeVote = -1;
+
+            if (currentMenu == VOTE_MODE)
+                UpdateBottomScreenFrameCount += 8;
+        }
+        else if (strcmp(arr[REQUEST_NAME_INDEX], "GAMEOVER") == 0) // End of the game, back to the warm up in 10 seconds
+        {
+            int winnerId = intParse(arr[1]);
+            int winnerTeam = intParse(arr[2]);
+
+            if (winnerId != -1)
+            {
+                // Deathmatch / GunGame: a player wins
+                Player *winner = GetPlayer(winnerId);
+                if (winner != NULL)
+                {
+                    snprintf(gameEventNotificationText, sizeof(gameEventNotificationText), "%s wins!", winner->name);
+                    textToShowTimer = 600;
+                }
+            }
+            else if (winnerTeam == TERRORISTS)
+            {
+                showPartyEventText(TERRORISTS_WIN);
+            }
+            else if (winnerTeam == COUNTERTERRORISTS)
+            {
+                showPartyEventText(COUNTER_TERRORISTS_WIN);
+            }
+            else
+            {
+                strncpy(gameEventNotificationText, "Draw", sizeof(gameEventNotificationText));
+                textToShowTimer = 600;
+            }
+
+            // Show the scores
+            initScoreMenu();
+        }
+        else if (strcmp(arr[REQUEST_NAME_INDEX], "RECONNECT") == 0) // Map change: reconnect after the disconnection
+        {
+            autoReconnect = true;
+            // Private party: join the new party with the same code
+            reconnectOption = isPrivate ? JOIN_PRIVATE_PARTY : JOIN_RANDOM_PARTY;
         }
         else if (strcmp(arr[REQUEST_NAME_INDEX], "CHANGMAP") == 0) // End the party
         {
@@ -1237,6 +1304,16 @@ void treatData()
 
                         AllPlayers[FoundPlayer].AllAmmoMagazine[i2].AmmoCount = AmmoCountInt;
                         AllPlayers[FoundPlayer].AllAmmoMagazine[i2].TotalAmmoCount = TotalAmmoCountInt;
+                    }
+
+                    // GunGame: new gun with an empty magazine, reload before shooting
+                    Player *player = &AllPlayers[FoundPlayer];
+                    if (FoundPlayer == 0 && currentPartyMode == 4 && !applyRules &&
+                        (player->currentGunInInventory == 1 || player->currentGunInInventory == 2) &&
+                        player->AllAmmoMagazine[player->currentGunInInventory - 1].AmmoCount == 0 &&
+                        player->AllAmmoMagazine[player->currentGunInInventory - 1].TotalAmmoCount > 0)
+                    {
+                        startReloadGun(0);
                     }
                     break;
                 }
@@ -1421,7 +1498,19 @@ void ReadServerData()
     closesocket(my_socket);
     udpClose();
     Connection = UNSELECTED;
-    if (!partyFinished && currentMenu != ONLINE_ERROR)
+    if (autoReconnect)
+    {
+        // Map change: show a message, reconnect in a few seconds (main loop)
+        autoReconnect = false;
+        reconnectPending = true;
+        reconnectDelay = 240; // 4 seconds, time for the server to change the map
+        // Same cleaning as a return to the main menu (removes the players
+        // of the old party, or the new party can't be joined)
+        initMainMenu();
+        strcpy(errorText, "The server is changing the map. Reconnecting...");
+        initOnlineErrorMenu();
+    }
+    else if (!partyFinished && currentMenu != ONLINE_ERROR)
     {
         initMainMenu();
     }
@@ -1527,7 +1616,7 @@ void sendDataToServer()
             strcat(InfoToSend, positionText);
 
         SendPosition = false;
-        // Every 3 frames (20 times per second) instead of every 5 frames
+        // Every 2 frames (30 times per second): decremented before the test
         SendPositionData = 2;
     }
 
@@ -1633,6 +1722,13 @@ void sendDataToServer()
     {
         SendVoteStartNow = false;
         sprintf(InfoToSend + strlen(InfoToSend), "{%d;0}", VOTE);
+    }
+
+    // Send the vote for the next mode
+    if (SendVoteMode)
+    {
+        SendVoteMode = false;
+        sprintf(InfoToSend + strlen(InfoToSend), "{%d;1;%d}", VOTE, voteModeIndex);
     }
 
     // Send wall hit data

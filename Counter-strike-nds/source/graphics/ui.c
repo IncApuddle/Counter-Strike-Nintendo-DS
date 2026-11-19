@@ -417,6 +417,10 @@ void ChangeMenu(int menuId)
     {
         initTouchSettingsMenu();
     }
+    else if (menuId == VOTE_MODE)
+    {
+        initVoteModeMenu();
+    }
 }
 
 /**
@@ -1023,10 +1027,8 @@ void drawTopScreenUI()
                 int timerXOffset = 0;
                 if (roundState == TRAINING && Connection != OFFLINE)
                 {
-                    if (PlayerCount != 1)
                     {
-                        char forceLaunchText[31];
-                        sprintf(forceLaunchText, "Start to vote force launch %d/%d", playerWantToStart, playerWantToStartLimite);
+                        const char *forceLaunchText = "Please VOTE in the menu BELOW.";
                         int backgroundSize = strlen(forceLaunchText) * 8;
                         int backgroundOffset = 8; // 1*8
                         NE_PolyFormat(13, 0, NE_LIGHT_0, NE_CULL_BACK, NE_MODULATION);
@@ -1579,6 +1581,17 @@ void initGameMenu()
     AllButtons[4].yTextPos = 6;
     AllButtons[4].text = "Gamepad";
 
+    // Vote for the next mode (online warm up)
+    AllButtons[5].xPos = 190;
+    AllButtons[5].yPos = 40;
+    AllButtons[5].xSize = 60;
+    AllButtons[5].ySize = 24;
+    AllButtons[5].OnClick = &initVoteModeMenu;
+    AllButtons[5].xTextPos = 25;
+    AllButtons[5].yTextPos = 6;
+    AllButtons[5].text = "Vote";
+    AllButtons[5].isHidden = applyRules || roundState != TRAINING || Connection == OFFLINE;
+
     if (AllPlayers[0].Team == SPECTATOR)
     {
         AllButtons[1].isHidden = true;
@@ -1590,7 +1603,7 @@ void initGameMenu()
         AllButtons[1].isHidden = true;
     }
 
-    SetButtonToShow(5);
+    SetButtonToShow(6);
 }
 
 /**
@@ -3221,6 +3234,70 @@ void drawControlsSettingsMenu()
     char buttonsSensitivityText[33];
     snprintf(buttonsSensitivityText, sizeof(buttonsSensitivityText), "Button sensitivity: %0.1f", *AllSliders[0].value);
     NE_TextPrint(0, 4, 14, NE_White, buttonsSensitivityText);
+}
+
+/**
+ * @brief Vote for a mode
+ *
+ * @param index 0 Competitive, 1 Casual, 2 Deathmatch, 3 GunGame
+ */
+static void voteForMode(int index)
+{
+    voteModeIndex = index;
+    myModeVote = index;
+    SendVoteMode = true;
+    UpdateBottomScreenFrameCount += 8;
+}
+
+static const char *voteModeNames[MODE_VOTE_COUNT] = {"Competitive", "Casual", "Deathmatch", "GunGame"};
+
+/**
+ * @brief Init the menu to vote for the next mode (online warm up)
+ *
+ */
+void initVoteModeMenu()
+{
+    SetTwoScreenMode(false);
+
+    startChangeMenu(VOTE_MODE);
+
+    renderFunction = &drawVoteModeMenu;
+    lastOpenedMenu = &initGameMenu;
+
+    setQuitButton(true);
+
+    for (int i = 0; i < MODE_VOTE_COUNT; i++)
+    {
+        AllButtons[i].xPos = 40;
+        AllButtons[i].yPos = 40 + i * 36;
+        AllButtons[i].xSize = 130;
+        AllButtons[i].ySize = 28;
+        AllButtons[i].OnClick = &voteForMode;
+        AllButtons[i].parameter = i;
+        AllButtons[i].xTextPos = 6;
+        AllButtons[i].yTextPos = (54 + i * 36) / 8; // Centered in the button
+        AllButtons[i].text = voteModeNames[i];
+    }
+
+    SetButtonToShow(MODE_VOTE_COUNT);
+    SetCheckBoxToShow(0);
+    SetSliderToShow(0);
+}
+
+/**
+ * @brief Draw the vote menu: votes of each mode
+ *
+ */
+void drawVoteModeMenu()
+{
+    NE_TextPrint(0, 8, 1, NE_White, "Next game mode");
+
+    for (int i = 0; i < MODE_VOTE_COUNT; i++)
+    {
+        char text[16];
+        snprintf(text, sizeof(text), "%d%s", modeVotes[i], myModeVote == i ? " <" : "");
+        NE_TextPrint(0, 23, (54 + i * 36) / 8, NE_White, text);
+    }
 }
 
 /**

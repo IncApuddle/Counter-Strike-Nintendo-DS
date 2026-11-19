@@ -188,13 +188,38 @@ void buyGun()
     }
     else if (ShopCategory == GRENADES && AllGrenades[grenadeIndex].Price <= localPlayer->Money)
     {
-        // Search for the first empty slot for grenade
-        for (int grenadeCheckIndex = InventoryGrenadeStartPosition; grenadeCheckIndex < InventoryEquipementStartPosition; grenadeCheckIndex++)
+        // Max number of this grenade (maxQuantity has values for the first 3
+        // modes only: other modes use the competitive values, HE 1, flash 2,
+        // smoke 1, like Counter-Strike)
+        int modeIndex = currentPartyMode < 3 ? currentPartyMode : 0;
+        int maxQuantity = AllGrenades[grenadeIndex].maxQuantity[modeIndex];
+
+        // Infinite money (training, deathmatch): the shop is always open, so
+        // the limit is the number of grenades in the inventory, not the number
+        // bought in the round
+        bool canBuyGrenade;
+        if (allPartyModes[currentPartyMode].infiniteMoney)
         {
-            if (localPlayer->AllGunsInInventory[grenadeCheckIndex] == -1 && localPlayer->grenadeBought[grenadeIndex] < AllGrenades[grenadeIndex].maxQuantity[currentPartyMode])
+            int ownedCount = 0;
+            for (int i = InventoryGrenadeStartPosition; i < InventoryEquipementStartPosition; i++)
+            {
+                if (localPlayer->AllGunsInInventory[i] == GetSelectedGunShop())
+                    ownedCount++;
+            }
+            canBuyGrenade = ownedCount < maxQuantity;
+        }
+        else
+        {
+            canBuyGrenade = localPlayer->grenadeBought[grenadeIndex] < maxQuantity;
+        }
+
+        // Search for the first empty slot for grenade
+        for (int grenadeCheckIndex = InventoryGrenadeStartPosition; grenadeCheckIndex < InventoryEquipementStartPosition && canBuyGrenade; grenadeCheckIndex++)
+        {
+            if (localPlayer->AllGunsInInventory[grenadeCheckIndex] == -1)
             {
                 localPlayer->AllGunsInInventory[grenadeCheckIndex] = GetSelectedGunShop();
-                if (currentPartyMode != 2)
+                if (!allPartyModes[currentPartyMode].infiniteMoney)
                     localPlayer->grenadeBought[grenadeIndex]++;
 
                 if (!allPartyModes[currentPartyMode].infiniteMoney)

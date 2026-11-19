@@ -50,6 +50,7 @@ extern float debugValue1;
 extern float debugValue2;
 extern float debugValue3;
 extern char errorText[ERROR_TEXT_LENGTH];
+extern char gameEventNotificationText[30];
 extern bool showFinalScore;
 extern bool showPing;
 extern int showShootFriendMessage;
@@ -82,6 +83,7 @@ enum UiMenu
     ENTER_IP = 21,
     AI_Set = 22,
     TOUCH_SETTINGS = 23,
+    VOTE_MODE = 24,
 };
 
 enum shopCategory
@@ -180,6 +182,8 @@ void initMainMenu();
 void initChatMenu();
 void initControlsSettingsMenu();
 void initTouchSettingsMenu();
+void initVoteModeMenu();
+void drawVoteModeMenu();
 void initControlsChangeMenu();
 void initSelectionMapImageMenu();
 void initSelectionMapListMenu();

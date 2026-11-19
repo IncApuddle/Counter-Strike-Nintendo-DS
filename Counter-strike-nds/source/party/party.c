@@ -697,7 +697,8 @@ void checkAfterDamage(int shooterPlayerIndex, int hittedPlayerIndex, bool CheckS
                     TopKill++;
                 }
 
-                if(currentPartyMode == 4)
+                // GunGame of the single player mode (online, the server changes the guns)
+                if(currentPartyMode == 4 && applyRules)
                 {
                     if (killerClient != localPlayer)
                     {

@@ -594,6 +594,21 @@ void checkStartGameLoop()
 	}
 	else
 	{
+		// Map change on the server: reconnect (cancelled if the player leaves the message)
+		if (reconnectPending)
+		{
+			if (GetCurrentMenu() != ONLINE_ERROR)
+			{
+				reconnectPending = false;
+			}
+			else if (--reconnectDelay <= 0)
+			{
+				reconnectPending = false;
+				JoinParty(reconnectOption);
+				return;
+			}
+		}
+
 		readKeys();
 		// For debug, rapid party start
 		if (isDebugMode && currentMenu == MAIN)
@@ -1089,11 +1104,7 @@ void GameLoop()
 		}
 	}
 
-	// Check if the player want to vote
-	if (roundState == TRAINING && Connection != OFFLINE && PlayerCount != 1 && (keysdown & KEY_START))
-	{
-		SendVoteStartNow = true;
-	}
+	// Force launch vote (START) removed: the warm up is used to vote for the mode
 
 	if (localPlayer->Team != SPECTATOR && !localPlayer->IsDead && roundState != WAIT_START)
 	{

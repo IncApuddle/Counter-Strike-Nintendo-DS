@@ -131,4 +131,16 @@ void sendDataToServer();
 int intParse(char *charToParse);
 float floatParse(char *charToParse);
 
+// Vote for the next mode (warm up)
+#define MODE_VOTE_COUNT 4
+extern bool SendVoteMode;
+extern int voteModeIndex;
+extern int modeVotes[MODE_VOTE_COUNT];
+extern int myModeVote;
+
+// Map change: automatic reconnection
+extern bool reconnectPending;
+extern int reconnectDelay;
+extern int reconnectOption;
+
 #endif // NETWORK_H_
