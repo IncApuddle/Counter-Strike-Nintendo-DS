@@ -68,6 +68,5 @@ Note : To avoid coding collisions, path finding..., there is an Unity project to
 - [ ] Add fall damage
 - [x] Smoke doesn't affect bots at this time
 - [ ] Languege system
-- [ ] Add more maps
-- [ ] Add hostage rescue mode
-- [ ] Add dropping weapons
+- [ ] Add Office map and hostage rescue mode
+- [x] Add dropping weapons
