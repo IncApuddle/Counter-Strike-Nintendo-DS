@@ -63,10 +63,9 @@ Note : To avoid coding collisions, path finding..., there is an Unity project to
 ## TODO
 - [x] make a few strategies for bots
 - [x] make shotgun reload work.
-- [ ] Ad hoc (Ni-Fi) multiplayer
-- [ ] Disable sleep mode in multiplayer : **?**
-- [ ] Add fall damage
 - [x] Smoke doesn't affect bots at this time
-- [ ] Languege system
-- [ ] Add Office map and hostage rescue mode
 - [x] Add dropping weapons
+- [ ] Ad hoc (Ni-Fi) multiplayer
+- [ ] Add fall damage
+- [ ] Add Office map and hostage rescue mode
+- [ ] Languege system
