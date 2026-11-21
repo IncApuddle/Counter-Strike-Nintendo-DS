@@ -25,6 +25,9 @@
 #include "stats.h"
 #include "debug.h"
 #include "droppedGuns.h"
+#include "localplay.h"
+#include <dswifi9.h>
+#include "localhost.h"
 
 enum shopCategory ShopCategory = PISTOLS; // 0 pistols, 1 Heavy, 2 sgm, 3 rifles, 4 equipment, 5 grenades
 
@@ -421,6 +424,14 @@ void ChangeMenu(int menuId)
     else if (menuId == VOTE_MODE)
     {
         initVoteModeMenu();
+    }
+    else if (menuId == LOCAL_ROOMS)
+    {
+        initLocalRoomsMenu();
+    }
+    else if (menuId == LOCAL_LOBBY_MENU)
+    {
+        initLocalLobbyMenu();
     }
 }
 
@@ -1508,7 +1519,7 @@ void drawBottomScreenUI()
     if (NeedChangeScreen)
     {
         NeedChangeScreen = false;
-        AlwaysUpdateBottomScreen = !AlwaysUpdateBottomScreen;
+        AlwaysUpdateBottomScreen = TwoScreenModeTarget;
         UpdateBottomScreenFrameCount = 4;
     }
 }
@@ -2078,6 +2089,11 @@ void initMainMenu()
     }
     Connection = UNSELECTED;
 
+    // Leave the local multiplayer room if any (not at the end of a local game:
+    // everybody goes back to the room)
+    if (!localKeepRoom && !isLocalHostGame())
+        localLeave();
+
     setQuitButton(false);
 
     removeAllPlayers();
@@ -2527,7 +2543,11 @@ void initSelectionMapImageMenu()
 
     renderFunction = &drawSelectionMapImageMenu;
 
-    lastOpenedMenu = &initMainMenu;
+    // Local multiplayer host: back to the room
+    if (localIsHost && localState == LOCAL_LOBBY)
+        lastOpenedMenu = &initLocalLobbyMenu;
+    else
+        lastOpenedMenu = &initMainMenu;
 
     onCloseMenu = &unloadSelectionMapImageMenu;
     haveToCallOnCloseMenu = true;
@@ -2699,32 +2719,32 @@ void initJoinCreatePartyMenu()
 
     // Set change controls button
     AllButtons[0].xPos = 36;
-    AllButtons[0].yPos = 44;
+    AllButtons[0].yPos = 68;
     AllButtons[0].xSize = 190;
-    AllButtons[0].ySize = 32;
+    AllButtons[0].ySize = 26;
     AllButtons[0].OnClick = &JoinParty;
     AllButtons[0].parameter = JOIN_RANDOM_PARTY;
     AllButtons[0].xTextPos = 7;
-    AllButtons[0].yTextPos = 7;
+    AllButtons[0].yTextPos = 9;
     AllButtons[0].text = "Join a random party";
 
     AllButtons[1].xPos = 36;
-    AllButtons[1].yPos = 92;
+    AllButtons[1].yPos = 104;
     AllButtons[1].xSize = 190;
-    AllButtons[1].ySize = 32;
+    AllButtons[1].ySize = 26;
     AllButtons[1].OnClick = &initEnterCodeMenu;
     AllButtons[1].xTextPos = 6;
-    AllButtons[1].yTextPos = 13;
+    AllButtons[1].yTextPos = 14;
     AllButtons[1].text = "Join a private party";
 
     AllButtons[2].xPos = 36;
     AllButtons[2].yPos = 140;
     AllButtons[2].xSize = 190;
-    AllButtons[2].ySize = 32;
+    AllButtons[2].ySize = 26;
     AllButtons[2].OnClick = &JoinParty;
     AllButtons[2].parameter = CREATE_PRIVATE_PARTY;
     AllButtons[2].xTextPos = 5;
-    AllButtons[2].yTextPos = 19;
+    AllButtons[2].yTextPos = 18;
     AllButtons[2].text = "Create a private party";
 
     AllButtons[3].xPos = 1;
@@ -2736,7 +2756,17 @@ void initJoinCreatePartyMenu()
     AllButtons[3].yTextPos = 1;
     AllButtons[3].text = "IP";
 
-    SetButtonToShow(4);
+    // Local multiplayer (NiFi), above the online buttons
+    AllButtons[4].xPos = 36;
+    AllButtons[4].yPos = 32;
+    AllButtons[4].xSize = 190;
+    AllButtons[4].ySize = 26;
+    AllButtons[4].OnClick = &initLocalRoomsMenu;
+    AllButtons[4].xTextPos = 11;
+    AllButtons[4].yTextPos = 5;
+    AllButtons[4].text = "Local game";
+
+    SetButtonToShow(5);
 }
 
 /**
@@ -3198,6 +3228,15 @@ void drawControllerMenu()
                  isLeftControls ? 9 : 13, 1, // Coordinates x(column), y(row)
                  NE_White,                  // Color
                  "Gamepad");
+
+    // Local multiplayer (NiFi): counters of the connection (to find problems)
+    if (localState == LOCAL_PLAYING)
+    {
+        char statsText[64];
+        snprintf(statsText, sizeof(statsText), "rx:%d tx:%d e:%d(%d) w:%d", localStats.goodPackets, localStats.sentPackets,
+                 localStats.sendErrors, localStats.lastSendError, localStats.framesSinceLastPacket);
+        NE_TextPrint(0, 6, 23, NE_White, statsText);
+    }
 }
 
 /**
@@ -3657,4 +3696,173 @@ void unloadChangeNameMenu()
 void unloadControlsChangeMenu()
 {
     stopScanForInput();
+}
+//////////////////////////////////////////////////////////////////////////////
+// Local multiplayer (NiFi) menus
+
+static char localRoomButtonTexts[LOCAL_MAX_ROOMS][48];
+
+/**
+ * @brief Leave the local mode and go back to the multiplayer menu
+ *
+ */
+static void leaveLocalToMultiplayerMenu()
+{
+    localLeave();
+    initJoinCreatePartyMenu();
+}
+
+static void onCreateLocalRoom(int unused)
+{
+    (void)unused;
+    localCreateRoom();
+    if (localState == LOCAL_LOBBY)
+        initLocalLobbyMenu();
+}
+
+static void onJoinLocalRoom(int roomIndex)
+{
+    localJoinRoom(roomIndex);
+    if (localState == LOCAL_CONNECTING)
+        initLocalLobbyMenu();
+}
+
+/**
+ * @brief Init the local multiplayer menu: create a room or join a room found
+ * by the scan
+ *
+ */
+void initLocalRoomsMenu()
+{
+    SetTwoScreenMode(true);
+
+    startChangeMenu(LOCAL_ROOMS);
+
+    renderFunction = &drawLocalRoomsMenu;
+
+    lastOpenedMenu = &leaveLocalToMultiplayerMenu;
+
+    setQuitButton(true);
+
+    // Look for rooms
+    localStartScan();
+
+    AllButtons[0].xPos = 56;
+    AllButtons[0].yPos = 28;
+    AllButtons[0].xSize = 144;
+    AllButtons[0].ySize = 24;
+    AllButtons[0].OnClick = &onCreateLocalRoom;
+    AllButtons[0].parameter = 0;
+    AllButtons[0].xTextPos = 10;
+    AllButtons[0].yTextPos = 4;
+    AllButtons[0].text = "Create room";
+
+    // Rooms found (updated in drawLocalRoomsMenu())
+    for (int i = 0; i < LOCAL_MAX_ROOMS; i++)
+    {
+        AllButtons[i + 1].xPos = 16;
+        AllButtons[i + 1].yPos = 80 + i * 26;
+        AllButtons[i + 1].xSize = 224;
+        AllButtons[i + 1].ySize = 22;
+        AllButtons[i + 1].OnClick = &onJoinLocalRoom;
+        AllButtons[i + 1].parameter = i;
+        AllButtons[i + 1].xTextPos = 3;
+        AllButtons[i + 1].yTextPos = (80 + i * 26 + 8) / 8; // Text in the middle of the button
+        localRoomButtonTexts[i][0] = '\0';
+        AllButtons[i + 1].text = localRoomButtonTexts[i];
+        AllButtons[i + 1].isHidden = true;
+    }
+
+    SetButtonToShow(1 + LOCAL_MAX_ROOMS);
+}
+
+void drawLocalRoomsMenu()
+{
+    NE_TextPrint(0, 8, 1, NE_White, "Local multiplayer");
+    NE_TextPrint(0, 2, 8, NE_White, "Rooms near you:");
+
+    // Update the buttons of the rooms
+    for (int i = 0; i < LOCAL_MAX_ROOMS; i++)
+    {
+        bool visible = i < localRoomCount;
+        if (visible)
+        {
+            snprintf(localRoomButtonTexts[i], sizeof(localRoomButtonTexts[i]), "%-15.15s %d/%d",
+                     localRooms[i].hostName, localRooms[i].playersCurrent, LOCAL_MAX_PLAYERS);
+        }
+        if (AllButtons[i + 1].isHidden == visible)
+        {
+            AllButtons[i + 1].isHidden = !visible;
+            UpdateBottomScreenFrameCount += 8;
+        }
+    }
+
+    if (localRoomCount == 0)
+        NE_TextPrint(0, 2, 11, NE_White, "Searching...");
+}
+
+/**
+ * @brief Init the room menu (players in the room)
+ *
+ */
+void initLocalLobbyMenu()
+{
+    SetTwoScreenMode(true);
+
+    startChangeMenu(LOCAL_LOBBY_MENU);
+
+    renderFunction = &drawLocalLobbyMenu;
+
+    lastOpenedMenu = &leaveLocalToMultiplayerMenu;
+
+    setQuitButton(true);
+
+    // Host: choose the map and the mode (like single player), then the game starts
+    AllButtons[0].xPos = 76;
+    AllButtons[0].yPos = 140;
+    AllButtons[0].xSize = 104;
+    AllButtons[0].ySize = 24;
+    AllButtons[0].OnClick = &initSelectionMapImageMenu;
+    AllButtons[0].parameter = 0;
+    AllButtons[0].xTextPos = 13;
+    AllButtons[0].yTextPos = 18;
+    AllButtons[0].text = "Start";
+    AllButtons[0].isHidden = !localIsHost;
+
+    SetButtonToShow(1);
+}
+
+void drawLocalLobbyMenu()
+{
+    NE_TextPrint(0, 11, 1, NE_White, localIsHost ? "Your room" : "Room");
+
+    // Counters of the connection (to check the connection)
+    char statsText[64];
+    snprintf(statsText, sizeof(statsText), "h:%d rx:%d/%d/%d tx:%d e:%d %s:%d", localStats.handlerCalls, localStats.receivedFrames, localStats.goodPackets,
+             localStats.badPackets, localStats.sentPackets, localStats.sendErrors, localIsHost ? "cl" : "st",
+             localIsHost ? Wifi_MultiplayerGetNumClients() : Wifi_AssocStatus());
+    NE_TextPrint(0, 1, 22, NE_White, statsText);
+
+    if (localState == LOCAL_CONNECTING)
+    {
+        NE_TextPrint(0, 2, 5, NE_White, "Connecting...");
+        return;
+    }
+
+    char text[32];
+    int count = 0;
+    for (int i = 0; i < LOCAL_MAX_PLAYERS; i++)
+    {
+        if (!localLobbyPlayers[i].used)
+            continue;
+        snprintf(text, sizeof(text), "%d. %s%s", count + 1, localLobbyPlayers[i].name, i == 0 ? " (host)" : "");
+        NE_TextPrint(0, 4, 4 + count * 2, NE_White, text); // 6 players: rows 4 to 14
+        count++;
+    }
+
+    snprintf(text, sizeof(text), "Players: %d/%d", count, LOCAL_MAX_PLAYERS);
+    NE_TextPrint(0, 4, 16, NE_White, text);
+
+    if (!localIsHost)
+        NE_TextPrint(0, 2, 19, NE_White, "Waiting for the host...");
 }

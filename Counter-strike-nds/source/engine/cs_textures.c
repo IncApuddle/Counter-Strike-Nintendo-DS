@@ -229,6 +229,143 @@ int CS_MaterialTexLoadPrepared(NE_Material *tex, NE_Palette *pal,
     return 1;
 }
 
+/**
+ * @brief Same as CS_MaterialTexLoadBMPtoRGB256(), but an 8 bpp BMP that only
+ * uses the 16 first colors is loaded as a 16 colors texture (NE_PAL16): half
+ * of the VRAM, and the conversion only needs a buffer of half of the size in
+ * RAM (no 8 bpp copy). Used for the big images (map view: 256x177): online,
+ * with a big map (Mirage), there wasn't enough free RAM for the 8 bpp copy.
+ */
+int CS_MaterialTexLoadBMPCompact(NE_Material *tex, NE_Palette *pal,
+                                 const void *pointer, bool transpcolor)
+{
+    if (tex == NULL || pal == NULL || pointer == NULL)
+        return 0;
+
+    uintptr_t addr = (uintptr_t)pointer;
+    if (addr < 0x02000000 || addr >= 0x03000000)
+        return 0;
+
+    const NE_BMPHeader *header = pointer;
+    const NE_BMPInfoHeader *infoheader =
+        (const void *)((const u8 *)header + sizeof(NE_BMPHeader));
+
+    int sizex = (int32_t)infoheader->width;
+    int sizey = (int32_t)infoheader->height;
+    bool top_down = sizey < 0;
+    if (top_down)
+        sizey = -sizey;
+
+    // Only uncompressed 8 bpp BMP files, the others use the normal loader
+    if (header->type != 0x4D42 || infoheader->compression != 0 || infoheader->bits != 8 ||
+        sizex <= 0 || sizey <= 0 || sizex > 1024 || sizey > 1024)
+        return CS_MaterialTexLoadBMPtoRGB256(tex, pal, pointer, transpcolor);
+
+    const u8 *palettedata = (const u8 *)infoheader + infoheader->size;
+    const u8 *imagedata = (const u8 *)header + header->offset;
+    int stride = ((sizex * 8 + 31) / 32) * 4;
+
+    // Only the 16 first colors?
+    for (int y = 0; y < sizey; y++)
+    {
+        const u8 *src = imagedata + y * stride;
+        for (int x = 0; x < sizex; x++)
+        {
+            if (src[x] >= 16)
+                return CS_MaterialTexLoadBMPtoRGB256(tex, pal, pointer, transpcolor);
+        }
+    }
+
+    int texwidth = 8;
+    while (texwidth < sizex)
+        texwidth <<= 1;
+
+    // 2 pixels per byte, the left pixel in the low 4 bits, padded with color 0
+    u8 *buffer = calloc(texwidth / 2 * sizey, 1);
+    if (buffer == NULL)
+    {
+        NE_DebugPrint("Not enough memory");
+        return 0;
+    }
+
+    for (int y = 0; y < sizey; y++)
+    {
+        int srcy = top_down ? y : (sizey - y - 1);
+        const u8 *src = imagedata + srcy * stride;
+        u8 *dst = buffer + y * (texwidth / 2);
+        for (int x = 0; x < sizex; x++)
+        {
+            if (x & 1)
+                dst[x >> 1] |= src[x] << 4;
+            else
+                dst[x >> 1] |= src[x];
+        }
+    }
+
+    u16 palette[16];
+    int numcolors = infoheader->ncolors;
+    if (numcolors <= 0 || numcolors > 16)
+        numcolors = 16;
+    for (int i = 0; i < 16; i++)
+    {
+        if (i < numcolors)
+        {
+            u8 b = palettedata[(i << 2) + 0];
+            u8 g = palettedata[(i << 2) + 1];
+            u8 r = palettedata[(i << 2) + 2];
+            palette[i] = RGB15(r >> 3, g >> 3, b >> 3);
+        }
+        else
+        {
+            palette[i] = 0;
+        }
+    }
+
+    NE_TextureFlags flags = NE_TEXGEN_TEXCOORD | NE_TEXTURE_WRAP_S | NE_TEXTURE_WRAP_T;
+    if (transpcolor)
+        flags |= NE_TEXTURE_COLOR0_TRANSPARENT;
+
+    int ret = NE_MaterialTexLoad(tex, NE_PAL16, texwidth, sizey, flags, buffer);
+    free(buffer);
+    if (ret == 0)
+    {
+        NE_DebugPrint("Error while loading 16 colors texture");
+        return 0;
+    }
+
+    ret = NE_PaletteLoad(pal, palette, 16, NE_PAL16);
+    if (ret == 0)
+    {
+        NE_DebugPrint("Error while loading palette");
+        return 0;
+    }
+
+    NE_MaterialSetPalette(tex, pal);
+    cs_texture_size_save(tex, sizex, sizey);
+    return 1;
+}
+
+/**
+ * @brief Load a raw 256x256 NE_PAL256 texture (see tools/make_map_textures.py:
+ * 256 u16 palette entries, then the pixels, top row first). The data is copied
+ * to VRAM directly, no buffer in RAM is needed.
+ */
+int CS_MaterialTexLoadRaw256(NE_Material *tex, NE_Palette *pal,
+                             const void *pointer, bool transpcolor)
+{
+    if (tex == NULL || pal == NULL || pointer == NULL)
+        return 0;
+
+    CS_PreparedTexture prepared;
+    prepared.palette = (u16 *)pointer;
+    prepared.buffer = (u8 *)pointer + 256 * sizeof(u16);
+    prepared.texwidth = 256;
+    prepared.width = 256;
+    prepared.height = 256;
+    prepared.numcolors = 256;
+    return CS_MaterialTexLoadPrepared(tex, pal, &prepared, transpcolor);
+}
+
 int CS_MaterialTexLoadBMPtoRGB256(NE_Material *tex, NE_Palette *pal,
                                   const void *pointer, bool transpcolor)
 {

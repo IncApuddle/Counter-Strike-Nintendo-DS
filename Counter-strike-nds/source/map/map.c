@@ -542,23 +542,22 @@ void TextureToLoad(int TextureNumb)
 {
 	CS_MaterialDeleteSafe(&GroundMaterial);
 	GroundMaterial = NE_MaterialCreate();
-	// CS_MaterialDeleteSafe(&GroundMaterialShadowed);
-	// GroundMaterialShadowed = NE_MaterialCreate();
 	CS_PaletteDeleteSafe(&Palettes[1]);
 	Palettes[1] = NE_PaletteCreate();
 
+	// Raw textures (tools/make_map_textures.py): they are copied to VRAM
+	// directly. The BMP conversion needed a 64 KB buffer in RAM, and it failed
+	// online after another map (like Fy_Snow then Mirage): white map.
 	if(TextureNumb == 1)
 	{
-        CS_MaterialTexLoadBMPtoRGB256(GroundMaterial, Palettes[1], (void *)texMap_Dust2_bin, 1);
+        CS_MaterialTexLoadRaw256(GroundMaterial, Palettes[1], (void *)texMap_Dust2_bin, 1);
 		CurrentTexture = 1;
 	}
 	else if(TextureNumb == 2)
 	{
-        CS_MaterialTexLoadBMPtoRGB256(GroundMaterial, Palettes[1], (void *)texMap_General_Map_bin, 1);
+        CS_MaterialTexLoadRaw256(GroundMaterial, Palettes[1], (void *)texMap_General_Map_bin, 1);
 		CurrentTexture = 2;
 	}
-
-    // NE_MaterialTexClone(GroundMaterial, GroundMaterialShadowed);
 }
 
 Wall *getMapWalls()

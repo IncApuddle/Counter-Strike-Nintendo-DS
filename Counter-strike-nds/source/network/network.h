@@ -144,4 +144,11 @@ extern bool reconnectPending;
 extern int reconnectDelay;
 extern int reconnectOption;
 
+
+// Local multiplayer (NiFi)
+void networkTreatText(const char *text);
+void networkAppendReceived(const char *text);
+void networkResetReceived(void);
+void runLocalClientGame(void);
+
 #endif // NETWORK_H_

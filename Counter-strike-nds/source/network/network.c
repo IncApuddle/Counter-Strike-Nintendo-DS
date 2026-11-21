@@ -6,6 +6,7 @@
 
 #include "../main.h"
 #include "droppedGuns.h"
+#include "localplay.h"
 // ioctl() and FIONBIO (non-blocking sockets)
 #if __has_include(<sys/ioctl.h>)
 #include <sys/ioctl.h>
@@ -264,9 +265,12 @@ void initNetwork(int option)
     // See Wifi_CheckInit to replace my_socket == 0 by !Wifi_CheckInit()
     // Call Wifi_InitDefault only once (by checking if the socket was already used), or the wifi will not work after that
     netLog("initNetwork: option %d, connection %d, socket %d", option, Connection, my_socket);
-    if (my_socket == 0 && !Wifi_InitDefault(WFC_CONNECT))
+    // The wifi library is started without connection (INIT_ONLY) to be able
+    // to use the local multiplayer mode too, then the game connects to the
+    // access point saved in the DS settings
+    if (!connectToAccessPoint())
     {
-        netLog("Wifi_InitDefault failed");
+        netLog("Can't connect to the access point");
         Connection = UNSELECTED;
         initMainMenu();
     }
@@ -307,23 +311,48 @@ void initNetwork(int option)
 void connectToServer(char *url, bool LocalMode, int my_socket, enum JoinType option)
 {
     partyOption = option;
-    struct hostent *myhost;
+
+    // Tell the socket to connect to the IP address of the server, on port 6003
+    // or 1080 for android phone
+    struct sockaddr_in sain;
+    memset(&sain, 0, sizeof(sain));
+    sain.sin_family = AF_INET;
+    if (!LocalMode)
+        sain.sin_port = htons(SERVER_PORT);
+    else
+        sain.sin_port = htons(LOCAL_SERVER_PORT);
+
+    bool addressFound = false;
     if (LocalMode)
     {
-        // Get ip adress of the phone
+        // The server is on the phone: its address is the gateway address
         struct in_addr gateway;
         Wifi_GetIPInfo(&gateway, NULL, NULL, NULL);
-
-        // Find the IP address of the server, with gethostbyname
-        char GatewayChar[22] = "";
-        sprintf(GatewayChar, "%s", inet_ntoa(gateway));
-        myhost = gethostbyname(GatewayChar);
+        sain.sin_addr = gateway;
+        addressFound = true;
     }
-    else // Find the IP address of the server, with gethostbyname
-        myhost = gethostbyname(url);
+    else
+    {
+        // Find the IP address of the server (getaddrinfo() replaces the
+        // deprecated gethostbyname())
+        struct addrinfo hints;
+        memset(&hints, 0, sizeof(hints));
+        hints.ai_family = AF_INET;
+        hints.ai_socktype = SOCK_STREAM;
 
-    netLog("gethostbyname(%s) = %p", LocalMode ? "gateway" : url, (void *)myhost);
-    if (myhost == NULL || myhost->h_addr_list[0] == NULL)
+        struct addrinfo *result = NULL;
+        int error = getaddrinfo(url, NULL, &hints, &result);
+        netLog("getaddrinfo(%s) = %d", url, error);
+        if (error == 0 && result != NULL && result->ai_addr != NULL)
+        {
+            sain.sin_addr = ((struct sockaddr_in *)result->ai_addr)->sin_addr;
+            addressFound = true;
+        }
+        if (result != NULL)
+            freeaddrinfo(result);
+    }
+
+    if (!addressFound)
     {
         netLog("Can't find the server address");
         closesocket(my_socket);
@@ -331,15 +360,6 @@ void connectToServer(char *url, bool LocalMode, int my_socket, enum JoinType opt
         initMainMenu();
         return;
     }
-
-    // Tell the socket to connect to the IP address we found, on port 6003 or 1080 for android phone
-    struct sockaddr_in sain;
-    sain.sin_family = AF_INET;
-    if (!LocalMode)
-        sain.sin_port = htons(SERVER_PORT);
-    else
-        sain.sin_port = htons(LOCAL_SERVER_PORT);
-    sain.sin_addr.s_addr = *((unsigned long *)(myhost->h_addr_list[0]));
 
     // Connect to the server
     int rc = connect(my_socket, (struct sockaddr *)&sain, sizeof(sain));
@@ -746,7 +766,9 @@ void treatData()
             LoadMap(currentMap);
 
             // Load the image of the map (map view, SELECT button). It was only
-            // loaded for single player games, online the map was white.
+            // loaded for single player games, online the map was white. The
+            // image is loaded as a 16 colors texture (MapImgToLoadFunc()): its
+            // conversion needs less RAM (Mirage online, little free RAM).
             MapImgToLoad = currentMap;
             MapImgToLoadFunc();
             logNetworkMemory("SETMAP");
@@ -1292,6 +1314,11 @@ void treatData()
                 addDroppedGun(gunId, x, y, z, 0, 0, NO_PLAYER, netId);
             }
         }
+        else if (strcmp(arr[REQUEST_NAME_INDEX], "PICKUP") == 0) // We took a gun on the floor
+        {
+            // Same sound as in single player (and the shop)
+            PlayBasicSound(SFX_MOLOTOV_DETONATE);
+        }
         else if (strcmp(arr[REQUEST_NAME_INDEX], "REMOVEGUN") == 0) // A gun was taken (-1: remove all guns)
         {
             removeDroppedGunByNetId(intParse(arr[1]));
@@ -1833,6 +1860,15 @@ void sendDataToServer()
         sprintf(InfoToSend + strlen(InfoToSend), "{%d}", DROPGUN);
     }
 
+    // Local multiplayer (NiFi): send to the host DS
+    if (Connection == LOCAL_GAME)
+    {
+        // Messages one by one (a packet never cuts a message)
+        if (InfoToSend[0] != '\0')
+            localSendToHost(InfoToSend);
+        return;
+    }
+
     // Get string data length
     int InfoLentgh = strlen(InfoToSend);
     if (InfoLentgh != 0)
@@ -1898,4 +1934,107 @@ Player *GetPlayer(int id)
             return &AllPlayers[i];
     }
     return NULL;
+}
+//////////////////////////////////////////////////////////////////////////////
+// Local multiplayer (NiFi)
+
+/**
+ * @brief Treat server messages now (host: messages of the clients converted to
+ * server messages, like POS or SHOOT)
+ *
+ */
+void networkTreatText(const char *text)
+{
+    networkAppendReceived(text);
+    treatData();
+}
+
+/**
+ * @brief Add server messages received from the host DS (treated in the game loop)
+ *
+ */
+void networkAppendReceived(const char *text)
+{
+    int length = strlen(text);
+    int current = strlen(Values);
+    if (current + length >= (int)sizeof(Values))
+    {
+        netLog("Receive buffer full, data dropped");
+        return;
+    }
+    memcpy(Values + current, text, length + 1);
+}
+
+void networkResetReceived(void)
+{
+    Values[0] = '\0';
+}
+
+/**
+ * @brief Game loop of a client of a local multiplayer game (the host DS is the
+ * server)
+ *
+ */
+void runLocalClientGame(void)
+{
+    prepareParty(1);
+    resetNetworkVariables();
+    firstConnection = true;
+    bool controllerMenuShown = false;
+
+    while (Connection == LOCAL_GAME && localState == LOCAL_PLAYING)
+    {
+        // Messages of the host
+        treatData();
+
+        // The host gives the team: no team selection
+        if (!controllerMenuShown && localPlayer->Id != UNUSED && localPlayer->Team != SPECTATOR && currentMenu == SCORE_BOARD)
+        {
+            controllerMenuShown = true;
+            SetNeedChangeScreen(true);
+            initControllerMenu();
+        }
+
+        // The camera shows our player when it is alive (the TEAM message
+        // moves the camera to another player, like a player who joins an
+        // online game during a round)
+        if (localPlayer->Id != UNUSED && !localPlayer->IsDead && localPlayer->Team != SPECTATOR && CurrentCameraPlayer != 0)
+            SetCurrentCameraPlayer(0);
+
+        if (localPlayer->Id != UNUSED)
+            GameLoop();
+
+        UpdateEngine();
+        sendDataToServer();
+    }
+
+    // End of the game decided by the host: back to the room
+    if (localState == LOCAL_LOBBY)
+    {
+        Connection = UNSELECTED;
+        localKeepRoom = true;
+        initMainMenu();
+        localKeepRoom = false;
+        partyFinished = false;
+        firstConnection = true;
+        OnPartyQuit();
+        initLocalLobbyMenu();
+        return;
+    }
+
+    // End of the game (left by the player, or the host left)
+    bool showError = currentMenu == ONLINE_ERROR;
+    char savedError[ERROR_TEXT_LENGTH];
+    strncpy(savedError, errorText, ERROR_TEXT_LENGTH);
+
+    Connection = UNSELECTED;
+    initMainMenu();
+    if (showError)
+    {
+        strncpy(errorText, savedError, ERROR_TEXT_LENGTH);
+        initOnlineErrorMenu();
+    }
+    partyFinished = false;
+    firstConnection = true;
+    OnPartyQuit();
 }

@@ -32,6 +32,8 @@
 #include "stats.h"
 #include "camera.h"
 #include "droppedGuns.h"
+#include "localplay.h"
+#include "localhost.h"
 
 //
 //////Level
@@ -174,6 +176,7 @@ int currentMenu = -1; // 0 Main menu //1 Map //2 Score //3 Shop categories //4 S
 bool PartyStarted = false;
 // Need to apply game rules? (true in solo mode, false in online mode)
 bool applyRules = false;
+int lastThrownGrenadeType = 0; // Type of the last grenade thrown by the local player (local multiplayer host)
 // Number of lose of terrorists team
 int LoseCountTerrorists = 0;
 // Number of lose of counter terrorists team
@@ -512,9 +515,24 @@ void checkStartGameLoop()
 {
 	// The music is updated in UpdateEngineNotInGame() and UpdateEngine() now
 
+	// Local multiplayer (NiFi) game as a client: the host DS is the server
+	if (Connection == LOCAL_GAME)
+	{
+		runLocalClientGame();
+		return;
+	}
+
 	// Play without internet
 	if (Connection == OFFLINE)
 	{
+		// Local multiplayer (NiFi) host: single player rules, the players of
+		// the room instead of the bots
+		bool localHost = localIsHost && localState == LOCAL_LOBBY;
+
+		// Loading of the map: the clients aren't disconnected
+		if (localHost)
+			localGiveLoadingTime();
+
 		prepareParty(0);
 
 		// Unload old map and load new one
@@ -527,9 +545,13 @@ void checkStartGameLoop()
 
 		AddNewPlayer(0, true, false);
 
-		// Add bots
-		if (currentPartyMode != 2)
+		if (localHost)
 		{
+			localHostAddPlayers();
+		}
+		else if (currentPartyMode != 2)
+		{
+			// Add bots
 			for (int i = 1; i < amountOfBots; i++)
 				AddNewPlayer(i, false, true);
 		}
@@ -571,7 +593,7 @@ void checkStartGameLoop()
 			}
 			UpdatePlayerTexture(i);
 		}
-		if (!equalTeam)
+		if (!equalTeam && !localHost)
 		{
 			AllPlayers[2].Team = AllPlayers[1].Team;
 		}
@@ -581,12 +603,23 @@ void checkStartGameLoop()
 
 		checkShopForBots();
 
+		if (localHost)
+			localHostStartGame();
+
 		while (Connection == OFFLINE)
 		{
 			// Play game code
 			GameLoop();
+			// Local multiplayer host: send the changes to the clients
+			localHostUpdate();
 			UpdateEngine();
 		}
+
+		// Local multiplayer host: everybody goes back to the room
+		bool backToRoom = isLocalHostGame() && localState == LOCAL_PLAYING;
+		localHostEndGame();
+		if (backToRoom && localState == LOCAL_LOBBY)
+			initLocalLobbyMenu();
 	}
 	else if (Connection != UNSELECTED)
 	{
@@ -1275,6 +1308,7 @@ void GameLoop()
 				ChangeGunInInventoryForLocalPlayer(1);
 				fireLockedAfterGrenade = true;
 
+				lastThrownGrenadeType = grenadeType;
 				SendGrenade = true;
 				// Force player to send position
 				SendPosition = true;
@@ -1649,6 +1683,9 @@ void UpdateEngineNotInGame()
 	// selection) because the stream buffer wasn't refilled.
 	checkMusicSteaming();
 
+	// Local multiplayer (NiFi) packets
+	localUpdate();
+
 	ScanForInput();
 
 	increaseFrameCount();
@@ -1717,6 +1754,9 @@ void UpdateEngine()
 	// selection) because the stream buffer wasn't refilled.
 	checkMusicSteaming();
 
+	// Local multiplayer (NiFi) packets
+	localUpdate();
+
 	ScanForInput();
 
 	increaseFrameCount();
@@ -1726,6 +1766,12 @@ void UpdateEngine()
 
 	if (!isDebugBottomScreen)
 	{
+		// A lot of changes at the same time (like the messages received when
+		// joining a game, each one adds 8 frames) kept the bottom screen
+		// updated for seconds: a few frames are enough to draw the changes
+		if (UpdateBottomScreenFrameCount > 16)
+			UpdateBottomScreenFrameCount = 16;
+
 		// Draw 3D objects and sprites
 		if (!AlwaysUpdateBottomScreen && UpdateBottomScreenFrameCount == 0)
 			processTopOnly(Draw3DScene, drawBottomScreenUI);

@@ -12,6 +12,7 @@ void Draw3DScene(void);
 void DrawPlayers();
 void Draw3DSceneNotInGame(void);
 void createPlayerShadow();
+extern bool TwoScreenModeTarget;
 void SetTwoScreenMode(bool value);
 
 extern NE_Palette *Palettes[19];

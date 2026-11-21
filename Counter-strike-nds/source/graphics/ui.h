@@ -84,6 +84,8 @@ enum UiMenu
     AI_Set = 22,
     TOUCH_SETTINGS = 23,
     VOTE_MODE = 24,
+    LOCAL_ROOMS = 25,      // Local multiplayer (NiFi): create or join a room
+    LOCAL_LOBBY_MENU = 26, // Local multiplayer (NiFi): players in the room
 };
 
 enum shopCategory
@@ -183,7 +185,11 @@ void initChatMenu();
 void initControlsSettingsMenu();
 void initTouchSettingsMenu();
 void initVoteModeMenu();
+void initLocalRoomsMenu();
+void initLocalLobbyMenu();
 void drawVoteModeMenu();
+void drawLocalRoomsMenu();
+void drawLocalLobbyMenu();
 void initControlsChangeMenu();
 void initSelectionMapImageMenu();
 void initSelectionMapListMenu();

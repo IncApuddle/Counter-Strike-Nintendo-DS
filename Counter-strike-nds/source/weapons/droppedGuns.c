@@ -27,6 +27,7 @@
 #include "sounds.h"
 #include "network.h"
 #include "ui.h"
+#include "localhost.h"
 #include "tutorial.h"
 
 // Atlas format (see tools/make_dropped_guns_atlas.py)
@@ -416,6 +417,9 @@ static void takeDroppedGun(int playerIndex, DroppedGun *gun)
     }
     else
     {
+        // Local multiplayer: pick up sound for the client
+        localHostOnGunPickup(playerIndex);
+
         // Bots take the best gun
         if (slot == 2 || player->currentGunInInventory == 0)
         {

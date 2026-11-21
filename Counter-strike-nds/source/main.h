@@ -209,6 +209,7 @@ enum connectionType
 	DEBUG_IP_1,
 	ONLINE_SERVER_IP,
 	LOCAL,
+	LOCAL_GAME, // Local multiplayer (NiFi) game, as a client of the host DS
 };
 
 enum inputButtons
@@ -582,6 +583,7 @@ extern NE_Model *flashModels[FLASH_MODELS_COUNT];
 extern bool BombWillExplode;
 extern CollisionBox2D bombDefuseZone;
 extern float x, y, z;
+extern int lastThrownGrenadeType;
 extern float xWithoutY, zWithoutY, xWithoutYForAudio, zWithoutYForAudio;
 extern Vector4 BombPosition;
 extern int ShowWallHitFlash[FLASH_MODELS_COUNT];

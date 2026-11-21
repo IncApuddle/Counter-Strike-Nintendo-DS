@@ -28,9 +28,9 @@
 
 // Same declarations as dsma.h of Nitro Engine
 uint32_t DSMA_GetNumFrames(const void *dsa_file);
-ITCM_CODE ARM_CODE
+// ITCM_CODE is only on the definitions: the section name contains the line
+// number, a declaration with ITCM_CODE gives another section (GCC warning)
 int DSMA_DrawModel(const void *dsm_file, const void *dsa_file, uint32_t frame_interp);
-ITCM_CODE ARM_CODE
 int DSMA_DrawModelBlendAnimation(const void *dsm_file,
         const void *dsa_file_1, uint32_t frame_interp_1,
         const void *dsa_file_2, uint32_t frame_interp_2,

@@ -34,8 +34,8 @@ int waypointsSize = 0;
 int MatriceCount = 0;
 
 //The equal team
-bool equalTeam = false;
-int amountOfBots = 6;
+bool equalTeam = true; // Equal teams by default
+int amountOfBots = 10; // Players in single player: 9 bots + the player by default
 
 //NomberPoint for Sites | Is there two sites or one
 int SiteAPoint = 0;

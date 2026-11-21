@@ -543,6 +543,7 @@ void SetOnlinelPlayersPositions()
 
             float Speed = 0.087;
             int Ok = 0;
+            (void)Ok; // Only counted (the player doesn't follow waypoints here)
 
             Vector3 Direction;
             Direction.x = positionToGo.x - player->position.x;

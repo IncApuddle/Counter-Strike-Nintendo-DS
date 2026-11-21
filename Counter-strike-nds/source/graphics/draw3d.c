@@ -12,6 +12,7 @@
 #include "ui.h"
 #include "map.h"
 #include "draw3d.h"
+#include "localplay.h"
 #include "party.h"
 #include "player.h"
 #include "camera.h"
@@ -92,7 +93,7 @@ void initGraphics()
     CS_MaterialTexLoadBMPtoRGB256(PlayerMaterial, Palettes[3], (void *)tex_CtSkin_bin, 0);
     CS_MaterialTexLoadBMPtoRGB256(PlayerMaterialTerrorist, Palettes[13], (void *)tex_TSkin_bin, 0);
 
-    CS_MaterialTexLoadBMPtoRGB256(GroundMaterial, Palettes[1], (void *)texMap_Dust2_bin, 1);
+    CS_MaterialTexLoadRaw256(GroundMaterial, Palettes[1], (void *)texMap_Dust2_bin, 1); // tools/make_map_textures.py
     // NE_MaterialTexClone(GroundMaterial, GeneralMaterial);
     CS_MaterialTexLoadBMPtoRGB256(GeneralMaterial, Palettes[18], (void *)tex_General_bin, 0);
 
@@ -193,15 +194,15 @@ void MapImgToLoadFunc()
 
     if(MapImgToLoad == 0)
 	{
-		CS_MaterialTexLoadBMPtoRGB256(TopScreenSpritesMaterials[4], Palettes[17], (void *)MapUI_Dust2_bin, 0);
+		CS_MaterialTexLoadBMPCompact(TopScreenSpritesMaterials[4], Palettes[17], (void *)MapUI_Dust2_bin, 0);
 	}
     else if(MapImgToLoad == 6) // MIRAGE (Fy_Snow is map 5 now)
 	{
-		CS_MaterialTexLoadBMPtoRGB256(TopScreenSpritesMaterials[4], Palettes[17], (void *)MapUI_Mirage_bin, 0);
+		CS_MaterialTexLoadBMPCompact(TopScreenSpritesMaterials[4], Palettes[17], (void *)MapUI_Mirage_bin, 0);
 	}
 	else
 	{
-		CS_MaterialTexLoadBMPtoRGB256(TopScreenSpritesMaterials[4], Palettes[17], (void *)MapUI_General_bin, 0);
+		CS_MaterialTexLoadBMPCompact(TopScreenSpritesMaterials[4], Palettes[17], (void *)MapUI_General_bin, 0);
 	}
 
     // The sprite is created in the init code. The old code created a new one
@@ -239,16 +240,17 @@ void createPlayerShadow()
  *
  * @param value
  */
+bool TwoScreenModeTarget = false;
+
 void SetTwoScreenMode(bool value)
 {
-    if (AlwaysUpdateBottomScreen && !value && UpdateBottomScreenFrameCount == 0)
-    {
+    // The mode was toggled when the change was applied (next draw of the
+    // bottom screen): two calls in the same frame (like when the game starts
+    // after the lobby) left the two screens mode enabled by mistake. Now the
+    // wanted mode is saved and applied.
+    TwoScreenModeTarget = value;
+    if (AlwaysUpdateBottomScreen != value)
         NeedChangeScreen = true;
-    }
-    else if (!AlwaysUpdateBottomScreen && value)
-    {
-        NeedChangeScreen = true;
-    }
 }
 
 /**
@@ -431,8 +433,10 @@ void Draw3DScene(void)
  */
 void DrawPlayers()
 {
-    if (UpdateBottomScreenFrameCount != 0)
-        return;
+    // The players were not drawn while the bottom screen was updated
+    // (UpdateBottomScreenFrameCount != 0): they blinked each time something
+    // changed on the bottom screen (counters, touch buttons...). They are now
+    // always drawn.
 
     Map *map = &allMaps[currentMap];
 

@@ -821,6 +821,10 @@ void OnPartyQuit()
  */
 void StartSinglePlayer(int partyMode)
 {
+    // The map image to load was only set when the selected map changed: after
+    // an online game (the server sets it), starting the same map as before
+    // kept the image of the online map
+    MapImgToLoad = currentSelectionMap;
     MapImgToLoadFunc();
     Connection = OFFLINE;
     currentPartyMode = partyMode;
