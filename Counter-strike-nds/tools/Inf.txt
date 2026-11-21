@@ -1,0 +1,2 @@
+python3 tools/make_map_textures.py      =   Convert map texture
+py tools/make_dropped_guns_atlas.py build tools/dropped_guns.png data/dropped_guns.bin preview.png     = Convert dropped_guns.png to .bin
