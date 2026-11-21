@@ -1,0 +1,9 @@
+When exporting from blender set Scale = 0.01
+--------
+cd /opt/Counter-Strike-nds/assets/player
+sh convert.sh
+===
+You need Python in MSYS2 (pacman -S python). 
+The script automatically looks for md5_to_dsma.py in /opt/blocksds. 
+If it is located elsewhere, specify the path as follows: 
+MD5_TO_DSMA=/path/to/md5_to_dsma.py sh convert.sh.
