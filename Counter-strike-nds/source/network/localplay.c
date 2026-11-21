@@ -30,6 +30,7 @@
 #include "network.h"
 #include "ui.h"
 #include "localhost.h"
+#include "party.h"
 
 #include <dswifi9.h>
 #include <string.h>
@@ -49,6 +50,7 @@
 #define LOCAL_OUT_BUFFER_SIZE 2048        // Text waiting to be sent, per client
 #define LOCAL_IN_BUFFER_SIZE 1024         // Text received and not treated yet (incomplete message)
 #define LOCAL_RX_QUEUE_LENGTH 12          // Received packets waiting for treatment
+#define LOCAL_SILENT_PROBE_FRAMES 30      // Host: CMD packets less often when no client answers
 #define LOCAL_TIMEOUT 600                 // Frames without receiving anything before a disconnection (10 s)
 #define LOCAL_LOADING_GRACE 1800          // More time when the game starts (loading of the map, 30 s)
 #define LOCAL_CONNECT_TIMEOUT 600         // Frames to connect to a room (10 s)
@@ -364,6 +366,19 @@ static void sendFramePacket(void)
         if (count == 0)
             return;
 
+        // melonDS waits for the replies of the clients after each CMD packet
+        // (to keep its windows in sync): if no client answers anymore (client
+        // that left, crashed or paused), a CMD packet every frame slows down
+        // the host a lot. Then only one CMD packet every 30 frames is sent
+        // (enough to find the clients again).
+        static int probeTimer = 0;
+        if (localStats.framesSinceLastPacket > LOCAL_SILENT_PROBE_FRAMES)
+        {
+            if (++probeTimer < LOCAL_SILENT_PROBE_FRAMES)
+                return;
+        }
+        probeTimer = 0;
+
         // Same space for each client. The first client changes every frame
         // (if the packet of a client doesn't fit, it fits in the next frame)
         int share = cmdSize / count;
@@ -659,6 +674,9 @@ static void treatLocalMessage(LocalPeer *peer, const char *message)
             localGiveLoadingTime();
             networkResetReceived();
             Connection = LOCAL_GAME;
+            // State of the previous game (like a game left before the start of
+            // the round: WAIT_START, no move): the host sends the real state
+            roundState = TRAINING;
         }
         else if (strcmp(params[0], "LERROR") == 0 && paramCount >= 2)
         {

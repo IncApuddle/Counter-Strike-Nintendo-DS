@@ -698,6 +698,16 @@ void treatData()
                     if (i == CurrentCameraPlayer && getPlayerCurrentGunIndex(&AllPlayers[i]) != EMPTY)
                         UpdateGunTexture();
 
+                    // GunGame: new gun with an empty magazine (the AMMO
+                    // message can come before this one), reload it
+                    Player *player = &AllPlayers[i];
+                    if (i == 0 && currentPartyMode == 4 && !applyRules && (newGun == 1 || newGun == 2) &&
+                        player->AllAmmoMagazine[newGun - 1].AmmoCount == 0 &&
+                        player->AllAmmoMagazine[newGun - 1].TotalAmmoCount > 0)
+                    {
+                        startReloadGun(0);
+                    }
+
                     break;
                 }
             }

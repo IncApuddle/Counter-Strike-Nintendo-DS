@@ -607,6 +607,15 @@ void GunSwitch(int shooterPlayerIndex1)
     // Reset new gun ammo
     ResetGunsAmmo(shooterPlayerIndex1);
 
+    // Player of a local multiplayer game (NiFi): the new gun has an empty
+    // magazine, the client reloads it (like with the online server, see the
+    // AMMO message) and sends RELOADED
+    if (shooterPlayerIndex1 != 0 && !AllPlayers[shooterPlayerIndex1].isAi)
+    {
+        AllPlayers[shooterPlayerIndex1].isReloading = false;
+        AllPlayers[shooterPlayerIndex1].AllAmmoMagazine[0].AmmoCount = 0;
+    }
+
     // Set the gun texture at screen
     if (shooterPlayerIndex1 == 0)
     {
@@ -707,7 +716,10 @@ void checkAfterDamage(int shooterPlayerIndex, int hittedPlayerIndex, bool CheckS
                 // GunGame of the single player mode (online, the server changes the guns)
                 if(currentPartyMode == 4 && applyRules)
                 {
-                    if (killerClient != localPlayer)
+                    // The bots count twice (faster guns). Only the bots: the
+                    // players of a local multiplayer game (NiFi) are not bots,
+                    // they got a new gun for each kill
+                    if (killerClient->isAi)
                     {
                         killerClient->KillCount++;
                     }

@@ -1037,7 +1037,9 @@ void drawTopScreenUI()
             {
                 char Timer[30];
                 int timerXOffset = 0;
-                if (roundState == TRAINING && Connection != OFFLINE)
+                // Online warm up (votes). Not in local multiplayer games (no
+                // votes, Deathmatch and GunGame are always in this state)
+                if (roundState == TRAINING && Connection != OFFLINE && Connection != LOCAL_GAME)
                 {
                     {
                         const char *forceLaunchText = "Please VOTE in the menu BELOW.";
@@ -1613,7 +1615,7 @@ void initGameMenu()
     AllButtons[5].xTextPos = 25;
     AllButtons[5].yTextPos = 6;
     AllButtons[5].text = "Vote";
-    AllButtons[5].isHidden = applyRules || roundState != TRAINING || Connection == OFFLINE;
+    AllButtons[5].isHidden = applyRules || roundState != TRAINING || Connection == OFFLINE || Connection == LOCAL_GAME;
 
     if (AllPlayers[0].Team == SPECTATOR)
     {
@@ -3229,14 +3231,6 @@ void drawControllerMenu()
                  NE_White,                  // Color
                  "Gamepad");
 
-    // Local multiplayer (NiFi): counters of the connection (to find problems)
-    if (localState == LOCAL_PLAYING)
-    {
-        char statsText[64];
-        snprintf(statsText, sizeof(statsText), "rx:%d tx:%d e:%d(%d) w:%d", localStats.goodPackets, localStats.sentPackets,
-                 localStats.sendErrors, localStats.lastSendError, localStats.framesSinceLastPacket);
-        NE_TextPrint(0, 6, 23, NE_White, statsText);
-    }
 }
 
 /**
@@ -3836,12 +3830,7 @@ void drawLocalLobbyMenu()
 {
     NE_TextPrint(0, 11, 1, NE_White, localIsHost ? "Your room" : "Room");
 
-    // Counters of the connection (to check the connection)
-    char statsText[64];
-    snprintf(statsText, sizeof(statsText), "h:%d rx:%d/%d/%d tx:%d e:%d %s:%d", localStats.handlerCalls, localStats.receivedFrames, localStats.goodPackets,
-             localStats.badPackets, localStats.sentPackets, localStats.sendErrors, localIsHost ? "cl" : "st",
-             localIsHost ? Wifi_MultiplayerGetNumClients() : Wifi_AssocStatus());
-    NE_TextPrint(0, 1, 22, NE_White, statsText);
+    // The counters of the connection are only shown on the error screen
 
     if (localState == LOCAL_CONNECTING)
     {

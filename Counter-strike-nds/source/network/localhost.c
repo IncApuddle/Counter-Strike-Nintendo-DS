@@ -379,6 +379,19 @@ void localHostUpdate(void)
         snprintf(text, sizeof(text), "{PartyRound;%d}", roundState);
         sendToAllExcept(NO_PLAYER, text);
     }
+    else if (roundState == TRAINING)
+    {
+        // Sent again every second (warm up, Deathmatch, GunGame): a client
+        // with another state can't move. Only this state: the others play
+        // sounds or reset the round on the clients.
+        static int roundResendTimer = 0;
+        if (++roundResendTimer >= 60)
+        {
+            roundResendTimer = 0;
+            snprintf(text, sizeof(text), "{PartyRound;%d}", roundState);
+            sendToAllExcept(NO_PLAYER, text);
+        }
+    }
     if (sentCounterScore != CounterScore || sentTerroristsScore != TerroristsScore)
     {
         sentCounterScore = CounterScore;
