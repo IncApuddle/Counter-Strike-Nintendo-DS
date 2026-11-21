@@ -65,7 +65,7 @@ Note : To avoid coding collisions, path finding..., there is an Unity project to
 - [x] make shotgun reload work.
 - [x] Smoke doesn't affect bots at this time
 - [x] Add dropping weapons
-- [ ] Ad hoc (Ni-Fi) multiplayer
+- [x] Ad hoc (Ni-Fi) multiplayer
 - [ ] Add fall damage
 - [ ] Add Office map and hostage rescue mode
 - [ ] Languege system
