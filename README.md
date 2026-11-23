@@ -67,5 +67,6 @@ Note : To avoid coding collisions, path finding..., there is an Unity project to
 - [x] Add dropping weapons
 - [x] Ad hoc (Ni-Fi) multiplayer
 - [ ] Add fall damage
+- [ ] Death animation?
 - [ ] Add Office map and hostage rescue mode
 - [ ] Languege system
