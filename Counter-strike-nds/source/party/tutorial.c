@@ -4,6 +4,7 @@
 //
 // This file is part of Counter Strike Nintendo DS Multiplayer Edition (CS:DS)
 
+#include "lang.h"
 #include "tutorial.h"
 #include "input.h"
 #include "party.h"
@@ -33,43 +34,43 @@ void getTutorialText()
     switch (tutorialStep)
     {
     case TextWelcome:
-        sprintf(tutorialText, "Welcome to Counter Strike");
+        snprintf(tutorialText, sizeof(tutorialText), "%s", TR("Welcome to Counter Strike"));
         return;
 
     case TextLookAround:
-        sprintf(tutorialText, "Look around with the stylus");
+        snprintf(tutorialText, sizeof(tutorialText), "%s", TR("Look around with the stylus"));
         return;
 
     case TextMovePlayer:
-        sprintf(tutorialText, "Move your player with %s %s %s %s", inputsNames[inputs[UP_BUTTON].nameIndex], inputsNames[inputs[DOWN_BUTTON].nameIndex], inputsNames[inputs[LEFT_BUTTON].nameIndex], inputsNames[inputs[RIGHT_BUTTON].nameIndex]);
+        snprintf(tutorialText, sizeof(tutorialText), TR("Move your player with %s %s %s %s"), TR(inputsNames[inputs[UP_BUTTON].nameIndex]), TR(inputsNames[inputs[DOWN_BUTTON].nameIndex]), TR(inputsNames[inputs[LEFT_BUTTON].nameIndex]), TR(inputsNames[inputs[RIGHT_BUTTON].nameIndex]));
         return;
 
     case TextJump:
-        sprintf(tutorialText, "Jump with %s", inputsNames[inputs[JUMP_BUTTON].nameIndex]);
+        snprintf(tutorialText, sizeof(tutorialText), TR("Jump with %s"), TR(inputsNames[inputs[JUMP_BUTTON].nameIndex]));
         return;
 
     case TextShoot:
-        sprintf(tutorialText, "Shoot with %s", inputsNames[inputs[FIRE_BUTTON].nameIndex]);
+        snprintf(tutorialText, sizeof(tutorialText), TR("Shoot with %s"), TR(inputsNames[inputs[FIRE_BUTTON].nameIndex]));
         return;
 
     case TextReload:
-        sprintf(tutorialText, "Reload with the reload button on the gamepad");
+        snprintf(tutorialText, sizeof(tutorialText), "%s", TR("Reload with the reload button on the gamepad"));
         return;
 
     case TextChangeGun:
-        sprintf(tutorialText, "Change weapons with the left/right arrows on the gamepad");
+        snprintf(tutorialText, sizeof(tutorialText), "%s", TR("Change weapons with the left/right arrows on the gamepad"));
         return;
 
     case TextPlantBomb:
-        sprintf(tutorialText, "Plant the bomb with %s on the red cross", inputsNames[inputs[FIRE_BUTTON].nameIndex]);
+        snprintf(tutorialText, sizeof(tutorialText), TR("Plant the bomb with %s on the red cross"), TR(inputsNames[inputs[FIRE_BUTTON].nameIndex]));
         return;
 
     case TextDefuseBomb:
-        sprintf(tutorialText, "Defuse the bomb with %s", inputsNames[inputs[DEFUSE_BUTTON].nameIndex]);
+        snprintf(tutorialText, sizeof(tutorialText), TR("Defuse the bomb with %s"), TR(inputsNames[inputs[DEFUSE_BUTTON].nameIndex]));
         return;
 
     case TextEnd:
-        sprintf(tutorialText, "Tutorial finished!");
+        snprintf(tutorialText, sizeof(tutorialText), "%s", TR("Tutorial finished!"));
         return;
 
     case TextEmpty:

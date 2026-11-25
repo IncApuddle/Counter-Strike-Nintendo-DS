@@ -880,7 +880,8 @@ void localHostTreatClientMessage(int peerIndex, char **params, int paramCount)
                 if (damage > 100)
                     damage = 100;
                 setPlayerHealth(playerIndex, AllPlayers[playerIndex].Health - damage);
-                checkAfterDamage(NO_PLAYER, playerIndex, false);
+                // CheckScore: respawn in Deathmatch/GunGame, end of the round
+                checkAfterDamage(NO_PLAYER, playerIndex, true);
             }
         }
         break;

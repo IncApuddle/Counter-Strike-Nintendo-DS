@@ -21,6 +21,7 @@
 #include "gun.h"
 #include "ui.h"
 #include "collisions.h"
+#include "lang.h"
 #include "network.h"
 #include "party.h"
 #include "player.h"
@@ -1273,7 +1274,7 @@ void treatData()
                 Player *winner = GetPlayer(winnerId);
                 if (winner != NULL)
                 {
-                    snprintf(gameEventNotificationText, sizeof(gameEventNotificationText), "%s wins!", winner->name);
+                    snprintf(gameEventNotificationText, sizeof(gameEventNotificationText), TR("%s wins!"), winner->name);
                     textToShowTimer = 600;
                 }
             }
@@ -1287,7 +1288,7 @@ void treatData()
             }
             else
             {
-                strncpy(gameEventNotificationText, "Draw", sizeof(gameEventNotificationText));
+                snprintf(gameEventNotificationText, sizeof(gameEventNotificationText), "%s", TR("Draw"));
                 textToShowTimer = 600;
             }
 

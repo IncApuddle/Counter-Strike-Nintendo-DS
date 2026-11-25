@@ -13,6 +13,7 @@
 #include "movements.h"
 #include "sounds.h"
 #include "main.h"
+#include "lang.h"
 #include "network.h"
 #include "debug.h"
 #include "ui.h"
@@ -392,6 +393,7 @@ int main(void)
 
 	// Load save file
 	bootLog("boot: Load()");
+	langInit(); // Translation table (before Load(): the language is saved)
 	Load();
 
 	// Init rumble pack

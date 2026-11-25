@@ -489,7 +489,9 @@ void updateFallDamage(bool onStairs)
     {
         // Single player and host of a local game
         setPlayerHealth(0, localPlayer->Health - damage);
-        checkAfterDamage(NO_PLAYER, 0, false);
+        // CheckScore: respawn in Deathmatch/GunGame (TRAINING state), end of
+        // the round if all the team is dead
+        checkAfterDamage(NO_PLAYER, 0, true);
     }
     else
     {

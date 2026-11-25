@@ -6,6 +6,7 @@
 
 #include "main.h"
 #include "ui.h"
+#include "lang.h"
 #include "movements.h"
 #include "collisions.h"
 #include "keyboard.h"
@@ -71,7 +72,7 @@ char errorText[ERROR_TEXT_LENGTH];
 // Dialog text
 char *dialogText = "";
 // Game event notification text
-char gameEventNotificationText[30] = "";
+char gameEventNotificationText[48] = "";
 // Kill notification text
 char killText[33] = "";
 
@@ -196,9 +197,12 @@ int printLongText(int minX, int maxX, int y, char *text)
     char tempText[maxX - minX + 2];
     tempText[0] = '\0';
 
+    // Translation (the parts are printed with NE_TextPrint(): already translated)
+    const char *translated = TR(text);
+
     // Store the text in ptrText to avoid modifying the original text (because of strtok)
-    char ptrText[strlen(text) + 1];
-    strcpy(ptrText, text);
+    char ptrText[strlen(translated) + 1];
+    strcpy(ptrText, translated);
 
     // Cut the text every spaces
     char *ptr = strtok(ptrText, " ");
@@ -655,22 +659,22 @@ void showPartyEventText(int event)
 {
     if (event == TERRORISTS_WIN)
     {
-        strncpy(gameEventNotificationText, "Terrorists win", 30);
+        snprintf(gameEventNotificationText, sizeof(gameEventNotificationText), "%s", TR("Terrorists win"));
         PlayBasicSound(SFX_TERRORISTSWIN);
     }
     else if (event == COUNTER_TERRORISTS_WIN)
     {
-        strncpy(gameEventNotificationText, "Counter-Terrorists win", 30);
+        snprintf(gameEventNotificationText, sizeof(gameEventNotificationText), "%s", TR("Counter-Terrorists win"));
         PlayBasicSound(SFX_COUNTERTERRORISTWIN);
     }
     else if (event == BOMB_PLANTED)
     {
-        strncpy(gameEventNotificationText, "Bomb has been planted", 30);
+        snprintf(gameEventNotificationText, sizeof(gameEventNotificationText), "%s", TR("Bomb has been planted"));
         PlayBasicSound(SFX_BOMBHASBEENPLANTED);
     }
     else if (event == BOMB_DEFUSED)
     {
-        strncpy(gameEventNotificationText, "Bomb has been defused", 30);
+        snprintf(gameEventNotificationText, sizeof(gameEventNotificationText), "%s", TR("Bomb has been defused"));
         PlayBasicSound(SFX_BOMBHASBEENDEFUSED);
     }
 
@@ -718,7 +722,7 @@ void showKillText(int killerIndex, int deadPlayerIndex)
  */
 void showConnectedText(int connectedPlayerIndex)
 {
-    sprintf(killText, "%s connected", AllPlayers[connectedPlayerIndex].name);
+    snprintf(killText, sizeof(killText), TR("%s connected"), AllPlayers[connectedPlayerIndex].name);
 
     KillTextShowTimer = 240;
     notificationType = 1;
@@ -731,7 +735,7 @@ void showConnectedText(int connectedPlayerIndex)
  */
 void showDisconnectedText(int disconnectedPlayerIndex)
 {
-    sprintf(killText, "%s disconnected", AllPlayers[disconnectedPlayerIndex].name);
+    snprintf(killText, sizeof(killText), TR("%s disconnected"), AllPlayers[disconnectedPlayerIndex].name);
 
     KillTextShowTimer = 240;
     notificationType = 1;
@@ -799,7 +803,7 @@ void drawKeyboardInput()
     NE_2DDrawQuad(0, 0, ScreenWidth, ScreenHeightFixed, 3, RGB15(3, 3, 3)); // Background
     if (currentMenu == CHANGENAME)
     {
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      11, 2,    // Coordinates x(column), y(row)
                      NE_White, // Color
                      "Change name");
@@ -815,14 +819,14 @@ void drawKeyboardInput()
             nameLength++;
         }
 
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      10, 12,   // Coordinates x(column), y(row)
                      NE_White, // Color
                      editedName);
     }
     else if (currentMenu == ENTER_CODE)
     {
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      11, 2,    // Coordinates x(column), y(row)
                      NE_White, // Color
                      "Enter code");
@@ -838,14 +842,14 @@ void drawKeyboardInput()
             codeLength++;
         }
 
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      14, 12,   // Coordinates x(column), y(row)
                      NE_White, // Color
                      code);
     }
     else if (currentMenu == ENTER_IP)
     {
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      12, 2,    // Coordinates x(column), y(row)
                      NE_White, // Color
                      "Enter IP");
@@ -861,7 +865,7 @@ void drawKeyboardInput()
             IPLength++;
         }
 
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      9, 12,   // Coordinates x(column), y(row)
                      NE_White, // Color
                      ChengedIP);
@@ -985,7 +989,7 @@ void drawTopScreenUI()
             // DEBUG show player position
             char PositionText[30];
             sprintf(PositionText, "%f %f %f", localPlayer->position.x, localPlayer->position.y, localPlayer->position.z);
-            NE_TextPrint(0,        // Font slot
+            TextPrint(0,        // Font slot
                          1, 0,     // Coordinates x(column), y(row)
                          NE_White, // Color
                          PositionText);
@@ -1000,7 +1004,7 @@ void drawTopScreenUI()
             // sprintf(CPU, "%0.3f %0.3f %0.3f", debugValue1, debugValue2, debugValue3);
             //  sprintf(CPU, "%d %d", AllGuns[selectPlayer->AllGunsInInventory[selectPlayer->currentGunInInventory]].isDualGun, selectPlayer->AllGunsInInventory[selectPlayer->currentGunInInventory]);
 
-            NE_TextPrint(0,        // Font slot
+            TextPrint(0,        // Font slot
                          1, 1,     // Coordinates x(column), y(row)
                          NE_White, // Color
                          CPU);
@@ -1014,7 +1018,7 @@ void drawTopScreenUI()
                 // sprintf(CPU2 + strlen(CPU2), "%s %d %d\n", AllPlayers[i].name, AllPlayers[i].target, AllPlayers[i].lastSeenTarget);
             }
 
-            NE_TextPrint(0,        // Font slot
+            TextPrint(0,        // Font slot
                          0, 9,     // Coordinates x(column), y(row)
                          NE_White, // Color
                          CPU2);
@@ -1025,7 +1029,7 @@ void drawTopScreenUI()
             for (int i = 0; i < allMaps[currentMap].AllZones[localPlayer->CurrentOcclusionZone].ZoneCount; i++)
                 sprintf(Occlusion + strlen(Occlusion), "%d ", allMaps[currentMap].AllZones[localPlayer->CurrentOcclusionZone].visibleMapPart[i]);
 
-            NE_TextPrint(0,        // Font slot
+            TextPrint(0,        // Font slot
                          1, 2,     // Coordinates x(column), y(row)
                          NE_White, // Color
                          Occlusion);
@@ -1042,20 +1046,20 @@ void drawTopScreenUI()
                 if (roundState == TRAINING && Connection != OFFLINE && Connection != LOCAL_GAME)
                 {
                     {
-                        const char *forceLaunchText = "Please VOTE in the menu BELOW.";
+                        const char *forceLaunchText = TR("Please VOTE in the menu BELOW.");
                         int backgroundSize = strlen(forceLaunchText) * 8;
                         int backgroundOffset = 8; // 1*8
                         NE_PolyFormat(13, 0, NE_LIGHT_0, NE_CULL_BACK, NE_MODULATION);
                         NE_2DDrawQuad(backgroundOffset - 1, (6 + TextYOffset) * 8 - 1, backgroundOffset + backgroundSize, (7 + TextYOffset) * 8 + 1, 1, RGB15(3, 3, 3));
                         NE_PolyFormat(31, 0, NE_LIGHT_0, NE_CULL_BACK, NE_MODULATION);
 
-                        NE_TextPrint(0,                  // Font slot
+                        TextPrint(0,                  // Font slot
                                      1, 6 + TextYOffset, // Coordinates x(column), y(row)
                                      NE_White,           // Color
                                      forceLaunchText);
                     }
 
-                    sprintf(Timer, "Waiting for players ");
+                    snprintf(Timer, sizeof(Timer), "%s", TR("Waiting for players "));
 
                     NE_PolyFormat(13, 0, NE_LIGHT_0, NE_CULL_BACK, NE_MODULATION);
                     NE_2DDrawQuad(ScreenCenterWidth - 105, 8, ScreenCenterWidth + 104, 16, 1, RGB15(3, 3, 3));
@@ -1076,7 +1080,7 @@ void drawTopScreenUI()
                 if (isDebugTopScreen)
                     sprintf(Timer + strlen(Timer), " State: %d", roundState);
 
-                NE_TextPrint(0,                                  // Font slot
+                TextPrint(0,                                  // Font slot
                              13 - timerXOffset, 4 + TextYOffset, // Coordinates x(column), y(row)
                              NE_White,                           // Color
                              Timer);
@@ -1093,9 +1097,9 @@ void drawTopScreenUI()
                 NE_PolyFormat(31, 0, NE_LIGHT_0, NE_CULL_BACK, NE_MODULATION);
 
                 // Show planting text
-                char plantingText[12];
-                sprintf(plantingText, "Planting...");
-                NE_TextPrint(0,        // Font slot
+                char plantingText[24];
+                snprintf(plantingText, sizeof(plantingText), "%s", TR("Planting..."));
+                TextPrint(0,        // Font slot
                              11, 18,   // Coordinates x(column), y(row)
                              NE_White, // Color
                              plantingText);
@@ -1114,9 +1118,9 @@ void drawTopScreenUI()
                 NE_PolyFormat(31, 0, NE_LIGHT_0, NE_CULL_BACK, NE_MODULATION);
 
                 // Show defusing text
-                char defusingText[12];
-                sprintf(defusingText, "Defusing...");
-                NE_TextPrint(0,        // Font slot
+                char defusingText[24];
+                snprintf(defusingText, sizeof(defusingText), "%s", TR("Defusing..."));
+                TextPrint(0,        // Font slot
                              11, 18,   // Coordinates x(column), y(row)
                              NE_White, // Color
                              defusingText);
@@ -1133,7 +1137,7 @@ void drawTopScreenUI()
             //  CountersT score
             sprintf(PartyScore, "%02d  ", CounterScore);
 
-            NE_TextPrint(0,                   // Font slot
+            TextPrint(0,                   // Font slot
                          13, 3 + TextYOffset, // Coordinates x(column), y(row)
                          ColorCounterTeam,    // Color
                          PartyScore);
@@ -1141,7 +1145,7 @@ void drawTopScreenUI()
             // Terrosists score
             sprintf(PartyScore, "%02d", TerroristsScore);
 
-            NE_TextPrint(0,                   // Font slot
+            TextPrint(0,                   // Font slot
                          17, 3 + TextYOffset, // Coordinates x(column), y(row)
                          ColorTerroristsTeam, // Color
                          PartyScore);
@@ -1158,7 +1162,7 @@ void drawTopScreenUI()
             NE_2DDrawQuad(backgroundOffset, 0, backgroundOffset + backgroundSize, (1) * 8 + 1, 1, RGB15(3, 3, 3));
             NE_PolyFormat(31, 0, NE_LIGHT_0, NE_CULL_BACK, NE_MODULATION);
 
-            NE_TextPrint(0,        // Font slot
+            TextPrint(0,        // Font slot
                          0, 0,     // Coordinates x(column), y(row)
                          NE_White, // Color
                          PING);
@@ -1173,7 +1177,7 @@ void drawTopScreenUI()
             NE_2DDrawQuad(backgroundOffset, (7 + TextYOffset) * 8 - 1, backgroundOffset + backgroundSize, (8 + TextYOffset) * 8 + 1, 1, RGB15(3, 3, 3));
             NE_PolyFormat(31, 0, NE_LIGHT_0, NE_CULL_BACK, NE_MODULATION);
 
-            NE_TextPrint(0,                  // Font slot
+            TextPrint(0,                  // Font slot
                          0, 7 + TextYOffset, // Coordinates x(column), y(row)
                          NE_White,           // Color
                          gameEventNotificationText);
@@ -1194,21 +1198,21 @@ void drawTopScreenUI()
                 {
                     if (strncmp(ptr, "1", 1) == 0)
                     {
-                        NE_TextPrint(0,                            // Font slot
+                        TextPrint(0,                            // Font slot
                                      currentLine, 8 + TextYOffset, // Coordinates x(column), y(row)
                                      ColorCounterTeamLiter,        // Color
                                      ptr + 1);
                     }
                     else if (strncmp(ptr, "0", 1) == 0)
                     {
-                        NE_TextPrint(0,                            // Font slot
+                        TextPrint(0,                            // Font slot
                                      currentLine, 8 + TextYOffset, // Coordinates x(column), y(row)
                                      ColorTerroristsTeam,          // Color
                                      ptr + 1);
                     }
                     else
                     {
-                        NE_TextPrint(0,                            // Font slot
+                        TextPrint(0,                            // Font slot
                                      currentLine, 8 + TextYOffset, // Coordinates x(column), y(row)
                                      NE_White,                     // Color
                                      ptr + 1);
@@ -1220,7 +1224,7 @@ void drawTopScreenUI()
             }
             else if (notificationType == 1)
             {
-                NE_TextPrint(0,                  // Font slot
+                TextPrint(0,                  // Font slot
                              0, 8 + TextYOffset, // Coordinates x(column), y(row)
                              RGB15(31, 31, 31),  // Color
                              killText);
@@ -1247,7 +1251,7 @@ void drawTopScreenUI()
             NE_2DDrawQuad(31, 160, 224, 168, 1, RGB15(11, 0, 0));
             NE_PolyFormat(31, 0, NE_LIGHT_0, NE_CULL_BACK, NE_MODULATION);
 
-            NE_TextPrint(0,        // Font slot
+            TextPrint(0,        // Font slot
                          4, 20,    // Coordinates x(column), y(row)
                          NE_White, // Color
                          "Don't shoot your friends!");
@@ -1269,7 +1273,7 @@ void drawTopScreenUI()
 
                     char ViewedBotName[21] = "";
                     sprintf(ViewedBotName, "%s", selectPlayer->name);
-                    NE_TextPrint(0,                // Font slot
+                    TextPrint(0,                // Font slot
                                  textPosition, 21, // Coordinates x(column), y(row)
                                  NE_White,         // Color
                                  ViewedBotName);
@@ -1287,7 +1291,7 @@ void drawTopScreenUI()
                     NE_2DDrawQuad(backgroundOffset - 1, 175, backgroundOffset + backgroundSize, 184, 1, RGB15(3, 3, 3));
                     NE_PolyFormat(31, 0, NE_LIGHT_0, NE_CULL_BACK, NE_MODULATION);
 
-                    NE_TextPrint(0,        // Font slot
+                    TextPrint(0,        // Font slot
                                  1, 22,    // Coordinates x(column), y(row)
                                  NE_White, // Color
                                  AmmoText);
@@ -1306,7 +1310,7 @@ void drawTopScreenUI()
                 // Print white text
                 if (redHealthTextCounter == 0)
                 {
-                    NE_TextPrint(0,        // Font slot
+                    TextPrint(0,        // Font slot
                                  1, 23,    // Coordinates x(column), y(row)
                                  NE_White, // Color
                                  HealthText);
@@ -1314,7 +1318,7 @@ void drawTopScreenUI()
                 else // Print red text after taking damage
                 {
                     int ColorAmount = 31 - redHealthTextCounter / 2;
-                    NE_TextPrint(0,                                   // Font slot
+                    TextPrint(0,                                   // Font slot
                                  1, 23,                               // Coordinates x(column), y(row)
                                  RGB15(31, ColorAmount, ColorAmount), // Color
                                  HealthText);
@@ -1815,9 +1819,41 @@ void initSettingsMenu()
     AllSliders[0].step = 0.1;
     AllSliders[0].value = &cursorTransparency;
 
+    // Language button (lang.h), under the keyboard mode button
+    AllButtons[3].xPos = 140;
+    AllButtons[3].yPos = 166;
+    AllButtons[3].xSize = 100;
+    AllButtons[3].ySize = 20;
+    AllButtons[3].OnClick = &changeLanguage;
+    AllButtons[3].yTextPos = 21;
+    updateLanguageButton();
+
     SetSliderToShow(1);
-    SetButtonToShow(3);
+    SetButtonToShow(4);
     SetCheckBoxToShow(2);
+}
+
+/**
+ * @brief Text of the language button of the settings menu (name of the
+ * current language, in this language)
+ *
+ */
+void updateLanguageButton()
+{
+    AllButtons[3].text = langNames[currentLanguage];
+    AllButtons[3].xTextPos = (AllButtons[3].xPos + AllButtons[3].xSize / 2) / 8 - (int)strlen(langNames[currentLanguage]) / 2;
+}
+
+/**
+ * @brief Language button: next language (saved when the settings menu is
+ * closed)
+ *
+ */
+void changeLanguage()
+{
+    langSetLanguage((currentLanguage + 1) % LANG_COUNT);
+    updateLanguageButton();
+    UpdateBottomScreenFrameCount += 8;
 }
 
 /**
@@ -1993,13 +2029,13 @@ void initControllerMenu()
 
     int buttonXPosition = 2;
     int mapButtonXPosition = 2;
-    int mapTextXPosition = 1;
+    int mapTextXPosition = 2;
     int textXPosition = 2;
     if (isLeftControls)
     {
         buttonXPosition = 218; // 256 - 36 - 2
-        mapButtonXPosition = 193;
-        mapTextXPosition = 25;
+        mapButtonXPosition = 185; // The map button ends at 229 (quit button at 236)
+        mapTextXPosition = 24;
         textXPosition = 29;
     }
 
@@ -2043,10 +2079,10 @@ void initControllerMenu()
     AllButtons[3].yTextPos = 21;
     AllButtons[3].text = "<";
 
-    // Map button
+    // Map button (44 pixels: 5 letters of the translations, like "Karte")
     AllButtons[4].xPos = mapButtonXPosition;
     AllButtons[4].yPos = 2;
-    AllButtons[4].xSize = 36;
+    AllButtons[4].xSize = 44;
     AllButtons[4].ySize = 20;
     AllButtons[4].OnClick = &changeMapState;
     AllButtons[4].parameter = 0;
@@ -2061,7 +2097,7 @@ void initControllerMenu()
     // Drop the gun in the hands (Competitive and Casual), right of the map
     // button. With the left controls, the map button is on the right of the
     // screen: the drop button is on its left.
-    AllButtons[5].xPos = isLeftControls ? mapButtonXPosition - 42 : mapButtonXPosition + 40;
+    AllButtons[5].xPos = isLeftControls ? mapButtonXPosition - 46 : mapButtonXPosition + 48;
     AllButtons[5].yPos = 2;
     AllButtons[5].xSize = 42;
     AllButtons[5].ySize = 20;
@@ -2148,9 +2184,9 @@ void initMainMenu()
     AllButtons[3].xSize = ScreenWidth - 160;
     AllButtons[3].ySize = 20;
     AllButtons[3].OnClick = &initStatsMenu;
-    AllButtons[3].xTextPos = 13;
+    AllButtons[3].xTextPos = 12;
     AllButtons[3].yTextPos = 22;
-    AllButtons[3].text = "Stats";
+    AllButtons[3].text = "Authors";
 
     launchMusic();
 
@@ -2864,14 +2900,15 @@ void initStatsMenu()
 void drawGameMenu()
 {
     // Print texts
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  12, 1,    // Coordinates x(column), y(row)
                  NE_White, // Color
                  "Main menu");
 
     if (isPrivate)
     {
-        char PartyCodeText[30] = "Party code: ";
+        char PartyCodeText[40];
+        snprintf(PartyCodeText, sizeof(PartyCodeText), "%s", TR("Party code: "));
         sprintf(PartyCodeText + strlen(PartyCodeText), "%s ", partyCode);
         printLongText(10, 23, 3, PartyCodeText);
     }
@@ -2893,21 +2930,22 @@ void drawScoreMenu()
     NE_2DDrawQuad(126, 28, 130, 180, 19, RGB15(31, 31, 31));
     if (!showFinalScore)
     {
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      11, 1,    // Coordinates x(column), y(row)
                      NE_White, // Color
                      "Score table");
     }
     else
     {
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      9, 1,     // Coordinates x(column), y(row)
                      NE_White, // Color
                      "Party finished");
     }
 
     // Counter terrorists text
-    char CounterScoreText[30] = "Counter t";
+    char CounterScoreText[40];
+    snprintf(CounterScoreText, sizeof(CounterScoreText), "%s", TR("Counter t"));
     int offset = 0;
     if (!allPartyModes[currentPartyMode].noScore)
     {
@@ -2917,7 +2955,7 @@ void drawScoreMenu()
     {
         offset = 2;
     }
-    NE_TextPrint(0,             // Font slot
+    TextPrint(0,             // Font slot
                  1 + offset, 4, // Coordinates x(column), y(row)
                  NE_White,      // Color
                  CounterScoreText);
@@ -2933,19 +2971,19 @@ void drawScoreMenu()
             char playerName[PLAYER_MAX_LENGTH];
 
             sprintf(playerName, "%s", AllPlayers[i].name);
-            NE_TextPrint(0,        // Font slot
+            TextPrint(0,        // Font slot
                          1, y,     // Coordinates x(column), y(row)
                          NE_White, // Color
                          playerName);
 
             char playerValues[PLAYER_MAX_LENGTH];
-            sprintf(playerValues, "Kills:  %d", AllPlayers[i].KillCount);
-            NE_TextPrint(0,                 // Font slot
+            snprintf(playerValues, sizeof(playerValues), TR("Kills:  %d"), AllPlayers[i].KillCount);
+            TextPrint(0,                 // Font slot
                          1, y + 1,          // Coordinates x(column), y(row)
                          RGB15(17, 17, 17), // Color
                          playerValues);
-            sprintf(playerValues, "Deaths: %d", AllPlayers[i].DeathCount);
-            NE_TextPrint(0,                 // Font slot
+            snprintf(playerValues, sizeof(playerValues), TR("Deaths: %d"), AllPlayers[i].DeathCount);
+            TextPrint(0,                 // Font slot
                          1, y + 2,          // Coordinates x(column), y(row)
                          RGB15(17, 17, 17), // Color
                          playerValues);
@@ -2955,13 +2993,14 @@ void drawScoreMenu()
     }
 
     // Counter terrorists text
-    char TerroristsScoreText[30] = "Terrorists";
+    char TerroristsScoreText[40];
+    snprintf(TerroristsScoreText, sizeof(TerroristsScoreText), "%s", TR("Terrorists"));
     if (!allPartyModes[currentPartyMode].noScore)
     {
         sprintf(TerroristsScoreText + strlen(TerroristsScoreText), ": %d ", TerroristsScore);
     }
 
-    NE_TextPrint(0,              // Font slot
+    TextPrint(0,              // Font slot
                  17 + offset, 4, // Coordinates x(column), y(row)
                  NE_White,       // Color
                  TerroristsScoreText);
@@ -2977,19 +3016,19 @@ void drawScoreMenu()
             char playerName[PLAYER_MAX_LENGTH];
             // sprintf(playerName, "id: %d", AllPlayers[i].Id);
             sprintf(playerName, "%s", AllPlayers[i].name);
-            NE_TextPrint(0,        // Font slot
+            TextPrint(0,        // Font slot
                          17, y,    // Coordinates x(column), y(row)
                          NE_White, // Color
                          playerName);
 
             char playerValues[PLAYER_MAX_LENGTH];
-            sprintf(playerValues, "Kills:  %d", AllPlayers[i].KillCount);
-            NE_TextPrint(0,                 // Font slot
+            snprintf(playerValues, sizeof(playerValues), TR("Kills:  %d"), AllPlayers[i].KillCount);
+            TextPrint(0,                 // Font slot
                          17, y + 1,         // Coordinates x(column), y(row)
                          RGB15(17, 17, 17), // Color
                          playerValues);
-            sprintf(playerValues, "Deaths: %d", AllPlayers[i].DeathCount);
-            NE_TextPrint(0,                 // Font slot
+            snprintf(playerValues, sizeof(playerValues), TR("Deaths: %d"), AllPlayers[i].DeathCount);
+            TextPrint(0,                 // Font slot
                          17, y + 2,         // Coordinates x(column), y(row)
                          RGB15(17, 17, 17), // Color
                          playerValues);
@@ -3011,44 +3050,44 @@ void drawShopCategoriesMenu()
     NE_2DDrawQuad(0, (198 - 23) / 3 * 2 - 1 + 23, ScreenWidth, (198 - 23) / 3 * 2 + 2 + 23, 0, RGB15(31, 31, 31));
 
     // Show texts
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  14, 1,    // Coordinates x(column), y(row)
                  NE_White, // Color
                  "Shop");
 
     char MoneyText[30];
     sprintf(MoneyText, "%d$", localPlayer->Money);
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  1, 1,     // Coordinates x(column), y(row)
                  NE_White, // Color
                  MoneyText);
 
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  4, 6,     // Coordinates x(column), y(row)
                  NE_White, // Color
                  "PISTOLS");
 
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  5, 13,    // Coordinates x(column), y(row)
                  NE_White, // Color
                  "HEAVY");
 
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  6, 21,    // Coordinates x(column), y(row)
                  NE_White, // Color
                  "SMG");
 
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  21, 6,    // Coordinates x(column), y(row)
                  NE_White, // Color
                  "RIFLES");
 
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  20, 13,   // Coordinates x(column), y(row)
                  NE_White, // Color
                  "EQUIPMENT");
 
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  20, 21,   // Coordinates x(column), y(row)
                  NE_White, // Color
                  "GRENADES");
@@ -3060,12 +3099,12 @@ void drawShopCategoriesMenu()
  */
 void drawSettingsMenu()
 {
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  12, 1,    // Coordinates x(column), y(row)
                  NE_White, // Color
                  "Settings");
 
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  18, 16,   // Coordinates x(column), y(row)
                  NE_White, // Color
                  "Keyboard mode");
@@ -3074,8 +3113,8 @@ void drawSettingsMenu()
     printLongText(17, 31, 4, "Show Ping");
     // printLongText(23, 31, 4, "Anim. Model");
 
-    char gamePadSensitivityText[29];
-    sprintf(gamePadSensitivityText, "Crosshair transparency: %d%%", (int)(*AllSliders[0].value * 100));
+    char gamePadSensitivityText[40];
+    snprintf(gamePadSensitivityText, sizeof(gamePadSensitivityText), TR("Crosshair transparency: %d%%"), (int)(*AllSliders[0].value * 100));
     printLongText(1, 16, 15, gamePadSensitivityText);
 }
 
@@ -3087,17 +3126,14 @@ void drawQuitMenu()
 {
     if (isInTutorial)
     {
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      7, 3,     // Coordinates x(column), y(row)
                      NE_White, // Color
                      "Skip the tutorial?");
     }
     else
     {
-        NE_TextPrint(0,        // Font slot
-                     4, 3,     // Coordinates x(column), y(row)
-                     NE_White, // Color
-                     "Are you sure want to quit\n            the game?");
+        printLongText(2, 30, 3, "Are you sure you want to quit the game?");
     }
 }
 
@@ -3111,14 +3147,14 @@ void drawShopMenu()
     CS_2DDrawTexturedQuad(26, 26, 118 + 26, 118 + 26, 1, BottomScreenSpritesMaterials[6]); // Draw gun
 
     // Title
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  14, 1,    // Coordinates x(column), y(row)
                  NE_White, // Color
                  "Shop");
 
     char MoneyText[30];
     sprintf(MoneyText, "%d$", localPlayer->Money);
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  1, 1,     // Coordinates x(column), y(row)
                  NE_White, // Color
                  MoneyText);
@@ -3129,38 +3165,38 @@ void drawShopMenu()
         printLongConstChar(21, 31, 4, AllGuns[SelectedGunShop].name);
 
         // Gun damage
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      21, 7,    // Coordinates x(column), y(row)
                      NE_White, // Color
                      "Damage");
         char DamageText[4];
 
         sprintf(DamageText, "%d", AllGuns[SelectedGunShop].Damage);
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      21, 8,    // Coordinates x(column), y(row)
                      NE_White, // Color
                      DamageText);
 
         // Gun fire rate
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      21, 11,   // Coordinates x(column), y(row)
                      NE_White, // Color
                      "Fire rate");
         char FireRateText[10];
         sprintf(FireRateText, "%d RPM", (int)(1.0 / (AllGuns[SelectedGunShop].fireRate / 3600.0)));
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      21, 12,   // Coordinates x(column), y(row)
                      NE_White, // Color
                      FireRateText);
 
         // Gun price
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      21, 15,   // Coordinates x(column), y(row)
                      NE_White, // Color
                      "Price");
         char PriceText[7];
         sprintf(PriceText, "%d$", AllGuns[SelectedGunShop].Price);
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      21, 16,   // Coordinates x(column), y(row)
                      NE_White, // Color
                      PriceText);
@@ -3171,14 +3207,14 @@ void drawShopMenu()
         printLongConstChar(21, 31, 4, allEquipments[SelectedGunShop - GunCount - shopGrenadeCount].name);
 
         // Gun price
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      21, 15,   // Coordinates x(column), y(row)
                      NE_White, // Color
                      "Price");
 
         char PriceText[7];
         sprintf(PriceText, "%d$", allEquipments[SelectedGunShop - GunCount - shopGrenadeCount].Price);
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      21, 16,   // Coordinates x(column), y(row)
                      NE_White, // Color
                      PriceText);
@@ -3192,14 +3228,14 @@ void drawShopMenu()
         printLongConstChar(21, 31, 4, AllGrenades[SelectedGunShop - GunCount].name);
 
         // Gun price
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      21, 15,   // Coordinates x(column), y(row)
                      NE_White, // Color
                      "Price");
 
         char PriceText[7];
         sprintf(PriceText, "%d$", AllGrenades[SelectedGunShop - GunCount].Price);
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      21, 16,   // Coordinates x(column), y(row)
                      NE_White, // Color
                      PriceText);
@@ -3230,7 +3266,7 @@ void drawControllerMenu()
 
     // Print texts (with the left controls, the drop button is on the right of
     // the title: the title is moved to the left)
-    NE_TextPrint(0,                         // Font slot
+    TextPrint(0,                         // Font slot
                  isLeftControls ? 9 : 13, 1, // Coordinates x(column), y(row)
                  NE_White,                  // Color
                  "Gamepad");
@@ -3245,20 +3281,16 @@ void drawMainMenu()
 {
 
     // Print texts
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  10, 1,    // Coordinates x(column), y(row)
                  NE_White, // Color
                  GAME_NAME);
 
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  1, 22,    // Coordinates x(column), y(row)
                  NE_White, // Color
                  GAME_VERSION);
 
-    NE_TextPrint(0,        // Font slot
-                 24, 22,   // Coordinates x(column), y(row)
-                 NE_White, // Color
-                 DEV_NAME);
 }
 
 /**
@@ -3286,7 +3318,7 @@ void drawChatMenu()
 void drawControlsSettingsMenu()
 {
     // Print texts
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  12, 1,    // Coordinates x(column), y(row)
                  NE_White, // Color
                  "Controls");
@@ -3295,14 +3327,14 @@ void drawControlsSettingsMenu()
     printLongText(20, 28, 6, "Change controls");
 
     // Print texts
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  13, 11,   // Coordinates x(column), y(row)
                  NE_White, // Color
                  "Camera");
 
     char buttonsSensitivityText[33];
-    snprintf(buttonsSensitivityText, sizeof(buttonsSensitivityText), "Button sensitivity: %0.1f", *AllSliders[0].value);
-    NE_TextPrint(0, 4, 14, NE_White, buttonsSensitivityText);
+    snprintf(buttonsSensitivityText, sizeof(buttonsSensitivityText), TR("Button sensitivity: %0.1f"), *AllSliders[0].value);
+    TextPrint(0, 4, 14, NE_White, buttonsSensitivityText);
 }
 
 /**
@@ -3359,13 +3391,13 @@ void initVoteModeMenu()
  */
 void drawVoteModeMenu()
 {
-    NE_TextPrint(0, 8, 1, NE_White, "Next game mode");
+    TextPrint(0, 8, 1, NE_White, "Next game mode");
 
     for (int i = 0; i < MODE_VOTE_COUNT; i++)
     {
         char text[16];
         snprintf(text, sizeof(text), "%d%s", modeVotes[i], myModeVote == i ? " <" : "");
-        NE_TextPrint(0, 23, (54 + i * 36) / 8, NE_White, text);
+        TextPrint(0, 23, (54 + i * 36) / 8, NE_White, text);
     }
 }
 
@@ -3375,20 +3407,20 @@ void drawVoteModeMenu()
  */
 void drawTouchSettingsMenu()
 {
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  10, 1,    // Coordinates x(column), y(row)
                  NE_White, // Color
                  "Touch camera");
 
     char text[32];
-    snprintf(text, sizeof(text), "Sensitivity: %0.1f", *AllSliders[0].value);
-    NE_TextPrint(0, 4, 4, NE_White, text);
+    snprintf(text, sizeof(text), TR("Sensitivity: %0.1f"), *AllSliders[0].value);
+    TextPrint(0, 4, 4, NE_White, text);
 
-    snprintf(text, sizeof(text), "Acceleration: %0.2f", *AllSliders[1].value);
-    NE_TextPrint(0, 4, 9, NE_White, text);
+    snprintf(text, sizeof(text), TR("Acceleration: %0.2f"), *AllSliders[1].value);
+    TextPrint(0, 4, 9, NE_White, text);
 
-    snprintf(text, sizeof(text), "Max gain: %0.1f", *AllSliders[2].value);
-    NE_TextPrint(0, 4, 14, NE_White, text);
+    snprintf(text, sizeof(text), TR("Max gain: %0.1f"), *AllSliders[2].value);
+    TextPrint(0, 4, 14, NE_White, text);
 }
 
 /**
@@ -3398,7 +3430,7 @@ void drawTouchSettingsMenu()
 void drawAISettingsMenu()
 {
     // Print texts
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  10, 1,    // Coordinates x(column), y(row)
                  NE_White, // Color
                  "Mod settings");
@@ -3408,7 +3440,7 @@ void drawAISettingsMenu()
     printLongText(19, 33, 20, "(May cause crashes)");
 
     char aiAmountText[26];
-    sprintf(aiAmountText, "The amount of bots: %d", amountOfBots);
+    snprintf(aiAmountText, sizeof(aiAmountText), TR("The amount of bots: %d"), amountOfBots);
     printLongText(5, 28, 13, aiAmountText);
 }
 
@@ -3419,49 +3451,49 @@ void drawAISettingsMenu()
 void drawControlsChangeMenu()
 {
     // Print texts
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  9, 1,     // Coordinates x(column), y(row)
                  NE_White, // Color
                  "Change controls");
 
     if (ButtonToShow >= 3)
         // Print texts
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      3, 6,     // Coordinates x(column), y(row)
                      NE_White, // Color
                      inputsNames[inputs[0 + (controlsPage * 6)].nameIndex]);
 
     if (ButtonToShow >= 4)
         // Print texts
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      19, 6,    // Coordinates x(column), y(row)
                      NE_White, // Color
                      inputsNames[inputs[1 + (controlsPage * 6)].nameIndex]);
 
     if (ButtonToShow >= 5)
         // Print texts
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      3, 11,    // Coordinates x(column), y(row)
                      NE_White, // Color
                      inputsNames[inputs[2 + (controlsPage * 6)].nameIndex]);
 
     if (ButtonToShow >= 6)
         // Print texts
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      19, 11,   // Coordinates x(column), y(row)
                      NE_White, // Color
                      inputsNames[inputs[3 + (controlsPage * 6)].nameIndex]);
 
     if (ButtonToShow >= 7)
         // Print texts
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      3, 16,    // Coordinates x(column), y(row)
                      NE_White, // Color
                      inputsNames[inputs[4 + (controlsPage * 6)].nameIndex]);
 
     if (ButtonToShow >= 8)
         // Print texts
-        NE_TextPrint(0,        // Font slot
+        TextPrint(0,        // Font slot
                      19, 16,   // Coordinates x(column), y(row)
                      NE_White, // Color
                      inputsNames[inputs[5 + (controlsPage * 6)].nameIndex]);
@@ -3474,7 +3506,7 @@ void drawControlsChangeMenu()
 void drawSelectionMapImageMenu()
 {
     // Print texts
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  11, 1,    // Coordinates x(column), y(row)
                  NE_White, // Color
                  "Select map");
@@ -3497,7 +3529,7 @@ void drawSelectionMapImageMenu()
 void drawSelectionMapListMenu()
 {
     // Print texts
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  11, 1,    // Coordinates x(column), y(row)
                  NE_White, // Color
                  "Select map");
@@ -3509,7 +3541,7 @@ void drawSelectionMapListMenu()
  */
 void drawPartyModeSelectionMenu()
 {
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  7, 1,     // Coordinates x(column), y(row)
                  NE_White, // Color
                  "Select a game mode");
@@ -3522,12 +3554,12 @@ void drawPartyModeSelectionMenu()
 void drawJoinCreatePartyMenu()
 {
     // Print texts
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  11, 1,    // Coordinates x(column), y(row)
                  NE_White, // Color
                  "Multiplayer");
 
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  4, 23,    // Coordinates x(column), y(row)
                  NE_White, // Color
                  DISCORD_LINK);
@@ -3548,7 +3580,7 @@ void drawEnterCodeMenu()
  */
 void drawOnlineErrorMenu()
 {
-    NE_TextPrint(0,        // Font slot
+    TextPrint(0,        // Font slot
                  11, 1,    // Coordinates x(column), y(row)
                  NE_White, // Color
                  "Information:");
@@ -3558,34 +3590,33 @@ void drawOnlineErrorMenu()
 
 void drawStatsMenu()
 {
-    NE_TextPrint(0,        // Font slot
-                 11, 1,    // Coordinates x(column), y(row)
+    // Authors
+    TextPrint(0,        // Font slot
+                 12, 1,    // Coordinates x(column), y(row)
+                 NE_White, // Color
+                 "Authors:");
+
+    printLongText(1, 31, 4, "Fewnity - the original idea and code");
+    printLongText(1, 31, 7, "IncApuddle - Modeling and visual");
+    printLongText(1, 31, 10, "Claude - Porting, code and fixes");
+
+    // Statistics
+    TextPrint(0,        // Font slot
+                 11, 14,   // Coordinates x(column), y(row)
                  NE_White, // Color
                  "Statistics:");
 
-    char botKillCountText[26];
-    sprintf(botKillCountText, "Bots killed: %d", totalBotsKillCount);
-    printLongText(0, 33, 5, botKillCountText);
-
-    char onlineKillCountText[26];
-    sprintf(onlineKillCountText, "Online players killed: %d", totalOnlinePlayersKillCount);
-    printLongText(0, 33, 8, onlineKillCountText);
-
     char timerText[26];
-    sprintf(timerText, "Time played: %02dh:%02dm", totalPlayedHours, totalPlayedMinutes);
-    printLongText(0, 33, 11, timerText);
+    snprintf(timerText, sizeof(timerText), TR("Time played: %02dh:%02dm"), totalPlayedHours, totalPlayedMinutes);
+    printLongText(1, 31, 16, timerText);
 
     char deathCountText[26];
-    sprintf(deathCountText, "Death count: %d", totalDeathCount);
-    printLongText(0, 33, 14, deathCountText);
+    snprintf(deathCountText, sizeof(deathCountText), TR("Death count: %d"), totalDeathCount);
+    printLongText(1, 31, 18, deathCountText);
 
-    char partyCountText[26];
-    sprintf(partyCountText, "Finished parties: %d", totalFinishedParty);
-    printLongText(0, 33, 17, partyCountText);
-
-    char winCountText2[26];
-    sprintf(winCountText2, "Victories: %d", totalWins);
-    printLongText(0, 33, 20, winCountText2);
+    char botKillCountText[26];
+    snprintf(botKillCountText, sizeof(botKillCountText), TR("Bots killed: %d"), totalBotsKillCount);
+    printLongText(1, 31, 20, botKillCountText);
 }
 
 /**
@@ -3601,10 +3632,25 @@ void drawButtons()
             int ButtonXPosition = AllButtons[i].xPos, ButtonYPosition = AllButtons[i].yPos, ButtonXSize = AllButtons[i].xSize, ButtonYSize = AllButtons[i].ySize;
             NE_2DDrawQuad(ButtonXPosition, ButtonYPosition, ButtonXPosition + ButtonXSize, ButtonYPosition + ButtonYSize, 1, RGB15(5, 5, 5)); // Button background
 
-            NE_TextPrint(0,                                              // Font slot
-                         AllButtons[i].xTextPos, AllButtons[i].yTextPos, // Coordinates x(column), y(row)
-                         NE_White,                                       // Color
-                         AllButtons[i].text);
+            // Translated text: centered in the button (the positions were
+            // made for the English texts)
+            const char *buttonText = TR(AllButtons[i].text);
+            if (buttonText != AllButtons[i].text)
+            {
+                // Centered to the pixel (with columns, the text of small
+                // buttons like Drop was moved to the left)
+                int textX = ButtonXPosition + (ButtonXSize - (int)strlen(buttonText) * 8) / 2;
+                if (textX < 0)
+                    textX = 0;
+                NE_TextPrintFree(0, textX, AllButtons[i].yTextPos * 8, NE_White, buttonText);
+            }
+            else
+            {
+                NE_TextPrint(0,                                       // Font slot
+                             AllButtons[i].xTextPos, AllButtons[i].yTextPos, // Coordinates x(column), y(row)
+                             NE_White,                                // Color
+                             buttonText);
+            }
         }
     }
 }
@@ -3776,8 +3822,8 @@ void initLocalRoomsMenu()
 
 void drawLocalRoomsMenu()
 {
-    NE_TextPrint(0, 8, 1, NE_White, "Local multiplayer");
-    NE_TextPrint(0, 2, 8, NE_White, "Rooms near you:");
+    TextPrint(0, 8, 1, NE_White, "Local multiplayer");
+    TextPrint(0, 2, 8, NE_White, "Rooms near you:");
 
     // Update the buttons of the rooms
     for (int i = 0; i < LOCAL_MAX_ROOMS; i++)
@@ -3796,7 +3842,7 @@ void drawLocalRoomsMenu()
     }
 
     if (localRoomCount == 0)
-        NE_TextPrint(0, 2, 11, NE_White, "Searching...");
+        TextPrint(0, 2, 11, NE_White, "Searching...");
 }
 
 /**
@@ -3832,13 +3878,13 @@ void initLocalLobbyMenu()
 
 void drawLocalLobbyMenu()
 {
-    NE_TextPrint(0, 11, 1, NE_White, localIsHost ? "Your room" : "Room");
+    TextPrint(0, 11, 1, NE_White, localIsHost ? "Your room" : "Room");
 
     // The counters of the connection are only shown on the error screen
 
     if (localState == LOCAL_CONNECTING)
     {
-        NE_TextPrint(0, 2, 5, NE_White, "Connecting...");
+        TextPrint(0, 2, 5, NE_White, "Connecting...");
         return;
     }
 
@@ -3848,14 +3894,14 @@ void drawLocalLobbyMenu()
     {
         if (!localLobbyPlayers[i].used)
             continue;
-        snprintf(text, sizeof(text), "%d. %s%s", count + 1, localLobbyPlayers[i].name, i == 0 ? " (host)" : "");
-        NE_TextPrint(0, 4, 4 + count * 2, NE_White, text); // 6 players: rows 4 to 14
+        snprintf(text, sizeof(text), "%d. %s%s", count + 1, localLobbyPlayers[i].name, i == 0 ? TR(" (host)") : "");
+        TextPrint(0, 4, 4 + count * 2, NE_White, text); // 6 players: rows 4 to 14
         count++;
     }
 
-    snprintf(text, sizeof(text), "Players: %d/%d", count, LOCAL_MAX_PLAYERS);
-    NE_TextPrint(0, 4, 16, NE_White, text);
+    snprintf(text, sizeof(text), TR("Players: %d/%d"), count, LOCAL_MAX_PLAYERS);
+    TextPrint(0, 4, 16, NE_White, text);
 
     if (!localIsHost)
-        NE_TextPrint(0, 2, 19, NE_White, "Waiting for the host...");
+        TextPrint(0, 2, 19, NE_White, "Waiting for the host...");
 }

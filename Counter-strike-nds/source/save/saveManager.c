@@ -4,6 +4,7 @@
 //
 // This file is part of Counter Strike Nintendo DS Multiplayer Edition (CS:DS)
 
+#include "lang.h"
 #include "saveManager.h"
 #include "keyboard.h"
 #include "input.h"
@@ -51,6 +52,7 @@ void Save()
     sprintf(saveText + strlen(saveText), "sensitivity %f\n", sensitivity);
     sprintf(saveText + strlen(saveText), "tutorial_done %d\n", tutorialDone);
     sprintf(saveText + strlen(saveText), "show_ping %d\n", showPing);
+    sprintf(saveText + strlen(saveText), "language %d\n", currentLanguage);
     sprintf(saveText + strlen(saveText), "inputs %d\n", INPUT_COUNT);
     for (int i = 0; i < INPUT_COUNT; i++)
     {
@@ -159,6 +161,12 @@ void Load()
                 int tmpShowPing;
                 fscanf(savefile, "%d", &tmpShowPing);
                 showPing = tmpShowPing;
+            }
+            else if (strcmp(word, "language") == 0) // Language of the texts (lang.h)
+            {
+                int tmpLanguage;
+                fscanf(savefile, "%d", &tmpLanguage);
+                langSetLanguage(tmpLanguage);
             }
             else if (strcmp(word, "inputs") == 0) //
             {
