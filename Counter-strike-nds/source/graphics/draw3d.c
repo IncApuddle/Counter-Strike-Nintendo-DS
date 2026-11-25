@@ -187,6 +187,8 @@ void initGraphics()
 // Create texture map sprite
 void MapImgToLoadFunc()
 {
+    // Raw 16 colors textures (tools/make_map_ui.py), copied to VRAM directly:
+    // no conversion buffer in RAM (the minimap of Mirage was white online)
 	CS_PaletteDeleteSafe(&Palettes[17]);
     CS_MaterialDeleteSafe(&TopScreenSpritesMaterials[4]);
     TopScreenSpritesMaterials[4] = NE_MaterialCreate();
@@ -194,15 +196,15 @@ void MapImgToLoadFunc()
 
     if(MapImgToLoad == 0)
 	{
-		CS_MaterialTexLoadBMPCompact(TopScreenSpritesMaterials[4], Palettes[17], (void *)MapUI_Dust2_bin, 0);
+		CS_MaterialTexLoadRawPal16(TopScreenSpritesMaterials[4], Palettes[17], (void *)MapUI_Dust2_bin, 0);
 	}
     else if(MapImgToLoad == 6) // MIRAGE (Fy_Snow is map 5 now)
 	{
-		CS_MaterialTexLoadBMPCompact(TopScreenSpritesMaterials[4], Palettes[17], (void *)MapUI_Mirage_bin, 0);
+		CS_MaterialTexLoadRawPal16(TopScreenSpritesMaterials[4], Palettes[17], (void *)MapUI_Mirage_bin, 0);
 	}
 	else
 	{
-		CS_MaterialTexLoadBMPCompact(TopScreenSpritesMaterials[4], Palettes[17], (void *)MapUI_General_bin, 0);
+		CS_MaterialTexLoadRawPal16(TopScreenSpritesMaterials[4], Palettes[17], (void *)MapUI_General_bin, 0);
 	}
 
     // The sprite is created in the init code. The old code created a new one

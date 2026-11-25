@@ -23,6 +23,7 @@ typedef struct //
     mm_word gunSound;
     int WalkSpeed;
     int scopeId;
+    bool hideCrosshair; // Sniper rifles: no crosshair (like in CS, aim with the scope)
     int gunCategory;
     enum teamEnum team; // 0 for terrorist only, 1 for counter terrorists only, -1 for both teams
     int MagazineCapacity;

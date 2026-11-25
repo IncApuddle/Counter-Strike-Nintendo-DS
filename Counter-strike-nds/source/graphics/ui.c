@@ -1323,9 +1323,13 @@ void drawTopScreenUI()
 
             if (CurrentScopeLevel == 0) // Draw gun if player doesn't aim with his gun
             {
-                // Draw cross air
-                NE_SpriteSetParams(TopScreenSprites[0], cursorTransparency * 31, 0, NE_White);
-                NE_SpriteDraw(TopScreenSprites[0]);
+                // Draw cross air (not with the sniper rifles, like in CS)
+                int crosshairGun = getPlayerCurrentGunIndex(&AllPlayers[CurrentCameraPlayer]);
+                if (crosshairGun < 0 || crosshairGun >= GunCount || !AllGuns[crosshairGun].hideCrosshair)
+                {
+                    NE_SpriteSetParams(TopScreenSprites[0], cursorTransparency * 31, 0, NE_White);
+                    NE_SpriteDraw(TopScreenSprites[0]);
+                }
                 NE_PolyFormat(31, 0, NE_LIGHT_0, NE_CULL_BACK, NE_MODULATION);
 
                 //  Draw gun

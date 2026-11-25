@@ -60,6 +60,8 @@ static inline bool CS_ModelIsAnimated(const NE_Model *model)
 // for every BMP texture, and the maps depend on it.
 //
 // Supports uncompressed 4 bpp and 8 bpp BMP files. Returns 1 on success.
+int CS_MaterialTexLoadRawPal16(NE_Material *tex, NE_Palette *pal,
+                               const void *pointer, bool transpcolor);
 int CS_MaterialTexLoadRaw256(NE_Material *tex, NE_Palette *pal,
                              const void *pointer, bool transpcolor);
 int CS_MaterialTexLoadBMPtoRGB256(NE_Material *tex, NE_Palette *pal,

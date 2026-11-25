@@ -512,6 +512,7 @@ void LoadGuns()
     AllGuns[gunIndex].maxBotShootDisance = 32;
     AllGuns[gunIndex].inaccuracyReductionForBot = 0.6;
     AllGuns[gunIndex].name = "Scout";
+    AllGuns[gunIndex].hideCrosshair = true;
     gunIndex++;
 
     // M4A1
@@ -616,6 +617,7 @@ void LoadGuns()
     AllGuns[gunIndex].maxBotShootDisance = 32;
     AllGuns[gunIndex].inaccuracyReductionForBot = 0.6;
     AllGuns[gunIndex].name = "SG 550";
+    AllGuns[gunIndex].hideCrosshair = true;
     gunIndex++;
 
     // AWP
@@ -642,6 +644,7 @@ void LoadGuns()
     AllGuns[gunIndex].maxBotShootDisance = 36;
     AllGuns[gunIndex].inaccuracyReductionForBot = 0.7;
     AllGuns[gunIndex].name = "AWP";
+    AllGuns[gunIndex].hideCrosshair = true;
     gunIndex++;
 
     // G3SG1
@@ -668,5 +671,6 @@ void LoadGuns()
     AllGuns[gunIndex].maxBotShootDisance = 32;
     AllGuns[gunIndex].inaccuracyReductionForBot = 0.6;
     AllGuns[gunIndex].name = "G3SG1";
+    AllGuns[gunIndex].hideCrosshair = true;
     gunIndex++;
 }

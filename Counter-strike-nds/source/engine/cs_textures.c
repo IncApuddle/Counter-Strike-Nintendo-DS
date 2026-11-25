@@ -346,6 +346,44 @@ int CS_MaterialTexLoadBMPCompact(NE_Material *tex, NE_Palette *pal,
 }
 
 /**
+ * @brief Load a raw 16 colors texture (see tools/make_map_ui.py: u16 width,
+ * height, texture width, 0, then 16 u16 palette entries, then the pixels, 2
+ * per byte). The data is copied to VRAM directly, no buffer in RAM is needed.
+ */
+int CS_MaterialTexLoadRawPal16(NE_Material *tex, NE_Palette *pal,
+                               const void *pointer, bool transpcolor)
+{
+    if (tex == NULL || pal == NULL || pointer == NULL)
+        return 0;
+
+    const u16 *header = pointer;
+    int sizex = header[0];
+    int sizey = header[1];
+    int texwidth = header[2];
+    const u16 *palette = header + 4;
+    const u8 *pixels = (const u8 *)(palette + 16);
+
+    NE_TextureFlags flags = NE_TEXGEN_TEXCOORD | NE_TEXTURE_WRAP_S | NE_TEXTURE_WRAP_T;
+    if (transpcolor)
+        flags |= NE_TEXTURE_COLOR0_TRANSPARENT;
+
+    if (NE_MaterialTexLoad(tex, NE_PAL16, texwidth, sizey, flags, pixels) == 0)
+    {
+        NE_DebugPrint("Error while loading 16 colors texture");
+        return 0;
+    }
+    if (NE_PaletteLoad(pal, palette, 16, NE_PAL16) == 0)
+    {
+        NE_DebugPrint("Error while loading palette");
+        return 0;
+    }
+
+    NE_MaterialSetPalette(tex, pal);
+    cs_texture_size_save(tex, sizex, sizey);
+    return 1;
+}
+
+/**
  * @brief Load a raw 256x256 NE_PAL256 texture (see tools/make_map_textures.py:
  * 256 u16 palette entries, then the pixels, top row first). The data is copied
  * to VRAM directly, no buffer in RAM is needed.
