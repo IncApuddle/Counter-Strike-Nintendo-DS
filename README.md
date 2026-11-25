@@ -12,7 +12,7 @@ New player models (Animated and Static),<br/>
 Now you can choose to which server to connect via IP.<br/>
 Now there is an acceleration to a touch screen.<br/>
 Now there is a fall damage.<br/>
-Now there is English, Russian, German, French, Spanish and Italian Languages.<br/>
+Now there is English, Russian, German, French, Spanish and Italian Languages. You can switch language in settings by clicking on a language button.<br/>
 
 <img src="/Screenshots/1.png" width="31%"> <img src="/Screenshots/2.png" width="31%"> <img src="/Screenshots/3.png" width="31%">
 
