@@ -1,0 +1,151 @@
+en,ru,de,fr,es,it
+Single Player,Одиночная игра,Einzelspieler,Solo,Un jugador,Giocatore singolo
+Multiplayer,Мультиплеер,Mehrspieler,Multijoueur,Multijugador,Multigiocatore
+Settings,Настройки,Optionen,Options,Opciones,Opzioni
+Authors,Авторы,Autoren,Auteurs,Autores,Autori
+Authors:,Авторы:,Autoren:,Auteurs :,Autores:,Autori:
+Fewnity - the original idea and code,Fewnity - оригинальная идея и код,Fewnity - Originalidee und Code,Fewnity - idée et code originaux,Fewnity - idea y código originales,Fewnity - idea e codice originali
+IncApuddle - Modeling and visual,IncApuddle - модели и графика,IncApuddle - Modelle und Grafik,IncApuddle - modèles et visuels,IncApuddle - modelos y gráficos,IncApuddle - modelli e grafica
+"Claude - Porting, code and fixes","Claude - портирование, код и исправления","Claude - Portierung, Code und Fehlerbehebung","Claude - portage, code et corrections","Claude - port, código y correcciones","Claude - porting, codice e correzioni"
+Statistics:,Статистика:,Statistik:,Statistiques :,Estadísticas:,Statistiche:
+Time played: %02dh:%02dm,Время игры: %02dч:%02dм,Spielzeit: %02dh:%02dm,Temps de jeu : %02dh:%02dm,Tiempo jugado: %02dh:%02dm,Tempo di gioco: %02dh:%02dm
+Death count: %d,Смертей: %d,Tode: %d,Morts : %d,Muertes: %d,Morti: %d
+Bots killed: %d,Убито ботов: %d,Bots getötet: %d,Bots tués : %d,Bots eliminados: %d,Bot uccisi: %d
+Keyboard mode,Раскладка,Tastatur,Clavier,Teclado,Tastiera
+Use Rumble Pack (cause crash on 3DS),Rumble Pack (вылет на 3DS),Rumble Pack (Absturz auf 3DS),Rumble Pak (plante sur 3DS),Rumble Pak (falla en 3DS),Rumble Pak (crash su 3DS)
+Show Ping,Показать пинг,Ping zeigen,Afficher ping,Mostrar ping,Mostra ping
+Crosshair transparency: %d%%,Прозрачность прицела: %d%%,Fadenkreuz-Transparenz: %d%%,Transparence du viseur : %d%%,Transparencia de la mira: %d%%,Trasparenza mirino: %d%%
+Change name,Сменить имя,Name ändern,Changer nom,Nombre,Cambia nome
+Controls,Управление,Steuerung,Contrôles,Controles,Comandi
+Skip the tutorial?,Пропустить обучение?,Tutorial überspringen?,Passer le tutoriel ?,¿Saltar el tutorial?,Saltare il tutorial?
+Are you sure you want to quit the game?,Вы точно хотите выйти из игры?,Möchtest du das Spiel wirklich verlassen?,Voulez-vous vraiment quitter la partie ?,¿Seguro que quieres salir de la partida?,Vuoi davvero uscire dalla partita?
+Yes,Да,Ja,Oui,Sí,Sì
+No,Нет,Nein,Non,No,No
+Local game,Локальная игра,Lokales Spiel,Partie locale,Partida local,Partita locale
+Join a random party,Случайная игра,Zufälliges Spiel,Partie aléatoire,Partida aleatoria,Partita casuale
+Join a private party,Войти в приватную игру,Privatem Spiel beitreten,Rejoindre partie privée,Unirse a partida privada,Entra in partita privata
+Create a private party,Создать приватную игру,Privates Spiel erstellen,Créer partie privée,Crear partida privada,Crea partita privata
+Enter code,Введите код,Code eingeben,Entrez le code,Introduce el código,Inserisci il codice
+Enter IP,Введите IP,IP eingeben,Entrez l'IP,Introduce la IP,Inserisci l'IP
+Party code: ,Код игры: ,Spielcode: ,Code : ,Código: ,Codice: 
+Local multiplayer,Локальная игра,Lokales Spiel,Partie locale,Partida local,Partita locale
+Create room,Создать комнату,Raum erstellen,Créer un salon,Crear sala,Crea stanza
+Rooms near you:,Комнаты рядом:,Räume in der Nähe:,Salons à proximité :,Salas cercanas:,Stanze vicine:
+Searching...,Поиск...,Suche...,Recherche...,Buscando...,Ricerca...
+Your room,Ваша комната,Dein Raum,Votre salon,Tu sala,La tua stanza
+Room,Комната,Raum,Salon,Sala,Stanza
+Connecting...,Подключение...,Verbinde...,Connexion...,Conectando...,Connessione...
+Players: %d/%d,Игроков: %d/%d,Spieler: %d/%d,Joueurs : %d/%d,Jugadores: %d/%d,Giocatori: %d/%d
+ (host), (хост), (Host), (hôte), (anfitrión), (host)
+Start,Старт,Start,Lancer,Empezar,Avvia
+Waiting for the host...,Ожидание хоста...,Warte auf den Host...,En attente de l'hôte...,Esperando al anfitrión...,In attesa dell'host...
+Information:,Информация:,Information:,Information :,Información:,Informazioni:
+Can't join the room.,Не удалось войти в комнату.,Beitritt zum Raum fehlgeschlagen.,Impossible de rejoindre le salon.,No se puede entrar en la sala.,Impossibile entrare nella stanza.
+You were disconnected from the room.,Вы отключены от комнаты.,Die Verbindung zum Raum wurde getrennt.,Vous avez été déconnecté du salon.,Te has desconectado de la sala.,Sei stato disconnesso dalla stanza.
+"Connected, but the host doesn't answer.","Подключено, но хост не отвечает.","Verbunden, aber der Host antwortet nicht.","Connecté, mais l'hôte ne répond pas.","Conectado, pero el anfitrión no responde.","Connesso, ma l'host non risponde."
+The host left the room.,Хост покинул комнату.,Der Host hat den Raum verlassen.,L'hôte a quitté le salon.,El anfitrión ha salido de la sala.,L'host ha lasciato la stanza.
+The room is full or the game has started.,Комната полна или игра уже началась.,Der Raum ist voll oder das Spiel läuft schon.,Le salon est plein ou la partie a commencé.,La sala está llena o la partida ya empezó.,La stanza è piena o la partita è iniziata.
+The host has another version of the game.,У хоста другая версия игры.,Der Host hat eine andere Spielversion.,L'hôte a une autre version du jeu.,El anfitrión tiene otra versión del juego.,L'host ha un'altra versione del gioco.
+Can't start the wifi.,Не удалось включить Wi-Fi.,WLAN kann nicht gestartet werden.,Impossible de démarrer le Wi-Fi.,No se puede iniciar el Wi-Fi.,Impossibile avviare il Wi-Fi.
+Choose team,Выбрать команду,Team wählen,Choisir équipe,Elegir equipo,Scegli squadra
+Score table,Таблица счёта,Punktetabelle,Tableau des scores,Puntuaciones,Punteggi
+Party finished,Игра окончена,Spiel beendet,Partie terminée,Partida terminada,Partita finita
+Counter t,Спецназ,Anti-T,Anti-T,Antiterr.,Antiterr.
+Terrorists,Террористы,Terroristen,Terroristes,Terroristas,Terroristi
+Join,Войти,Beitreten,Rejoindre,Unirse,Entra
+Kills:  %d,Убийств: %d,Kills:  %d,Tués :  %d,Bajas:  %d,Uccisioni: %d
+Deaths: %d,Смертей: %d,Tode: %d,Morts : %d,Muertes: %d,Morti: %d
+Map,Карта,Karte,Carte,Mapa,Mappa
+Drop,Сброс,Wurf,Jeter,Tirar,Getta
+Gamepad,Геймпад,Gamepad,Manette,Mando,Pad
+Main menu,Главное меню,Hauptmenü,Menu principal,Menú principal,Menu principale
+Quit game,Выйти,Verlassen,Quitter,Salir,Esci
+Show score,Счёт,Punktestand,Scores,Puntuación,Punteggio
+Open shop,Магазин,Shop,Boutique,Tienda,Negozio
+Shop,Магазин,Shop,Boutique,Tienda,Negozio
+Vote,Голос,Wählen,Voter,Votar,Vota
+Please VOTE in the menu BELOW.,ГОЛОСУЙТЕ в меню НИЖЕ.,Bitte UNTEN im Menü WÄHLEN.,VOTEZ dans le menu EN BAS.,VOTA en el menú de ABAJO.,VOTA nel menu IN BASSO.
+Waiting for players ,Ожидание игроков ,Warte auf Spieler ,Attente de joueurs ,Esperando jugadores ,Attesa giocatori 
+Don't shoot your friends!,Не стреляйте в своих!,Schieß nicht auf Freunde!,Ne tirez pas sur vos alliés !,¡No dispares a tus aliados!,Non sparare agli alleati!
+Terrorists win,Победа террористов,Terroristen gewinnen,Les terroristes gagnent,Ganan los terroristas,Vincono i terroristi
+Counter-Terrorists win,Победа спецназа,Anti-Terroristen gewinnen,Les anti-terroristes gagnent,Ganan los antiterroristas,Vincono gli antiterroristi
+Bomb has been planted,Бомба заложена,Bombe wurde gelegt,La bombe est posée,Bomba colocada,Bomba piazzata
+Bomb has been defused,Бомба обезврежена,Bombe wurde entschärft,La bombe est désamorcée,Bomba desactivada,Bomba disinnescata
+Draw,Ничья,Unentschieden,Égalité,Empate,Pareggio
+%s wins!,%s побеждает!,%s gewinnt!,%s gagne !,¡%s gana!,%s vince!
+%s connected,%s подключился,%s ist beigetreten,%s s'est connecté,%s se ha conectado,%s si è connesso
+%s disconnected,%s отключился,%s hat das Spiel verlassen,%s s'est déconnecté,%s se ha desconectado,%s si è disconnesso
+Planting...,Закладка...,Lege...,Pose...,Colocando...,Piazzamento...
+Defusing...,Разминирование...,Entschärfe...,Désamorçage...,Desactivando...,Disinnesco...
+Buy!,Купить!,Kaufen!,Acheter !,¡Comprar!,Compra!
+Damage,Урон,Schaden,Dégâts,Daño,Danno
+Fire rate,Темп огня,Feuerrate,Cadence,Cadencia,Cadenza
+Price,Цена,Preis,Prix,Precio,Prezzo
+Equal teams:,Равные команды:,Gleiche Teams:,Équipes égales :,Equipos iguales:,Squadre pari:
+The amount of bots: %d,Количество ботов: %d,Anzahl der Bots: %d,Nombre de bots : %d,Número de bots: %d,Numero di bot: %d
+Select map,Выбор карты,Karte wählen,Choix de la carte,Elegir mapa,Scegli mappa
+Select a game mode,Выбор режима,Spielmodus wählen,Choix du mode,Elegir modo,Scegli modalità
+Next game mode,Следующий режим,Nächster Modus,Mode suivant,Siguiente modo,Prossima modalità
+Mod,Мод,Mod,Mod,Mod,Mod
+Mod settings,Настройки мода,Mod-Optionen,Options du mod,Opciones del mod,Opzioni mod
+Camera,Камера,Kamera,Caméra,Cámara,Camera
+Animated model:,Анимир. модель:,Animiertes Modell:,Modèle animé :,Modelo animado:,Modello animato:
+(May cause crashes),(Возможны вылеты),(Kann abstürzen),(Peut planter),(Puede fallar),(Può bloccarsi)
+Casual,Обычный,Gelegenheit,Occasionnel,Casual,Casual
+Competitive,Соревновательный,Wettkampf,Compétitif,Competitivo,Competitivo
+Deathmatch,Бой насмерть,Deathmatch,Deathmatch,Deathmatch,Deathmatch
+GunGame,Гонка вооружений,GunGame,GunGame,GunGame,GunGame
+Training (unfinished),Обучение (не завершено),Training (unfertig),Entraînement (inachevé),Entrenamiento (sin terminar),Allenamento (incompleto)
+Change controls,Сменить кнопки,Tasten ändern,Changer touches,Cambiar botones,Cambia tasti
+Default,По умолчанию,Standard,Défaut,Por defecto,Predefinito
+Left-handed gamepad,Геймпад для левши,Linkshänder-Gamepad,Manette gaucher,Mando para zurdos,Pad per mancini
+Touch camera,Сенсорная камера,Touch-Kamera,Caméra tactile,Cámara táctil,Camera touch
+Sensitivity: %0.1f,Чувствительность: %0.1f,Empfindlichkeit: %0.1f,Sensibilité : %0.1f,Sensibilidad: %0.1f,Sensibilità: %0.1f
+Button sensitivity: %0.1f,Чувств. кнопок: %0.1f,Tasten-Empfindl.: %0.1f,Sensib. boutons : %0.1f,Sensib. botones: %0.1f,Sensib. tasti: %0.1f
+Acceleration: %0.2f,Ускорение: %0.2f,Beschleunigung: %0.2f,Accélération : %0.2f,Aceleración: %0.2f,Accelerazione: %0.2f
+Max gain: %0.1f,Макс. усиление: %0.1f,Max. Verstärkung: %0.1f,Gain max : %0.1f,Ganancia máx.: %0.1f,Guadagno max: %0.1f
+Fire,Огонь,Feuer,Tir,Disparar,Fuoco
+Jump,Прыжок,Springen,Saut,Saltar,Salto
+Scope,Прицел,Zielfernrohr,Lunette,Mira,Mirino
+Defuse,Разминировать,Entschärfen,Désamorcer,Desactivar,Disinnesca
+Move forward,Вперёд,Vorwärts,Avancer,Avanzar,Avanti
+Move backward,Назад,Rückwärts,Reculer,Retroceder,Indietro
+Move left,Влево,Links,Gauche,Izquierda,Sinistra
+Move right,Вправо,Rechts,Droite,Derecha,Destra
+Look up,Взгляд вверх,Nach oben,Regarder haut,Mirar arriba,Guarda su
+Look down,Взгляд вниз,Nach unten,Regarder bas,Mirar abajo,Guarda giù
+Look left,Взгляд влево,Nach links,Regarder gauche,Mirar izquierda,Guarda sinistra
+Look right,Взгляд вправо,Nach rechts,Regarder droite,Mirar derecha,Guarda destra
+Next weapon,След. оружие,Nächste Waffe,Arme suivante,Arma siguiente,Arma successiva
+Previous weapon,Пред. оружие,Vorherige Waffe,Arme précédente,Arma anterior,Arma precedente
+Drop weapon,Бросить оружие,Waffe fallen lassen,Jeter l'arme,Tirar el arma,Getta l'arma
+Select,Select,Select,Select,Select,Select
+Right,Вправо,Rechts,Droite,Derecha,Destra
+Left,Влево,Links,Gauche,Izquierda,Sinistra
+Up,Вверх,Oben,Haut,Arriba,Su
+Down,Вниз,Unten,Bas,Abajo,Giù
+Unassigned,Не назначено,Nicht belegt,Non assigné,Sin asignar,Non assegnato
+Scanning...,Ожидание...,Warte...,Attente...,Esperando...,Attesa...
+Already used,Уже занято,Schon belegt,Déjà utilisé,Ya en uso,Già usato
+Welcome to Counter Strike,Добро пожаловать в Counter Strike,Willkommen bei Counter Strike,Bienvenue dans Counter Strike,Bienvenido a Counter Strike,Benvenuto in Counter Strike
+Move your player with %s %s %s %s,Двигайтесь кнопками %s %s %s %s,Bewege dich mit %s %s %s %s,Déplacez-vous avec %s %s %s %s,Muévete con %s %s %s %s,Muoviti con %s %s %s %s
+Look around with the stylus,Осматривайтесь стилусом,Schau dich mit dem Stift um,Regardez autour avec le stylet,Mira alrededor con el lápiz,Guardati intorno con lo stilo
+Jump with %s,Прыжок: %s,Springe mit %s,Sautez avec %s,Salta con %s,Salta con %s
+Shoot with %s,Стрельба: %s,Schieße mit %s,Tirez avec %s,Dispara con %s,Spara con %s
+Reload with the reload button on the gamepad,Перезаряжайтесь кнопкой перезарядки на геймпаде,Lade mit der Nachladetaste auf dem Gamepad nach,Rechargez avec le bouton de rechargement de la manette,Recarga con el botón de recarga del mando,Ricarica con il tasto di ricarica del pad
+Change weapons with the left/right arrows on the gamepad,Меняйте оружие стрелками влево/вправо на геймпаде,Wechsle die Waffe mit den Pfeilen links/rechts auf dem Gamepad,Changez d'arme avec les flèches gauche/droite de la manette,Cambia de arma con las flechas izquierda/derecha del mando,Cambia arma con le frecce sinistra/destra del pad
+Plant the bomb with %s on the red cross,Заложите бомбу на красном кресте: %s,Lege die Bombe mit %s auf das rote Kreuz,Posez la bombe avec %s sur la croix rouge,Coloca la bomba con %s en la cruz roja,Piazza la bomba con %s sulla croce rossa
+Defuse the bomb with %s,Обезвредьте бомбу: %s,Entschärfe die Bombe mit %s,Désamorcez la bombe avec %s,Desactiva la bomba con %s,Disinnesca la bomba con %s
+Tutorial finished!,Обучение завершено!,Tutorial abgeschlossen!,Tutoriel terminé !,¡Tutorial completado!,Tutorial completato!
+An error has occurred!,Произошла ошибка!,Ein Fehler ist aufgetreten!,Une erreur est survenue !,¡Se ha producido un error!,Si è verificato un errore!
+Your save is corrupted.,Ваше сохранение повреждено.,Dein Spielstand ist beschädigt.,Votre sauvegarde est corrompue.,Tu partida guardada está dañada.,Il salvataggio è danneggiato.
+Your Nintendo DS doesn't have a MAC address.,У вашей Nintendo DS нет MAC-адреса.,Dein Nintendo DS hat keine MAC-Adresse.,Votre Nintendo DS n'a pas d'adresse MAC.,Tu Nintendo DS no tiene dirección MAC.,Il tuo Nintendo DS non ha un indirizzo MAC.
+You have been kicked (game speed-up is not allowed).,Вас выгнали (ускорение игры запрещено).,Du wurdest entfernt (Beschleunigung ist verboten).,Vous avez été exclu (accélération interdite).,Has sido expulsado (no se permite acelerar).,Sei stato espulso (accelerazione vietata).
+You have been kicked (Team kill).,Вас выгнали (убийство союзника).,Du wurdest entfernt (Teamkill).,Vous avez été exclu (tir allié).,Has sido expulsado (fuego amigo).,Sei stato espulso (uccisione alleato).
+"You are using an old version of the game, please update your game.","У вас старая версия игры, обновите её.","Deine Spielversion ist veraltet, bitte aktualisiere das Spiel.","Votre version du jeu est obsolète, mettez-la à jour.","Tu versión del juego es antigua, actualízala.","La versione del gioco è vecchia, aggiornala."
+You are using a modified game.,Вы используете изменённую игру.,Du benutzt ein verändertes Spiel.,Vous utilisez un jeu modifié.,Usas un juego modificado.,Stai usando un gioco modificato.
+You are banned!,Вы забанены!,Du bist gesperrt!,Vous êtes banni !,¡Estás baneado!,Sei stato bannato!
+"The server is currently full, please try again later.","Сервер заполнен, попробуйте позже.","Der Server ist voll, versuche es später erneut.","Le serveur est plein, réessayez plus tard.","El servidor está lleno, inténtalo más tarde.","Il server è pieno, riprova più tardi."
+The server is currently under maintenance.,Сервер на обслуживании.,Der Server wird gerade gewartet.,Le serveur est en maintenance.,El servidor está en mantenimiento.,Il server è in manutenzione.
+The code is incorrect.,Неверный код.,Der Code ist falsch.,Le code est incorrect.,El código es incorrecto.,Il codice non è corretto.
+The server is changing the map. Reconnecting...,Сервер меняет карту. Переподключение...,Der Server wechselt die Karte. Verbinde neu...,Le serveur change de carte. Reconnexion...,El servidor cambia de mapa. Reconectando...,Il server cambia mappa. Riconnessione...
