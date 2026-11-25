@@ -11,6 +11,7 @@ New texture for Terrorists,<br/>
 New player models (Animated and Static),<br/>
 Now you can choose to which server to connect via IP.<br/>
 Now there is an acceleration to a touch screen.<br/>
+Now there is a fall damage.<br/>
 
 <img src="/Screenshots/1.png" width="31%"> <img src="/Screenshots/2.png" width="31%"> <img src="/Screenshots/3.png" width="31%">
 
@@ -66,7 +67,7 @@ Note : To avoid coding collisions, path finding..., there is an Unity project to
 - [x] Smoke doesn't affect bots at this time
 - [x] Add dropping weapons
 - [x] Ad hoc (Ni-Fi) multiplayer
-- [ ] Add fall damage
-- [ ] Death animation?
+- [x] Add fall damage
+- [x] Death animation?
 - [ ] Add Office map and hostage rescue mode
 - [ ] Languege system
