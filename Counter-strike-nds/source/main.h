@@ -442,6 +442,7 @@ typedef struct // Player values
 	int animBlend;	   // Blending factor of animNext (f32, 0 to 4096)
 	int animMoveTimer; // Frames left to keep the run animation
 	int animAirTimer;  // Frames left to keep the jump/fall animation
+	int deathTimer;    // Frames left to show the model of a dead player (death animation)
 	int animPrevX;	   // Model position in the previous frame (f32)
 	int animPrevY;
 	int animPrevZ;

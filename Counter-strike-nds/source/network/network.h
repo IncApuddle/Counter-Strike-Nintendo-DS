@@ -77,6 +77,7 @@ enum RequestType
     RELOADED = 42,
     STATUS = 43,
     DROPGUN = 44,
+    FALLDMG = 45,
 };
 
 #define REQUEST_NAME_INDEX 0

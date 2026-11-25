@@ -15,7 +15,9 @@ enum PlayerAnimState
     PLAYER_ANIM_RUN,
     PLAYER_ANIM_JUMP,
     PLAYER_ANIM_FALL,
-    PLAYER_ANIM_COUNT
+    PLAYER_ANIM_COUNT,
+    // Death animation (optional file data/gign_death_dsa.bin), one shot
+    PLAYER_ANIM_DEATH = PLAYER_ANIM_COUNT
 };
 
 // Scale of the animated model (f32). The model is 11.25 units tall after the
@@ -40,5 +42,9 @@ void PlayerAnimUpdateAll(void);
 
 // Draw the model of a player (adds PLAYER_ANIM_MODEL_ROTATION if needed).
 void PlayerAnimDraw(Player *player);
+
+// A player died: start the death animation (if the file exists and the model
+// is animated). The model is shown until player->deathTimer is 0.
+void PlayerAnimOnDeath(Player *player);
 
 #endif // PLAYER_ANIM_H_

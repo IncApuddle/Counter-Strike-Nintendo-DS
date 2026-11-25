@@ -35,4 +35,10 @@ void addMoneyToTeam(int Money, enum teamEnum Team);
 void setBombForARandomPlayer();
 void setShopZone(Player *player);
 
+// Fall damage of the local player (call after the physics update). onStairs:
+// the player is on a ramp/stairs (isInDownStairs, see CheckStairs())
+void updateFallDamage(bool onStairs);
+// Fall damage to send to the server/host (online, client of a local game)
+extern int SendFallDamage;
+
 #endif // PLAYER_H_

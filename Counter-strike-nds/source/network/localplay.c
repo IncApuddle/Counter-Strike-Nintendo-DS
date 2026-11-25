@@ -87,6 +87,7 @@ typedef struct
     char inStream[LOCAL_IN_BUFFER_SIZE]; // Incomplete message
     int inLength;
     int silentFrames;
+    bool hasAnswered; // At least one packet received from this peer
 
     // Lobby
     bool helloReceived;
@@ -371,8 +372,17 @@ static void sendFramePacket(void)
         // that left, crashed or paused), a CMD packet every frame slows down
         // the host a lot. Then only one CMD packet every 30 frames is sent
         // (enough to find the clients again).
+        // A new client (nothing received yet) needs a CMD packet every frame
+        // to answer: melonDS lost its replies with only one CMD packet every
+        // 30 frames (the client couldn't join the room).
+        bool anyActive = false;
+        for (int i = 0; i < LOCAL_MAX_CLIENTS; i++)
+        {
+            if (peers[i].used && (!peers[i].hasAnswered || peers[i].silentFrames <= LOCAL_SILENT_PROBE_FRAMES))
+                anyActive = true;
+        }
         static int probeTimer = 0;
-        if (localStats.framesSinceLastPacket > LOCAL_SILENT_PROBE_FRAMES)
+        if (!anyActive)
         {
             if (++probeTimer < LOCAL_SILENT_PROBE_FRAMES)
                 return;
@@ -494,6 +504,7 @@ static void treatPeerPart(LocalPeer *peer, const LocalPacketHeader *header, cons
     localStats.goodPackets++;
     localStats.framesSinceLastPacket = 0;
     peer->silentFrames = 0;
+    peer->hasAnswered = true;
 
     // Our packet was received
     LocalPacketHeader *inflightHeader = (LocalPacketHeader *)peer->inflight;

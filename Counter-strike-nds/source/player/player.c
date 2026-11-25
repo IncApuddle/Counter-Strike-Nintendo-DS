@@ -29,6 +29,8 @@ void killPlayer(Player *player)
     player->Health = 0;
     // Set client has dead
     player->IsDead = true;
+    // Death animation of the model (if any)
+    PlayerAnimOnDeath(player);
     if (player == localPlayer && (currentMenu == SHOP || currentMenu == SHOPCATEGORIES))
     {
         initGameMenu();
@@ -434,6 +436,68 @@ void setSelectedGunInInventory(int playerIndex, int gunIndex)
  * @param playerIndex Player index
  * @param health New health
  */
+// Fall damage (like Counter-Strike 1.6): no damage under a safe fall speed,
+// then the damage grows with the speed, 100 at the fatal speed. The CS speeds
+// (safe: 580 u/s, fatal: 1024 u/s, gravity 800 u/s2) give falls of 2.9 and 9.1
+// player heights. With the player height of the DS game (~1.8 units) and the
+// gravity of the player (0.0065 units per frame^2): about 5.2 and 16.2 units.
+// Tuned for the game: safe up to 4 units, fatal from 15 units.
+// Speed = sqrt(2 * gravity * height), f32 units per frame (vertical speed of
+// the physics, gravity = 26 in f32).
+#define FALL_SAFE_SPEED 923  // 4 units
+#define FALL_FATAL_SPEED 1787 // 15 units
+
+static int fallPeakSpeed = 0;
+int SendFallDamage = 0;
+
+void updateFallDamage(bool onStairs)
+{
+    CS_Physics *physic = localPlayer->PlayerPhysic;
+    if (physic == NULL || localPlayer->Id == UNUSED || localPlayer->IsDead || localPlayer->Team == SPECTATOR || roundState == WAIT_START)
+    {
+        fallPeakSpeed = 0;
+        return;
+    }
+
+    // Falling: keep the fastest speed. On a ramp/stairs, the vertical speed
+    // is reset by CheckStairs() before the physics update, then the gravity
+    // makes it negative again: the player is on the ground there.
+    if (physic->yspeed < 0 && !onStairs)
+    {
+        if (-physic->yspeed > fallPeakSpeed)
+            fallPeakSpeed = -physic->yspeed;
+        return;
+    }
+
+    int peak = fallPeakSpeed;
+    fallPeakSpeed = 0;
+
+    // Going up (jump) or a fall too slow
+    if ((physic->yspeed > 0 && !onStairs) || peak <= FALL_SAFE_SPEED)
+        return;
+
+    // Landed
+    int damage = (peak - FALL_SAFE_SPEED) * 100 / (FALL_FATAL_SPEED - FALL_SAFE_SPEED);
+    if (damage <= 0)
+        return;
+    if (damage > 100)
+        damage = 100;
+
+    Play2DSound(SFX_FLESH_IMPACT, 255);
+
+    if (applyRules)
+    {
+        // Single player and host of a local game
+        setPlayerHealth(0, localPlayer->Health - damage);
+        checkAfterDamage(NO_PLAYER, 0, false);
+    }
+    else
+    {
+        // Online or client of a local game: the server/host applies it
+        SendFallDamage += damage;
+    }
+}
+
 void setPlayerHealth(int playerIndex, int health)
 {
     Player *player = &AllPlayers[playerIndex];

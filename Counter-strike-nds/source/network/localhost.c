@@ -871,6 +871,20 @@ void localHostTreatClientMessage(int peerIndex, char **params, int paramCount)
         dropCurrentGun(playerIndex);
         break;
 
+    case FALLDMG: // FALLDMG;damage (fall damage, calculated by the client)
+        if (paramCount >= 2 && !AllPlayers[playerIndex].IsDead && roundState != WAIT_START)
+        {
+            int damage = atoi(params[1]);
+            if (damage > 0)
+            {
+                if (damage > 100)
+                    damage = 100;
+                setPlayerHealth(playerIndex, AllPlayers[playerIndex].Health - damage);
+                checkAfterDamage(NO_PLAYER, playerIndex, false);
+            }
+        }
+        break;
+
     default:
         // TEAM (teams are given by the host), PING, VOTE: not used in local
         // multiplayer. GETBOMB: the host gives the bomb itself (the client

@@ -1805,7 +1805,10 @@ void UpdateEngine()
 
 	// Update physics and animations
 	if (localPlayer->Id != UNUSED && localPlayer->Team != SPECTATOR)
+	{
 		CS_PhysicsUpdate(localPlayer->PlayerPhysic);
+		updateFallDamage(isInDownStairs);
+	}
 
 	PlayerAnimUpdateAll();
 

@@ -20,6 +20,23 @@
 #include "gign_jump_dsa_bin.h"
 #include "gign_fall_dsa_bin.h"
 
+// Death animation: optional, used if data/gign_death_dsa.bin exists (made
+// like the other animations: Blender MD5 export, md5_to_dsma.py)
+#if __has_include("gign_death_dsa_bin.h")
+#include "gign_death_dsa_bin.h"
+#define HAS_DEATH_ANIMATION 1
+#else
+#define HAS_DEATH_ANIMATION 0
+#endif
+
+// Frames to show the dead body after the end of the death animation
+#define DEATH_HIDE_DELAY 60
+
+uint32_t DSMA_GetNumFrames(const void *dsa_file);
+
+static NE_Animation *DeathAnimation = NULL;
+static int DeathAnimationFrames = 0; // DS frames
+
 // The animations were made at 24 FPS and the game runs at 60 FPS:
 // 24 / 60 * 4096 = 1638 (f32 model frames per DS frame).
 #define ANIM_SPEED 1638
@@ -77,6 +94,23 @@ void PlayerAnimInit(void)
     }
 
     AnimationsLoaded = true;
+
+#if HAS_DEATH_ANIMATION
+    DeathAnimation = NE_AnimationCreate();
+    if (DeathAnimation != NULL && NE_AnimationLoad(DeathAnimation, gign_death_dsa_bin) != 0)
+    {
+        int frames = DSMA_GetNumFrames(gign_death_dsa_bin);
+        if (frames < 1)
+            frames = 1;
+        DeathAnimationFrames = (frames - 1) * 4096 / ANIM_SPEED + 1;
+    }
+    else
+    {
+        if (DeathAnimation != NULL)
+            NE_AnimationDelete(DeathAnimation);
+        DeathAnimation = NULL;
+    }
+#endif
 }
 
 NE_Model *PlayerAnimCreateModel(int playerIndex)
@@ -91,6 +125,7 @@ NE_Model *PlayerAnimCreateModel(int playerIndex)
     player->animPrevX = 0;
     player->animPrevY = 0;
     player->animPrevZ = 0;
+    player->deathTimer = 0;
 
     if (PlayerAnim && AnimationsLoaded)
     {
@@ -224,6 +259,41 @@ static void updatePlayer(Player *player)
     updateBlend(player);
 }
 
+void PlayerAnimOnDeath(Player *player)
+{
+    player->deathTimer = 0;
+
+    if (DeathAnimation == NULL || player == localPlayer || player->PlayerModel == NULL ||
+        !CS_ModelIsAnimated(player->PlayerModel))
+        return;
+
+    // No blend: the death animation starts now
+    NE_Model *model = player->PlayerModel;
+    if (player->animNext != -1)
+        NE_ModelAnimSecondaryClear(model, false);
+    NE_ModelSetAnimation(model, DeathAnimation);
+    NE_ModelAnimStart(model, NE_ANIM_ONESHOT, ANIM_SPEED);
+    player->animState = PLAYER_ANIM_DEATH;
+    player->animNext = -1;
+    player->animBlend = 0;
+    player->deathTimer = DeathAnimationFrames + DEATH_HIDE_DELAY;
+}
+
+// The player is alive again (respawn, new round): back to the idle animation
+static void endDeathAnimation(Player *player)
+{
+    NE_Model *model = player->PlayerModel;
+    player->deathTimer = 0;
+    NE_ModelSetAnimation(model, Animations[PLAYER_ANIM_IDLE]);
+    NE_ModelAnimStart(model, AnimTypes[PLAYER_ANIM_IDLE], ANIM_SPEED);
+    player->animState = PLAYER_ANIM_IDLE;
+    player->animNext = -1;
+    player->animBlend = 0;
+    player->animPrevX = model->x;
+    player->animPrevY = model->y;
+    player->animPrevZ = model->z;
+}
+
 void PlayerAnimUpdateAll(void)
 {
     if (!AnimationsLoaded)
@@ -235,11 +305,22 @@ void PlayerAnimUpdateAll(void)
     {
         Player *player = &AllPlayers[i];
 
-        if (player->Id == UNUSED || player->IsDead)
+        if (player->Id == UNUSED)
             continue;
 
         if (!CS_ModelIsAnimated(player->PlayerModel))
             continue;
+
+        if (player->IsDead)
+        {
+            // Dead body shown during the death animation and a bit after
+            if (player->deathTimer > 0)
+                player->deathTimer--;
+            continue;
+        }
+
+        if (player->animState == PLAYER_ANIM_DEATH)
+            endDeathAnimation(player);
 
         if (paused)
         {

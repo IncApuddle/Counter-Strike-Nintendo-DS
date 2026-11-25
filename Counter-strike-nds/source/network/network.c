@@ -416,6 +416,7 @@ void resetNetworkVariables()
     SendGetDroppedBomb = false;
     SendReloaded = false;
     SendDropGun = false;
+    SendFallDamage = 0;
 }
 
 static void logNetworkMemory(const char *reason);
@@ -1868,6 +1869,13 @@ void sendDataToServer()
     {
         SendDropGun = false;
         sprintf(InfoToSend + strlen(InfoToSend), "{%d}", DROPGUN);
+    }
+
+    // Fall damage of the local player (the server/host applies it)
+    if (SendFallDamage > 0)
+    {
+        sprintf(InfoToSend + strlen(InfoToSend), "{%d;%d}", FALLDMG, SendFallDamage);
+        SendFallDamage = 0;
     }
 
     // Local multiplayer (NiFi): send to the host DS

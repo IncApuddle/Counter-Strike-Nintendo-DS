@@ -445,7 +445,7 @@ void DrawPlayers()
     {
         Player *player = &AllPlayers[playerIndex];
         // Check if he is not dead, in game and if the camera is not on this player
-        if (AllPlayers[playerIndex].Id != UNUSED && !AllPlayers[playerIndex].IsDead && CurrentCameraPlayer != playerIndex)
+        if (AllPlayers[playerIndex].Id != UNUSED && (!AllPlayers[playerIndex].IsDead || AllPlayers[playerIndex].deathTimer > 0) && CurrentCameraPlayer != playerIndex)
         {
             for (int i3 = 0; i3 < allMaps[currentMap].AllZones[AllPlayers[playerIndex].CurrentOcclusionZone].ZoneCount; i3++)
             {
@@ -462,7 +462,7 @@ void DrawPlayers()
                         PlayerAnimDraw(&AllPlayers[playerIndex]);
 
                         // Draw player's shadow
-                        if (player->isAi || fabs(player->position.y - player->lerpDestination.y) < 0.05)
+                        if (!player->IsDead && (player->isAi || fabs(player->position.y - player->lerpDestination.y) < 0.05))
                         {
                             NE_PolyFormat(15, 0, NE_LIGHT_0, NE_CULL_BACK, NE_MODULATION);
                             NE_ModelDraw(AllPlayers[playerIndex].PlayerShadow);
