@@ -69,5 +69,5 @@ Note : To avoid coding collisions, path finding..., there is an Unity project to
 - [x] Ad hoc (Ni-Fi) multiplayer
 - [x] Add fall damage
 - [x] Death animation?
+- [x] Languege system
 - [ ] Add Office map and hostage rescue mode
-- [ ] Languege system
